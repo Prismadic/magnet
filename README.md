@@ -1,3 +1,9 @@
+<center>
+
+<img src="./magnet.png">
+
+</center>
+
 # 🧲 magnet
 
 <small>small, efficient embedding  model toolkit</small>
