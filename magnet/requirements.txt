@@ -1,0 +1,9 @@
+torch
+sentence-transformers
+pandas
+tqdm
+spacy
+transformers
+faiss-cpu
+boto3
+nats-py
