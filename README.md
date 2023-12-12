@@ -1,14 +1,15 @@
 <p align="center">
    <img height="250" width="250" src="./magnet.png">
+   <br>
+   <h3 align="center">magnet</h3>
+   <p align="center">small, efficient embedding model toolkit</p>
+   <p align="center"><i>~ fine-tune SOTA LLMs on knowledge bases rapidly ~</p>
 </p>
 
-# 🧲 magnet
 
-<small>small, efficient embedding  model toolkit</small>
-embedding model toolkit
-<small>
 
-~ fine-tune SOTA LLMs on knowledge bases rapidly ~
+
+
 
 </small>
 
