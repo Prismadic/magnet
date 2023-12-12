@@ -1,8 +1,6 @@
-<center>
-
-<img src="./magnet.png">
-
-</center>
+<p align="center">
+   <img height="250" width="250" src="./magnet.png">
+</p>
 
 # 🧲 magnet
 
