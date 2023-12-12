@@ -3,13 +3,8 @@
    <br>
    <h3 align="center">magnet</h3>
    <p align="center">small, efficient embedding model toolkit</p>
-   <p align="center"><i>~ fine-tune SOTA LLMs on knowledge bases rapidly ~</p>
+   <p align="center"><i>~ fine-tune SOTA LLMs on knowledge bases rapidly ~</i></p>
 </p>
-
-
-
-
-
 
 </small>
 
