@@ -8,6 +8,17 @@
 
 </small>
 
+## 💾 Installation
+
+``` bash
+pip install llm-magnet
+```
+or 
+``` bash
+python3 setup.py install
+```
+
+
 ## 🎉 usage
 
 [check out this notebook, it's really useful](./example.ipynb) `(./example.ipynb)`
