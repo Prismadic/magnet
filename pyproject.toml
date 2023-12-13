@@ -1,0 +1,5 @@
+[project]
+name = "llm_magnet"
+version = "0.0.1"
+description = "An embedding model toolkit; fine-tune SOTA LLMs on knowledge bases rapidly."
+readme = "dynamic"
