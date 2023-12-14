@@ -47,7 +47,7 @@ class Processor:
         except Exception as e:
             _f("fatal", e)
 
-    def export_as_sentences(self, path: str = None, text_column: str = "clean", id_column: str = 'id', splitter: any = None):
+    def export_as_sentences(self, path: str = None, text_column: str = "clean", id_column: str = 'id', splitter: any = None, nlp=True):
         self.df = self.df.dropna()
         if self.df is not None:
             try:
@@ -58,7 +58,7 @@ class Processor:
                 tqdm.pandas()
                 self.df["sentences"] = self.df[text_column].progress_apply(
                     lambda x: [
-                        str(s) for s in sentence_splitter(self.utils.normalize_text(x))
+                        str(s) for s in sentence_splitter(self.utils.normalize_text(x), nlp=nlp)
                     ]
                 )
                 for i in range(len(self.df)):
