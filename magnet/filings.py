@@ -75,45 +75,68 @@ class Processor:
         else:
             return _f("fatal", "no data loaded!")
         
-    def bge_sentence_splitter(self, data, window_size=768, overlap=76):
-        self.utils.nlp.max_length = len(data) + 100
-        sentences = [str(x) for x in self.utils.nlp(data).sents]
+    def bge_sentence_splitter(self, data, window_size=250, overlap=25, nlp=True):
+        if nlp:
+            self.utils.nlp.max_length = len(data) + 100
+            sentences = [str(x) for x in self.utils.nlp(data).sents]
 
-        new_sentences = []
-        for sentence in sentences:
-            start_idx = 0
-            end_idx = window_size
-            
-            while start_idx < len(sentence):
-                chunk = sentence[start_idx:end_idx]
-                new_sentences.append(chunk)
+            new_sentences = []
+            for sentence in sentences:
+                start_idx = 0
+                end_idx = window_size
                 
-                # Slide the window, ensuring we don't exceed the sentence boundaries
-                start_idx += (window_size - overlap)
-                end_idx = min(start_idx + window_size, len(sentence))
+                while start_idx < len(sentence):
+                    chunk = sentence[start_idx:end_idx]
+                    new_sentences.append(chunk)
+                    
+                    # Slide the window, ensuring we don't exceed the sentence boundaries
+                    start_idx += (window_size - overlap)
+                    end_idx = min(start_idx + window_size, len(sentence))
 
-        return new_sentences
+            return new_sentences
+        else:
+            # Perform chunked splitting by a fixed character length
+            new_sentences = []
+            start_char_idx = 0
+            while start_char_idx < len(data):
+                end_char_idx = start_char_idx + window_size
+                chunk = data[start_char_idx:end_char_idx]
+                new_sentences.append(chunk)
+                start_char_idx += (window_size - overlap)
+            return new_sentences
+
     
-    def mistral_sentence_splitter(self, data, window_size=768, overlap=76):
-        self.utils.nlp.max_length = len(data) + 100
-        sentences = [str(x) for x in self.utils.nlp(data).sents]
+    def mistral_sentence_splitter(self, data, window_size=768, overlap=76, nlp=True):
+        if nlp:
+            self.utils.nlp.max_length = len(data) + 100
+            sentences = [str(x) for x in self.utils.nlp(data).sents]
 
-        new_sentences = []
-        for sentence in sentences:
-            tokens = self.utils.nlp.tokenizer(sentence)
-            num_tokens = len(tokens)
-            
-            start_token_idx = 0
-            end_token_idx = min(window_size, num_tokens)
-            
-            while start_token_idx < num_tokens:
-                start_char_idx = tokens[start_token_idx].idx
-                end_char_idx = tokens[end_token_idx - 1].idx + len(tokens[end_token_idx - 1])
-                chunk = sentence[start_char_idx:end_char_idx]
+            new_sentences = []
+            for sentence in sentences:
+                tokens = self.utils.nlp.tokenizer(sentence)
+                num_tokens = len(tokens)
+                
+                start_token_idx = 0
+                end_token_idx = min(window_size, num_tokens)
+                
+                while start_token_idx < num_tokens:
+                    start_char_idx = tokens[start_token_idx].idx
+                    end_char_idx = tokens[end_token_idx - 1].idx + len(tokens[end_token_idx - 1])
+                    chunk = sentence[start_char_idx:end_char_idx]
+                    new_sentences.append(chunk)
+                    
+                    # Slide the window, ensuring we don't exceed the token or character boundaries
+                    start_token_idx += (window_size - overlap)
+                    end_token_idx = min(start_token_idx + window_size, num_tokens)
+                    
+            return new_sentences
+        else:
+            # Perform chunked splitting by a fixed character length
+            new_sentences = []
+            start_char_idx = 0
+            while start_char_idx < len(data):
+                end_char_idx = start_char_idx + window_size
+                chunk = data[start_char_idx:end_char_idx]
                 new_sentences.append(chunk)
-                
-                # Slide the window, ensuring we don't exceed the token or character boundaries
-                start_token_idx += (window_size - overlap)
-                end_token_idx = min(start_token_idx + window_size, num_tokens)
-                
-        return new_sentences
+                start_char_idx += (window_size - overlap)
+            return new_sentences
