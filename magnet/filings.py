@@ -82,16 +82,27 @@ class Processor:
 
             new_sentences = []
             for sentence in sentences:
+                # Split the sentence into words
+                words = sentence.split()
+
+                # Initialize indices
                 start_idx = 0
-                end_idx = window_size
-                
-                while start_idx < len(sentence):
-                    chunk = sentence[start_idx:end_idx]
-                    new_sentences.append(chunk)
-                    
-                    # Slide the window, ensuring we don't exceed the sentence boundaries
-                    start_idx += (window_size - overlap)
-                    end_idx = min(start_idx + window_size, len(sentence))
+                end_idx = 0
+
+                while end_idx < len(words):
+                    # Calculate the end index based on words, not characters
+                    while end_idx < len(words) and len(' '.join(words[start_idx:end_idx + 1])) <= window_size:
+                        end_idx += 1
+
+                    # Create a chunk with the selected words
+                    chunk = ' '.join(words[start_idx:end_idx])
+
+                    # Check if the chunk is not empty and does not contain individual words longer than window_size
+                    if chunk and all(len(word) <= window_size for word in chunk.split()):
+                        new_sentences.append(chunk)
+
+                    # Update the start index for the next chunk
+                    start_idx = end_idx
 
             return new_sentences
         else:
@@ -104,6 +115,7 @@ class Processor:
                 new_sentences.append(chunk)
                 start_char_idx += (window_size - overlap)
             return new_sentences
+
 
     
     def mistral_sentence_splitter(self, data, window_size=768, overlap=76, nlp=True):
@@ -117,18 +129,23 @@ class Processor:
                 num_tokens = len(tokens)
                 
                 start_token_idx = 0
-                end_token_idx = min(window_size, num_tokens)
-                
-                while start_token_idx < num_tokens:
-                    start_char_idx = tokens[start_token_idx].idx
-                    end_char_idx = tokens[end_token_idx - 1].idx + len(tokens[end_token_idx - 1])
-                    chunk = sentence[start_char_idx:end_char_idx]
-                    new_sentences.append(chunk)
-                    
-                    # Slide the window, ensuring we don't exceed the token or character boundaries
-                    start_token_idx += (window_size - overlap)
-                    end_token_idx = min(start_token_idx + window_size, num_tokens)
-                    
+                end_token_idx = 0
+
+                while end_token_idx < num_tokens:
+                    # Calculate the end index based on tokens
+                    while end_token_idx < num_tokens and sum(len(tokens[i].text) for i in range(start_token_idx, end_token_idx + 1)) <= window_size:
+                        end_token_idx += 1
+
+                    # Create a chunk with the selected tokens
+                    chunk = ' '.join(tokens[start_token_idx:end_token_idx])
+
+                    # Check if the chunk is not empty and does not contain individual words longer than window_size
+                    if chunk and all(len(token.text) <= window_size for token in tokens[start_token_idx:end_token_idx]):
+                        new_sentences.append(chunk)
+
+                    # Update the start index for the next chunk
+                    start_token_idx = end_token_idx
+
             return new_sentences
         else:
             # Perform chunked splitting by a fixed character length
@@ -140,3 +157,4 @@ class Processor:
                 new_sentences.append(chunk)
                 start_char_idx += (window_size - overlap)
             return new_sentences
+
