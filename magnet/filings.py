@@ -115,8 +115,6 @@ class Processor:
                 new_sentences.append(chunk)
                 start_char_idx += (window_size - overlap)
             return new_sentences
-
-
     
     def mistral_sentence_splitter(self, data, window_size=768, overlap=76, nlp=True):
         if nlp:
