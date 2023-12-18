@@ -25,13 +25,13 @@ class Charge:
 class Oscillator:
     def __init__(self, server):
         self.server = server
-    async def on(self, frequency="default"):
+    async def on(self, frequency="default", cb=print):
         self.frequency = frequency
         self.nc = await nats.connect(f'nats://{self.server}:4222')
         self.sub = await self.nc.subscribe(self.frequency)
         while True:
             msg = await self.sub.next_msg(timeout=1.0)
-            print(msg) # this should obviously have some meaningful output
+            cb(msg) # customizable callback
     async def off(self):
         await self.sub.unsubscribe()
         _f('warn', f'unsubscribed from {self.frequency}')
