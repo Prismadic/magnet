@@ -14,7 +14,10 @@ class Charge:
         except TimeoutError:
             _f('fatal', f'could not connect to {self.server}')
     async def off(self):
+        await self.sub.unsubscribe()
+        _f('warn', f'unsubscribed from {self.frequency}')
         await self.nc.drain()
+        _f('warn', f'disconnected from {self.server}')
     async def pulse(self, packet):
         try:
             await self.nc.publish(self.frequency, packet)
