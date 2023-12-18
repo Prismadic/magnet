@@ -81,7 +81,6 @@ class Processor:
                 _f("fatal", e)
         else:
             return _f("fatal", "no data loaded!")
-        
     def bge_sentence_splitter(self, data, window_size=250, overlap=25, nlp=True):
         if nlp:
             self.utils.nlp.max_length = len(data) + 100
@@ -122,7 +121,6 @@ class Processor:
                 new_sentences.append(chunk)
                 start_char_idx += (window_size - overlap)
             return new_sentences
-    
     def mistral_sentence_splitter(self, data, window_size=768, overlap=76, nlp=True):
         if nlp:
             self.utils.nlp.max_length = len(data) + 100

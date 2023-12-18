@@ -4,6 +4,7 @@ from magnet.utils import _f
 class Charge:
     def __init__(self, server):
         self.server = server
+        
     async def on(self, frequency: str = 'default'):
         self.frequency = frequency
         try:
@@ -27,6 +28,7 @@ class Charge:
 class Resonator:
     def __init__(self, server):
         self.server = server
+
     async def on(self, frequency: str = 'default', cb=print):
         self.frequency = frequency
         self.nc = await nats.connect(f'nats://{self.server}:4222')
