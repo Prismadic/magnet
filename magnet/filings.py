@@ -47,7 +47,7 @@ class Processor:
                 _f("fatal", "data type not in [csv, json, xlsx, parquet, pd.DataFrame]")
         except Exception as e:
             _f("fatal", e)
-    async def export_as_sentences(self, path: str = None, text_column: str = "clean", id_column: str = 'id', splitter: any = None, nlp=True):
+    async def process(self, path: str = None, text_column: str = "clean", id_column: str = 'id', splitter: any = None, nlp=True):
         self.df = self.df.dropna()
         if self.field:
             await self.field.on()
