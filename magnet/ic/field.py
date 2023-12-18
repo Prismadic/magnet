@@ -21,7 +21,7 @@ class Charge:
         except:
             _f('fatal', f'could not send data to {self.server}')
 
-class Oscillator:
+class Satellite:
     def __init__(self, server):
         self.server = server
     async def on(self, frequency: str = 'default', cb=print):
