@@ -28,39 +28,24 @@ python3 setup.py install
 ``` python
 from magnet.filings import Processor
 source_data_file = "./raw/kb_export_clean.parquet" # your text documents data
+filings = Processor()
+filings.load(source_data_file)
+await filings.process('./data/filings.parquet','clean','file', nlp=False)
 ```
-
-<small>*(yes, this is all it takes to initialize a project!)*</small>
-
-## 😥 compute requirements
-
-_minimum_ requirements for ~6000 documents from a knowledge base:
-
- 1. RAM
-    - 32GB RAM
- 3. GPU
-    - can choose to store your embeddings in VRAM
-    - 4x 16GB VRAM (*for finetuning with research efficiency*)
-    - otherwise helpful with embedding your data & scoring/ranking (speeds below)
-
-#### ⏱️ "Ready, Set, Go!"
-
-Generally speaking, the size of your documents and the quality of them will impact these times.
-The larger datasets listed are curated with a lot more attention to quality for example. So in addition to being larger overall, the documents in the dataset are also larger.
-
-🚧
 
 ## 👏 features
 
- - Apple silicon first class citizen
  - so long as your initial data has columns for article text and ids, `magnet` can do the rest
+ - sequential distributed processing with NATS
  - finetune highly performant expert models from 0-1 in very little time
  - upload to S3
  - ideal cyberpunk vision of LLM power users in vectorspace
 
 ## goals
 
+- [ ] add [mlx](https://github.com/ml-explore/mlx) support
 - [x] finish `README.md`
+- [x] add [NATS](https://nats.io) for distributed processing
 - [ ] `deepspeed` integration for model parallelism on multiple GPU
 
 ## bad code

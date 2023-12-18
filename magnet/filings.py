@@ -2,11 +2,13 @@ import pandas as pd
 import os
 from .utils import _f, Utils
 from tqdm import tqdm
+
 class Processor:
-    def __init__(self):
+    def __init__(self, field=None):
         self.df = None
         self.utils = Utils()
-
+        self.field = field
+        
     def save(self, filename: str = None, raw: pd.DataFrame = None):
         try:
             file_extension = os.path.splitext(filename)[-1]
@@ -46,9 +48,10 @@ class Processor:
                 _f("fatal", "data type not in [csv, json, xlsx, parquet, pd.DataFrame]")
         except Exception as e:
             _f("fatal", e)
-
-    def export_as_sentences(self, path: str = None, text_column: str = "clean", id_column: str = 'id', splitter: any = None, nlp=True):
+    async def process(self, path: str = None, text_column: str = "clean", id_column: str = 'id', splitter: any = None, nlp=True):
         self.df = self.df.dropna()
+        if self.field:
+            await self.field.on()
         if self.df is not None:
             try:
                 _f("wait", f"get coffee or tea - {len(self.df)} processing...")
@@ -61,10 +64,14 @@ class Processor:
                         str(s) for s in sentence_splitter(self.utils.normalize_text(x), nlp=nlp)
                     ]
                 )
-                for i in range(len(self.df)):
+                pbar = tqdm(range(len(self.df)))
+                for i in pbar:
                     for s in self.df['sentences'].iloc[i]:
                         a = self.df[id_column].iloc[i]
                         all_sentences.append((a, s))
+                        if self.field:
+                            await self.field.pulse(bytes(s, 'utf8'))
+                        pbar.set_description(s[0:10])
                 knowledge_base['sentences'] = [x[1] for x in all_sentences]
                 knowledge_base['id'] = [x[0] for x in all_sentences]
                 self.df = knowledge_base
@@ -74,7 +81,6 @@ class Processor:
                 _f("fatal", e)
         else:
             return _f("fatal", "no data loaded!")
-        
     def bge_sentence_splitter(self, data, window_size=250, overlap=25, nlp=True):
         if nlp:
             self.utils.nlp.max_length = len(data) + 100
@@ -115,9 +121,6 @@ class Processor:
                 new_sentences.append(chunk)
                 start_char_idx += (window_size - overlap)
             return new_sentences
-
-
-    
     def mistral_sentence_splitter(self, data, window_size=768, overlap=76, nlp=True):
         if nlp:
             self.utils.nlp.max_length = len(data) + 100
@@ -157,4 +160,3 @@ class Processor:
                 new_sentences.append(chunk)
                 start_char_idx += (window_size - overlap)
             return new_sentences
-
