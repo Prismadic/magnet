@@ -47,7 +47,3 @@ await filings.process('./data/filings.parquet','clean','file', nlp=False)
 - [ ] add [mlx](https://github.com/ml-explore/mlx) support
 - [x] finish `README.md`
 - [x] add [NATS](https://nats.io) for distributed processing
-
-## bad code
-
-- [x] `spacy.nlp` is used poorly throughout, need to make it possible to make sentence splitter hooks of our own and `spacy` can be a default fallback
