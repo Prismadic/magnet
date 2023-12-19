@@ -24,7 +24,7 @@ class Charge:
         except TimeoutError:
             _f('fatal', f'could not connect to {self.server}')
     async def off(self):
-        await self.js.unsubscribe()
+        await self.sub.unsubscribe()
         _f('warn', f'unsubscribed from {self.stream}')
         await self.nc.drain()
         _f('warn', f'disconnected from {self.server}')
@@ -62,7 +62,7 @@ class Resonator:
                 except json.decoder.JSONDecodeError:
                     _f('fatal','invalid JSON')
     async def off(self):
-        await self.js.unsubscribe()
+        await self.sub.unsubscribe()
         _f('warn', f'unsubscribed from {self.stream}')
         await self.nc.drain()
         _f('warn', f'disconnected from {self.server}')
