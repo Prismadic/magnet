@@ -58,13 +58,16 @@ class Resonator:
         except TimeoutError:
             _f("fatal", f'could not connect to {self.server}')
         while True:
-            msgs = await self.sub.fetch(batch=10, timeout=60)
-            for msg in msgs:
-                try:
-                    payload = Payload(**json.loads(msg.data))
-                    cb(payload)
-                except json.decoder.JSONDecodeError:
-                    _f('fatal','invalid JSON')
+            try:
+                msgs = await self.sub.fetch(batch=10, timeout=60)
+                for msg in msgs:
+                    try:
+                        payload = Payload(**json.loads(msg.data))
+                        cb(payload)
+                    except json.decoder.JSONDecodeError:
+                        _f('fatal','invalid JSON')
+            except TimeoutError:
+                _f("fatal", f'could not connect to {self.server}')
     async def off(self):
         await self.sub.unsubscribe()
         _f('warn', f'unsubscribed from {self.stream}')
