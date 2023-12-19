@@ -1,6 +1,7 @@
 import nats, json
 from magnet.utils import _f
 from dataclasses import asdict, dataclass
+from nats.errors import TimeoutError
 
 @dataclass
 class Payload:
@@ -50,9 +51,12 @@ class Resonator:
     async def on(self, frequency: str = 'no_category', stream: str = 'documents', cb=print):
         self.frequency = frequency
         self.stream = stream
-        self.nc = await nats.connect(f'nats://{self.server}:4222')
-        self.js = self.nc.jetstream()
-        self.sub =  await self.js.pull_subscribe(self.frequency, stream=self.stream)
+        try:
+            self.nc = await nats.connect(f'nats://{self.server}:4222')
+            self.js = self.nc.jetstream()
+            self.sub =  await self.js.pull_subscribe(self.frequency, stream=self.stream)
+        except TimeoutError:
+            _f("fatal", f'could not connect to {self.server}')
         while True:
             msgs = await self.sub.fetch(batch=10, timeout=60)
             for msg in msgs:
