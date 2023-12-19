@@ -21,15 +21,17 @@ python3 setup.py install
 
 ## 🎉 usage
 
-[check out this notebook, it's really useful](./example.ipynb) `(./example.ipynb)`
+[check out the example notebooks](./examples/)
 
 <small>a snippet to get you started</small>
 
 ``` python
 from magnet.filings import Processor
-source_data_file = "./raw/kb_export_clean.parquet" # your text documents data
+# your text documents data
+source_data_file = "./raw/export.parquet"
 filings = Processor()
 filings.load(source_data_file)
+# output, text column, id column, and we disable sentence splitting for fastest processing
 await filings.process('./data/filings.parquet','clean','file', nlp=False)
 ```
 

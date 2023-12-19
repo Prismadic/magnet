@@ -48,7 +48,7 @@ class Resonator:
     def __init__(self, server):
         self.server = server
 
-    async def on(self, frequency: str = 'no_category', stream: str = 'documents', cb=print):
+    async def on(self, frequency: str = 'no_category', stream: str = 'documents', cb=print, batch=10, timeout=60):
         self.frequency = frequency
         self.stream = stream
         try:
@@ -59,7 +59,7 @@ class Resonator:
             _f("fatal", f'could not connect to {self.server}')
         while True:
             try:
-                msgs = await self.sub.fetch(batch=10, timeout=60)
+                msgs = await self.sub.fetch(batch, timeout)
                 for msg in msgs:
                     try:
                         payload = Payload(**json.loads(msg.data))
