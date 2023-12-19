@@ -55,25 +55,25 @@ class Processor:
         if self.df is not None:
             try:
                 _f("wait", f"get coffee or tea - {len(self.df)} processing...")
-                sentence_splitter = self.bge_sentence_splitter if splitter is None else splitter
-                all_sentences = []
+                sentence_splitter = self.bge_splitter if splitter is None else splitter
+                chunks = []
                 knowledge_base = pd.DataFrame()
                 tqdm.pandas()
-                self.df["sentences"] = self.df[text_column].progress_apply(
+                self.df["chunks"] = self.df[text_column].progress_apply(
                     lambda x: [
                         str(s) for s in sentence_splitter(self.utils.normalize_text(x), nlp=nlp)
                     ]
                 )
                 pbar = tqdm(range(len(self.df)))
                 for i in pbar:
-                    for s in self.df['sentences'].iloc[i]:
+                    for s in self.df['chunks'].iloc[i]:
                         a = self.df[id_column].iloc[i]
-                        all_sentences.append((a, s))
+                        chunks.append((a, s))
                         if self.field:
                             await self.field.pulse(s, a)
                         pbar.set_description(s[0:10])
-                knowledge_base['sentences'] = [x[1] for x in all_sentences]
-                knowledge_base['id'] = [x[0] for x in all_sentences]
+                knowledge_base['chunks'] = [x[1] for x in chunks]
+                knowledge_base['id'] = [x[0] for x in chunks]
                 self.df = knowledge_base
                 _f('wait', f'saving to {path}')
                 self.save(path, self.df)
@@ -82,7 +82,7 @@ class Processor:
                 _f("fatal", e)
         else:
             return _f("fatal", "no data loaded!")
-    def bge_sentence_splitter(self, data, window_size=250, overlap=25, nlp=True):
+    def bge_splitter(self, data, window_size=250, overlap=25, nlp=True):
         if nlp:
             self.utils.nlp.max_length = len(data) + 100
             sentences = [str(x) for x in self.utils.nlp(data).sents]
@@ -114,15 +114,15 @@ class Processor:
             return new_sentences
         else:
             # Perform chunked splitting by a fixed character length
-            new_sentences = []
+            chunks = []
             start_char_idx = 0
             while start_char_idx < len(data):
                 end_char_idx = start_char_idx + window_size
                 chunk = data[start_char_idx:end_char_idx]
-                new_sentences.append(chunk)
+                chunks.append(chunk)
                 start_char_idx += (window_size - overlap)
-            return new_sentences
-    def mistral_sentence_splitter(self, data, window_size=768, overlap=76, nlp=True):
+            return chunks
+    def mistral_splitter(self, data, window_size=768, overlap=76, nlp=True):
         if nlp:
             self.utils.nlp.max_length = len(data) + 100
             sentences = [str(x) for x in self.utils.nlp(data).sents]
@@ -153,11 +153,11 @@ class Processor:
             return new_sentences
         else:
             # Perform chunked splitting by a fixed character length
-            new_sentences = []
+            chunks = []
             start_char_idx = 0
             while start_char_idx < len(data):
                 end_char_idx = start_char_idx + window_size
                 chunk = data[start_char_idx:end_char_idx]
-                new_sentences.append(chunk)
+                chunks.append(chunk)
                 start_char_idx += (window_size - overlap)
-            return new_sentences
+            return chunks

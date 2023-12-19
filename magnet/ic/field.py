@@ -48,24 +48,25 @@ class Resonator:
     def __init__(self, server):
         self.server = server
 
-    async def on(self, frequency: str = 'no_category', stream: str = 'documents', cb=print, batch=10, timeout=60):
+    async def on(self, frequency: str = 'no_category', stream: str = 'documents', cb=print):
         self.frequency = frequency
         self.stream = stream
         try:
             self.nc = await nats.connect(f'nats://{self.server}:4222')
             self.js = self.nc.jetstream()
-            self.sub = await self.js.pull_subscribe(self.frequency, stream=self.stream)
+            self.sub = await self.js.subscribe(self.frequency)
         except TimeoutError:
             _f("fatal", f'could not connect to {self.server}')
         while True:
             try:
-                msgs = await self.sub.fetch(batch, timeout)
-                for msg in msgs:
-                    try:
-                        payload = Payload(**json.loads(msg.data))
-                        cb(payload)
-                    except json.decoder.JSONDecodeError:
-                        _f('fatal','invalid JSON')
+                msg = await self.sub.next_msg()
+                # for msg in msgs:
+                try:
+                    payload = Payload(**json.loads(msg.data))
+                    await msg.ack()
+                    cb(payload)
+                except json.decoder.JSONDecodeError:
+                    _f('fatal','invalid JSON')
             except TimeoutError:
                 _f("fatal", f'could not connect to {self.server}')
     async def off(self):

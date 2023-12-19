@@ -17,15 +17,15 @@ class Embedder:
         self.db.on()
         if create:
             self.db.create(overwrite=True)
-    def embed_and_store(self, payload):
+    def embed_and_store(self, payload, verbose=False):
         try:
             # payload = Payload(**json.loads(payload.data))
-            _f('info','embedding payload')
+            _f('info','embedding payload') if verbose else None
             payload['embedding'] = self.model.encode(payload['text'], normalize_embeddings=True)
         except Exception as e:
             _f('fatal',e)
         try:
-            _f('info','storing payload')
+            _f('info','storing payload') if verbose else None
             self.db.collection.insert([
                     [payload['document']]
                     , [payload['text']]
