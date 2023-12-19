@@ -70,11 +70,12 @@ class Processor:
                         a = self.df[id_column].iloc[i]
                         all_sentences.append((a, s))
                         if self.field:
-                            await self.field.pulse(bytes(s, 'utf8'))
+                            await self.field.pulse(s, a)
                         pbar.set_description(s[0:10])
                 knowledge_base['sentences'] = [x[1] for x in all_sentences]
                 knowledge_base['id'] = [x[0] for x in all_sentences]
                 self.df = knowledge_base
+                _f('wait', f'saving to {path}')
                 self.save(path, self.df)
                 return
             except Exception as e:
