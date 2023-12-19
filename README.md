@@ -43,7 +43,7 @@ await filings.process('./data/filings.parquet','clean','file', nlp=False)
 
 ## goals
 
-- [x] add Milvus implementation
+- [x] add [milvus](https://milvus.io) implementation
 - [ ] add [mlx](https://github.com/ml-explore/mlx) support
 - [x] finish `README.md`
 - [x] add [NATS](https://nats.io) for distributed processing
