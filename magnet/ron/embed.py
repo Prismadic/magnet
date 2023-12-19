@@ -68,14 +68,7 @@ class MilvusDB:
             FieldSchema(name='embedding', dtype=DataType.FLOAT_VECTOR, dim=self.config['DIMENSION'])
         ]
         self.schema = CollectionSchema(fields=self.fields)
-        self.index_params = {
-            'metric_type': 'COSINE',
-            'index_type':'HNSW',
-            'params':{
-                "efConstruction":40
-                , "M":48
-            },
-        }
+        self.index_params = self.config['INDEX_PARAMS']
 
     def on(self):
         try:
