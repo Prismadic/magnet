@@ -12,7 +12,6 @@ class Payload:
 class Embedder:
     def __init__(self, config, create=False):
         self.config = config
-        # self.ds = mhs.MilvusDocumentStore(uri=self.config['MILVUS_URI'], embedding_dim=self.config['DIMENSION'])
         self.model = SentenceTransformer(self.config['MODEL'])
         self.db = MilvusDB(self.config)
         self.db.on()
