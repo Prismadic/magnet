@@ -45,16 +45,16 @@ class Charge:
         _f('success', f'{self.frequency} stream deleted')
 
 class Resonator:
-
     def __init__(self, server):
         self.server = server
+
     async def on(self, frequency: str = 'no_category', stream: str = 'documents', cb=print):
         self.frequency = frequency
         self.stream = stream
         try:
             self.nc = await nats.connect(f'nats://{self.server}:4222')
             self.js = self.nc.jetstream()
-            self.sub =  await self.js.pull_subscribe(self.frequency, stream=self.stream)
+            self.sub = await self.js.pull_subscribe(self.frequency, stream=self.stream)
         except TimeoutError:
             _f("fatal", f'could not connect to {self.server}')
         while True:
