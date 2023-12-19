@@ -11,7 +11,7 @@ class Charge:
     def __init__(self, server):
         self.server = server
 
-    async def on(self, frequency: str = 'default', stream: str = 'default'):
+    async def on(self, frequency: str = 'no_category', stream: str = 'documents'):
         self.frequency = frequency
         self.stream = stream
         try:
@@ -47,7 +47,7 @@ class Resonator:
 
     def __init__(self, server):
         self.server = server
-    async def on(self, frequency: str = 'default', stream: str = 'default', cb=print):
+    async def on(self, frequency: str = 'no_category', stream: str = 'documents', cb=print):
         self.frequency = frequency
         self.stream = stream
         self.nc = await nats.connect(f'nats://{self.server}:4222')
