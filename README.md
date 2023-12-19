@@ -47,7 +47,6 @@ await filings.process('./data/filings.parquet','clean','file', nlp=False)
 - [ ] add [mlx](https://github.com/ml-explore/mlx) support
 - [x] finish `README.md`
 - [x] add [NATS](https://nats.io) for distributed processing
-- [ ] `deepspeed` integration for model parallelism on multiple GPU
 
 ## bad code
 
