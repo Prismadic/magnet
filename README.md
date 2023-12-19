@@ -37,7 +37,7 @@ await filings.process('./data/filings.parquet','clean','file', nlp=False)
 
  - so long as your initial data has columns for article text and some unique identifier per source document, `magnet` can do the rest
  - embed & index to vector db with [milvus](https://milvus.io)
- - sequential distributed processing with [NATS](https://nats.io)
+ - distributed processing with [NATS](https://nats.io)
  - upload to S3
  - ideal cyberpunk vision of LLM power users in vectorspace
 
