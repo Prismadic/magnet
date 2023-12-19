@@ -35,9 +35,9 @@ await filings.process('./data/filings.parquet','clean','file', nlp=False)
 
 ## 👏 features
 
- - so long as your initial data has columns for article text and ids, `magnet` can do the rest
- - sequential distributed processing with NATS
- - finetune highly performant expert models from 0-1 in very little time
+ - so long as your initial data has columns for article text and some unique identifier per source document, `magnet` can do the rest
+ - embed & index to vector db with [milvus](https://milvus.io)
+ - sequential distributed processing with [NATS](https://nats.io)
  - upload to S3
  - ideal cyberpunk vision of LLM power users in vectorspace
 
