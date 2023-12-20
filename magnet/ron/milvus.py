@@ -33,7 +33,7 @@ class Embedder:
                 ])
         except Exception as e:
             _f('fatal',e)
-    def search(self, payload):
+    def search(self, payload, cb=print):
         payload['embedding'] = self.model.encode(payload['text'], normalize_embeddings=True)
         self.db.collection.load()
         _results = self.db.collection.search(
@@ -51,7 +51,7 @@ class Embedder:
                     , 'document': hit.entity.get('document')
                     , 'distance': hit.distance
                 })
-        return results
+        cb(results)
     def delete(self, name=None):
         if name and name==self.config['INDEX']:
             try:
