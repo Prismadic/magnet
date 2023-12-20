@@ -5,7 +5,7 @@ __pycache__/
 
 # Custom
 data/
-*.ipynb
+/*.ipynb
 raw/
 .DS_Store
 local_example.ipynb
