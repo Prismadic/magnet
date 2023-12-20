@@ -15,12 +15,13 @@ class Generate:
                   , q: str = "What is your itinerary?"
                   , t: float = 0.0
                   , n: int = 8096
+                  , p: str = "qa_ref"
                   , cb: object = None
                   , docs: list = []
                 ):
         if self.field:
             await self.field.on(category=self.stream.category, stream=self.stream.stream)
-        prompt = Prompts().qa_ref(docs,q)
+        prompt = getattr(globals()['Prompts'](), p)(docs,q)
         _f('warn', '(p + q) > n') if len(prompt) > n else None
         payload = json.dumps({
             "model": m,
