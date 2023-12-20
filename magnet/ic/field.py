@@ -2,7 +2,7 @@ import nats, json
 from magnet.utils import _f
 from dataclasses import asdict
 from nats.errors import TimeoutError
-from data_classes import Payload
+from .data_classes import Payload, GeneratedPayload
 
 class Charge:
     def __init__(self, server):
@@ -19,6 +19,9 @@ class Charge:
             _f("success", f'connected to {self.server}')
         except TimeoutError:
             _f('fatal', f'could not connect to {self.server}')
+    async def voltage(self):
+        jsm = await self.js.stream_info(name=self.stream)
+        _f('info',json.dumps(jsm.config.__dict__, indent=2))
     async def off(self):
         await self.sub.unsubscribe()
         _f('warn', f'unsubscribed from {self.stream}')
