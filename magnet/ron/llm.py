@@ -1,5 +1,5 @@
 from magnet.utils import _f
-from .huggingface import InferenceAPI
+from .utils.huggingface import InferenceAPI
 from .utils.prompts import *
 import requests, json
 
