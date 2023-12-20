@@ -50,12 +50,16 @@ class Resonator:
     async def on(self, category: str = 'no_category', stream: str = 'documents', cb=print, session='magnet'):
         self.category = category
         self.stream = stream
+        self.session = session
+        _f('wait',f'connecting to {self.server}')
         try:
             self.nc = await nats.connect(f'nats://{self.server}:4222')
             self.js = self.nc.jetstream()
-            self.sub = await self.js.subscribe(self.category, durable=session)
+            self.sub = await self.js.subscribe(self.category, durable=self.session)
+            _f("success", f'connected to {self.server}')
         except TimeoutError:
             _f("fatal", f'could not connect to {self.server}')
+        _f("info", f'consuming delta from <{self.category}> on 🛰️ <{self.stream}> w/ session 🧲 "{self.session}"')
         while True:
             try:
                 msg = await self.sub.next_msg()
@@ -65,8 +69,8 @@ class Resonator:
                     cb(payload)
                 except json.decoder.JSONDecodeError:
                     _f('fatal','invalid JSON')
-            except TimeoutError:
-                _f("fatal", f'could not connect to {self.server}')
+            except TimeoutError or BrokenPipeError:
+                _f("warn", f'retrying connection to {self.server}')
     async def off(self):
         await self.sub.unsubscribe()
         _f('warn', f'unsubscribed from {self.stream}')
