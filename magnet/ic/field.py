@@ -39,9 +39,12 @@ class Charge:
         except Exception as e:
             print(e)
             _f('fatal', f'could not send data to {self.server}')
-    async def emp(self):
-        await self.js.delete_stream(name=self.stream)
-        _f('success', f'{self.stream} stream deleted')
+    async def emp(self, name=None):
+        if name and name==self.stream:
+            await self.js.delete_stream(name=self.stream)
+            _f('warn', f'{self.stream} stream deleted')
+        else:
+            _f('fatal', "name does not match the connection or connection doesn't exist")
 
 class Resonator:
     def __init__(self, server):
