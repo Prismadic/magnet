@@ -22,7 +22,6 @@ class Generate:
         if self.field:
             await self.field.on(category=self.stream.category, stream=self.stream.stream)
         prompt = Prompts().qa_ref(docs,q)
-        print(prompt)
         _f('warn', '(p + q) > n') if len(prompt) > n else None
         payload = json.dumps({
             "model": m,

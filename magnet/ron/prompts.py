@@ -2,9 +2,7 @@ class Prompts:
     def __init__(self):
         return
     def qa_ref(self, docs: str = [], q: str = None):
-        print()
         docs = '\n'.join([f"Document: {d}\nText: {t}" for (d, t) in [tuple(x.values()) for x in docs]])
-        print(docs)
         return """
                 Create a concise and informative answer (no more than 50 words) for a given question 
                 based solely on the given documents. You must only use information from the given documents. 
