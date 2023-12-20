@@ -1,4 +1,3 @@
-from haystack.nodes import PromptTemplate
 from magnet.utils import _f
 from .huggingface import InferenceAPI
 from .utils.prompts import Prompts

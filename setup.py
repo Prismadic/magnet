@@ -10,7 +10,6 @@ setup(
         , "spacy"
         , "numpy"
         , "nats-py"
-        , "farm-haystack"
         , "sentence_transformers"
         , "vllm"
     ],
