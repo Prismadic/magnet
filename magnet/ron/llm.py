@@ -4,13 +4,16 @@ from vllm import LLM
 import requests
 import json
 
-class Ask:
-    def __init__(self, server):
+class Generate:
+    def __init__(self, server, field=None):
         self.server = server
-
-    async def gen(self, m: str = "mistralai/Mistral-7B-Instruct-v0.1", q: str = "What is your itinerary?", t: float = 0.0, n: int = 8096, cb=None, p: str = "deepset/question-answering-with-references"):
+        self.field = field
+        
+    async def ask(self, m: str = "mistralai/Mistral-7B-Instruct-v0.1", q: str = "What is your itinerary?", t: float = 0.0, n: int = 8096, cb=None, p: str = "deepset/question-answering-with-references"):
+        if self.field:
+            await self.field.on(category='ask', stream='generations')
         prompt = f'{PromptTemplate(p).prompt_text} \n\n {q}'
-        _f('warn', 'prompt + query is longer than the maximum context length (n)') if len(prompt)>n else None
+        _f('warn', '(p + q) > n') if len(prompt)>n else None
         payload = json.dumps({
             "model": m,
             "prompt": prompt,
@@ -21,6 +24,7 @@ class Ask:
             'Content-Type': 'application/json'
         }
         response = requests.request("POST", f"{self.server}/v1/completions", headers=headers, data=payload)
+        await self.field.pulse(prompt, response.text) if self.field else None
         if cb:
             cb(response.text)
         else:
