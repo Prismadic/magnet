@@ -1,12 +1,8 @@
 import nats, json
 from magnet.utils import _f
-from dataclasses import asdict, dataclass
+from dataclasses import asdict
 from nats.errors import TimeoutError
-
-@dataclass
-class Payload:
-    text: str
-    document: str
+from data_classes import Payload
 
 class Charge:
     def __init__(self, server):
