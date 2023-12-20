@@ -11,7 +11,7 @@ class Generate:
         
     async def ask(self, m: str = "mistralai/Mistral-7B-Instruct-v0.1", q: str = "What is your itinerary?", t: float = 0.0, n: int = 8096, cb=None, p: str = "deepset/question-answering-with-references"):
         if self.field:
-            await self.field.on(category='ask', stream='generations')
+            await self.field.on(category=self.stream.category, stream=self.stream.stream)
         prompt = f'{PromptTemplate(p).prompt_text} \n\n {q}'
         _f('warn', '(p + q) > n') if len(prompt)>n else None
         payload = json.dumps({
