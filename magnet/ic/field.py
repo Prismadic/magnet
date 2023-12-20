@@ -12,14 +12,14 @@ class Charge:
     def __init__(self, server):
         self.server = server
 
-    async def on(self, frequency: str = 'no_category', stream: str = 'documents'):
-        self.frequency = frequency
+    async def on(self, category: str = 'no_category', stream: str = 'documents'):
+        self.category = category
         self.stream = stream
         try:
             nc = await nats.connect(f'nats://{self.server}:4222')
             self.nc = nc
             self.js = self.nc.jetstream()
-            await self.js.add_stream(name=self.stream, subjects=[self.frequency])
+            await self.js.add_stream(name=self.stream, subjects=[self.category])
             _f("success", f'connected to {self.server}')
         except TimeoutError:
             _f('fatal', f'could not connect to {self.server}')
@@ -35,7 +35,7 @@ class Charge:
         except:
             _f('fatal', 'invalid JSON')
         try:
-            await self.js.publish(self.frequency, bytes_)
+            await self.js.publish(self.category, bytes_)
         except Exception as e:
             print(e)
             _f('fatal', f'could not send data to {self.server}')
@@ -47,13 +47,13 @@ class Resonator:
     def __init__(self, server):
         self.server = server
 
-    async def on(self, frequency: str = 'no_category', stream: str = 'documents', cb=print, session='magnet'):
-        self.frequency = frequency
+    async def on(self, category: str = 'no_category', stream: str = 'documents', cb=print, session='magnet'):
+        self.category = category
         self.stream = stream
         try:
             self.nc = await nats.connect(f'nats://{self.server}:4222')
             self.js = self.nc.jetstream()
-            self.sub = await self.js.subscribe(self.frequency, durable=session)
+            self.sub = await self.js.subscribe(self.category, durable=session)
         except TimeoutError:
             _f("fatal", f'could not connect to {self.server}')
         while True:
