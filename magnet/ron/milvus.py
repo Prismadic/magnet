@@ -52,11 +52,14 @@ class Embedder:
                     , 'distance': hit.distance
                 })
         return results
-    def delete(self):
-        try:
-            self.db.delete_index()
-        except Exception as e:
-            _f('fatal',e)
+    def delete(self, name=None):
+        if name and name==self.config['INDEX']:
+            try:
+                self.db.delete_index()
+            except Exception as e:
+                _f('fatal',e)
+        else:
+            _f('fatal', "name doesn't match the connection or the connection doesn't exist")
             
 class MilvusDB:
     def __init__(self, config):

@@ -44,7 +44,7 @@ class Charge:
             await self.js.delete_stream(name=self.stream)
             _f('warn', f'{self.stream} stream deleted')
         else:
-            _f('fatal', "name does not match the connection or connection doesn't exist")
+            _f('fatal', "name doesn't match the connection or connection doesn't exist")
 
 class Resonator:
     def __init__(self, server):
