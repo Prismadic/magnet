@@ -1,7 +1,7 @@
 import nats, json
 from magnet.utils import _f
 from dataclasses import asdict
-from nats.errors import TimeoutError
+from nats.errors import TimeoutError, SlowConsumerError
 from .data_classes import Payload, GeneratedPayload
 
 class Charge:
@@ -19,8 +19,8 @@ class Charge:
             _f("success", f'connected to {self.server}')
         except TimeoutError:
             _f('fatal', f'could not connect to {self.server}')
-    async def voltage(self):
-        jsm = await self.js.stream_info(name=self.stream)
+    async def info(self, session: str = None):
+        jsm = await self.js.consumer_info(stream=self.stream, consumer=session)
         _f('info',json.dumps(jsm.config.__dict__, indent=2))
     async def off(self):
         await self.sub.unsubscribe()
@@ -69,10 +69,10 @@ class Resonator:
                     payload = Payload(**json.loads(msg.data))
                     await msg.ack()
                     cb(payload)
-                except json.decoder.JSONDecodeError:
-                    _f('fatal','invalid JSON')
-            except TimeoutError or BrokenPipeError:
-                _f("warn", f'retrying connection to {self.server}')
+                except json.decoder.JSONDecodeError or BrokenPipeError or SlowConsumerError:
+                    _f('fatal','invalid JSON') if not SlowConsumerError else _f('warn', 'processing speed is slow')
+            except TimeoutError or BrokenPipeError or SlowConsumerError:
+                _f("warn", f'retrying connection to {self.server}') if not SlowConsumerError else _f('warn', 'processing speed is slow')
     async def off(self):
         await self.sub.unsubscribe()
         _f('warn', f'unsubscribed from {self.stream}')
