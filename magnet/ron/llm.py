@@ -1,8 +1,7 @@
 from magnet.utils import _f
 from .huggingface import InferenceAPI
-from .utils.prompts import Prompts
-import requests
-import json
+from .utils.prompts import *
+import requests, json
 
 class Generate:
     def __init__(self, server: str = None, field = None, hf_token: str = None):
