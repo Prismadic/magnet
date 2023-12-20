@@ -11,8 +11,8 @@ setup(
         , "numpy"
         , "nats-py"
         , "farm-haystack"
-        , "milvus-haystack"
         , "sentence_transformers"
+        , "vllm"
     ],
     url = 'https://github.com/Prismadic/magnet'
 )
