@@ -39,7 +39,7 @@ class Generate:
             if not isinstance(response, list) and 'error' in response.keys():
                 return _f('fatal', response['error'])
             else:
-                response = response[0]['generated_text']
+                response = response[0]['generated_text'].split(json.loads(payload)['prompt'])[1]
         else:
             response = requests.request(
                 "POST", f"{self.server}/v1/completions", headers=headers, data=payload).text
