@@ -20,7 +20,6 @@ class Charge:
             self.nc = nc
             self.js = self.nc.jetstream()
             await self.js.add_stream(name=self.stream, subjects=[self.frequency])
-            self.sub = await self.js.pull_subscribe(self.frequency, 'magnet-charge')
             _f("success", f'connected to {self.server}')
         except TimeoutError:
             _f('fatal', f'could not connect to {self.server}')
@@ -42,25 +41,24 @@ class Charge:
             _f('fatal', f'could not send data to {self.server}')
     async def emp(self):
         await self.js.delete_stream(name=self.stream)
-        _f('success', f'{self.frequency} stream deleted')
+        _f('success', f'{self.stream} stream deleted')
 
 class Resonator:
     def __init__(self, server):
         self.server = server
 
-    async def on(self, frequency: str = 'no_category', stream: str = 'documents', cb=print):
+    async def on(self, frequency: str = 'no_category', stream: str = 'documents', cb=print, session='magnet'):
         self.frequency = frequency
         self.stream = stream
         try:
             self.nc = await nats.connect(f'nats://{self.server}:4222')
             self.js = self.nc.jetstream()
-            self.sub = await self.js.subscribe(self.frequency)
+            self.sub = await self.js.subscribe(self.frequency, durable=session)
         except TimeoutError:
             _f("fatal", f'could not connect to {self.server}')
         while True:
             try:
                 msg = await self.sub.next_msg()
-                # for msg in msgs:
                 try:
                     payload = Payload(**json.loads(msg.data))
                     await msg.ack()

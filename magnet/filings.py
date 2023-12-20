@@ -64,14 +64,12 @@ class Processor:
                         str(s) for s in sentence_splitter(self.utils.normalize_text(x), nlp=nlp)
                     ]
                 )
-                pbar = tqdm(range(len(self.df)))
-                for i in pbar:
+                for i in tqdm(range(len(self.df))):
                     for s in self.df['chunks'].iloc[i]:
                         a = self.df[id_column].iloc[i]
                         chunks.append((a, s))
                         if self.field:
                             await self.field.pulse(s, a)
-                        pbar.set_description(s[0:10])
                 knowledge_base['chunks'] = [x[1] for x in chunks]
                 knowledge_base['id'] = [x[0] for x in chunks]
                 self.df = knowledge_base
