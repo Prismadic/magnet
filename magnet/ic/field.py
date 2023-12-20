@@ -61,7 +61,7 @@ class Resonator:
             _f("success", f'connected to {self.server}')
         except TimeoutError:
             _f("fatal", f'could not connect to {self.server}')
-        _f("info", f'consuming delta from <{self.category}> on 🛰️ <{self.stream}> w/ session 🧲 "{self.session}"')
+        _f("info", f'consuming delta from [{self.category}] on\n🛰️ stream: {self.stream}\n🧲 session: "{self.session}"')
         while True:
             try:
                 msg = await self.sub.next_msg()
