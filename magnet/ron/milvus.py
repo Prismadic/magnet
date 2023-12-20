@@ -33,14 +33,15 @@ class Embedder:
                 ])
         except Exception as e:
             _f('fatal',e)
-    def search(self, payload, cb=None):
+    def search(self, payload, limit=100, cb=None):
+        payload = {'text':payload}
         payload['embedding'] = self.model.encode(payload['text'], normalize_embeddings=True)
         self.db.collection.load()
         _results = self.db.collection.search(
             data=[payload['embedding']],  # Embeded search value
             anns_field="embedding",  # Search across embeddings
             param={},
-            limit = 100,  # Limit to top_k results per search
+            limit = limit,  # Limit to top_k results per search
             output_fields=['text', 'document']
         )
         results = []
@@ -52,7 +53,7 @@ class Embedder:
                     , 'distance': hit.distance
                 })
         if cb:
-            cb(results)
+            return cb(payload['text'], results)
         else:
             return results
     def delete(self, name=None):
