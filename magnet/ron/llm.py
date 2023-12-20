@@ -1,6 +1,7 @@
 from haystack.nodes import PromptTemplate
 from magnet.utils import _f
 from .huggingface import InferenceAPI
+from .prompts import Prompts
 import requests
 import json
 
@@ -15,12 +16,13 @@ class Generate:
                   , q: str = "What is your itinerary?"
                   , t: float = 0.0
                   , n: int = 8096
-                  , p: str = "deepset/question-answering-with-references"
                   , cb: object = None
+                  , docs: list = []
                 ):
         if self.field:
             await self.field.on(category=self.stream.category, stream=self.stream.stream)
-        prompt = f'{PromptTemplate(p).prompt_text} \n\n {q}'
+        prompt = Prompts().qa_ref(docs,q)
+        print(prompt)
         _f('warn', '(p + q) > n') if len(prompt) > n else None
         payload = json.dumps({
             "model": m,
