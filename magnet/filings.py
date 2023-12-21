@@ -2,11 +2,14 @@ import pandas as pd
 import os
 from .utils import _f, Utils
 from tqdm import tqdm
+from magnet.ic.utils.data_classes import *
+
 class Processor:
-    def __init__(self):
+    def __init__(self, field=None):
         self.df = None
         self.utils = Utils()
-
+        self.field = field
+        
     def save(self, filename: str = None, raw: pd.DataFrame = None):
         try:
             file_extension = os.path.splitext(filename)[-1]
@@ -46,74 +49,118 @@ class Processor:
                 _f("fatal", "data type not in [csv, json, xlsx, parquet, pd.DataFrame]")
         except Exception as e:
             _f("fatal", e)
-
-    def export_as_sentences(self, path: str = None, text_column: str = "clean", id_column: str = 'id', splitter: any = None):
+    async def process(self, path: str = None, text_column: str = "clean", id_column: str = 'id', splitter: any = None, nlp=True):
         self.df = self.df.dropna()
+        if self.field:
+            await self.field.on()
         if self.df is not None:
             try:
                 _f("wait", f"get coffee or tea - {len(self.df)} processing...")
-                sentence_splitter = self.bge_sentence_splitter if splitter is None else splitter
-                all_sentences = []
+                sentence_splitter = self.bge_splitter if splitter is None else splitter
+                chunks = []
                 knowledge_base = pd.DataFrame()
                 tqdm.pandas()
-                self.df["sentences"] = self.df[text_column].progress_apply(
+                self.df["chunks"] = self.df[text_column].progress_apply(
                     lambda x: [
-                        str(s) for s in sentence_splitter(self.utils.normalize_text(x))
+                        str(s) for s in sentence_splitter(self.utils.normalize_text(x), nlp=nlp)
                     ]
                 )
-                for i in range(len(self.df)):
-                    for s in self.df['sentences'].iloc[i]:
-                        a = self.df[id_column].iloc[i]
-                        all_sentences.append((a, s))
-                knowledge_base['sentences'] = [x[1] for x in all_sentences]
-                knowledge_base['id'] = [x[0] for x in all_sentences]
+                for i in tqdm(range(len(self.df))):
+                    for c in self.df['chunks'].iloc[i]:
+                        d = self.df[id_column].iloc[i]
+                        chunks.append((d, c))
+                        if self.field:
+                            payload = Payload(
+                                document = d
+                                , text = c
+                            )
+                            await self.field.pulse(payload)
+                knowledge_base['chunks'] = [c[1] for c in chunks]
+                knowledge_base['id'] = [c[0] for c in chunks]
                 self.df = knowledge_base
+                _f('wait', f'saving to {path}')
                 self.save(path, self.df)
                 return
             except Exception as e:
                 _f("fatal", e)
         else:
             return _f("fatal", "no data loaded!")
-        
-    def bge_sentence_splitter(self, data, window_size=768, overlap=76):
-        self.utils.nlp.max_length = len(data) + 100
-        sentences = [str(x) for x in self.utils.nlp(data).sents]
+    def bge_splitter(self, data, window_size=250, overlap=25, nlp=True):
+        if nlp:
+            self.utils.nlp.max_length = len(data) + 100
+            sentences = [str(x) for x in self.utils.nlp(data).sents]
 
-        new_sentences = []
-        for sentence in sentences:
-            start_idx = 0
-            end_idx = window_size
-            
-            while start_idx < len(sentence):
-                chunk = sentence[start_idx:end_idx]
-                new_sentences.append(chunk)
-                
-                # Slide the window, ensuring we don't exceed the sentence boundaries
-                start_idx += (window_size - overlap)
-                end_idx = min(start_idx + window_size, len(sentence))
+            new_sentences = []
+            for sentence in sentences:
+                # Split the sentence into words
+                words = sentence.split()
 
-        return new_sentences
-    
-    def mistral_sentence_splitter(self, data, window_size=768, overlap=76):
-        self.utils.nlp.max_length = len(data) + 100
-        sentences = [str(x) for x in self.utils.nlp(data).sents]
+                # Initialize indices
+                start_idx = 0
+                end_idx = 0
 
-        new_sentences = []
-        for sentence in sentences:
-            tokens = self.utils.nlp.tokenizer(sentence)
-            num_tokens = len(tokens)
-            
-            start_token_idx = 0
-            end_token_idx = min(window_size, num_tokens)
-            
-            while start_token_idx < num_tokens:
-                start_char_idx = tokens[start_token_idx].idx
-                end_char_idx = tokens[end_token_idx - 1].idx + len(tokens[end_token_idx - 1])
-                chunk = sentence[start_char_idx:end_char_idx]
-                new_sentences.append(chunk)
+                while end_idx < len(words):
+                    # Calculate the end index based on words, not characters
+                    while end_idx < len(words) and len(' '.join(words[start_idx:end_idx + 1])) <= window_size:
+                        end_idx += 1
+
+                    # Create a chunk with the selected words
+                    chunk = ' '.join(words[start_idx:end_idx])
+
+                    # Check if the chunk is not empty and does not contain individual words longer than window_size
+                    if chunk and all(len(word) <= window_size for word in chunk.split()):
+                        new_sentences.append(chunk)
+
+                    # Update the start index for the next chunk
+                    start_idx = end_idx
+
+            return new_sentences
+        else:
+            # Perform chunked splitting by a fixed character length
+            chunks = []
+            start_char_idx = 0
+            while start_char_idx < len(data):
+                end_char_idx = start_char_idx + window_size
+                chunk = data[start_char_idx:end_char_idx]
+                chunks.append(chunk)
+                start_char_idx += (window_size - overlap)
+            return chunks
+    def mistral_splitter(self, data, window_size=768, overlap=76, nlp=True):
+        if nlp:
+            self.utils.nlp.max_length = len(data) + 100
+            sentences = [str(x) for x in self.utils.nlp(data).sents]
+
+            new_sentences = []
+            for sentence in sentences:
+                tokens = self.utils.nlp.tokenizer(sentence)
+                num_tokens = len(tokens)
                 
-                # Slide the window, ensuring we don't exceed the token or character boundaries
-                start_token_idx += (window_size - overlap)
-                end_token_idx = min(start_token_idx + window_size, num_tokens)
-                
-        return new_sentences
+                start_token_idx = 0
+                end_token_idx = 0
+
+                while end_token_idx < num_tokens:
+                    # Calculate the end index based on tokens
+                    while end_token_idx < num_tokens and sum(len(tokens[i].text) for i in range(start_token_idx, end_token_idx + 1)) <= window_size:
+                        end_token_idx += 1
+
+                    # Create a chunk with the selected tokens
+                    chunk = ' '.join(tokens[start_token_idx:end_token_idx])
+
+                    # Check if the chunk is not empty and does not contain individual words longer than window_size
+                    if chunk and all(len(token.text) <= window_size for token in tokens[start_token_idx:end_token_idx]):
+                        new_sentences.append(chunk)
+
+                    # Update the start index for the next chunk
+                    start_token_idx = end_token_idx
+
+            return new_sentences
+        else:
+            # Perform chunked splitting by a fixed character length
+            chunks = []
+            start_char_idx = 0
+            while start_char_idx < len(data):
+                end_char_idx = start_char_idx + window_size
+                chunk = data[start_char_idx:end_char_idx]
+                chunks.append(chunk)
+                start_char_idx += (window_size - overlap)
+            return chunks
