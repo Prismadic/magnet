@@ -38,6 +38,7 @@ class Processor:
                     ".parquet": pd.read_parquet,
                 }
                 if file_extension in file_handlers:
+                    _f("wait", f"loading - {raw_data_dir}")
                     self.df = file_handlers[file_extension](raw_data_dir)
                     _f("success", f"loaded - {raw_data_dir}")
                 else:
@@ -51,8 +52,6 @@ class Processor:
             _f("fatal", e)
     async def process(self, path: str = None, text_column: str = "clean", id_column: str = 'id', splitter: any = None, nlp=True):
         self.df = self.df.dropna()
-        if self.field:
-            await self.field.on()
         if self.df is not None:
             try:
                 _f("wait", f"get coffee or tea - {len(self.df)} processing...")
