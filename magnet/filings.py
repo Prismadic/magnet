@@ -5,10 +5,9 @@ from tqdm import tqdm
 from magnet.ic.utils.data_classes import *
 
 class Processor:
-    def __init__(self, field=None):
+    def __init__(self):
         self.df = None
         self.utils = Utils()
-        self.field = field
         
     def save(self, filename: str = None, raw: pd.DataFrame = None):
         try:
@@ -26,7 +25,9 @@ class Processor:
                 _f("fatal", "unsupported data")
         except Exception as e:
             _f("fatal", e)
-    def load(self, raw: str | pd.DataFrame = None):
+    def load(self, raw: str | pd.DataFrame = None, text_column: str = "clean", id_column: str = 'id'):
+        self.id_column = id_column
+        self.text_column = text_column
         try:
             if isinstance(raw, str):
                 raw_data_dir = raw
@@ -50,7 +51,7 @@ class Processor:
                 _f("fatal", "data type not in [csv, json, xlsx, parquet, pd.DataFrame]")
         except Exception as e:
             _f("fatal", e)
-    async def process(self, path: str = None, text_column: str = "clean", id_column: str = 'id', splitter: any = None, nlp=True):
+    async def process(self, path: str = None, splitter: any = None, nlp=True):
         self.df = self.df.dropna()
         if self.df is not None:
             try:
@@ -59,21 +60,15 @@ class Processor:
                 chunks = []
                 knowledge_base = pd.DataFrame()
                 tqdm.pandas()
-                self.df["chunks"] = self.df[text_column].progress_apply(
+                self.df["chunks"] = self.df[self.text_column].progress_apply(
                     lambda x: [
                         str(s) for s in sentence_splitter(self.utils.normalize_text(x), nlp=nlp)
                     ]
                 )
                 for i in tqdm(range(len(self.df))):
                     for c in self.df['chunks'].iloc[i]:
-                        d = self.df[id_column].iloc[i]
+                        d = self.df[self.id_column].iloc[i]
                         chunks.append((d, c))
-                        if self.field:
-                            payload = Payload(
-                                document = d
-                                , text = c
-                            )
-                            await self.field.pulse(payload)
                 knowledge_base['chunks'] = [c[1] for c in chunks]
                 knowledge_base['id'] = [c[0] for c in chunks]
                 self.df = knowledge_base
@@ -84,6 +79,22 @@ class Processor:
                 _f("fatal", e)
         else:
             return _f("fatal", "no data loaded!")
+    async def create_charge(self, field=None):
+        if self.df is not None and field is not None:
+            self.field = field
+            chunks = []
+            for i in tqdm(range(len(self.df))):
+                for c in self.df['chunks'].iloc[i]:
+                    d = self.df[self.id_column].iloc[i]
+                    chunks.append((d, c))
+                    if self.field:
+                        payload = Payload(
+                            document = d
+                            , text = c
+                        )
+                        await self.field.pulse(payload)
+        else:
+            return _f("fatal", "no data loaded!") if field else _f('fatal', 'no field loaded!')
     def default_splitter(self, data, window_size=768, overlap=76, nlp=True):
         if nlp:
             self.utils.nlp.max_length = len(data) + 100

@@ -72,9 +72,9 @@ class Resonator:
                 try:
                     await msg.ack()
                     await cb(payload)
-                except TimeoutError or BrokenPipeError:
+                except Exception as e:
                     _f("warn", f'retrying connection to {self.server}')
-            except json.decoder.JSONDecodeError or BrokenPipeError:
+            except Exception as e:
                 _f('fatal','invalid JSON')
     async def info(self, session: str = None):
         jsm = await self.js.consumer_info(stream=self.stream, consumer=session)
