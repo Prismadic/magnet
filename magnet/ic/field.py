@@ -1,38 +1,41 @@
 import nats, json
 from magnet.utils import _f
 from dataclasses import asdict
-from nats.errors import TimeoutError, SlowConsumerError
-from .data_classes import Payload, GeneratedPayload
+from nats.errors import TimeoutError
+from .utils.data_classes import *
 
 class Charge:
     def __init__(self, server):
         self.server = server
 
-    async def on(self, category: str = 'no_category', stream: str = 'documents'):
+    async def on(self, category: str = 'no_category', stream: str = 'documents', create: bool = False):
         self.category = category
         self.stream = stream
         try:
             nc = await nats.connect(f'nats://{self.server}:4222')
             self.nc = nc
             self.js = self.nc.jetstream()
-            await self.js.add_stream(name=self.stream, subjects=[self.category])
-            _f("success", f'connected to {self.server}')
+            streams = await self.js.streams_info()
+            if self.stream not in [x.config.name for x in streams]:
+                try:
+                    _f("wait", f'creating {self.stream}') \
+                    , await self.js.add_stream(name=self.stream, subjects=[self.category]) \
+                        if create else _f("fatal", f"couldn't create {stream} on {self.server}")
+                except:
+                    _f('fatal', f"couldn't create {stream} on {self.server}")
         except TimeoutError:
             _f('fatal', f'could not connect to {self.server}')
-    async def info(self, session: str = None):
-        jsm = await self.js.consumer_info(stream=self.stream, consumer=session)
-        _f('info',json.dumps(jsm.config.__dict__, indent=2))
+        _f("success", f'connected to [{self.category}] on\n🛰️ stream: {self.stream}')
     async def off(self):
         await self.sub.unsubscribe()
         _f('warn', f'unsubscribed from {self.stream}')
         await self.nc.drain()
         _f('warn', f'disconnected from {self.server}')
-    async def pulse(self, packet, document_id):
+    async def pulse(self, payload):
         try:
-            payload = Payload(text=packet,document=document_id)
-            bytes_ = json.dumps(asdict(payload)).encode()
-        except:
-            _f('fatal', 'invalid JSON')
+            bytes_ = json.dumps(asdict(payload), separators=(', ', ':')).encode('utf-8')
+        except Exception as e:
+            _f('fatal', f'invalid JSON\n{e}')
         try:
             await self.js.publish(self.category, bytes_)
         except Exception as e:
@@ -43,7 +46,7 @@ class Charge:
             await self.js.delete_stream(name=self.stream)
             _f('warn', f'{self.stream} stream deleted')
         else:
-            _f('fatal', "name doesn't match the connection or connection doesn't exist")
+            _f('fatal', "name doesn't match the stream or stream doesn't exist")
 
 class Resonator:
     def __init__(self, server):
@@ -64,15 +67,18 @@ class Resonator:
         _f("info", f'consuming delta from [{self.category}] on\n🛰️ stream: {self.stream}\n🧲 session: "{self.session}"')
         while True:
             try:
-                msg = await self.sub.next_msg()
+                msg = await self.sub.next_msg(timeout=60)
+                payload = Payload(**json.loads(msg.data))
                 try:
-                    payload = Payload(**json.loads(msg.data))
                     await msg.ack()
-                    cb(payload)
-                except json.decoder.JSONDecodeError or BrokenPipeError or SlowConsumerError:
-                    _f('fatal','invalid JSON') if not SlowConsumerError else _f('warn', 'processing speed is slow')
-            except TimeoutError or BrokenPipeError or SlowConsumerError:
-                _f("warn", f'retrying connection to {self.server}') if not SlowConsumerError else _f('warn', 'processing speed is slow')
+                    await cb(payload)
+                except TimeoutError or BrokenPipeError:
+                    _f("warn", f'retrying connection to {self.server}')
+            except json.decoder.JSONDecodeError or BrokenPipeError:
+                _f('fatal','invalid JSON')
+    async def info(self, session: str = None):
+        jsm = await self.js.consumer_info(stream=self.stream, consumer=session)
+        _f('info',json.dumps(jsm.config.__dict__, indent=2))
     async def off(self):
         await self.sub.unsubscribe()
         _f('warn', f'unsubscribed from {self.stream}')

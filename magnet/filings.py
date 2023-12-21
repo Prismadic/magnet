@@ -2,6 +2,7 @@ import pandas as pd
 import os
 from .utils import _f, Utils
 from tqdm import tqdm
+from magnet.ic.utils.data_classes import *
 
 class Processor:
     def __init__(self, field=None):
@@ -65,13 +66,17 @@ class Processor:
                     ]
                 )
                 for i in tqdm(range(len(self.df))):
-                    for s in self.df['chunks'].iloc[i]:
-                        a = self.df[id_column].iloc[i]
-                        chunks.append((a, s))
+                    for c in self.df['chunks'].iloc[i]:
+                        d = self.df[id_column].iloc[i]
+                        chunks.append((d, c))
                         if self.field:
-                            await self.field.pulse(s, a)
-                knowledge_base['chunks'] = [x[1] for x in chunks]
-                knowledge_base['id'] = [x[0] for x in chunks]
+                            payload = Payload(
+                                document = d
+                                , text = c
+                            )
+                            await self.field.pulse(payload)
+                knowledge_base['chunks'] = [c[1] for c in chunks]
+                knowledge_base['id'] = [c[0] for c in chunks]
                 self.df = knowledge_base
                 _f('wait', f'saving to {path}')
                 self.save(path, self.df)
