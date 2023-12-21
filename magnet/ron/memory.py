@@ -22,7 +22,7 @@ class Embedder:
     async def embed_and_store(self, payload, verbose=False):
         try:
             _f('info','embedding payload') if verbose else None
-            payload.embedding = self.model.encode(payload.text, normalize_embeddings=True)
+            payload.embedding = self.model.encode(f"Represent this sentence for searching relevant passages: {payload.text}", normalize_embeddings=True)
         except Exception as e:
             _f('fatal',e)
         else:
@@ -44,7 +44,7 @@ class Embedder:
             _f('info','embedding payload') if verbose else None
             payload = EmbeddingPayload(
                     model = self.config['MODEL']
-                    , embedding = self.model.encode(payload.text, normalize_embeddings=True).tolist()
+                    , embedding = self.model.encode(f"Represent this sentence for searching relevant passages: {payload.text}", normalize_embeddings=True).tolist()
                     , text = payload.text
                     , document = payload.document
                 )
