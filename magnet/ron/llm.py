@@ -1,5 +1,6 @@
 from magnet.utils import _f
 from .utils.huggingface import InferenceAPI
+from .utils.local import LocalInference
 from .utils.prompts import *
 from .utils.data_classes import *
 import requests, json
@@ -22,6 +23,7 @@ class Generate:
                   , p: str = "qa_ref"
                   , cb: object = None
                   , docs: list = []
+                  , v: bool = False
                 ):
         prompt = getattr(globals()['Prompts'](), p)(docs,q)
         _f('warn', '(p + q + d) > n') if len(prompt) > n else None
@@ -44,9 +46,12 @@ class Generate:
                 return _f('fatal', response['error'])
             else:
                 response = response[0]['generated_text'].split(json.loads(payload)['prompt'])[1]
-        else:
+        elif v:
             response = requests.request(
                 "POST", f"{self.server}/v1/completions", headers=headers, data=payload).text
+        else:
+            llm = LocalInference(model=m)
+            response = llm.invoke(payload)
         if self.field:
             payload = GeneratedPayload(
                         query=q
