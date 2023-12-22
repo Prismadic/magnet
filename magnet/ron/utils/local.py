@@ -14,8 +14,8 @@ class LocalInference:
             , "model_path": self.model
             , "temp": payload["parameters"]["temperature"]
             , "prompt": payload["prompt"]
-            , "max_tokens": 500 # payload["parameters"]["max_new_tokens"]
+            , "max_tokens": payload["parameters"]["max_new_tokens"]
             , "tokens_per_eval": 10
         }
         response = mistral.generate(payload)
-        return response.json()
+        return response

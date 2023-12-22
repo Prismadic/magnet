@@ -243,19 +243,6 @@ def generate(payload):
             prompt_tps = prompt.size / (toc - tic)
             tic = time.time()
 
-        if (len(tokens) % payload['tokens_per_eval']) == 0:
-            mx.eval(tokens)
-            s = tokenizer.decode([t.item() for t in tokens])
-            print(s, end="", flush=True)
-            tokens = []
-
     mx.eval(tokens)
     s = tokenizer.decode([t.item() for t in tokens])
     return s
-    # print(s, flush=True)
-    # print("------")
-    # generation_tps = ntoks / (time.time() - tic)
-    # print(
-    #     f"Tokens per second: prompt {prompt_tps:.3f}, "
-    #     f"generation {generation_tps:.3f}"
-    # )
