@@ -6,7 +6,6 @@ import json
 
 @dataclass
 class EmbeddingPayload:
-    document: str
     embedding: list
     text: str
     model: str
@@ -54,14 +53,14 @@ class Embedder:
             _f('fatal',e)
 
     def search(self, payload, limit=100, cb=None):
-        payload = EmbeddingPayload({
-                    'text': payload
-                    , 'embedding': self.model.encode(payload.data.text, normalize_embeddings=True)
-                    , 'model': self.config.model
-                })
+        payload = EmbeddingPayload(
+                    text = payload
+                    , embedding = self.model.encode(f"Represent this sentence for searching relevant passages: {payload}", normalize_embeddings=True)
+                    , model = self.config['MODEL']
+                )
         self.db.collection.load()
         _results = self.db.collection.search(
-            data=[payload.data.embedding],  # Embeded search value
+            data=[payload.embedding],  # Embeded search value
             anns_field="embedding",  # Search across embeddings
             param={},
             limit = limit,  # Limit to top_k results per search
@@ -76,7 +75,7 @@ class Embedder:
                     , 'distance': hit.distance
                 })
         if cb:
-            return cb(payload.data.text, results)
+            return cb(payload.text, results)
         else:
             return results
     def delete(self, name=None):
