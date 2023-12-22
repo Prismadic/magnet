@@ -16,6 +16,7 @@ class Charge:
             nc = await nats.connect(f'nats://{self.server}:4222')
             self.nc = nc
             self.js = self.nc.jetstream()
+            self.js.purge_stream
             streams = await self.js.streams_info()
             if self.stream not in [x.config.name for x in streams] or self.category not in [x.config.subjects for x in streams]:
                 try:
@@ -27,7 +28,6 @@ class Charge:
                     if self.category not in [x.config.subjects for x in streams if x.config.name == self.stream]:
                         subjects = [x.config.subjects[0] for x in streams if x.config.name == self.stream]
                         subjects.append(self.category)
-                        print(subjects)
                         await self.js.update_stream(StreamConfig(
                             name = self.stream
                             , subjects = subjects
@@ -57,6 +57,12 @@ class Charge:
             _f('warn', f'{self.stream} stream deleted')
         else:
             _f('fatal', "name doesn't match the stream or stream doesn't exist")
+    async def reset(self, name=None):
+        if name and name==self.category:
+            await self.js.purge_stream(name=self.stream, subject=self.category)
+            _f('warn', f'{self.category} category deleted')
+        else:
+            _f('fatal', "name doesn't match the stream category or category doesn't exist")
 
 class Resonator:
     def __init__(self, server):
