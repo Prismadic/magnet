@@ -1,6 +1,6 @@
 import requests
 from magnet.utils.globals import _f
-from magnet.ron.utils.mlx import mistral
+from magnet.utils.mlx import mistral
 import json
 
 class LocalInference:
