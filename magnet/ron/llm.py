@@ -25,10 +25,11 @@ class Generate:
         payload = json.dumps({
             "model": m,
             "prompt": prompt,
-            "max_tokens": 8096,
-            "max_new_tokens": 8096,
-            "temperature": t,
-            "inputs": prompt
+            "inputs": prompt,
+            "parameters": {
+                "max_new_tokens": n
+                , "temperature": t,
+            }
         })
         headers = {
             'Content-Type': 'application/json'

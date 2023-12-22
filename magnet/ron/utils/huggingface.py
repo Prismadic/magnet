@@ -7,9 +7,6 @@ class InferenceAPI:
     
     def invoke(self, payload):
         payload = json.loads(payload)
-        payload['parameters'] = {
-            "max_new_tokens": 8096
-        }
         headers = {"Authorization": f"Bearer {self.token}"}
         response = requests.post(f"https://api-inference.huggingface.co/models/{payload['model']}", headers=headers, json=payload)
         return response.json()
