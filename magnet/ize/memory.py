@@ -34,6 +34,7 @@ class Embedder:
                         , [payload.text]
                         , [payload.embedding]
                     ])
+                self.db.collection.flush(collection_name_array=[self.config['INDEX']])
             except Exception as e:
                 _f('fatal',e)
     async def embed_and_charge(self, payload, verbose=False, field=None):
