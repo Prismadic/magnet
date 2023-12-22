@@ -69,8 +69,9 @@ class Processor:
                     for c in self.df['chunks'].iloc[i]:
                         d = self.df[self.id_column].iloc[i]
                         chunks.append((d, c))
-                knowledge_base['chunks'] = [c[1] for c in chunks]
                 knowledge_base['id'] = [c[0] for c in chunks]
+                knowledge_base['chunks'] = [c[1] for c in chunks]
+
                 self.df = knowledge_base
                 _f('wait', f'saving to {path}')
                 self.save(path, self.df)
@@ -79,22 +80,24 @@ class Processor:
                 _f("fatal", e)
         else:
             return _f("fatal", "no data loaded!")
+        
     async def create_charge(self, field=None):
         if self.df is not None and field is not None:
             self.field = field
-            chunks = []
             for i in tqdm(range(len(self.df))):
-                for c in self.df['chunks'].iloc[i]:
-                    d = self.df[self.id_column].iloc[i]
-                    chunks.append((d, c))
-                    if self.field:
-                        payload = Payload(
-                            document = d
-                            , text = c
-                        )
-                        await self.field.pulse(payload)
+                d = self.df[self.id_column].iloc[i]
+                c = self.df[self.text_column].iloc[i]
+                payload = Payload(
+                    document = d
+                    , text = c
+                )
+                if self.field:
+                    await self.field.pulse(payload)
+                else:
+                    _f('fatal', 'no field initialized')
         else:
             return _f("fatal", "no data loaded!") if field else _f('fatal', 'no field loaded!')
+    
     def default_splitter(self, data, window_size=768, overlap=76, nlp=True):
         if nlp:
             self.utils.nlp.max_length = len(data) + 100

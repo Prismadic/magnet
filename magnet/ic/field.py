@@ -3,6 +3,7 @@ from magnet.utils import _f
 from dataclasses import asdict
 from nats.errors import TimeoutError
 from .utils.data_classes import *
+from nats.js.api import StreamConfig
 
 class Charge:
     def __init__(self, server):
@@ -16,19 +17,28 @@ class Charge:
             self.nc = nc
             self.js = self.nc.jetstream()
             streams = await self.js.streams_info()
-            if self.stream not in [x.config.name for x in streams]:
+            if self.stream not in [x.config.name for x in streams] or self.category not in [x.config.subjects for x in streams]:
                 try:
-                    _f("wait", f'creating {self.stream}') \
-                    , await self.js.add_stream(name=self.stream, subjects=[self.category]) \
-                        if create else _f("fatal", f"couldn't create {stream} on {self.server}")
+                    if self.stream not in [x.config.name for x in streams]:
+                        _f("wait", f'creating {self.stream}') \
+                        , await self.js.add_stream(name=self.stream, subjects=[self.category]) \
+                            if create else _f("warn", f"couldn't create {stream} on {self.server}")
+                        streams = await self.js.streams_info()
+                    if self.category not in [x.config.subjects for x in streams if x.config.name == self.stream]:
+                        subjects = [x.config.subjects[0] for x in streams if x.config.name == self.stream]
+                        subjects.append(self.category)
+                        print(subjects)
+                        await self.js.update_stream(StreamConfig(
+                            name = self.stream
+                            , subjects = subjects
+                        ))
+                        _f("success", f'created [{self.category}] on\n🛰️ stream: {self.stream}')
                 except:
                     _f('fatal', f"couldn't create {stream} on {self.server}")
         except TimeoutError:
             _f('fatal', f'could not connect to {self.server}')
         _f("success", f'connected to [{self.category}] on\n🛰️ stream: {self.stream}')
     async def off(self):
-        await self.sub.unsubscribe()
-        _f('warn', f'unsubscribed from {self.stream}')
         await self.nc.drain()
         _f('warn', f'disconnected from {self.server}')
     async def pulse(self, payload):
@@ -36,11 +46,11 @@ class Charge:
             bytes_ = json.dumps(asdict(payload), separators=(', ', ':')).encode('utf-8')
         except Exception as e:
             _f('fatal', f'invalid JSON\n{e}')
-        try:
-            await self.js.publish(self.category, bytes_)
-        except Exception as e:
-            print(e)
-            _f('fatal', f'could not send data to {self.server}')
+        await self.js.publish(self.category, bytes_)
+        # try:
+        #     await self.js.publish(self.category, bytes_)
+        # except:
+        #     _f('fatal', f'could not send data to {self.server}')
     async def emp(self, name=None):
         if name and name==self.stream:
             await self.js.delete_stream(name=self.stream)

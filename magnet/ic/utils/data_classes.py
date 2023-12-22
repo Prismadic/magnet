@@ -11,6 +11,7 @@ class GeneratedPayload:
     query: str
     prompt: str
     context: list
+    result: str
     model: str
 
 @dataclass
