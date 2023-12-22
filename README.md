@@ -40,7 +40,8 @@ await filings.process('./data/filings.parquet','clean','file', nlp=False)
 
 - ⚡️ **It's Fast**
    - <small>fast on consumer hardware</small>
-   - <small>**extremely** fast on accelerated hardware</small>
+   - <small>_very_ fast on Apple Silicon w/ mlx</small>
+   - <small>**extremely** fast on ROCm/CUDA</small>
 - 🫵 **Automatic or your way**
    - <small>rely on established transformer patterns to let `magnet` do the work</small>
    - <small>keep your existing data processing functions, bring them to `magnet`!</small>
@@ -50,7 +51,8 @@ await filings.process('./data/filings.parquet','clean','file', nlp=False)
  - 🧮 **Choose Inference Method**
    - <small>HuggingFace</small>
    - <small>vLLM node</small>
-   - <small>localhost</small>
+   - <small>CUDA</small>
+   - <small>mlx</small>
  - 🌎 **Huge Volumes**
    - <small>handle gigantic amounts of data inexpensively</small>
    - <small>fault-tolerant by design</small>
@@ -63,9 +65,10 @@ await filings.process('./data/filings.parquet','clean','file', nlp=False)
    - <small>emojis are the future</small>
 
 
-## 🧲 ideas
+## 🧲 why
 
-- so long as your initial data has columns for article text and some unique identifier per source document, `magnet` can do the rest
+- build a distributed LLM research node with any hardware, from Rasbperry Pi to cloud hardware.
+- Apple silicon first-class citizen with [mlx](https://github.com/ml-explore/mlx)
 - embed & index to vector db with [milvus](https://milvus.io)
 - distributed processing with [NATS](https://nats.io)
 - upload to S3
@@ -78,4 +81,4 @@ await filings.process('./data/filings.parquet','clean','file', nlp=False)
 - [x] add [milvus](https://milvus.io) implementation
 - [x] finish `README.md`
 - [x] add [NATS](https://nats.io) for distributed processing
-- [ ] add [mlx](https://github.com/ml-explore/mlx) support
+- [x] add [mlx](https://github.com/ml-explore/mlx) support
