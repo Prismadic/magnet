@@ -11,7 +11,7 @@ sys.path.insert(0, os.path.abspath('..'))
 project = 'magnet'
 copyright = '2023, Prismadic'
 author = 'Prismadic'
-release = '0.0.8'
+release = '0.0.9'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -30,7 +30,7 @@ github_url = "https://github.com/Prismadic/magnet"
 display_github = True
 html_logo = "../magnet.png"
 pygments_style = 'default'
-version = "v0.0.8"
+version = "v0.0.9"
 release = "latest"
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
