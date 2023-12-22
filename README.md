@@ -40,7 +40,7 @@ await filings.process('./data/filings.parquet','clean','file', nlp=False)
 
 - ⚡️ **It's Fast**
    - <small>fast on consumer hardware</small>
-   - <small>_very_ fast on Apple Silicon w/ mlx</small>
+   - <small>_very_ fast on Apple Silicon</small>
    - <small>**extremely** fast on ROCm/CUDA</small>
 - 🫵 **Automatic or your way**
    - <small>rely on established transformer patterns to let `magnet` do the work</small>
@@ -51,7 +51,7 @@ await filings.process('./data/filings.parquet','clean','file', nlp=False)
  - 🧮 **Choose Inference Method**
    - <small>HuggingFace</small>
    - <small>vLLM node</small>
-   - <small>CUDA</small>
+   - <small>GPU</small>
    - <small>mlx</small>
  - 🌎 **Huge Volumes**
    - <small>handle gigantic amounts of data inexpensively</small>
@@ -67,7 +67,7 @@ await filings.process('./data/filings.parquet','clean','file', nlp=False)
 
 ## 🧲 why
 
-- build a distributed LLM research node with any hardware, from Rasbperry Pi to cloud hardware.
+- build a distributed LLM research node with any hardware, from Rasbperry Pi to the expensive cloud
 - Apple silicon first-class citizen with [mlx](https://github.com/ml-explore/mlx)
 - embed & index to vector db with [milvus](https://milvus.io)
 - distributed processing with [NATS](https://nats.io)
