@@ -22,7 +22,7 @@ class MilvusDB:
             _f('fatal',e)
     def off(self):
         try:
-            self.connection = connections.disconnect(host=self.config['MILVUS_URI'], port=19530)
+            self.connection = connections.disconnect(alias="magnet")
             _f('warn',f"disconnected from {self.config['MILVUS_URI']}")
         except Exception as e:
             _f('fatal',e)

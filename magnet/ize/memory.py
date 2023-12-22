@@ -11,14 +11,16 @@ class EmbeddingPayload:
     model: str
 
 class Embedder:
-    def __init__(self, config, create=False, field=None):
+    def __init__(self, config, create=False):
         self.config = config
         self.model = SentenceTransformer(self.config['MODEL'])
         self.db = MilvusDB(self.config)
         self.db.on()
         if create:
             self.db.create(overwrite=True)
-    async def embed_and_store(self, payload, verbose=False):
+    async def embed_and_store(self, payload, verbose=False, field=None):
+        if field:
+            self.field = field
         try:
             _f('info','embedding payload') if verbose else None
             payload.embedding = self.model.encode(f"Represent this sentence for searching relevant passages: {payload.text}", normalize_embeddings=True)
@@ -78,6 +80,10 @@ class Embedder:
             return cb(payload.text, results)
         else:
             return results
+    def info(self):
+        return self.db.collection
+    def disconnect(self):
+        return self.db.off()
     def delete(self, name=None):
         if name and name==self.config['INDEX']:
             try:
