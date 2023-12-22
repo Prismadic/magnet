@@ -25,7 +25,7 @@ class Charge:
                         , await self.js.add_stream(name=self.stream, subjects=[self.category]) \
                             if create else _f("warn", f"couldn't create {stream} on {self.server}")
                         streams = await self.js.streams_info()
-                    if self.category not in [x.config.subjects for x in streams if x.config.name == self.stream]:
+                    if self.category not in [x.config.subjects for x in streams if x.config.name == self.stream][0]:
                         subjects = [x.config.subjects[0] for x in streams if x.config.name == self.stream]
                         subjects.append(self.category)
                         await self.js.update_stream(StreamConfig(
@@ -46,11 +46,10 @@ class Charge:
             bytes_ = json.dumps(asdict(payload), separators=(', ', ':')).encode('utf-8')
         except Exception as e:
             _f('fatal', f'invalid JSON\n{e}')
-        await self.js.publish(self.category, bytes_)
-        # try:
-        #     await self.js.publish(self.category, bytes_)
-        # except:
-        #     _f('fatal', f'could not send data to {self.server}')
+        try:
+            await self.js.publish(self.category, bytes_)
+        except Exception as e:
+            _f('fatal', f'could not send data to {self.server}\n{e}')
     async def emp(self, name=None):
         if name and name==self.stream:
             await self.js.delete_stream(name=self.stream)
