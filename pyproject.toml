@@ -1,5 +1,8 @@
 [project]
 name = "llm_magnet"
-version = "0.0.6"
+version = "0.0.7"
 description = "An embedding model toolkit; fine-tune SOTA LLMs on knowledge bases rapidly."
 readme = "dynamic"
+
+[tool.setuptools.packages.find]
+exclude = ["raw", "data"]
