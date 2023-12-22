@@ -12,7 +12,7 @@ class Generate:
     async def ask(self
                   , m: str = "mistralai/Mistral-7B-Instruct-v0.1"
                   , q: str = "What is your itinerary?"
-                  , t: float = 0.0
+                  , t: float = 1.0
                   , n: int = 8096
                   , p: str = "qa_ref"
                   , cb: object = None
