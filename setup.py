@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='llm_magnet',
-    version='0.0.7',
+    version='0.0.8',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     install_requires=[

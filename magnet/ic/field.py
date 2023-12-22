@@ -18,23 +18,24 @@ class Charge:
             self.js = self.nc.jetstream()
             self.js.purge_stream
             streams = await self.js.streams_info()
-            if self.stream not in [x.config.name for x in streams] or self.category not in [x.config.subjects for x in streams]:
+            if self.stream not in [x.config.name for x in streams] or self.category not in sum([x.config.subjects for x in streams], []):
                 try:
                     if self.stream not in [x.config.name for x in streams]:
                         _f("wait", f'creating {self.stream}') \
                         , await self.js.add_stream(name=self.stream, subjects=[self.category]) \
                             if create else _f("warn", f"couldn't create {stream} on {self.server}")
                         streams = await self.js.streams_info()
-                    if self.category not in [x.config.subjects for x in streams if x.config.name == self.stream][0]:
-                        subjects = [x.config.subjects for x in streams if x.config.name == self.stream][0]
+                    if self.category not in sum([x.config.subjects for x in streams if x.config.name == self.stream], []):
+                        subjects = sum([x.config.subjects for x in streams if x.config.name == self.stream], [])
+                        print(subjects)
                         subjects.append(self.category)
                         await self.js.update_stream(StreamConfig(
                             name = self.stream
                             , subjects = subjects
                         ))
                         _f("success", f'created [{self.category}] on\n🛰️ stream: {self.stream}')
-                except:
-                    _f('fatal', f"couldn't create {stream} on {self.server}")
+                except Exception as e:
+                    _f('fatal', f"couldn't create {stream} on {self.server}\n{e}")
         except TimeoutError:
             _f('fatal', f'could not connect to {self.server}')
         _f("success", f'connected to [{self.category}] on\n🛰️ stream: {self.stream}')

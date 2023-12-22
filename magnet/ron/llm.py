@@ -1,6 +1,7 @@
 from magnet.utils import _f
 from .utils.huggingface import InferenceAPI
 from .utils.prompts import *
+from .utils.data_classes import *
 import requests, json
 
 class Generate:
@@ -18,8 +19,6 @@ class Generate:
                   , cb: object = None
                   , docs: list = []
                 ):
-        if self.field:
-            await self.field.on(category=self.stream.category, stream=self.stream.stream)
         prompt = getattr(globals()['Prompts'](), p)(docs,q)
         _f('warn', '(p + q + d) > n') if len(prompt) > n else None
         payload = json.dumps({
@@ -44,7 +43,19 @@ class Generate:
         else:
             response = requests.request(
                 "POST", f"{self.server}/v1/completions", headers=headers, data=payload).text
-        await self.field.pulse(prompt, response) if self.field else None
+        if self.field:
+            payload = GeneratedPayload(
+                        query=q
+                        , prompt=prompt
+                        , context=docs
+                        , result=prompt
+                        , model=m
+                    )
+            _f('info', payload)
+            try:
+                await self.field.pulse(payload)
+            except Exception as e:
+                _f('fatal',e)
         if cb:
             cb(response)
         else:

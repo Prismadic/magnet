@@ -17,7 +17,7 @@ class Embedder:
         self.db = MilvusDB(self.config)
         self.db.on()
         if create:
-            self.db.create(overwrite=True)
+            self.db.create()
     async def embed_and_store(self, payload, verbose=False, field=None):
         if field:
             self.field = field
