@@ -26,7 +26,7 @@ class Charge:
                             if create else _f("warn", f"couldn't create {stream} on {self.server}")
                         streams = await self.js.streams_info()
                     if self.category not in [x.config.subjects for x in streams if x.config.name == self.stream][0]:
-                        subjects = [x.config.subjects[0] for x in streams if x.config.name == self.stream]
+                        subjects = [x.config.subjects for x in streams if x.config.name == self.stream][0]
                         subjects.append(self.category)
                         await self.js.update_stream(StreamConfig(
                             name = self.stream
