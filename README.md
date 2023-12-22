@@ -1,5 +1,5 @@
 <p align="center">
-   <img height="250" width="250" src="./magnet.png">
+   <img height="300" width="300" src="./magnet.png">
    <br>
    <h3 align="center">magnet</h3>
    <p align="center">small, efficient embedding model toolkit</p>
