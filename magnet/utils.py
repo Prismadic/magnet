@@ -3,7 +3,7 @@ import boto3
 from spacy.lang.en import English
 import inspect
 
-def reverseEngineer():
+def reversal():
     return inspect.getsource(inspect.currentframe().f_back)
 
 def _f(
