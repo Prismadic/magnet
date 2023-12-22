@@ -62,7 +62,7 @@ class Embedder:
         _results = self.db.collection.search(
             data=[payload.embedding],  # Embeded search value
             anns_field="embedding",  # Search across embeddings
-            param={},
+            param=self.config['INDEX_PARAMS'],
             limit = limit,  # Limit to top_k results per search
             output_fields=['text', 'document']
         )

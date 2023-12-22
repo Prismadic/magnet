@@ -21,7 +21,7 @@ class Generate:
         if self.field:
             await self.field.on(category=self.stream.category, stream=self.stream.stream)
         prompt = getattr(globals()['Prompts'](), p)(docs,q)
-        _f('warn', '(p + q) > n') if len(prompt) > n else None
+        _f('warn', '(p + q + d) > n') if len(prompt) > n else None
         payload = json.dumps({
             "model": m,
             "prompt": prompt,
