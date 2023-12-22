@@ -85,8 +85,7 @@ class Resonator:
                 msg = await self.sub.next_msg(timeout=60)
                 payload = Payload(**json.loads(msg.data))
                 try:
-                    await msg.ack()
-                    await cb(payload)
+                    await cb(payload, msg)
                 except Exception as e:
                     _f("warn", f'retrying connection to {self.server}')
             except Exception as e:
