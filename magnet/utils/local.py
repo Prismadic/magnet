@@ -1,5 +1,5 @@
 import requests
-from magnet.utils import _f
+from magnet.utils.globals import _f
 from magnet.ron.utils.mlx import mistral
 import json
 

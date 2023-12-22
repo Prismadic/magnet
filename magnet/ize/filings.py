@@ -1,8 +1,8 @@
 import pandas as pd
 import os
-from .utils import _f, Utils
+from magnet.utils.globals import _f, Utils
 from tqdm import tqdm
-from magnet.ic.utils.data_classes import *
+from magnet.utils.data_classes import *
 
 class Processor:
     def __init__(self):

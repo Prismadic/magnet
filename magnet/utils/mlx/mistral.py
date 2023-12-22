@@ -11,7 +11,7 @@ import mlx.core as mx
 import mlx.nn as nn
 from mlx.utils import tree_unflatten
 from sentencepiece import SentencePieceProcessor
-from magnet.utils import _f
+from magnet.utils.globals import _f
 
 @dataclass
 class ModelArgs:

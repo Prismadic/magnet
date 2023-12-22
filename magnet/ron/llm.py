@@ -1,8 +1,8 @@
-from magnet.utils import _f
-from .utils.huggingface import InferenceAPI
-from .utils.local import LocalInference
-from .utils.prompts import *
-from .utils.data_classes import *
+from magnet.utils.globals import _f
+from magnet.utils.huggingface import InferenceAPI
+from magnet.utils.local import LocalInference
+from magnet.utils.prompts import *
+from magnet.utils.data_classes import *
 import requests, json
 
 class Generate:

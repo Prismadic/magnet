@@ -1,5 +1,5 @@
 from pymilvus import connections, utility, FieldSchema, CollectionSchema, DataType, Collection
-from magnet.utils import _f
+from magnet.utils.globals import _f
 
 class MilvusDB:
     def __init__(self, config):

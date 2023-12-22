@@ -1,15 +1,37 @@
 import nats, json
-from magnet.utils import _f
+from magnet.utils.globals import _f
 from dataclasses import asdict
 from nats.errors import TimeoutError
-from .utils.data_classes import *
+from magnet.utils.data_classes import *
 from nats.js.api import StreamConfig
 
 class Charge:
+    """
+    The `Charge` class is responsible for connecting to a NATS server, managing streams and categories, and publishing data to the server.
+
+    Args:
+        server (str): The NATS server URL.
+
+    Attributes:
+        server (str): The NATS server URL.
+        category (str): The current category.
+        stream (str): The current stream.
+        nc: The NATS connection object.
+        js: The JetStream API object.
+    """
+
     def __init__(self, server):
         self.server = server
 
     async def on(self, category: str = 'no_category', stream: str = 'documents', create: bool = False):
+        """
+        Connects to the NATS server, creates a stream and category if they don't exist, and prints a success message.
+
+        Args:
+            category (str, optional): The category to connect to. Defaults to 'no_category'.
+            stream (str, optional): The stream to connect to. Defaults to 'documents'.
+            create (bool, optional): Whether to create the stream and category if they don't exist. Defaults to False.
+        """
         self.category = category
         self.stream = stream
         try:
@@ -39,10 +61,21 @@ class Charge:
         except TimeoutError:
             _f('fatal', f'could not connect to {self.server}')
         _f("success", f'connected to [{self.category}] on\n🛰️ stream: {self.stream}')
+
     async def off(self):
+        """
+        Disconnects from the NATS server and prints a warning message.
+        """
         await self.nc.drain()
         _f('warn', f'disconnected from {self.server}')
+
     async def pulse(self, payload):
+        """
+        Publishes data to the NATS server using the specified category and payload.
+
+        Args:
+            payload (dict): The data to be published.
+        """
         try:
             bytes_ = json.dumps(asdict(payload), separators=(', ', ':')).encode('utf-8')
         except Exception as e:
@@ -51,13 +84,27 @@ class Charge:
             await self.js.publish(self.category, bytes_)
         except Exception as e:
             _f('fatal', f'could not send data to {self.server}\n{e}')
+
     async def emp(self, name=None):
+        """
+        Deletes the specified stream if the name matches the current stream, or prints an error message if the name doesn't match or the stream doesn't exist.
+
+        Args:
+            name (str, optional): The name of the stream to delete. Defaults to None.
+        """
         if name and name==self.stream:
             await self.js.delete_stream(name=self.stream)
             _f('warn', f'{self.stream} stream deleted')
         else:
             _f('fatal', "name doesn't match the stream or stream doesn't exist")
+
     async def reset(self, name=None):
+        """
+        Purges the specified category if the name matches the current category, or prints an error message if the name doesn't match or the category doesn't exist.
+
+        Args:
+            name (str, optional): The name of the category to purge. Defaults to None.
+        """
         if name and name==self.category:
             await self.js.purge_stream(name=self.stream, subject=self.category)
             _f('warn', f'{self.category} category deleted')

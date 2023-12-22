@@ -27,7 +27,7 @@ python3 setup.py install
 <small>a snippet to get you started</small>
 
 ``` python
-from magnet.filings import Processor
+from magnet.ize.filings import Processor
 # your text documents data
 source_data_file = "./raw/export.parquet"
 filings = Processor()

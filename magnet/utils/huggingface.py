@@ -1,6 +1,6 @@
 import requests
-from magnet.utils import _f
 import json
+
 class InferenceAPI:
     def __init__(self, token):
         self.token = token

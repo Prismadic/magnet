@@ -1,8 +1,7 @@
 from sentence_transformers import SentenceTransformer
-from magnet.utils import _f
-from .utils.milvus import *
+from magnet.utils.globals import _f
+from magnet.utils.milvus import *
 from dataclasses import dataclass
-import json
 
 @dataclass
 class EmbeddingPayload:
