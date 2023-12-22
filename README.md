@@ -61,8 +61,8 @@ await filings.process('./data/filings.parquet','clean','file', nlp=False)
    - <small>JWT</small>
    - <small>Basic</small>
  - 🪵 **World-Class Comprehension**
-   - <small>`magnet` optionally logs its own code as it's executed (yes, really)
-   - <small>easy to trace</small>
+   - <small>`magnet` optionally logs its own code as it's executed (yes, really)</small>
+   - <small>build a self-aware system in one day</small>
    - <small>emojis are the future</small>
 
 
