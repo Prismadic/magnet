@@ -52,7 +52,7 @@ class Generate:
                         query=q
                         , prompt=prompt
                         , context=docs
-                        , result=prompt
+                        , result=response
                         , model=m
                     )
             try:
