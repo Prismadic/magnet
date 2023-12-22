@@ -10,6 +10,10 @@ class Generate:
         self.field = field
         self.token = hf_token
 
+    async def on(self):
+        if self.field:
+            pass
+
     async def ask(self
                   , m: str = "mistralai/Mistral-7B-Instruct-v0.1"
                   , q: str = "What is your itinerary?"
@@ -51,7 +55,6 @@ class Generate:
                         , result=prompt
                         , model=m
                     )
-            _f('info', payload)
             try:
                 await self.field.pulse(payload)
             except Exception as e:
