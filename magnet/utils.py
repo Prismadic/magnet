@@ -1,6 +1,10 @@
 import re, os, torch, random
 import boto3
 from spacy.lang.en import English
+import inspect
+
+def reverseEngineer():
+    return inspect.getsource(inspect.currentframe().f_back)
 
 def _f(
     tag: str = None,
