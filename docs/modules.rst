@@ -1,7 +1,10 @@
-magnet.git
+magnet
 ==========
 
 .. toctree::
    :maxdepth: 5
 
-   magnet
+   magnet.ic
+   magnet.ize
+   magnet.ron
+   magnet.utils

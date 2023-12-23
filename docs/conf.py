@@ -41,3 +41,6 @@ html_theme_options = {
 }
 html_show_sourcelink = True
 html_static_path = ['_static']
+html_theme_options = {
+    "collapse_navigation" : False
+}

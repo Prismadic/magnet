@@ -11,11 +11,3 @@ Subpackages
    magnet.ize
    magnet.ron
    magnet.utils
-
-Module contents
----------------
-
-.. automodule:: magnet
-   :members:
-   :undoc-members:
-   :show-inheritance:

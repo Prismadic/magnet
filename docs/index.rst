@@ -3,14 +3,16 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to the ``🧲`` docs
+Welcome to the 🧲 docs for ``latest``
 ==================================
 
 .. toctree::
-   :maxdepth: 4
-   :caption: Contents:
-
-   modules
+   :maxdepth: 2
+   
+   magnet.ic
+   magnet.ize
+   magnet.ron
+   magnet.utils
 
 .. raw:: html
 
@@ -39,7 +41,6 @@ the small distributed language model toolkit
 |NET|
 
 .. raw:: html
-
    </h3>
 
 .. raw:: html
@@ -119,20 +120,19 @@ or
    -  build a self-aware system and allow it to learn from itself
    -  emojis are the future
 
-learn more about how Prismadic uses 🧲
-------
-
 .. raw:: html
 
    <h3 align="center">
 
-subscribe to our `substack <https://prismadic.substack.com>`_
+learn more about how Prismadic uses 🧲
 
-|A1| |A2|
+subscribe to our `substack <https://prismadic.substack.com>`_
 
 .. raw:: html
 
    </h3>
+
+|A1| |A2|
 
 .. |A1| image:: https://github.com/Prismadic/.github/raw/main/profile/image_square.jpg
 .. |A2| image:: https://github.com/Prismadic/.github/raw/main/profile/accent_color_square.jpg
