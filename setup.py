@@ -13,7 +13,6 @@ setup(
         , "sentence_transformers"
         , "vllm"
         , "pymilvus"
-        , "mlx"
     ],
     url = 'https://github.com/Prismadic/magnet'
 )

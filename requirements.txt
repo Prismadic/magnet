@@ -4,6 +4,5 @@ pandas
 tqdm
 spacy
 pymilvus
-mlx
 boto3
 nats-py
