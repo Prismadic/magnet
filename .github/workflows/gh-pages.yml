@@ -20,8 +20,8 @@ jobs:
         with:
           python-version: 3.9    # Python version to build the html sphinx documentation
           environment-file: docs_env.yaml    # Path to the documentation conda environment
-          auto-update-conda: false
-          auto-activate-base: false
+          auto-update-conda: true
+          auto-activate-base: true
           show-channel-urls: true
       - name: Installing the library
         shell: bash -l {0}
