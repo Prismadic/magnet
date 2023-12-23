@@ -11,7 +11,6 @@ setup(
         , "numpy"
         , "nats-py"
         , "sentence_transformers"
-        , "vllm"
         , "pymilvus"
         , "rich"
         , "mlx"
