@@ -3,11 +3,11 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to magnet's documentation!
+Welcome to the ``🧲`` docs
 ==================================
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 4
    :caption: Contents:
 
    modules
@@ -34,6 +34,15 @@ the small distributed language model toolkit
 
 .. raw:: html
 
+   <h3 align="center">
+
+|NET|
+
+.. raw:: html
+
+   </h3>
+
+.. raw:: html
    <h4 align="center">
 
 ⚡️ fine-tune state-of-the-art LLMs anywhere, rapidly ⚡️
@@ -127,6 +136,7 @@ subscribe to our `substack <https://prismadic.substack.com>`_
 
 .. |A1| image:: https://github.com/Prismadic/.github/raw/main/profile/image_square.jpg
 .. |A2| image:: https://github.com/Prismadic/.github/raw/main/profile/accent_color_square.jpg
+.. |NET| image:: https://github.com/Prismadic/magnet/raw/main/clustered_bidirectional.png
 
 Indices and tables
 ==================
