@@ -27,6 +27,6 @@ jobs:
         with:
           branch: main
           dir_docs: docs
-          sphinxapiopts: '-o .'
+          sphinxapiopts: '--separate -o .'
           sphinxapiexclude: '../*setup* ../*.ipynb'
           sphinxopts: ''
