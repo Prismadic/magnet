@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>magnet.utils.mlx package &mdash; magnet latest documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/tooltipster.custom.css?v=7bc2f056" />
+      <link rel="stylesheet" type="text/css" href="_static/css/tooltipster.bundle.min.css?v=37217874" />
+      <link rel="stylesheet" type="text/css" href="_static/css/tooltipster-sideTip-shadow.min.css?v=6227e517" />
+      <link rel="stylesheet" type="text/css" href="_static/css/tooltipster-sideTip-punk.min.css?v=94669e23" />
+      <link rel="stylesheet" type="text/css" href="_static/css/tooltipster-sideTip-noir.min.css?v=21a39f42" />
+      <link rel="stylesheet" type="text/css" href="_static/css/tooltipster-sideTip-light.min.css?v=a18b2449" />
+      <link rel="stylesheet" type="text/css" href="_static/css/tooltipster-sideTip-borderless.min.css?v=dbff53e4" />
+      <link rel="stylesheet" type="text/css" href="_static/css/micromodal.css?v=d7bf34ee" />
+      <link rel="stylesheet" type="text/css" href="_static/css/sphinx_rtd_theme.css?v=3234e928" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=c6e86fd7"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/js/hoverxref.js?v=82c55261"></script>
+        <script src="_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
+        <script src="_static/js/micromodal.min.js?v=04d6302d"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/magnet.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v0.0.9
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">magnet.utils.mlx package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-magnet.utils.mlx.mistral">magnet.utils.mlx.mistral module</a><ul>
+<li><a class="reference internal" href="#magnet.utils.mlx.mistral.Attention"><code class="docutils literal notranslate"><span class="pre">Attention</span></code></a></li>
+<li><a class="reference internal" href="#magnet.utils.mlx.mistral.FeedForward"><code class="docutils literal notranslate"><span class="pre">FeedForward</span></code></a></li>
+<li><a class="reference internal" href="#magnet.utils.mlx.mistral.Mistral"><code class="docutils literal notranslate"><span class="pre">Mistral</span></code></a></li>
+<li><a class="reference internal" href="#magnet.utils.mlx.mistral.ModelArgs"><code class="docutils literal notranslate"><span class="pre">ModelArgs</span></code></a><ul>
+<li><a class="reference internal" href="#magnet.utils.mlx.mistral.ModelArgs.dim"><code class="docutils literal notranslate"><span class="pre">ModelArgs.dim</span></code></a></li>
+<li><a class="reference internal" href="#magnet.utils.mlx.mistral.ModelArgs.head_dim"><code class="docutils literal notranslate"><span class="pre">ModelArgs.head_dim</span></code></a></li>
+<li><a class="reference internal" href="#magnet.utils.mlx.mistral.ModelArgs.hidden_dim"><code class="docutils literal notranslate"><span class="pre">ModelArgs.hidden_dim</span></code></a></li>
+<li><a class="reference internal" href="#magnet.utils.mlx.mistral.ModelArgs.n_heads"><code class="docutils literal notranslate"><span class="pre">ModelArgs.n_heads</span></code></a></li>
+<li><a class="reference internal" href="#magnet.utils.mlx.mistral.ModelArgs.n_kv_heads"><code class="docutils literal notranslate"><span class="pre">ModelArgs.n_kv_heads</span></code></a></li>
+<li><a class="reference internal" href="#magnet.utils.mlx.mistral.ModelArgs.n_layers"><code class="docutils literal notranslate"><span class="pre">ModelArgs.n_layers</span></code></a></li>
+<li><a class="reference internal" href="#magnet.utils.mlx.mistral.ModelArgs.norm_eps"><code class="docutils literal notranslate"><span class="pre">ModelArgs.norm_eps</span></code></a></li>
+<li><a class="reference internal" href="#magnet.utils.mlx.mistral.ModelArgs.vocab_size"><code class="docutils literal notranslate"><span class="pre">ModelArgs.vocab_size</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#magnet.utils.mlx.mistral.RMSNorm"><code class="docutils literal notranslate"><span class="pre">RMSNorm</span></code></a></li>
+<li><a class="reference internal" href="#magnet.utils.mlx.mistral.Tokenizer"><code class="docutils literal notranslate"><span class="pre">Tokenizer</span></code></a><ul>
+<li><a class="reference internal" href="#magnet.utils.mlx.mistral.Tokenizer.decode"><code class="docutils literal notranslate"><span class="pre">Tokenizer.decode()</span></code></a></li>
+<li><a class="reference internal" href="#magnet.utils.mlx.mistral.Tokenizer.encode"><code class="docutils literal notranslate"><span class="pre">Tokenizer.encode()</span></code></a></li>
+<li><a class="reference internal" href="#magnet.utils.mlx.mistral.Tokenizer.eos_id"><code class="docutils literal notranslate"><span class="pre">Tokenizer.eos_id</span></code></a></li>
+<li><a class="reference internal" href="#magnet.utils.mlx.mistral.Tokenizer.pad_id"><code class="docutils literal notranslate"><span class="pre">Tokenizer.pad_id</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#magnet.utils.mlx.mistral.TransformerBlock"><code class="docutils literal notranslate"><span class="pre">TransformerBlock</span></code></a></li>
+<li><a class="reference internal" href="#magnet.utils.mlx.mistral.generate"><code class="docutils literal notranslate"><span class="pre">generate()</span></code></a></li>
+<li><a class="reference internal" href="#magnet.utils.mlx.mistral.infer"><code class="docutils literal notranslate"><span class="pre">infer()</span></code></a></li>
+<li><a class="reference internal" href="#magnet.utils.mlx.mistral.load_model"><code class="docutils literal notranslate"><span class="pre">load_model()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-magnet.utils.mlx">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">magnet</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">magnet.utils.mlx package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/magnet.utils.mlx.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="magnet-utils-mlx-package">
+<h1>magnet.utils.mlx package<a class="headerlink" href="#magnet-utils-mlx-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-magnet.utils.mlx.mistral">
+<span id="magnet-utils-mlx-mistral-module"></span><h2>magnet.utils.mlx.mistral module<a class="headerlink" href="#module-magnet.utils.mlx.mistral" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="magnet.utils.mlx.mistral.Attention">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">magnet.utils.mlx.mistral.</span></span><span class="sig-name descname"><span class="pre">Attention</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#magnet.utils.mlx.mistral.ModelArgs" title="magnet.utils.mlx.mistral.ModelArgs"><span class="pre">ModelArgs</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/utils/mlx/mistral.html#Attention"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.mlx.mistral.Attention" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="magnet.utils.mlx.mistral.FeedForward">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">magnet.utils.mlx.mistral.</span></span><span class="sig-name descname"><span class="pre">FeedForward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#magnet.utils.mlx.mistral.ModelArgs" title="magnet.utils.mlx.mistral.ModelArgs"><span class="pre">ModelArgs</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/utils/mlx/mistral.html#FeedForward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.mlx.mistral.FeedForward" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="magnet.utils.mlx.mistral.Mistral">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">magnet.utils.mlx.mistral.</span></span><span class="sig-name descname"><span class="pre">Mistral</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#magnet.utils.mlx.mistral.ModelArgs" title="magnet.utils.mlx.mistral.ModelArgs"><span class="pre">ModelArgs</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/utils/mlx/mistral.html#Mistral"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.mlx.mistral.Mistral" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="magnet.utils.mlx.mistral.ModelArgs">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">magnet.utils.mlx.mistral.</span></span><span class="sig-name descname"><span class="pre">ModelArgs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_layers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head_dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hidden_dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_heads</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_kv_heads</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">norm_eps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vocab_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/utils/mlx/mistral.html#ModelArgs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.mlx.mistral.ModelArgs" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="magnet.utils.mlx.mistral.ModelArgs.dim">
+<span class="sig-name descname"><span class="pre">dim</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#magnet.utils.mlx.mistral.ModelArgs.dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="magnet.utils.mlx.mistral.ModelArgs.head_dim">
+<span class="sig-name descname"><span class="pre">head_dim</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#magnet.utils.mlx.mistral.ModelArgs.head_dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="magnet.utils.mlx.mistral.ModelArgs.hidden_dim">
+<span class="sig-name descname"><span class="pre">hidden_dim</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#magnet.utils.mlx.mistral.ModelArgs.hidden_dim" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="magnet.utils.mlx.mistral.ModelArgs.n_heads">
+<span class="sig-name descname"><span class="pre">n_heads</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#magnet.utils.mlx.mistral.ModelArgs.n_heads" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="magnet.utils.mlx.mistral.ModelArgs.n_kv_heads">
+<span class="sig-name descname"><span class="pre">n_kv_heads</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#magnet.utils.mlx.mistral.ModelArgs.n_kv_heads" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="magnet.utils.mlx.mistral.ModelArgs.n_layers">
+<span class="sig-name descname"><span class="pre">n_layers</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#magnet.utils.mlx.mistral.ModelArgs.n_layers" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="magnet.utils.mlx.mistral.ModelArgs.norm_eps">
+<span class="sig-name descname"><span class="pre">norm_eps</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#magnet.utils.mlx.mistral.ModelArgs.norm_eps" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="magnet.utils.mlx.mistral.ModelArgs.vocab_size">
+<span class="sig-name descname"><span class="pre">vocab_size</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#magnet.utils.mlx.mistral.ModelArgs.vocab_size" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="magnet.utils.mlx.mistral.RMSNorm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">magnet.utils.mlx.mistral.</span></span><span class="sig-name descname"><span class="pre">RMSNorm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1e-05</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/utils/mlx/mistral.html#RMSNorm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.mlx.mistral.RMSNorm" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="magnet.utils.mlx.mistral.Tokenizer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">magnet.utils.mlx.mistral.</span></span><span class="sig-name descname"><span class="pre">Tokenizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/utils/mlx/mistral.html#Tokenizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.mlx.mistral.Tokenizer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="magnet.utils.mlx.mistral.Tokenizer.decode">
+<span class="sig-name descname"><span class="pre">decode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/magnet/utils/mlx/mistral.html#Tokenizer.decode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.mlx.mistral.Tokenizer.decode" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="magnet.utils.mlx.mistral.Tokenizer.encode">
+<span class="sig-name descname"><span class="pre">encode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/magnet/utils/mlx/mistral.html#Tokenizer.encode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.mlx.mistral.Tokenizer.encode" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="magnet.utils.mlx.mistral.Tokenizer.eos_id">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">eos_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#magnet.utils.mlx.mistral.Tokenizer.eos_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="magnet.utils.mlx.mistral.Tokenizer.pad_id">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pad_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#magnet.utils.mlx.mistral.Tokenizer.pad_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="magnet.utils.mlx.mistral.TransformerBlock">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">magnet.utils.mlx.mistral.</span></span><span class="sig-name descname"><span class="pre">TransformerBlock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#magnet.utils.mlx.mistral.ModelArgs" title="magnet.utils.mlx.mistral.ModelArgs"><span class="pre">ModelArgs</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/utils/mlx/mistral.html#TransformerBlock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.mlx.mistral.TransformerBlock" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="magnet.utils.mlx.mistral.generate">
+<span class="sig-prename descclassname"><span class="pre">magnet.utils.mlx.mistral.</span></span><span class="sig-name descname"><span class="pre">generate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/utils/mlx/mistral.html#generate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.mlx.mistral.generate" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="magnet.utils.mlx.mistral.infer">
+<span class="sig-prename descclassname"><span class="pre">magnet.utils.mlx.mistral.</span></span><span class="sig-name descname"><span class="pre">infer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prompt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#magnet.utils.mlx.mistral.Mistral" title="magnet.utils.mlx.mistral.Mistral"><span class="pre">Mistral</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/utils/mlx/mistral.html#infer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.mlx.mistral.infer" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="magnet.utils.mlx.mistral.load_model">
+<span class="sig-prename descclassname"><span class="pre">magnet.utils.mlx.mistral.</span></span><span class="sig-name descname"><span class="pre">load_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/utils/mlx/mistral.html#load_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.mlx.mistral.load_model" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-magnet.utils.mlx">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-magnet.utils.mlx" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Prismadic.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
