@@ -5,4 +5,5 @@ tqdm
 spacy
 pymilvus
 boto3
+vllm
 nats-py
