@@ -35,15 +35,9 @@ release = "latest"
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_theme = 'sphinx_rtd_theme'
-html_theme_options = {
-    'logo_only': True,
-    'navigation_depth': 5,
-}
+
 html_static_path = ['_static']
-html_theme_options = {
-    "collapse_navigation" : False
-    , 'prev_next_buttons_location': 'None'
-}
+
 html_context = {
     "display_github": True, # Integrate GitHub
     "github_user": "Prismadic", # Username
@@ -53,3 +47,10 @@ html_context = {
 }
 html_show_sphinx = False
 html_show_copyright = True
+
+html_theme_options = {
+    'logo_only': True
+    , 'navigation_depth': 5
+    , "collapse_navigation" : False
+    , 'prev_next_buttons_location': 'None'
+}
