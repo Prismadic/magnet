@@ -14,6 +14,7 @@ setup(
         , "vllm"
         , "pymilvus"
         , "rich"
+        , "mlx"
     ],
     url = 'https://github.com/Prismadic/magnet'
 )

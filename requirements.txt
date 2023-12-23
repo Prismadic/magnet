@@ -8,3 +8,4 @@ boto3
 vllm
 nats-py
 rich
+mlx

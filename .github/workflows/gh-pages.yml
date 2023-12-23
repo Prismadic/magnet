@@ -9,7 +9,7 @@ permissions:
     contents: write
 jobs:
   sphinx_docs_to_gh-pages:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     name: Sphinx docs to gh-pages
     steps:
       - uses: actions/checkout@v3
