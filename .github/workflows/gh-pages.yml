@@ -15,18 +15,10 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Make conda environment
-        uses: conda-incubator/setup-miniconda@v3.0.1
-        with:
-          python-version: 3.9    # Python version to build the html sphinx documentation
-          environment-file: docs_env.yaml    # Path to the documentation conda environment
-          auto-update-conda: true
-          auto-activate-base: true
-          show-channel-urls: true
       - name: Installing the library
         shell: bash -l {0}
         run: |
-          python setup.py install
+          python setup.py install && pip install sphinx sphinx_rtd_theme
       - name: Running the Sphinx to gh-pages Action
         uses: uibcdf/action-sphinx-docs-to-gh-pages@v1.1.0
         with:
