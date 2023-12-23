@@ -207,22 +207,26 @@ class Utils:
         bucket_path: str = None,
     ):
         """
-        The function `upload_to_s3` uploads a file to an S3 bucket using the provided access keys and
-        bucket information.
+        Uploads a file or directory to an Amazon S3 bucket.
 
-        :param file: The `file` parameter is the path to the file that you want to upload to Amazon S3.
-        It should be a string representing the file's location on your local machine
-        :param keys: The `keys` parameter is a tuple that contains the AWS access key and secret access
-        key. These keys are used to authenticate and authorize access to the AWS S3 service
-        :type keys: tuple
-        :param bucket: The `bucket` parameter is the name of the S3 bucket where you want to upload the
-        file
-        :type bucket: str
-        :param bucket_path: The `bucket_path` parameter is the path within the S3 bucket where you want
-        to upload the file. It is a string that represents the directory structure within the bucket.
-        For example, if you want to upload the file to the root of the bucket, you can set `bucket_path`
-        to
-        :type bucket_path: str
+        Args:
+            file_or_dir (str): The path of the file or directory to be uploaded.
+            keys (tuple): A tuple containing the access keys (access key ID and secret access key) required to access the Amazon S3 bucket. Default is ("YOUR_ACCESS_KEY", "YOUR_SECRET_KEY").
+            bucket (str): The name of the Amazon S3 bucket where the file or directory will be uploaded.
+            bucket_path (str): The path within the bucket where the file or directory will be uploaded.
+
+        Returns:
+            None
+
+        Raises:
+            None
+
+        Example Usage:
+            # Create an instance of the Utils class
+            utils = Utils()
+
+            # Upload a file to Amazon S3
+            utils.upload_to_s3(file_or_dir="path/to/file.txt", keys=("YOUR_ACCESS_KEY", "YOUR_SECRET_KEY"), bucket="my-bucket", bucket_path="data")
         """
         aws_access_key_id, aws_secret_access_key = keys
 
