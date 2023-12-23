@@ -1,14 +1,36 @@
 <p align="center">
    <img height="300" width="300" src="./magnet.png">
    <br>
-   <h3 align="center">magnet</h3>
+
+   <h1 align="center">magnet</h1>
+
    <p align="center">small, efficient embedding model toolkit</p>
    <p align="center"><i>~ fine-tune SOTA LLMs on knowledge bases rapidly ~</i></p>
+   <div align="center">
 </p>
 
-</small>
+![GitHub release (with filter)](https://img.shields.io/github/v/release/prismadic/magnet)
+![PyPI - Version](https://img.shields.io/pypi/v/llm_magnet)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/prismadic/magnet/python-publish.yml)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/prismadic/magnet)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/prismadic/magnet/main)
+![GitHub issues](https://img.shields.io/github/issues/prismadic/magnet)
+![GitHub Repo stars](https://img.shields.io/github/stars/prismadic/magnet)
+![GitHub watchers](https://img.shields.io/github/watchers/prismadic/magnet)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/llm_magnet)
+![PyPI - Wheel](https://img.shields.io/pypi/wheel/llm_magnet)
+![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/prismadic?style=social&logo=x)
+
+
+   </div>
+
+
+</p>
+
+<img src='./divider.png' style="width:100%;height:5px;">
 
 ## 🧬 Installation
+
 
 ``` bash
 pip install llm-magnet
@@ -19,6 +41,8 @@ or
 ``` bash
 python3 setup.py install
 ```
+
+<img src='./divider.png' style="width:100%;height:5px;">
 
 ## 🎉 usage
 
@@ -35,6 +59,8 @@ filings.load(source_data_file)
 # output, text column, id column, and we disable sentence splitting for fastest processing
 await filings.process('./data/filings.parquet','clean','file', nlp=False)
 ```
+
+<img src='./divider.png' style="width:100%;height:5px;">
 
 ## 🔮 features
 
@@ -65,6 +91,7 @@ await filings.process('./data/filings.parquet','clean','file', nlp=False)
    - <small>build a self-aware system and allow it to learn from itself</small>
    - <small>emojis are the future</small>
 
+<img src='./divider.png' style="width:100%;height:5px;">
 
 ## 🧲 why
 
@@ -75,11 +102,4 @@ await filings.process('./data/filings.parquet','clean','file', nlp=False)
 - upload to S3
 - ideal cyberpunk vision of LLM power users in vectorspace
 
-## goals
-
-- [x] add [vllm](https://vllm.ai) implementation
-- [x] add [huggingface](https://huggingface.co/docs/api-inference/detailed_parameters?code=python) implementation
-- [x] add [milvus](https://milvus.io) implementation
-- [x] finish `README.md`
-- [x] add [NATS](https://nats.io) for distributed processing
-- [x] add [mlx](https://github.com/ml-explore/mlx) support
+<img src='./divider.png' style="width:100%;height:5px;">
