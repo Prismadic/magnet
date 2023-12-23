@@ -1,13 +1,7 @@
 from sentence_transformers import SentenceTransformer
 from magnet.utils.globals import _f
 from magnet.utils.milvus import *
-from dataclasses import dataclass
-
-@dataclass
-class EmbeddingPayload:
-    embedding: list
-    text: str
-    model: str
+from magnet.utils.data_classes import EmbeddingPayload
 
 class Embedder:
     def __init__(self, config, create=False):
