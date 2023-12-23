@@ -98,6 +98,36 @@ def _f(
     else:
         print(f"😭 UNKNOWN TAG - `{tag}`")
 
+"""
+The `Utils` class provides various utility functions for tasks such as checking CUDA availability, normalizing text, and uploading files to Amazon S3.
+
+Example Usage:
+    # Create an instance of the Utils class
+    utils = Utils()
+
+    # Check if CUDA is available
+    utils.check_cuda()
+
+    # Normalize a text string
+    normalized_text = utils.normalize_text("   This is a sample text.   ")
+
+    # Upload a file to Amazon S3
+    utils.upload_to_s3(file_or_dir="path/to/file.txt", keys=("YOUR_ACCESS_KEY", "YOUR_SECRET_KEY"), bucket="my-bucket", bucket_path="data")
+
+Main functionalities:
+- Checking if CUDA is available on the machine
+- Normalizing text by performing various cleaning operations
+- Uploading files to Amazon S3
+
+Methods:
+- __init__(): Initializes the Utils class and sets up the spaCy English language model with a sentence tokenizer.
+- check_cuda(): Checks if CUDA is available on the machine and provides additional information if it is.
+- normalize_text(_): Cleans a text string by removing whitespace, replacing characters, and removing curly braces.
+- upload_to_s3(file_or_dir, keys, bucket, bucket_path): Uploads a file or directory to an Amazon S3 bucket using the provided access keys and bucket information.
+
+Fields:
+The Utils class does not have any fields.
+"""
 class Utils:
     def __init__(self):
         nlp = English()
