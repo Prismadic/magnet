@@ -21,7 +21,7 @@ jobs:
             python-version: 3.11
       - name: Installing the library
         run: |
-          python setup.py install && pip install sphinx sphinx_rtd_theme
+          pip install sphinx sphinx_rtd_theme
       - name: Running the Sphinx to gh-pages Action
         uses: uibcdf/action-sphinx-docs-to-gh-pages@v1.1.0
         with:
