@@ -4,8 +4,10 @@
 
    <h1 align="center">magnet</h1>
 
-   <p align="center">small, efficient embedding model toolkit</p>
-   <p align="center"><i>~ fine-tune SOTA LLMs on knowledge bases rapidly ~</i></p>
+   <h3 align="center"><a href="https://prismadic.github.io/magnet/">📖 docs</a> | 💻 <a href="https://github.com/Prismadic/magnet/tree/main/examples">examples</a></h3>
+
+   <p align="center">the small distributed language model toolkit</p>
+   <p align="center"><i>⚡️ fine-tune state-of-the-art LLMs anywhere, rapidly ⚡️</i></p>
    <div align="center">
 </p>
 
@@ -23,13 +25,11 @@
 
    </div>
 
-
 </p>
 
 <img src='./divider.png' style="width:100%;height:5px;">
 
 ## 🧬 Installation
-
 
 ``` bash
 pip install llm-magnet
@@ -62,36 +62,37 @@ await filings.process('./data/filings.parquet','clean','file', nlp=False)
 <img src='./divider.png' style="width:100%;height:5px;">
 
 ## 🔮 features
+
 <center>
 <img src="./clustered_bidirectional.png" style="width:50%;transform: rotate(90deg);margin-top:200px;" align="right">
 </center>
 
 - ⚡️ **It's Fast**
-   - <small>fast on consumer hardware</small>
-   - <small>_very_ fast on Apple Silicon</small>
-   - <small>**extremely** fast on ROCm/CUDA</small>
+  - <small>fast on consumer hardware</small>
+  - <small>_very_ fast on Apple Silicon</small>
+  - <small>**extremely** fast on ROCm/CUDA</small>
 - 🫵 **Automatic or your way**
-   - <small>rely on established transformer patterns to let `magnet` do the work</small>
-   - <small>keep your existing data processing functions, bring them to `magnet`!</small>
- - 🛰️ **100% Distributed**
-   - <small>processing, embedding, storage, retrieval, querying, or inference from anywhere</small>
-   - <small>as much or as little compute as you need</small>
- - 🧮 **Choose Inference Method**
-   - <small>HuggingFace</small>
-   - <small>vLLM node</small>
-   - <small>GPU</small>
-   - <small>mlx</small>
- - 🌎 **Huge Volumes**
-   - <small>handle gigantic amounts of data inexpensively</small>
-   - <small>fault-tolerant by design</small>
-   - <small>decentralized workloads</small>
- - 🔐 **Secure**
-   - <small>JWT</small>
-   - <small>Basic</small>
- - 🪵 **World-Class Comprehension**
-   - <small>`magnet` optionally logs its own code as it's executed (yes, really)</small>
-   - <small>build a self-aware system and allow it to learn from itself</small>
-   - <small>emojis are the future</small>
+  - <small>rely on established transformer patterns to let `magnet` do the work</small>
+  - <small>keep your existing data processing functions, bring them to `magnet`!</small>
+- 🛰️ **100% Distributed**
+  - <small>processing, embedding, storage, retrieval, querying, or inference from anywhere</small>
+  - <small>as much or as little compute as you need</small>
+- 🧮 **Choose Inference Method**
+  - <small>HuggingFace</small>
+  - <small>vLLM node</small>
+  - <small>GPU</small>
+  - <small>mlx</small>
+- 🌎 **Huge Volumes**
+  - <small>handle gigantic amounts of data inexpensively</small>
+  - <small>fault-tolerant by design</small>
+  - <small>decentralized workloads</small>
+- 🔐 **Secure**
+  - <small>JWT</small>
+  - <small>Basic</small>
+- 🪵 **World-Class Comprehension**
+  - <small>`magnet` optionally logs its own code as it's executed (yes, really)</small>
+  - <small>build a self-aware system and allow it to learn from itself</small>
+  - <small>emojis are the future</small>
 
 <img src='./divider.png' style="width:100%;height:5px;">
 

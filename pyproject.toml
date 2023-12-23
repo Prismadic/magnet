@@ -1,7 +1,7 @@
 [project]
 name = "llm_magnet"
 version = "0.0.9"
-description = "An embedding model toolkit; fine-tune SOTA LLMs on knowledge bases rapidly."
+description = "the small distributed language model toolkit. fine-tune state-of-the-art LLMs anywhere, rapidly."
 readme = "dynamic"
 
 [tool.setuptools.packages.find]
