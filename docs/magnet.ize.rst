@@ -19,11 +19,3 @@ magnet.ize.memory module
    :members:
    :undoc-members:
    :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: magnet.ize
-   :members:
-   :undoc-members:
-   :show-inheritance:

@@ -12,10 +12,3 @@ magnet.ic.field module
    :undoc-members:
    :show-inheritance:
 
-Module contents
----------------
-
-.. automodule:: magnet.ic
-   :members:
-   :undoc-members:
-   :show-inheritance:

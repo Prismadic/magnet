@@ -12,10 +12,3 @@ magnet.ron.llm module
    :undoc-members:
    :show-inheritance:
 
-Module contents
----------------
-
-.. automodule:: magnet.ron
-   :members:
-   :undoc-members:
-   :show-inheritance:

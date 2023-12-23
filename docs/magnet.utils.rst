@@ -68,10 +68,3 @@ magnet.utils.prompts module
    :undoc-members:
    :show-inheritance:
 
-Module contents
----------------
-
-.. automodule:: magnet.utils
-   :members:
-   :undoc-members:
-   :show-inheritance:

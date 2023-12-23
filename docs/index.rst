@@ -49,9 +49,11 @@ the small distributed language model toolkit
 |NET|
 
 .. raw:: html
+
    </h3>
 
 .. raw:: html
+
    <h4 align="center">
 
 ⚡️ fine-tune state-of-the-art LLMs anywhere, rapidly ⚡️
