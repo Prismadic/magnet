@@ -20,7 +20,6 @@ extensions = [
     'sphinx.ext.todo'
     , 'sphinx.ext.viewcode'
     , 'sphinx.ext.autodoc'
-    , 'hoverxref.extension'
 ]
 
 templates_path = ['_templates']
