@@ -28,7 +28,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 github_url = "https://github.com/Prismadic/magnet"
 display_github = True
 html_logo = "../magnet.png"
-pygments_style = 'colorful'
+pygments_style = 'dracula'
 version = "v0.0.9"
 release = "latest"
 # -- Options for HTML output -------------------------------------------------
