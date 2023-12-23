@@ -3,7 +3,7 @@ sentence-transformers
 pandas
 tqdm
 spacy
-transformers
-faiss-cpu
+pymilvus
+mlx
 boto3
 nats-py
