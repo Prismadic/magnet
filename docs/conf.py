@@ -7,7 +7,10 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 import os, sys
 sys.path.insert(0, os.path.abspath('../')) #documentation is detected
-sys.path.insert(0, os.path.abspath('../magnet'))
+sys.path.insert(0, os.path.abspath('../magnet/'))
+sys.path.insert(0, os.path.abspath('../magnet/ize'))
+sys.path.insert(0, os.path.abspath('../magnet/ron'))
+sys.path.insert(0, os.path.abspath('../magnet/ic'))
 project = 'magnet'
 copyright = '2023, Prismadic'
 author = 'Prismadic'
