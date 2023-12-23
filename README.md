@@ -62,6 +62,9 @@ await filings.process('./data/filings.parquet','clean','file', nlp=False)
 <img src='./divider.png' style="width:100%;height:5px;">
 
 ## 🔮 features
+<center>
+<img src="./clustered_bidirectional.png" style="width:50%;transform: rotate(90deg);margin-top:200px;" align="right">
+</center>
 
 - ⚡️ **It's Fast**
    - <small>fast on consumer hardware</small>
