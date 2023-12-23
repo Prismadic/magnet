@@ -18,7 +18,7 @@ jobs:
       - name: Make conda environment
         uses: conda-incubator/setup-miniconda@v3.0.1
         with:
-          python-version: 3.11    # Python version to build the html sphinx documentation
+          python-version: 3.9    # Python version to build the html sphinx documentation
           environment-file: docs_env.yaml    # Path to the documentation conda environment
           auto-update-conda: false
           auto-activate-base: false
