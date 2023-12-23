@@ -5,7 +5,6 @@ on:
     branches:
       - main
 
-# workflow_dispatch:        # Un comment line if you also want to trigger action manually
 permissions:
     contents: write
 jobs:
