@@ -1,10 +1,15 @@
-import re, os, torch, random
+import re
+import os
+import torch
+import random
 import boto3
 from spacy.lang.en import English
 import inspect
 
+
 def reversal():
     return inspect.getsource(inspect.currentframe().f_back)
+
 
 def _f(
     tag: str = None,
@@ -98,6 +103,7 @@ def _f(
     else:
         print(f"😭 UNKNOWN TAG - `{tag}`")
 
+
 """
 The `Utils` class provides various utility functions for tasks such as checking CUDA availability, normalizing text, and uploading files to Amazon S3.
 
@@ -128,6 +134,8 @@ Methods:
 Fields:
 The Utils class does not have any fields.
 """
+
+
 class Utils:
     def __init__(self):
         nlp = English()
@@ -142,7 +150,8 @@ class Utils:
         if torch.cuda.is_available():
             _f("success", "CUDA is available on this machine.")
             # You can also print additional information like the number of available GPUs:
-            _f("info", f"Number of available GPUs - {torch.cuda.device_count()}")
+            _f("info",
+               f"Number of available GPUs - {torch.cuda.device_count()}")
             # To get the name of the GPU:
             _f(
                 "info", f"GPU Name - {torch.cuda.get_device_name(0)}"
@@ -168,7 +177,8 @@ class Utils:
             if not isinstance(_, str):
                 _f('warn', f'non-string found {type(_)}')
             _ = _.strip()
-            _ = _.replace('.', '') if (_.count('.') / len(_)) * 100 > 0.3 else _
+            _ = _.replace('.', '') if (
+                _.count('.') / len(_)) * 100 > 0.3 else _
 
             # Check if more than 20% of the string is integers
             num_digits = sum(1 for char in _ if char.isdigit())
@@ -190,7 +200,6 @@ class Utils:
             return str(_)
         except Exception as e:
             _f("fatal", e)
-
 
     def upload_to_s3(
         self,
@@ -227,16 +236,17 @@ class Utils:
         _f("warn", f"uploading to S3 - {file_or_dir}")
         if os.path.isfile(os.path.abspath(file_or_dir)):
             s3.upload_file(
-                os.path.abspath(file_or_dir), bucket, f'{bucket_path}/{file_or_dir.split("/")[-1]}'
+                os.path.abspath(
+                    file_or_dir), bucket, f'{bucket_path}/{file_or_dir.split("/")[-1]}'
             )
-            _f("success", f'uploaded - {bucket}/{bucket_path}/{file_or_dir.split("/")[-1]}')
+            _f("success",
+               f'uploaded - {bucket}/{bucket_path}/{file_or_dir.split("/")[-1]}')
         elif os.path.isdir(os.path.abspath(file_or_dir)):
             for filename in os.listdir(file_or_dir):
                 f = os.path.join(file_or_dir, filename)
                 s3.upload_file(
-                    os.path.abspath(f), bucket, f'{bucket_path}/{f.split("/")[-1]}'
+                    os.path.abspath(
+                        f), bucket, f'{bucket_path}/{f.split("/")[-1]}'
                 )
-                _f("success", f'uploaded - {bucket}/{bucket_path}/{f.split("/")[-1]}')
-            
-        
-        
+                _f("success",
+                   f'uploaded - {bucket}/{bucket_path}/{f.split("/")[-1]}')

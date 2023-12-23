@@ -128,11 +128,12 @@ learn more about how Prismadic uses 🧲
 
 subscribe to our `substack <https://prismadic.substack.com>`_
 
+|A1| |A2|
+
 .. raw:: html
 
    </h3>
 
-|A1| |A2|
 
 .. |A1| image:: https://github.com/Prismadic/.github/raw/main/profile/image_square.jpg
 .. |A2| image:: https://github.com/Prismadic/.github/raw/main/profile/accent_color_square.jpg

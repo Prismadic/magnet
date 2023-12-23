@@ -14,6 +14,7 @@ from sentencepiece import SentencePieceProcessor
 from magnet.utils.globals import _f
 from magnet.utils.data_classes import MistralArgs
 
+
 class RMSNorm(nn.Module):
     def __init__(self, dims: int, eps: float = 1e-5):
         """
@@ -65,10 +66,10 @@ class RMSNorm(nn.Module):
 class Attention(nn.Module):
     """
     The `Attention` class is responsible for performing the attention computation in a transformer block.
-    
+
     Args:
         args (MistralArgs): An instance of `MistralArgs` that contains the arguments for the attention computation.
-    
+
     Attributes:
         args (MistralArgs): An instance of `MistralArgs` that contains the arguments for the attention computation.
         n_heads (int): The number of attention heads.
@@ -81,6 +82,7 @@ class Attention(nn.Module):
         wo (nn.Linear): Linear layer for the output projection.
         rope (nn.RoPE): Instance of `nn.RoPE` class for relative positional encoding.
     """
+
     def __init__(self, args: MistralArgs):
         super().__init__()
         self.args = args
@@ -93,8 +95,10 @@ class Attention(nn.Module):
         self.scale = self.args.head_dim**-0.5
 
         self.wq = nn.Linear(args.dim, args.n_heads * args.head_dim, bias=False)
-        self.wk = nn.Linear(args.dim, args.n_kv_heads * args.head_dim, bias=False)
-        self.wv = nn.Linear(args.dim, args.n_kv_heads * args.head_dim, bias=False)
+        self.wk = nn.Linear(args.dim, args.n_kv_heads *
+                            args.head_dim, bias=False)
+        self.wv = nn.Linear(args.dim, args.n_kv_heads *
+                            args.head_dim, bias=False)
         self.wo = nn.Linear(args.n_heads * args.head_dim, args.dim, bias=False)
         self.rope = nn.RoPE(args.head_dim, traditional=True)
 
@@ -123,7 +127,8 @@ class Attention(nn.Module):
         # Prepare the queries, keys and values for the attention computation
         queries = queries.reshape(B, L, self.n_heads, -1).transpose(0, 2, 1, 3)
         keys = keys.reshape(B, L, self.n_kv_heads, -1).transpose(0, 2, 1, 3)
-        values = values.reshape(B, L, self.n_kv_heads, -1).transpose(0, 2, 1, 3)
+        values = values.reshape(
+            B, L, self.n_kv_heads, -1).transpose(0, 2, 1, 3)
 
         def repeat(a):
             a = mx.concatenate([mx.expand_dims(a, 2)] * self.repeats, axis=2)
@@ -144,7 +149,8 @@ class Attention(nn.Module):
         scores = (queries * self.scale) @ keys.transpose(0, 1, 3, 2)
         if mask is not None:
             scores += mask
-        scores = mx.softmax(scores.astype(mx.float32), axis=-1).astype(scores.dtype)
+        scores = mx.softmax(scores.astype(mx.float32),
+                            axis=-1).astype(scores.dtype)
         output = (scores @ values).transpose(0, 2, 1, 3).reshape(B, L, -1)
         return self.wo(output), (keys, values)
 
@@ -211,6 +217,7 @@ class TransformerBlock(nn.Module):
     Returns:
         None
     """
+
     def __init__(self, args: MistralArgs):
         super().__init__()
         self.n_heads = args.n_heads
@@ -270,7 +277,8 @@ class Mistral(nn.Module):
         self.n_layers = args.n_layers
         assert self.vocab_size > 0
         self.tok_embeddings = nn.Embedding(args.vocab_size, args.dim)
-        self.layers = [TransformerBlock(args=args) for _ in range(args.n_layers)]
+        self.layers = [TransformerBlock(args=args)
+                       for _ in range(args.n_layers)]
         self.norm = RMSNorm(args.dim, eps=args.norm_eps)
         self.output = nn.Linear(args.dim, args.vocab_size, bias=False)
 
@@ -290,7 +298,8 @@ class Mistral(nn.Module):
 
         mask = None
         if h.shape[1] > 1:
-            mask = nn.MultiHeadAttention.create_additive_causal_mask(h.shape[1])
+            mask = nn.MultiHeadAttention.create_additive_causal_mask(
+                h.shape[1])
             mask = mask.astype(h.dtype)
 
         # Rest of the code remains the same
@@ -314,6 +323,7 @@ class Tokenizer:
         AssertionError: If the file specified by `model_path` does not exist.
         AssertionError: If the vocabulary size of the model does not match the number of pieces in the model.
     """
+
     def __init__(self, model_path: str):
         assert Path(model_path).exists(), model_path
         self._model = SentencePieceProcessor(model_file=model_path)
@@ -440,10 +450,10 @@ def generate(payload):
         str: The generated sequence of tokens decoded into a string.
     """
     mx.random.seed(payload['seed'])
-    _f('wait',f"loading model from {payload['model_path']}")
+    _f('wait', f"loading model from {payload['model_path']}")
     model, tokenizer = load_model(payload['model_path'])
     if model:
-        _f('success',f"loaded {payload['model_path']}")
+        _f('success', f"loaded {payload['model_path']}")
     tic = time.time()
     prompt = mx.array(tokenizer.encode(payload['prompt']))
     tokens = []

@@ -4,39 +4,39 @@ from magnet.utils.globals import _f, Utils
 from tqdm import tqdm
 from magnet.utils.data_classes import *
 
-"""
-The `Processor` class is responsible for loading, processing, and saving data. It provides methods for loading data from different file formats, splitting the data into smaller chunks, and saving the processed data to a file.
-
-Example Usage:
-    # Initialize the Processor class object
-    processor = Processor()
-
-    # Load data into the processor
-    processor.load(raw_data, text_column="clean", id_column="id")
-
-    # Process and split the loaded data into smaller chunks
-    await processor.process(path="processed_data.csv", splitter=None, nlp=True)
-
-    # Save the processed data to a file
-    processor.save(filename="processed_data.csv", raw=processor.df)
-
-Main functionalities:
-- Loading data from different file formats (csv, json, xlsx, parquet) or a pandas DataFrame
-- Splitting the loaded data into smaller chunks either by sentences using natural language processing (NLP) or by a fixed character length
-- Saving the processed data to a file in different formats (csv, json, xlsx, parquet)
-
-Methods:
-- __init__(): Initializes the Processor class object and sets the df attribute to None and creates an instance of the Utils class.
-- save(filename: str = None, raw: pd.DataFrame = None): Saves the pandas DataFrame to a file with the specified filename and file format.
-- load(raw: str | pd.DataFrame = None, text_column: str = "clean", id_column: str = 'id'): Loads data into the df attribute of the Processor class.
-- process(path: str = None, splitter: any = None, nlp=True): Processes and splits the loaded data into smaller chunks.
-- default_splitter(data, window_size=768, overlap=76, nlp=True): Splits the given input data into smaller chunks either by sentences or by a fixed character length.
-
-Fields:
-- df: A pandas DataFrame that stores the loaded data.
-- utils: An instance of the Utils class that provides utility functions.
-"""
 class Processor:
+    """
+    The `Processor` class is responsible for loading, processing, and saving data. It provides methods for loading data from different file formats, splitting the data into smaller chunks, and saving the processed data to a file.
+
+    Example Usage:
+        # Initialize the Processor class object
+        processor = Processor()
+
+        # Load data into the processor
+        processor.load(raw_data, text_column="clean", id_column="id")
+
+        # Process and split the loaded data into smaller chunks
+        await processor.process(path="processed_data.csv", splitter=None, nlp=True)
+
+        # Save the processed data to a file
+        processor.save(filename="processed_data.csv", raw=processor.df)
+
+    Main functionalities:
+    - Loading data from different file formats (csv, json, xlsx, parquet) or a pandas DataFrame
+    - Splitting the loaded data into smaller chunks either by sentences using natural language processing (NLP) or by a fixed character length
+    - Saving the processed data to a file in different formats (csv, json, xlsx, parquet)
+
+    Methods:
+    - __init__(): Initializes the Processor class object and sets the df attribute to None and creates an instance of the Utils class.
+    - save(filename: str = None, raw: pd.DataFrame = None): Saves the pandas DataFrame to a file with the specified filename and file format.
+    - load(raw: str | pd.DataFrame = None, text_column: str = "clean", id_column: str = 'id'): Loads data into the df attribute of the Processor class.
+    - process(path: str = None, splitter: any = None, nlp=True): Processes and splits the loaded data into smaller chunks.
+    - default_splitter(data, window_size=768, overlap=76, nlp=True): Splits the given input data into smaller chunks either by sentences or by a fixed character length.
+
+    Fields:
+    - df: A pandas DataFrame that stores the loaded data.
+    - utils: An instance of the Utils class that provides utility functions.
+    """
     def __init__(self):
         self.df = None
         self.utils = Utils()

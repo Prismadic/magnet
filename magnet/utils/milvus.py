@@ -3,22 +3,22 @@ from magnet.utils.globals import _f
 
 class MilvusDB:
     """
-    The `MilvusDB` class provides functionalities for interacting with a Milvus database.
+    A class that provides a high-level interface for interacting with a Milvus database.
+
+    Args:
+        config (dict): A configuration dictionary that contains the necessary parameters for connecting to the Milvus server and creating a collection.
 
     Attributes:
-        config (dict): A dictionary containing the configuration parameters for the MilvusDB object.
-        fields (list): A list of `FieldSchema` objects representing the fields of the collection.
-        schema (CollectionSchema): A `CollectionSchema` object representing the schema of the collection.
-        index_params (dict): A dictionary containing the parameters for creating the index.
+        config (dict): A configuration dictionary that contains the necessary parameters for connecting to the Milvus server and creating a collection.
+        fields (list): A list of `FieldSchema` objects that define the fields of the collection.
+        schema (CollectionSchema): A `CollectionSchema` object that represents the schema of the collection.
+        index_params (dict): A dictionary that contains the parameters for creating an index on the collection.
+        connection: The connection object to the Milvus server.
+        collection: The collection object in MilvusDB.
+
     """
 
     def __init__(self, config):
-        """
-        Initializes the `MilvusDB` object with the provided configuration.
-
-        Args:
-            config (dict): A dictionary containing the configuration parameters for the MilvusDB object.
-        """
         self.config = config
         self.fields = [
             FieldSchema(name='id', dtype=DataType.INT64, is_primary=True, auto_id=True),
@@ -35,6 +35,10 @@ class MilvusDB:
 
         Returns:
             None
+
+        Raises:
+            Exception: If an error occurs during the connection to the Milvus server.
+
         """
         try:
             self.connection = connections.connect(host=self.config['MILVUS_URI'], port=19530)
@@ -49,6 +53,10 @@ class MilvusDB:
 
         Returns:
             None
+
+        Raises:
+            Exception: If an error occurs during the disconnection from the Milvus server.
+
         """
         try:
             self.connection = connections.disconnect(alias="magnet")
@@ -58,37 +66,7 @@ class MilvusDB:
 
     def create(self, overwrite=False):
         """
-        Creates a collection in MilvusDB and creates an index on a specific field of the collection.
-
-        Args:
-            overwrite (bool, optional): Whether to overwrite the existing collection. Defaults to False.
-
-        Returns:
-            None
-        """
-        try:
-            # Create collection
-            self.collection.create()
-            _f('success', f"created collection {self.config['INDEX']}")
-
-            # Create index
-            self.collection.create_index(field_name='embedding', params=self.index_params)
-            _f('success', f"created index on field 'embedding'")
-        except Exception as e:
-            _f('fatal', e)
-
-    def delete_index(self):
-        """
-        Deletes the index of a collection in MilvusDB.
-
-        Returns:
-            None
-        """
-        try:
-            self.collection.drop_index(field_name='embedding')
-            _f('success', f"deleted index on field 'embedding'")
-        except Exception as e:
-            _f('fatal', e)
+        Create a collection in MilvusDB and create an index on a specific field of the collection.
 
         Args:
             overwrite (bool, optional): A boolean flag indicating whether to overwrite the existing collection with the same name. Default is False.
@@ -108,6 +86,7 @@ class MilvusDB:
             }
             milvus_db = MilvusDB(config)
             milvus_db.create(overwrite=True)
+
         """
         if utility.has_collection(self.config['INDEX']) and overwrite:
             utility.drop_collection(self.config['INDEX'])
@@ -116,12 +95,15 @@ class MilvusDB:
             self.collection.create_index(field_name="embedding", index_params=self.index_params)
             _f('success', f"{self.config['INDEX']} created")
         except Exception as e:
-            _f('fatal',e)
+            _f('fatal', e)
+
     def delete_index(self):
         """
         Deletes the index of a collection in MilvusDB.
 
-        :return: None
+        Returns:
+            None
+
         """
         if utility.has_collection(self.config['INDEX']):
             utility.drop_collection(self.config['INDEX'])

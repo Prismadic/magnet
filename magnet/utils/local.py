@@ -4,51 +4,18 @@ from magnet.utils.mlx import mistral
 import json
 
 class LocalInference:
-    """
-    A class for performing local inference using a pre-trained model.
-
-    Attributes:
-        model (str): The path to the pre-trained model.
-
-    Methods:
-        __init__(self, model):
-            Initializes the LocalInference class with the model path.
-
-        invoke(self, payload):
-            Invokes the local inference using the provided payload.
-
-    Example Usage:
-        # Create an instance of the LocalInference class
-        inference = LocalInference(model_path)
-
-        # Define the input parameters for the inference
-        payload = {
-            "parameters": {
-                "temperature": 0.8,
-                "max_new_tokens": 100
-            },
-            "prompt": "Hello, how are you?"
-        }
-
-        # Invoke the local inference
-        response = inference.invoke(json.dumps(payload))
-
-        # Print the generated response
-        print(response)
-    """
-
     def __init__(self, model):
         """
-        Initializes the LocalInference class with the model path.
+        Initializes the LocalInference class with a pre-trained model.
 
         Args:
-            model (str): The path to the pre-trained model.
+            model (str): The path to the pre-trained model used for inference.
         """
         self.model = model
     
     def invoke(self, payload):
         """
-        Invokes the local inference using the provided payload.
+        Invokes a local inference using a pre-trained model.
 
         Args:
             payload (str): A JSON string containing the input parameters for the inference.
@@ -58,15 +25,6 @@ class LocalInference:
         """
         payload = json.loads(payload)
         payload = {
-            "parameters": {
-                "temperature": 0.8,
-                "max_new_tokens": 100
-            },
-            "prompt": "Hello, how are you?"
-        }
-        # Call the mistral.generate() function to generate the response
-        response = mistral.generate(payload)
-        return response
             "seed": 2077,
             "model_path": self.model,
             "temp": payload["parameters"]["temperature"],

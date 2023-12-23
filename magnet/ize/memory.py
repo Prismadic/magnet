@@ -3,6 +3,7 @@ from magnet.utils.globals import _f
 from magnet.utils.milvus import *
 from magnet.utils.data_classes import EmbeddingPayload
 
+
 class Embedder:
     """
     The Embedder class is responsible for embedding text using a pre-trained sentence transformer model and storing or sending the embeddings for further processing. It utilizes the Milvus database for storing and searching the embeddings.
@@ -49,21 +50,21 @@ class Embedder:
         if field:
             self.field = field
         try:
-            _f('info','embedding payload') if verbose else None
-            payload.embedding = self.model.encode(f"Represent this sentence for searching relevant passages: {payload.text}", normalize_embeddings=True)
+            _f('info', 'embedding payload') if verbose else None
+            payload.embedding = self.model.encode(
+                f"Represent this sentence for searching relevant passages: {payload.text}", normalize_embeddings=True)
         except Exception as e:
-            _f('fatal',e)
+            _f('fatal', e)
         else:
             try:
-                _f('info','storing payload') if verbose else None
+                _f('info', 'storing payload') if verbose else None
                 self.db.collection.insert([
-                        [payload.document]
-                        , [payload.text]
-                        , [payload.embedding]
-                    ])
-                self.db.collection.flush(collection_name_array=[self.config['INDEX']])
+                    [payload.document], [payload.text], [payload.embedding]
+                ])
+                self.db.collection.flush(collection_name_array=[
+                                         self.config['INDEX']])
             except Exception as e:
-                _f('fatal',e)
+                _f('fatal', e)
 
     async def embed_and_charge(self, payload, verbose=False, field=None):
         """
@@ -99,7 +100,8 @@ class Embedder:
                 _f('info', 'embedding payload')
             payload = EmbeddingPayload(
                 model=self.config['MODEL'],
-                embedding=self.model.encode(f"Represent this sentence for searching relevant passages: {payload.text}", normalize_embeddings=True).tolist(),
+                embedding=self.model.encode(
+                    f"Represent this sentence for searching relevant passages: {payload.text}", normalize_embeddings=True).tolist(),
                 text=payload.text,
                 document=payload.document
             )
@@ -122,10 +124,11 @@ class Embedder:
             list: A list of dictionaries, each containing the text, document, and distance of a relevant passage.
         """
         payload = EmbeddingPayload(
-                    text=payload,
-                    embedding=self.model.encode(f"Represent this sentence for searching relevant passages: {payload}", normalize_embeddings=True),
-                    model=self.config['MODEL']
-                )
+            text=payload,
+            embedding=self.model.encode(
+                f"Represent this sentence for searching relevant passages: {payload}", normalize_embeddings=True),
+            model=self.config['MODEL']
+        )
         self.db.collection.load()
         _results = self.db.collection.search(
             data=[payload.embedding],  # Embeded search value
@@ -146,10 +149,13 @@ class Embedder:
             return cb(payload.text, results)
         else:
             return results
+
     def info(self):
         return self.db.collection
+
     def disconnect(self):
         return self.db.off()
+
     def delete(self, name=None):
         """
         Delete an index from the Milvus database.
@@ -172,10 +178,10 @@ class Embedder:
             embedder = Embedder(config)
             embedder.delete('my_index')
         """
-        if name and name==self.config['INDEX']:
+        if name and name == self.config['INDEX']:
             try:
                 self.db.delete_index()
             except Exception as e:
-                _f('fatal',e)
+                _f('fatal', e)
         else:
             _f('fatal', "name doesn't match the connection or the connection doesn't exist")
