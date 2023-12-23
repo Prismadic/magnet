@@ -76,14 +76,6 @@ or
 🔮 features
 -----------
 
-.. raw:: html
-
-   <center>
-
-.. raw:: html
-
-   </center>
-
 -  ⚡️ **It’s Fast**
 
    -  fast on consumer hardware
