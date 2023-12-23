@@ -2,7 +2,6 @@ magnet.git
 ==========
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 5
 
    magnet
-   setup
