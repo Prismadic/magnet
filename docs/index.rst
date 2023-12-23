@@ -5,22 +5,26 @@
 
 .. raw:: html
 
-   <h3 align="center">
+   <h1 align="center">
 
-Welcome to the 🧲 docs
-==================================
+   Welcome to the 🧲 docs
 
 .. raw:: html
 
-   </h3>
+   </h1>
+
+|DIV|
 
 .. toctree::
    :maxdepth: 3
+   :caption: Packages & useful classes
 
    magnet.ic
    magnet.ize
    magnet.ron
    magnet.utils
+
+|DIV|
 
 .. raw:: html
 
@@ -63,7 +67,9 @@ the small distributed language model toolkit
    </h4>
 
 🧬 Installation
----------------
+----------------
+
+|DIV|
 
 .. code:: bash
 
@@ -76,7 +82,9 @@ or
    python3 setup.py install
 
 🔮 features
------------
+----------------
+
+|DIV|
 
 -  ⚡️ **It’s Fast**
 
@@ -130,20 +138,23 @@ learn more about how Prismadic uses 🧲
 
 subscribe to our `substack <https://prismadic.substack.com>`_
 
-|A1| |A2|
-
 .. raw:: html
 
    </h3>
 
 
-.. |A1| image:: https://github.com/Prismadic/.github/raw/main/profile/image_square.jpg
-.. |A2| image:: https://github.com/Prismadic/.github/raw/main/profile/accent_color_square.jpg
-.. |NET| image:: https://github.com/Prismadic/magnet/raw/main/clustered_bidirectional.png
+|A1| |A2|
 
 Indices and tables
-==================
+----------------
+
+|DIV|
 
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+.. |A1| image:: https://github.com/Prismadic/.github/raw/main/profile/image_square.jpg
+.. |A2| image:: https://github.com/Prismadic/.github/raw/main/profile/accent_color_square.jpg
+.. |NET| image:: https://github.com/Prismadic/magnet/raw/main/clustered_bidirectional.png
+.. |DIV| image:: https://github.com/Prismadic/magnet/raw/ef68535ecee236ff007638afa56de538b8fafd1a/divider.png

@@ -9,8 +9,8 @@ import os, sys
 sys.path.insert(0, os.path.abspath('../')) #documentation is detected
 sys.path.insert(0, os.path.abspath('../magnet'))
 project = 'magnet'
-copyright = '2023, Prismadic'
-author = 'Prismadic'
+copyright = '2023, Prismadic, LLC'
+author = 'Prismadic, LLC.'
 release = '0.0.9'
 
 # -- General configuration ---------------------------------------------------
@@ -28,7 +28,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 github_url = "https://github.com/Prismadic/magnet"
 display_github = True
 html_logo = "../magnet.png"
-pygments_style = 'default'
+pygments_style = 'colorful'
 version = "v0.0.9"
 release = "latest"
 # -- Options for HTML output -------------------------------------------------
@@ -39,8 +39,17 @@ html_theme_options = {
     'logo_only': True,
     'navigation_depth': 5,
 }
-html_show_sourcelink = True
 html_static_path = ['_static']
 html_theme_options = {
     "collapse_navigation" : False
+    , 'prev_next_buttons_location': 'None'
 }
+html_context = {
+    "display_github": True, # Integrate GitHub
+    "github_user": "Prismadic", # Username
+    "github_repo": "magnet", # Repo name
+    "github_version": "main", # Version
+    "conf_py_path": "/docs/", # Path in the checkout to the docs root
+}
+html_show_sphinx = False
+html_show_copyright = True
