@@ -4,7 +4,7 @@
 
    <h1 align="center">magnet</h1>
 
-   <h3 align="center"><a href="https://prismadic.github.io/magnet/">📖 docs</a> | 💻 <a href="https://github.com/Prismadic/magnet/tree/main/examples">examples</a></h3>
+   <h3 align="center"><a href="https://prismadic.github.io/magnet/">📖 docs</a> | 💻 <a href="https://github.com/Prismadic/magnet/tree/main/examples">examples</a> | 📓 <a href="https://prismadic.substack.com">substack</a></h3> 
 
    <p align="center">the small distributed language model toolkit</p>
    <p align="center"><i>⚡️ fine-tune state-of-the-art LLMs anywhere, rapidly ⚡️</i></p>
