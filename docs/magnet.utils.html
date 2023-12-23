@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>magnet.utils package &mdash; magnet latest documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/tooltipster.custom.css?v=7bc2f056" />
+      <link rel="stylesheet" type="text/css" href="_static/css/tooltipster.bundle.min.css?v=37217874" />
+      <link rel="stylesheet" type="text/css" href="_static/css/tooltipster-sideTip-shadow.min.css?v=6227e517" />
+      <link rel="stylesheet" type="text/css" href="_static/css/tooltipster-sideTip-punk.min.css?v=94669e23" />
+      <link rel="stylesheet" type="text/css" href="_static/css/tooltipster-sideTip-noir.min.css?v=21a39f42" />
+      <link rel="stylesheet" type="text/css" href="_static/css/tooltipster-sideTip-light.min.css?v=a18b2449" />
+      <link rel="stylesheet" type="text/css" href="_static/css/tooltipster-sideTip-borderless.min.css?v=dbff53e4" />
+      <link rel="stylesheet" type="text/css" href="_static/css/micromodal.css?v=d7bf34ee" />
+      <link rel="stylesheet" type="text/css" href="_static/css/sphinx_rtd_theme.css?v=3234e928" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=c6e86fd7"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/js/hoverxref.js?v=82c55261"></script>
+        <script src="_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
+        <script src="_static/js/micromodal.min.js?v=04d6302d"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/magnet.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v0.0.9
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">magnet.utils package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-magnet.utils.data_classes">magnet.utils.data_classes module</a><ul>
+<li><a class="reference internal" href="#magnet.utils.data_classes.EmbeddingPayload"><code class="docutils literal notranslate"><span class="pre">EmbeddingPayload</span></code></a><ul>
+<li><a class="reference internal" href="#magnet.utils.data_classes.EmbeddingPayload.document"><code class="docutils literal notranslate"><span class="pre">EmbeddingPayload.document</span></code></a></li>
+<li><a class="reference internal" href="#magnet.utils.data_classes.EmbeddingPayload.embedding"><code class="docutils literal notranslate"><span class="pre">EmbeddingPayload.embedding</span></code></a></li>
+<li><a class="reference internal" href="#magnet.utils.data_classes.EmbeddingPayload.model"><code class="docutils literal notranslate"><span class="pre">EmbeddingPayload.model</span></code></a></li>
+<li><a class="reference internal" href="#magnet.utils.data_classes.EmbeddingPayload.text"><code class="docutils literal notranslate"><span class="pre">EmbeddingPayload.text</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#magnet.utils.data_classes.GeneratedPayload"><code class="docutils literal notranslate"><span class="pre">GeneratedPayload</span></code></a><ul>
+<li><a class="reference internal" href="#magnet.utils.data_classes.GeneratedPayload.context"><code class="docutils literal notranslate"><span class="pre">GeneratedPayload.context</span></code></a></li>
+<li><a class="reference internal" href="#magnet.utils.data_classes.GeneratedPayload.model"><code class="docutils literal notranslate"><span class="pre">GeneratedPayload.model</span></code></a></li>
+<li><a class="reference internal" href="#magnet.utils.data_classes.GeneratedPayload.prompt"><code class="docutils literal notranslate"><span class="pre">GeneratedPayload.prompt</span></code></a></li>
+<li><a class="reference internal" href="#magnet.utils.data_classes.GeneratedPayload.query"><code class="docutils literal notranslate"><span class="pre">GeneratedPayload.query</span></code></a></li>
+<li><a class="reference internal" href="#magnet.utils.data_classes.GeneratedPayload.result"><code class="docutils literal notranslate"><span class="pre">GeneratedPayload.result</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#magnet.utils.data_classes.Payload"><code class="docutils literal notranslate"><span class="pre">Payload</span></code></a><ul>
+<li><a class="reference internal" href="#magnet.utils.data_classes.Payload.document"><code class="docutils literal notranslate"><span class="pre">Payload.document</span></code></a></li>
+<li><a class="reference internal" href="#magnet.utils.data_classes.Payload.text"><code class="docutils literal notranslate"><span class="pre">Payload.text</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-magnet.utils.globals">magnet.utils.globals module</a><ul>
+<li><a class="reference internal" href="#magnet.utils.globals.Utils"><code class="docutils literal notranslate"><span class="pre">Utils</span></code></a><ul>
+<li><a class="reference internal" href="#magnet.utils.globals.Utils.check_cuda"><code class="docutils literal notranslate"><span class="pre">Utils.check_cuda()</span></code></a></li>
+<li><a class="reference internal" href="#magnet.utils.globals.Utils.normalize_text"><code class="docutils literal notranslate"><span class="pre">Utils.normalize_text()</span></code></a></li>
+<li><a class="reference internal" href="#magnet.utils.globals.Utils.upload_to_s3"><code class="docutils literal notranslate"><span class="pre">Utils.upload_to_s3()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#magnet.utils.globals.reversal"><code class="docutils literal notranslate"><span class="pre">reversal()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-magnet.utils.huggingface">magnet.utils.huggingface module</a><ul>
+<li><a class="reference internal" href="#magnet.utils.huggingface.InferenceAPI"><code class="docutils literal notranslate"><span class="pre">InferenceAPI</span></code></a><ul>
+<li><a class="reference internal" href="#magnet.utils.huggingface.InferenceAPI.invoke"><code class="docutils literal notranslate"><span class="pre">InferenceAPI.invoke()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-magnet.utils.local">magnet.utils.local module</a><ul>
+<li><a class="reference internal" href="#magnet.utils.local.LocalInference"><code class="docutils literal notranslate"><span class="pre">LocalInference</span></code></a><ul>
+<li><a class="reference internal" href="#magnet.utils.local.LocalInference.invoke"><code class="docutils literal notranslate"><span class="pre">LocalInference.invoke()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-magnet.utils.markdown">magnet.utils.markdown module</a><ul>
+<li><a class="reference internal" href="#magnet.utils.markdown.m_print"><code class="docutils literal notranslate"><span class="pre">m_print()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-magnet.utils.milvus">magnet.utils.milvus module</a><ul>
+<li><a class="reference internal" href="#magnet.utils.milvus.MilvusDB"><code class="docutils literal notranslate"><span class="pre">MilvusDB</span></code></a><ul>
+<li><a class="reference internal" href="#magnet.utils.milvus.MilvusDB.create"><code class="docutils literal notranslate"><span class="pre">MilvusDB.create()</span></code></a></li>
+<li><a class="reference internal" href="#magnet.utils.milvus.MilvusDB.delete_index"><code class="docutils literal notranslate"><span class="pre">MilvusDB.delete_index()</span></code></a></li>
+<li><a class="reference internal" href="#magnet.utils.milvus.MilvusDB.off"><code class="docutils literal notranslate"><span class="pre">MilvusDB.off()</span></code></a></li>
+<li><a class="reference internal" href="#magnet.utils.milvus.MilvusDB.on"><code class="docutils literal notranslate"><span class="pre">MilvusDB.on()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-magnet.utils.prompts">magnet.utils.prompts module</a><ul>
+<li><a class="reference internal" href="#magnet.utils.prompts.Prompts"><code class="docutils literal notranslate"><span class="pre">Prompts</span></code></a><ul>
+<li><a class="reference internal" href="#magnet.utils.prompts.Prompts.qa_ref"><code class="docutils literal notranslate"><span class="pre">Prompts.qa_ref()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-magnet.utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">magnet</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">magnet.utils package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/magnet.utils.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="magnet-utils-package">
+<h1>magnet.utils package<a class="headerlink" href="#magnet-utils-package" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="magnet.utils.mlx.html">magnet.utils.mlx package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="magnet.utils.mlx.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="magnet.utils.mlx.html#module-magnet.utils.mlx.mistral">magnet.utils.mlx.mistral module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="magnet.utils.mlx.html#magnet.utils.mlx.mistral.Attention"><code class="docutils literal notranslate"><span class="pre">Attention</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="magnet.utils.mlx.html#magnet.utils.mlx.mistral.FeedForward"><code class="docutils literal notranslate"><span class="pre">FeedForward</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="magnet.utils.mlx.html#magnet.utils.mlx.mistral.Mistral"><code class="docutils literal notranslate"><span class="pre">Mistral</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="magnet.utils.mlx.html#magnet.utils.mlx.mistral.ModelArgs"><code class="docutils literal notranslate"><span class="pre">ModelArgs</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.mlx.html#magnet.utils.mlx.mistral.ModelArgs.dim"><code class="docutils literal notranslate"><span class="pre">ModelArgs.dim</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.mlx.html#magnet.utils.mlx.mistral.ModelArgs.head_dim"><code class="docutils literal notranslate"><span class="pre">ModelArgs.head_dim</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.mlx.html#magnet.utils.mlx.mistral.ModelArgs.hidden_dim"><code class="docutils literal notranslate"><span class="pre">ModelArgs.hidden_dim</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.mlx.html#magnet.utils.mlx.mistral.ModelArgs.n_heads"><code class="docutils literal notranslate"><span class="pre">ModelArgs.n_heads</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.mlx.html#magnet.utils.mlx.mistral.ModelArgs.n_kv_heads"><code class="docutils literal notranslate"><span class="pre">ModelArgs.n_kv_heads</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.mlx.html#magnet.utils.mlx.mistral.ModelArgs.n_layers"><code class="docutils literal notranslate"><span class="pre">ModelArgs.n_layers</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.mlx.html#magnet.utils.mlx.mistral.ModelArgs.norm_eps"><code class="docutils literal notranslate"><span class="pre">ModelArgs.norm_eps</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.mlx.html#magnet.utils.mlx.mistral.ModelArgs.vocab_size"><code class="docutils literal notranslate"><span class="pre">ModelArgs.vocab_size</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="magnet.utils.mlx.html#magnet.utils.mlx.mistral.RMSNorm"><code class="docutils literal notranslate"><span class="pre">RMSNorm</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="magnet.utils.mlx.html#magnet.utils.mlx.mistral.Tokenizer"><code class="docutils literal notranslate"><span class="pre">Tokenizer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.mlx.html#magnet.utils.mlx.mistral.Tokenizer.decode"><code class="docutils literal notranslate"><span class="pre">Tokenizer.decode()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.mlx.html#magnet.utils.mlx.mistral.Tokenizer.encode"><code class="docutils literal notranslate"><span class="pre">Tokenizer.encode()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.mlx.html#magnet.utils.mlx.mistral.Tokenizer.eos_id"><code class="docutils literal notranslate"><span class="pre">Tokenizer.eos_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.mlx.html#magnet.utils.mlx.mistral.Tokenizer.pad_id"><code class="docutils literal notranslate"><span class="pre">Tokenizer.pad_id</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="magnet.utils.mlx.html#magnet.utils.mlx.mistral.TransformerBlock"><code class="docutils literal notranslate"><span class="pre">TransformerBlock</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="magnet.utils.mlx.html#magnet.utils.mlx.mistral.generate"><code class="docutils literal notranslate"><span class="pre">generate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="magnet.utils.mlx.html#magnet.utils.mlx.mistral.infer"><code class="docutils literal notranslate"><span class="pre">infer()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="magnet.utils.mlx.html#magnet.utils.mlx.mistral.load_model"><code class="docutils literal notranslate"><span class="pre">load_model()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="magnet.utils.mlx.html#module-magnet.utils.mlx">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-magnet.utils.data_classes">
+<span id="magnet-utils-data-classes-module"></span><h2>magnet.utils.data_classes module<a class="headerlink" href="#module-magnet.utils.data_classes" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="magnet.utils.data_classes.EmbeddingPayload">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">magnet.utils.data_classes.</span></span><span class="sig-name descname"><span class="pre">EmbeddingPayload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embedding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/utils/data_classes.html#EmbeddingPayload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.data_classes.EmbeddingPayload" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="magnet.utils.data_classes.EmbeddingPayload.document">
+<span class="sig-name descname"><span class="pre">document</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#magnet.utils.data_classes.EmbeddingPayload.document" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="magnet.utils.data_classes.EmbeddingPayload.embedding">
+<span class="sig-name descname"><span class="pre">embedding</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#magnet.utils.data_classes.EmbeddingPayload.embedding" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="magnet.utils.data_classes.EmbeddingPayload.model">
+<span class="sig-name descname"><span class="pre">model</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#magnet.utils.data_classes.EmbeddingPayload.model" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="magnet.utils.data_classes.EmbeddingPayload.text">
+<span class="sig-name descname"><span class="pre">text</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#magnet.utils.data_classes.EmbeddingPayload.text" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="magnet.utils.data_classes.GeneratedPayload">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">magnet.utils.data_classes.</span></span><span class="sig-name descname"><span class="pre">GeneratedPayload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prompt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/utils/data_classes.html#GeneratedPayload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.data_classes.GeneratedPayload" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="magnet.utils.data_classes.GeneratedPayload.context">
+<span class="sig-name descname"><span class="pre">context</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#magnet.utils.data_classes.GeneratedPayload.context" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="magnet.utils.data_classes.GeneratedPayload.model">
+<span class="sig-name descname"><span class="pre">model</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#magnet.utils.data_classes.GeneratedPayload.model" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="magnet.utils.data_classes.GeneratedPayload.prompt">
+<span class="sig-name descname"><span class="pre">prompt</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#magnet.utils.data_classes.GeneratedPayload.prompt" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="magnet.utils.data_classes.GeneratedPayload.query">
+<span class="sig-name descname"><span class="pre">query</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#magnet.utils.data_classes.GeneratedPayload.query" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="magnet.utils.data_classes.GeneratedPayload.result">
+<span class="sig-name descname"><span class="pre">result</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#magnet.utils.data_classes.GeneratedPayload.result" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="magnet.utils.data_classes.Payload">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">magnet.utils.data_classes.</span></span><span class="sig-name descname"><span class="pre">Payload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">document</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/utils/data_classes.html#Payload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.data_classes.Payload" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="magnet.utils.data_classes.Payload.document">
+<span class="sig-name descname"><span class="pre">document</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#magnet.utils.data_classes.Payload.document" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="magnet.utils.data_classes.Payload.text">
+<span class="sig-name descname"><span class="pre">text</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#magnet.utils.data_classes.Payload.text" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-magnet.utils.globals">
+<span id="magnet-utils-globals-module"></span><h2>magnet.utils.globals module<a class="headerlink" href="#module-magnet.utils.globals" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="magnet.utils.globals.Utils">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">magnet.utils.globals.</span></span><span class="sig-name descname"><span class="pre">Utils</span></span><a class="reference internal" href="_modules/magnet/utils/globals.html#Utils"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.globals.Utils" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="magnet.utils.globals.Utils.check_cuda">
+<span class="sig-name descname"><span class="pre">check_cuda</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/utils/globals.html#Utils.check_cuda"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.globals.Utils.check_cuda" title="Link to this definition"></a></dt>
+<dd><p>The function checks if CUDA is available on the machine and provides additional information if
+it is.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="magnet.utils.globals.Utils.normalize_text">
+<span class="sig-name descname"><span class="pre">normalize_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/utils/globals.html#Utils.normalize_text"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.globals.Utils.normalize_text" title="Link to this definition"></a></dt>
+<dd><p>The <cite>clean</cite> function takes a string as input and performs various cleaning operations on it,
+such as removing whitespace, replacing characters, and removing curly braces.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>_</strong> – The parameter “_” is a placeholder for the input string that needs to be cleaned</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a cleaned version of the input string.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="magnet.utils.globals.Utils.upload_to_s3">
+<span class="sig-name descname"><span class="pre">upload_to_s3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_or_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">('YOUR_ACCESS_KEY',</span> <span class="pre">'YOUR_SECRET_KEY')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bucket</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bucket_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/utils/globals.html#Utils.upload_to_s3"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.globals.Utils.upload_to_s3" title="Link to this definition"></a></dt>
+<dd><p>The function <cite>upload_to_s3</cite> uploads a file to an S3 bucket using the provided access keys and
+bucket information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file</strong> – The <cite>file</cite> parameter is the path to the file that you want to upload to Amazon S3.</p>
+</dd>
+</dl>
+<p>It should be a string representing the file’s location on your local machine
+:param keys: The <cite>keys</cite> parameter is a tuple that contains the AWS access key and secret access
+key. These keys are used to authenticate and authorize access to the AWS S3 service
+:type keys: tuple
+:param bucket: The <cite>bucket</cite> parameter is the name of the S3 bucket where you want to upload the
+file
+:type bucket: str
+:param bucket_path: The <cite>bucket_path</cite> parameter is the path within the S3 bucket where you want
+to upload the file. It is a string that represents the directory structure within the bucket.
+For example, if you want to upload the file to the root of the bucket, you can set <cite>bucket_path</cite>
+to
+:type bucket_path: str</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="magnet.utils.globals.reversal">
+<span class="sig-prename descclassname"><span class="pre">magnet.utils.globals.</span></span><span class="sig-name descname"><span class="pre">reversal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/utils/globals.html#reversal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.globals.reversal" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-magnet.utils.huggingface">
+<span id="magnet-utils-huggingface-module"></span><h2>magnet.utils.huggingface module<a class="headerlink" href="#module-magnet.utils.huggingface" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="magnet.utils.huggingface.InferenceAPI">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">magnet.utils.huggingface.</span></span><span class="sig-name descname"><span class="pre">InferenceAPI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/utils/huggingface.html#InferenceAPI"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.huggingface.InferenceAPI" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="magnet.utils.huggingface.InferenceAPI.invoke">
+<span class="sig-name descname"><span class="pre">invoke</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/utils/huggingface.html#InferenceAPI.invoke"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.huggingface.InferenceAPI.invoke" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-magnet.utils.local">
+<span id="magnet-utils-local-module"></span><h2>magnet.utils.local module<a class="headerlink" href="#module-magnet.utils.local" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="magnet.utils.local.LocalInference">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">magnet.utils.local.</span></span><span class="sig-name descname"><span class="pre">LocalInference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/utils/local.html#LocalInference"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.local.LocalInference" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="magnet.utils.local.LocalInference.invoke">
+<span class="sig-name descname"><span class="pre">invoke</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/utils/local.html#LocalInference.invoke"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.local.LocalInference.invoke" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-magnet.utils.markdown">
+<span id="magnet-utils-markdown-module"></span><h2>magnet.utils.markdown module<a class="headerlink" href="#module-magnet.utils.markdown" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="magnet.utils.markdown.m_print">
+<span class="sig-prename descclassname"><span class="pre">magnet.utils.markdown.</span></span><span class="sig-name descname"><span class="pre">m_print</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/utils/markdown.html#m_print"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.markdown.m_print" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-magnet.utils.milvus">
+<span id="magnet-utils-milvus-module"></span><h2>magnet.utils.milvus module<a class="headerlink" href="#module-magnet.utils.milvus" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="magnet.utils.milvus.MilvusDB">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">magnet.utils.milvus.</span></span><span class="sig-name descname"><span class="pre">MilvusDB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/utils/milvus.html#MilvusDB"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.milvus.MilvusDB" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="magnet.utils.milvus.MilvusDB.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/utils/milvus.html#MilvusDB.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.milvus.MilvusDB.create" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="magnet.utils.milvus.MilvusDB.delete_index">
+<span class="sig-name descname"><span class="pre">delete_index</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/utils/milvus.html#MilvusDB.delete_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.milvus.MilvusDB.delete_index" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="magnet.utils.milvus.MilvusDB.off">
+<span class="sig-name descname"><span class="pre">off</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/utils/milvus.html#MilvusDB.off"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.milvus.MilvusDB.off" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="magnet.utils.milvus.MilvusDB.on">
+<span class="sig-name descname"><span class="pre">on</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/utils/milvus.html#MilvusDB.on"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.milvus.MilvusDB.on" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-magnet.utils.prompts">
+<span id="magnet-utils-prompts-module"></span><h2>magnet.utils.prompts module<a class="headerlink" href="#module-magnet.utils.prompts" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="magnet.utils.prompts.Prompts">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">magnet.utils.prompts.</span></span><span class="sig-name descname"><span class="pre">Prompts</span></span><a class="reference internal" href="_modules/magnet/utils/prompts.html#Prompts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.prompts.Prompts" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="magnet.utils.prompts.Prompts.qa_ref">
+<span class="sig-name descname"><span class="pre">qa_ref</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">docs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/utils/prompts.html#Prompts.qa_ref"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.utils.prompts.Prompts.qa_ref" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-magnet.utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-magnet.utils" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Prismadic.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
