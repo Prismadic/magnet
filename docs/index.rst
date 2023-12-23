@@ -11,7 +11,6 @@ Welcome to magnet's documentation!
    :caption: Contents:
 
    modules
-   submodules
 
 Indices and tables
 ==================
