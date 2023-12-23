@@ -19,8 +19,7 @@
 ![GitHub watchers](https://img.shields.io/github/watchers/prismadic/magnet)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/llm_magnet)
 ![PyPI - Wheel](https://img.shields.io/pypi/wheel/llm_magnet)
-![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/prismadic?style=social&logo=x)
-
+![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/prismadic?style=social&link=https%3A%2F%2Fx.com%2Fprismadic)
 
    </div>
 
