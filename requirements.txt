@@ -7,4 +7,3 @@ pymilvus
 boto3
 nats-py
 rich
-mlx
