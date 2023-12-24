@@ -28,6 +28,17 @@
 
 .. raw:: html
 
+   <h1 align="center">
+
+magnet
+=======
+
+.. raw:: html
+
+   </h1>
+
+.. raw:: html
+
    <h3 align="center">
 
 don't forget to `check out <https://github.com/Prismadic/magnet/tree/main/examples>`_ the helpful 💻 examples
