@@ -58,11 +58,12 @@ class Embedder:
         else:
             try:
                 _f('info', 'storing payload') if verbose else None
-                self.db.collection.insert([
-                    [payload.document], [payload.text], [payload.embedding]
-                ])
-                self.db.collection.flush(collection_name_array=[
-                                         self.config['INDEX']])
+                if not self.is_dupe(q=payload.embedding):
+                    self.db.collection.insert([
+                        [payload.document], [payload.text], [payload.embedding]
+                    ])
+                    self.db.collection.flush(collection_name_array=[
+                                            self.config['INDEX']])
             except Exception as e:
                 _f('fatal', e)
 
@@ -96,8 +97,7 @@ class Embedder:
         else:
             raise ValueError('field is required')
         try:
-            if verbose:
-                _f('info', 'embedding payload')
+            _f('info', 'embedding payload') if verbose else None
             payload = EmbeddingPayload(
                 model=self.config['MODEL'],
                 embedding=self.model.encode(
@@ -105,8 +105,7 @@ class Embedder:
                 text=payload.text,
                 document=payload.document
             )
-            if verbose:
-                _f('info', f'sending payload\n{payload}')
+            _f('info', f'sending payload\n{payload}') if verbose else None
             await self.field.pulse(payload)
         except Exception as e:
             _f('fatal', e)
@@ -185,3 +184,12 @@ class Embedder:
                 _f('fatal', e)
         else:
             _f('fatal', "name doesn't match the connection or the connection doesn't exist")
+    def is_dupe(self, q):
+        match = self.collection.search(
+            data=[q]
+            , anns_field = "embeddings"
+            , param=self.config['INDEX_PARAMS']
+            , output_fields=['text', 'id', 'documentId']
+            , limit=1
+        )
+        return True if sum(match[0].distances) == 0.0 else False
