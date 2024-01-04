@@ -184,7 +184,17 @@ class Embedder:
                 _f('fatal', e)
         else:
             _f('fatal', "name doesn't match the connection or the connection doesn't exist")
+    
     def is_dupe(self, q):
+        """
+        Check if a given query is a duplicate in the Milvus database.
+
+        Args:
+            q (object): The query embedding to check for duplicates.
+
+        Returns:
+            bool: True if the query embedding is a duplicate in the Milvus database, False otherwise.
+        """
         match = self.collection.search(
             data=[q]
             , anns_field = "embeddings"

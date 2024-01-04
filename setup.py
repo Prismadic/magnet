@@ -14,6 +14,7 @@ setup(
         , "sentence_transformers"
         , "pymilvus"
         , "rich"
+        , "xxhash"
     ],
     url = 'https://github.com/Prismadic/magnet'
 )

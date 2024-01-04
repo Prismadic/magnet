@@ -23,7 +23,7 @@ class Charge:
     def __init__(self, server):
         self.server = server
 
-    async def on(self, category: str = 'no_category', stream: str = 'documents', create: bool = False):
+    async def on(self, category: str = 'no_category', stream: str = 'documents', create: bool = False, port: int = 4222, proto: str = "nats://"):
         """
         Connects to the NATS server, creates a stream and category if they don't exist, and prints a success message.
 
@@ -35,7 +35,7 @@ class Charge:
         self.category = category
         self.stream = stream
         try:
-            nc = await nats.connect(f'nats://{self.server}:4222')
+            nc = await nats.connect(f'{proto}{self.server}:{port}')
             self.nc = nc
             self.js = self.nc.jetstream()
             self.js.purge_stream
