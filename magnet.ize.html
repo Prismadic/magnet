@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>magnet.ize package &mdash; magnet latest documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=7254e0c9" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=c6e86fd7"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="magnet.ron package" href="magnet.ron.html" />
+    <link rel="prev" title="magnet.ic package" href="magnet.ic.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html">
+            
+              <img src="_static/magnet.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v0.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Packages &amp; useful classes</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="magnet.ic.html">magnet.ic package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="magnet.ic.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="magnet.ic.html#module-magnet.ic.field">magnet.ic.field module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="magnet.ic.html#magnet.ic.field.Charge"><code class="docutils literal notranslate"><span class="pre">Charge</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="magnet.ic.html#magnet.ic.field.Charge.emp"><code class="docutils literal notranslate"><span class="pre">Charge.emp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.ic.html#magnet.ic.field.Charge.off"><code class="docutils literal notranslate"><span class="pre">Charge.off()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.ic.html#magnet.ic.field.Charge.on"><code class="docutils literal notranslate"><span class="pre">Charge.on()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.ic.html#magnet.ic.field.Charge.pulse"><code class="docutils literal notranslate"><span class="pre">Charge.pulse()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.ic.html#magnet.ic.field.Charge.reset"><code class="docutils literal notranslate"><span class="pre">Charge.reset()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="magnet.ic.html#magnet.ic.field.Resonator"><code class="docutils literal notranslate"><span class="pre">Resonator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="magnet.ic.html#magnet.ic.field.Resonator.info"><code class="docutils literal notranslate"><span class="pre">Resonator.info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.ic.html#magnet.ic.field.Resonator.off"><code class="docutils literal notranslate"><span class="pre">Resonator.off()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.ic.html#magnet.ic.field.Resonator.on"><code class="docutils literal notranslate"><span class="pre">Resonator.on()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">magnet.ize package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-magnet.ize.filings">magnet.ize.filings module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#magnet.ize.filings.Processor"><code class="docutils literal notranslate"><span class="pre">Processor</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#magnet.ize.filings.Processor.create_charge"><code class="docutils literal notranslate"><span class="pre">Processor.create_charge()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#magnet.ize.filings.Processor.default_splitter"><code class="docutils literal notranslate"><span class="pre">Processor.default_splitter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#magnet.ize.filings.Processor.load"><code class="docutils literal notranslate"><span class="pre">Processor.load()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#magnet.ize.filings.Processor.process"><code class="docutils literal notranslate"><span class="pre">Processor.process()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#magnet.ize.filings.Processor.save"><code class="docutils literal notranslate"><span class="pre">Processor.save()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-magnet.ize.memory">magnet.ize.memory module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#magnet.ize.memory.Embedder"><code class="docutils literal notranslate"><span class="pre">Embedder</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#magnet.ize.memory.Embedder.delete"><code class="docutils literal notranslate"><span class="pre">Embedder.delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#magnet.ize.memory.Embedder.disconnect"><code class="docutils literal notranslate"><span class="pre">Embedder.disconnect()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#magnet.ize.memory.Embedder.embed_and_charge"><code class="docutils literal notranslate"><span class="pre">Embedder.embed_and_charge()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#magnet.ize.memory.Embedder.embed_and_store"><code class="docutils literal notranslate"><span class="pre">Embedder.embed_and_store()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#magnet.ize.memory.Embedder.info"><code class="docutils literal notranslate"><span class="pre">Embedder.info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#magnet.ize.memory.Embedder.is_dupe"><code class="docutils literal notranslate"><span class="pre">Embedder.is_dupe()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#magnet.ize.memory.Embedder.search"><code class="docutils literal notranslate"><span class="pre">Embedder.search()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="magnet.ron.html">magnet.ron package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="magnet.ron.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="magnet.ron.html#magnet-ron-llm-module">magnet.ron.llm module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="magnet.utils.html">magnet.utils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="magnet.utils.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="magnet.utils.mlx.html">magnet.utils.mlx package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.mlx.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.mlx.html#magnet-utils-mlx-mistral-module">magnet.utils.mlx.mistral module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="magnet.utils.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="magnet.utils.html#module-magnet.utils.data_classes">magnet.utils.data_classes module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="magnet.utils.html#magnet.utils.data_classes.EmbeddingPayload"><code class="docutils literal notranslate"><span class="pre">EmbeddingPayload</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.html#magnet.utils.data_classes.EmbeddingPayload.document"><code class="docutils literal notranslate"><span class="pre">EmbeddingPayload.document</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.html#magnet.utils.data_classes.EmbeddingPayload.embedding"><code class="docutils literal notranslate"><span class="pre">EmbeddingPayload.embedding</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.html#magnet.utils.data_classes.EmbeddingPayload.model"><code class="docutils literal notranslate"><span class="pre">EmbeddingPayload.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.html#magnet.utils.data_classes.EmbeddingPayload.text"><code class="docutils literal notranslate"><span class="pre">EmbeddingPayload.text</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="magnet.utils.html#magnet.utils.data_classes.GeneratedPayload"><code class="docutils literal notranslate"><span class="pre">GeneratedPayload</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.html#magnet.utils.data_classes.GeneratedPayload.context"><code class="docutils literal notranslate"><span class="pre">GeneratedPayload.context</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.html#magnet.utils.data_classes.GeneratedPayload.model"><code class="docutils literal notranslate"><span class="pre">GeneratedPayload.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.html#magnet.utils.data_classes.GeneratedPayload.prompt"><code class="docutils literal notranslate"><span class="pre">GeneratedPayload.prompt</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.html#magnet.utils.data_classes.GeneratedPayload.query"><code class="docutils literal notranslate"><span class="pre">GeneratedPayload.query</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.html#magnet.utils.data_classes.GeneratedPayload.result"><code class="docutils literal notranslate"><span class="pre">GeneratedPayload.result</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="magnet.utils.html#magnet.utils.data_classes.MistralArgs"><code class="docutils literal notranslate"><span class="pre">MistralArgs</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.html#magnet.utils.data_classes.MistralArgs.dim"><code class="docutils literal notranslate"><span class="pre">MistralArgs.dim</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.html#magnet.utils.data_classes.MistralArgs.head_dim"><code class="docutils literal notranslate"><span class="pre">MistralArgs.head_dim</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.html#magnet.utils.data_classes.MistralArgs.hidden_dim"><code class="docutils literal notranslate"><span class="pre">MistralArgs.hidden_dim</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.html#magnet.utils.data_classes.MistralArgs.n_heads"><code class="docutils literal notranslate"><span class="pre">MistralArgs.n_heads</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.html#magnet.utils.data_classes.MistralArgs.n_kv_heads"><code class="docutils literal notranslate"><span class="pre">MistralArgs.n_kv_heads</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.html#magnet.utils.data_classes.MistralArgs.n_layers"><code class="docutils literal notranslate"><span class="pre">MistralArgs.n_layers</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.html#magnet.utils.data_classes.MistralArgs.norm_eps"><code class="docutils literal notranslate"><span class="pre">MistralArgs.norm_eps</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.html#magnet.utils.data_classes.MistralArgs.vocab_size"><code class="docutils literal notranslate"><span class="pre">MistralArgs.vocab_size</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="magnet.utils.html#magnet.utils.data_classes.Payload"><code class="docutils literal notranslate"><span class="pre">Payload</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.html#magnet.utils.data_classes.Payload.document"><code class="docutils literal notranslate"><span class="pre">Payload.document</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.html#magnet.utils.data_classes.Payload.text"><code class="docutils literal notranslate"><span class="pre">Payload.text</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="magnet.utils.html#module-magnet.utils.globals">magnet.utils.globals module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="magnet.utils.html#magnet.utils.globals.Utils"><code class="docutils literal notranslate"><span class="pre">Utils</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.html#magnet.utils.globals.Utils.check_cuda"><code class="docutils literal notranslate"><span class="pre">Utils.check_cuda()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.html#magnet.utils.globals.Utils.normalize_text"><code class="docutils literal notranslate"><span class="pre">Utils.normalize_text()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.html#magnet.utils.globals.Utils.upload_to_s3"><code class="docutils literal notranslate"><span class="pre">Utils.upload_to_s3()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="magnet.utils.html#magnet.utils.globals.reversal"><code class="docutils literal notranslate"><span class="pre">reversal()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="magnet.utils.html#module-magnet.utils.huggingface">magnet.utils.huggingface module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="magnet.utils.html#magnet.utils.huggingface.InferenceAPI"><code class="docutils literal notranslate"><span class="pre">InferenceAPI</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.html#magnet.utils.huggingface.InferenceAPI.invoke"><code class="docutils literal notranslate"><span class="pre">InferenceAPI.invoke()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="magnet.utils.html#magnet-utils-local-module">magnet.utils.local module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="magnet.utils.html#module-magnet.utils.markdown">magnet.utils.markdown module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="magnet.utils.html#magnet.utils.markdown.m_print"><code class="docutils literal notranslate"><span class="pre">m_print()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="magnet.utils.html#module-magnet.utils.milvus">magnet.utils.milvus module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="magnet.utils.html#magnet.utils.milvus.MilvusDB"><code class="docutils literal notranslate"><span class="pre">MilvusDB</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.html#magnet.utils.milvus.MilvusDB.create"><code class="docutils literal notranslate"><span class="pre">MilvusDB.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.html#magnet.utils.milvus.MilvusDB.delete_index"><code class="docutils literal notranslate"><span class="pre">MilvusDB.delete_index()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.html#magnet.utils.milvus.MilvusDB.off"><code class="docutils literal notranslate"><span class="pre">MilvusDB.off()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.html#magnet.utils.milvus.MilvusDB.on"><code class="docutils literal notranslate"><span class="pre">MilvusDB.on()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="magnet.utils.html#module-magnet.utils.prompts">magnet.utils.prompts module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="magnet.utils.html#magnet.utils.prompts.Prompts"><code class="docutils literal notranslate"><span class="pre">Prompts</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="magnet.utils.html#magnet.utils.prompts.Prompts.qa_ref"><code class="docutils literal notranslate"><span class="pre">Prompts.qa_ref()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">magnet</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">magnet.ize package</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/Prismadic/magnet/blob/main/docs/magnet.ize.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="magnet-ize-package">
+<h1>magnet.ize package<a class="headerlink" href="#magnet-ize-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-magnet.ize.filings">
+<span id="magnet-ize-filings-module"></span><h2>magnet.ize.filings module<a class="headerlink" href="#module-magnet.ize.filings" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="magnet.ize.filings.Processor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">magnet.ize.filings.</span></span><span class="sig-name descname"><span class="pre">Processor</span></span><a class="reference internal" href="_modules/magnet/ize/filings.html#Processor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.ize.filings.Processor" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The <cite>Processor</cite> class is responsible for loading, processing, and saving data. It provides methods for loading data from different file formats, splitting the data into smaller chunks, and saving the processed data to a file.</p>
+<dl>
+<dt>Example Usage:</dt><dd><p># Initialize the Processor class object
+processor = Processor()</p>
+<p># Load data into the processor
+processor.load(raw_data, text_column=”clean”, id_column=”id”)</p>
+<p># Process and split the loaded data into smaller chunks
+await processor.process(path=”processed_data.csv”, splitter=None, nlp=True)</p>
+<p># Save the processed data to a file
+processor.save(filename=”processed_data.csv”, raw=processor.df)</p>
+</dd>
+<dt>Main functionalities:</dt><dd><ul class="simple">
+<li><p>Loading data from different file formats (csv, json, xlsx, parquet) or a pandas DataFrame</p></li>
+<li><p>Splitting the loaded data into smaller chunks either by sentences using natural language processing (NLP) or by a fixed character length</p></li>
+<li><p>Saving the processed data to a file in different formats (csv, json, xlsx, parquet)</p></li>
+</ul>
+</dd>
+<dt>Methods:</dt><dd><ul class="simple">
+<li><p>__init__(): Initializes the Processor class object and sets the df attribute to None and creates an instance of the Utils class.</p></li>
+<li><p>save(filename: str = None, raw: pd.DataFrame = None): Saves the pandas DataFrame to a file with the specified filename and file format.</p></li>
+<li><p>load(raw: str | pd.DataFrame = None, text_column: str = “clean”, id_column: str = ‘id’): Loads data into the df attribute of the Processor class.</p></li>
+<li><p>process(path: str = None, splitter: any = None, nlp=True): Processes and splits the loaded data into smaller chunks.</p></li>
+<li><p>default_splitter(data, window_size=768, overlap=76, nlp=True): Splits the given input data into smaller chunks either by sentences or by a fixed character length.</p></li>
+</ul>
+</dd>
+<dt>Fields:</dt><dd><ul class="simple">
+<li><p>df: A pandas DataFrame that stores the loaded data.</p></li>
+<li><p>utils: An instance of the Utils class that provides utility functions.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="magnet.ize.filings.Processor.create_charge">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">create_charge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/ize/filings.html#Processor.create_charge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.ize.filings.Processor.create_charge" title="Link to this definition"></a></dt>
+<dd><p>Process and send data to a field.</p>
+<dl>
+<dt>Args:</dt><dd><p>field (optional): The field object to which the data will be sent.</p>
+</dd>
+<dt>Returns:</dt><dd><p>None</p>
+</dd>
+<dt>Raises:</dt><dd><p>ValueError: If no data is loaded.
+ValueError: If no field is loaded.</p>
+</dd>
+<dt>Example Usage:</dt><dd><p># Initialize the Processor class object
+processor = Processor()</p>
+<p># Load data into the processor
+processor.load(raw_data, text_column=”clean”, id_column=”id”)</p>
+<p># Initialize the field object
+field = Field()</p>
+<p># Create charges and send data to the field
+await processor.create_charge(field)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="magnet.ize.filings.Processor.default_splitter">
+<span class="sig-name descname"><span class="pre">default_splitter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">768</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overlap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">76</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/ize/filings.html#Processor.default_splitter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.ize.filings.Processor.default_splitter" title="Link to this definition"></a></dt>
+<dd><p>Splits the given input data into smaller chunks either by sentences or by a fixed character length.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>data (str): The input data to be split.
+window_size (int, optional): The size of each chunk when splitting by a fixed character length. Defaults to 768.
+overlap (int, optional): The number of characters to overlap between each chunk when splitting by a fixed character length. Defaults to 76.
+nlp (bool, optional): A flag indicating whether to split the data into sentences using natural language processing (NLP) or by a fixed character length. Defaults to True.</p>
+</dd>
+<dt>Returns:</dt><dd><p>list: If <cite>nlp</cite> is True, returns a list of sentences extracted from the input data. If <cite>nlp</cite> is False, returns a list of chunks obtained by splitting the input data into fixed-sized chunks.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="magnet.ize.filings.Processor.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'clean'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'id'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/ize/filings.html#Processor.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.ize.filings.Processor.load" title="Link to this definition"></a></dt>
+<dd><p>Load data into the df attribute of the Processor class.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>raw (str | pd.DataFrame): The input data to be loaded. It can be either a file path (str) or a pandas DataFrame.
+text_column (str): The name of the column in the input data that contains the text data. Default is “clean”.
+id_column (str): The name of the column in the input data that contains the unique identifier for each data entry. Default is “id”.</p>
+</dd>
+<dt>Raises:</dt><dd><p>ValueError: If the file extension is not supported or an exception occurs during the loading process.</p>
+</dd>
+<dt>Returns:</dt><dd><p>None: If an error occurs during the loading process.
+str: Success message if the data is successfully loaded.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="magnet.ize.filings.Processor.process">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">splitter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nlp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/ize/filings.html#Processor.process"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.ize.filings.Processor.process" title="Link to this definition"></a></dt>
+<dd><p>Process and split the loaded data into smaller chunks.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>path (str): The path to save the processed data.
+splitter (function, optional): A custom function to split the text into chunks. If not provided, the default splitter function in the <cite>Processor</cite> class will be used.
+nlp (bool, optional): A flag indicating whether to split the data into sentences using natural language processing (NLP) or by a fixed character length.</p>
+</dd>
+<dt>Returns:</dt><dd><p>None: If there is no data loaded or if an error occurs during the processing.
+The processed data saved to the specified file path.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="magnet.ize.filings.Processor.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">raw</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/ize/filings.html#Processor.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.ize.filings.Processor.save" title="Link to this definition"></a></dt>
+<dd><p>Save the pandas DataFrame to a file with the specified filename and file format.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>filename (str): The name of the file to save the data to.
+raw (pd.DataFrame): The pandas DataFrame containing the data to be saved.</p>
+</dd>
+<dt>Raises:</dt><dd><p>ValueError: If the data format is unsupported or an error occurs during the saving process.</p>
+</dd>
+<dt>Returns:</dt><dd><p>None: If an error occurs during the saving process.
+str: Success message if the data is successfully saved to the specified file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-magnet.ize.memory">
+<span id="magnet-ize-memory-module"></span><h2>magnet.ize.memory module<a class="headerlink" href="#module-magnet.ize.memory" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="magnet.ize.memory.Embedder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">magnet.ize.memory.</span></span><span class="sig-name descname"><span class="pre">Embedder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">create</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/ize/memory.html#Embedder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.ize.memory.Embedder" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The Embedder class is responsible for embedding text using a pre-trained sentence transformer model and storing or sending the embeddings for further processing. It utilizes the Milvus database for storing and searching the embeddings.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>config (dict): A dictionary containing the configuration parameters for the Embedder class, including the model name, index name, and index parameters.
+create (bool, optional): If set to True, a connection to the Milvus database will be created. Defaults to False.</p>
+</dd>
+<dt>Attributes:</dt><dd><p>config (dict): A dictionary containing the configuration parameters for the Embedder class, including the model name, index name, and index parameters.
+model (SentenceTransformer): An instance of the SentenceTransformer class from the sentence_transformers library, used for text embedding.
+db (MilvusDB): An instance of the MilvusDB class from the magnet.utils.milvus module, used for connecting to the Milvus database.</p>
+</dd>
+<dt>Methods:</dt><dd><p>embed_and_store(self, payload, verbose=False, field=None): Embeds the given payload using a pre-trained sentence transformer model and stores it in the Milvus database.
+embed_and_charge(self, payload, verbose=False, field=None): Embeds the given payload using a pre-trained sentence transformer model and sends it to a specified field for further processing.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="magnet.ize.memory.Embedder.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/ize/memory.html#Embedder.delete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.ize.memory.Embedder.delete" title="Link to this definition"></a></dt>
+<dd><p>Delete an index from the Milvus database.</p>
+<dl>
+<dt>Args:</dt><dd><p>name (str, optional): The name of the index to be deleted. If not provided, no index will be deleted.</p>
+</dd>
+<dt>Returns:</dt><dd><p>None</p>
+</dd>
+<dt>Raises:</dt><dd><p>Exception: If an error occurs during the deletion process.</p>
+</dd>
+<dt>Example Usage:</dt><dd><dl class="simple">
+<dt>config = {</dt><dd><p>‘MODEL’: ‘bert-base-nli-mean-tokens’,
+‘INDEX’: ‘my_index’,
+‘INDEX_PARAMS’: {‘nprobe’: 16}</p>
+</dd>
+</dl>
+<p>}
+embedder = Embedder(config)
+embedder.delete(‘my_index’)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="magnet.ize.memory.Embedder.disconnect">
+<span class="sig-name descname"><span class="pre">disconnect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/ize/memory.html#Embedder.disconnect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.ize.memory.Embedder.disconnect" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="magnet.ize.memory.Embedder.embed_and_charge">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">embed_and_charge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/ize/memory.html#Embedder.embed_and_charge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.ize.memory.Embedder.embed_and_charge" title="Link to this definition"></a></dt>
+<dd><p>Embeds the given payload using a pre-trained sentence transformer model and sends it to a specified field for further processing.</p>
+<dl>
+<dt>Args:</dt><dd><p>payload (object): The payload to be embedded and charged. It should contain the <cite>text</cite> and <cite>document</cite> attributes.
+verbose (bool, optional): If set to True, additional information will be logged during the embedding process. Defaults to False.
+field (object): The field to which the encoded payload will be sent for further processing.</p>
+</dd>
+<dt>Raises:</dt><dd><p>ValueError: If the <cite>field</cite> parameter is not provided.</p>
+</dd>
+<dt>Returns:</dt><dd><p>None</p>
+</dd>
+<dt>Example Usage:</dt><dd><dl class="simple">
+<dt>config = {</dt><dd><p>‘MODEL’: ‘bert-base-nli-mean-tokens’,
+‘INDEX’: ‘my_index’,
+‘INDEX_PARAMS’: {‘nprobe’: 16}</p>
+</dd>
+</dl>
+<p>}
+embedder = Embedder(config)
+await embedder.embed_and_charge(payload, verbose=True, field=my_field)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="magnet.ize.memory.Embedder.embed_and_store">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">embed_and_store</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/ize/memory.html#Embedder.embed_and_store"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.ize.memory.Embedder.embed_and_store" title="Link to this definition"></a></dt>
+<dd><p>Embeds the given payload using a pre-trained sentence transformer model and stores it in a Milvus database.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>payload (object): An object containing the text and document attributes to be embedded and stored.
+verbose (bool, optional): A boolean indicating whether additional information should be logged during the embedding process. Defaults to False.
+field (object, optional): An object representing the field to which the encoded payload will be sent for further processing.</p>
+</dd>
+<dt>Returns:</dt><dd><p>None</p>
+</dd>
+<dt>Raises:</dt><dd><p>Exception: If an error occurs during the embedding or storing process.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="magnet.ize.memory.Embedder.info">
+<span class="sig-name descname"><span class="pre">info</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/ize/memory.html#Embedder.info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.ize.memory.Embedder.info" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="magnet.ize.memory.Embedder.is_dupe">
+<span class="sig-name descname"><span class="pre">is_dupe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/ize/memory.html#Embedder.is_dupe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.ize.memory.Embedder.is_dupe" title="Link to this definition"></a></dt>
+<dd><p>Check if a given query is a duplicate in the Milvus database.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>q (object): The query embedding to check for duplicates.</p>
+</dd>
+<dt>Returns:</dt><dd><p>bool: True if the query embedding is a duplicate in the Milvus database, False otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="magnet.ize.memory.Embedder.search">
+<span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cb</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/magnet/ize/memory.html#Embedder.search"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#magnet.ize.memory.Embedder.search" title="Link to this definition"></a></dt>
+<dd><p>Search for relevant passages based on a given input payload.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>payload (str): The search query or input payload.
+limit (int, optional): The maximum number of results to return. Defaults to 100.
+cb (function, optional): A callback function to process the results. Defaults to None.</p>
+</dd>
+<dt>Returns:</dt><dd><p>list: A list of dictionaries, each containing the text, document, and distance of a relevant passage.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Prismadic, LLC.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

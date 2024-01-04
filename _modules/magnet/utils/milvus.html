@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>magnet.utils.milvus &mdash; magnet latest documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=7254e0c9" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=c6e86fd7"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/magnet.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v0.1.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Packages &amp; useful classes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../magnet.ic.html">magnet.ic package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.ic.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.ic.html#module-magnet.ic.field">magnet.ic.field module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Charge"><code class="docutils literal notranslate"><span class="pre">Charge</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Charge.emp"><code class="docutils literal notranslate"><span class="pre">Charge.emp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Charge.off"><code class="docutils literal notranslate"><span class="pre">Charge.off()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Charge.on"><code class="docutils literal notranslate"><span class="pre">Charge.on()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Charge.pulse"><code class="docutils literal notranslate"><span class="pre">Charge.pulse()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Charge.reset"><code class="docutils literal notranslate"><span class="pre">Charge.reset()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Resonator"><code class="docutils literal notranslate"><span class="pre">Resonator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Resonator.info"><code class="docutils literal notranslate"><span class="pre">Resonator.info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Resonator.off"><code class="docutils literal notranslate"><span class="pre">Resonator.off()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Resonator.on"><code class="docutils literal notranslate"><span class="pre">Resonator.on()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../magnet.ize.html">magnet.ize package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.ize.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.ize.html#module-magnet.ize.filings">magnet.ize.filings module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.ize.html#magnet.ize.filings.Processor"><code class="docutils literal notranslate"><span class="pre">Processor</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ize.html#magnet.ize.filings.Processor.create_charge"><code class="docutils literal notranslate"><span class="pre">Processor.create_charge()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ize.html#magnet.ize.filings.Processor.default_splitter"><code class="docutils literal notranslate"><span class="pre">Processor.default_splitter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ize.html#magnet.ize.filings.Processor.load"><code class="docutils literal notranslate"><span class="pre">Processor.load()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ize.html#magnet.ize.filings.Processor.process"><code class="docutils literal notranslate"><span class="pre">Processor.process()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ize.html#magnet.ize.filings.Processor.save"><code class="docutils literal notranslate"><span class="pre">Processor.save()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.ize.html#module-magnet.ize.memory">magnet.ize.memory module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.ize.html#magnet.ize.memory.Embedder"><code class="docutils literal notranslate"><span class="pre">Embedder</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ize.html#magnet.ize.memory.Embedder.delete"><code class="docutils literal notranslate"><span class="pre">Embedder.delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ize.html#magnet.ize.memory.Embedder.disconnect"><code class="docutils literal notranslate"><span class="pre">Embedder.disconnect()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ize.html#magnet.ize.memory.Embedder.embed_and_charge"><code class="docutils literal notranslate"><span class="pre">Embedder.embed_and_charge()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ize.html#magnet.ize.memory.Embedder.embed_and_store"><code class="docutils literal notranslate"><span class="pre">Embedder.embed_and_store()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ize.html#magnet.ize.memory.Embedder.info"><code class="docutils literal notranslate"><span class="pre">Embedder.info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ize.html#magnet.ize.memory.Embedder.is_dupe"><code class="docutils literal notranslate"><span class="pre">Embedder.is_dupe()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ize.html#magnet.ize.memory.Embedder.search"><code class="docutils literal notranslate"><span class="pre">Embedder.search()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../magnet.ron.html">magnet.ron package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.ron.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.ron.html#magnet-ron-llm-module">magnet.ron.llm module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../magnet.utils.html">magnet.utils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.utils.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.mlx.html">magnet.utils.mlx package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.mlx.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.mlx.html#magnet-utils-mlx-mistral-module">magnet.utils.mlx.mistral module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.utils.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.utils.html#module-magnet.utils.data_classes">magnet.utils.data_classes module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.EmbeddingPayload"><code class="docutils literal notranslate"><span class="pre">EmbeddingPayload</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.EmbeddingPayload.document"><code class="docutils literal notranslate"><span class="pre">EmbeddingPayload.document</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.EmbeddingPayload.embedding"><code class="docutils literal notranslate"><span class="pre">EmbeddingPayload.embedding</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.EmbeddingPayload.model"><code class="docutils literal notranslate"><span class="pre">EmbeddingPayload.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.EmbeddingPayload.text"><code class="docutils literal notranslate"><span class="pre">EmbeddingPayload.text</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.GeneratedPayload"><code class="docutils literal notranslate"><span class="pre">GeneratedPayload</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.GeneratedPayload.context"><code class="docutils literal notranslate"><span class="pre">GeneratedPayload.context</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.GeneratedPayload.model"><code class="docutils literal notranslate"><span class="pre">GeneratedPayload.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.GeneratedPayload.prompt"><code class="docutils literal notranslate"><span class="pre">GeneratedPayload.prompt</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.GeneratedPayload.query"><code class="docutils literal notranslate"><span class="pre">GeneratedPayload.query</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.GeneratedPayload.result"><code class="docutils literal notranslate"><span class="pre">GeneratedPayload.result</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MistralArgs"><code class="docutils literal notranslate"><span class="pre">MistralArgs</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MistralArgs.dim"><code class="docutils literal notranslate"><span class="pre">MistralArgs.dim</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MistralArgs.head_dim"><code class="docutils literal notranslate"><span class="pre">MistralArgs.head_dim</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MistralArgs.hidden_dim"><code class="docutils literal notranslate"><span class="pre">MistralArgs.hidden_dim</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MistralArgs.n_heads"><code class="docutils literal notranslate"><span class="pre">MistralArgs.n_heads</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MistralArgs.n_kv_heads"><code class="docutils literal notranslate"><span class="pre">MistralArgs.n_kv_heads</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MistralArgs.n_layers"><code class="docutils literal notranslate"><span class="pre">MistralArgs.n_layers</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MistralArgs.norm_eps"><code class="docutils literal notranslate"><span class="pre">MistralArgs.norm_eps</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MistralArgs.vocab_size"><code class="docutils literal notranslate"><span class="pre">MistralArgs.vocab_size</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.Payload"><code class="docutils literal notranslate"><span class="pre">Payload</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.Payload.document"><code class="docutils literal notranslate"><span class="pre">Payload.document</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.Payload.text"><code class="docutils literal notranslate"><span class="pre">Payload.text</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.utils.html#module-magnet.utils.globals">magnet.utils.globals module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.globals.Utils"><code class="docutils literal notranslate"><span class="pre">Utils</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.globals.Utils.check_cuda"><code class="docutils literal notranslate"><span class="pre">Utils.check_cuda()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.globals.Utils.normalize_text"><code class="docutils literal notranslate"><span class="pre">Utils.normalize_text()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.globals.Utils.upload_to_s3"><code class="docutils literal notranslate"><span class="pre">Utils.upload_to_s3()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.globals.reversal"><code class="docutils literal notranslate"><span class="pre">reversal()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.utils.html#module-magnet.utils.huggingface">magnet.utils.huggingface module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.huggingface.InferenceAPI"><code class="docutils literal notranslate"><span class="pre">InferenceAPI</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.huggingface.InferenceAPI.invoke"><code class="docutils literal notranslate"><span class="pre">InferenceAPI.invoke()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.utils.html#magnet-utils-local-module">magnet.utils.local module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.utils.html#module-magnet.utils.markdown">magnet.utils.markdown module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.markdown.m_print"><code class="docutils literal notranslate"><span class="pre">m_print()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.utils.html#module-magnet.utils.milvus">magnet.utils.milvus module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.milvus.MilvusDB"><code class="docutils literal notranslate"><span class="pre">MilvusDB</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.milvus.MilvusDB.create"><code class="docutils literal notranslate"><span class="pre">MilvusDB.create()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.milvus.MilvusDB.delete_index"><code class="docutils literal notranslate"><span class="pre">MilvusDB.delete_index()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.milvus.MilvusDB.off"><code class="docutils literal notranslate"><span class="pre">MilvusDB.off()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.milvus.MilvusDB.on"><code class="docutils literal notranslate"><span class="pre">MilvusDB.on()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.utils.html#module-magnet.utils.prompts">magnet.utils.prompts module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.prompts.Prompts"><code class="docutils literal notranslate"><span class="pre">Prompts</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.prompts.Prompts.qa_ref"><code class="docutils literal notranslate"><span class="pre">Prompts.qa_ref()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">magnet</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">magnet.utils.milvus</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for magnet.utils.milvus</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">pymilvus</span> <span class="kn">import</span> <span class="n">connections</span><span class="p">,</span> <span class="n">utility</span><span class="p">,</span> <span class="n">FieldSchema</span><span class="p">,</span> <span class="n">CollectionSchema</span><span class="p">,</span> <span class="n">DataType</span><span class="p">,</span> <span class="n">Collection</span>
+<span class="kn">from</span> <span class="nn">magnet.utils.globals</span> <span class="kn">import</span> <span class="n">_f</span>
+
+<div class="viewcode-block" id="MilvusDB">
+<a class="viewcode-back" href="../../../magnet.utils.html#magnet.utils.milvus.MilvusDB">[docs]</a>
+<span class="k">class</span> <span class="nc">MilvusDB</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A class that provides a high-level interface for interacting with a Milvus database.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        config (dict): A configuration dictionary that contains the necessary parameters for connecting to the Milvus server and creating a collection.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        config (dict): A configuration dictionary that contains the necessary parameters for connecting to the Milvus server and creating a collection.</span>
+<span class="sd">        fields (list): A list of `FieldSchema` objects that define the fields of the collection.</span>
+<span class="sd">        schema (CollectionSchema): A `CollectionSchema` object that represents the schema of the collection.</span>
+<span class="sd">        index_params (dict): A dictionary that contains the parameters for creating an index on the collection.</span>
+<span class="sd">        connection: The connection object to the Milvus server.</span>
+<span class="sd">        collection: The collection object in MilvusDB.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">config</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">FieldSchema</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">INT64</span><span class="p">,</span> <span class="n">is_primary</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">auto_id</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+            <span class="n">FieldSchema</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;document&#39;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">VARCHAR</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">4096</span><span class="p">),</span>
+            <span class="n">FieldSchema</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">VARCHAR</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">65535</span><span class="p">),</span>
+            <span class="n">FieldSchema</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;embedding&#39;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">DataType</span><span class="o">.</span><span class="n">FLOAT_VECTOR</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;DIMENSION&#39;</span><span class="p">])</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">schema</span> <span class="o">=</span> <span class="n">CollectionSchema</span><span class="p">(</span><span class="n">fields</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">index_params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;INDEX_PARAMS&#39;</span><span class="p">]</span>
+
+<div class="viewcode-block" id="MilvusDB.on">
+<a class="viewcode-back" href="../../../magnet.utils.html#magnet.utils.milvus.MilvusDB.on">[docs]</a>
+    <span class="k">def</span> <span class="nf">on</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Establishes a connection to the Milvus server and creates a collection object.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            Exception: If an error occurs during the connection to the Milvus server.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">connection</span> <span class="o">=</span> <span class="n">connections</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;MILVUS_URI&#39;</span><span class="p">],</span> <span class="n">port</span><span class="o">=</span><span class="mi">19530</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">collection</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;INDEX&#39;</span><span class="p">],</span> <span class="n">schema</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="p">)</span>
+            <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;success&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;connected successfully to </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;MILVUS_URI&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;fatal&#39;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MilvusDB.off">
+<a class="viewcode-back" href="../../../magnet.utils.html#magnet.utils.milvus.MilvusDB.off">[docs]</a>
+    <span class="k">def</span> <span class="nf">off</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Disconnects from the Milvus server.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            Exception: If an error occurs during the disconnection from the Milvus server.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">connection</span> <span class="o">=</span> <span class="n">connections</span><span class="o">.</span><span class="n">disconnect</span><span class="p">(</span><span class="n">alias</span><span class="o">=</span><span class="s2">&quot;magnet&quot;</span><span class="p">)</span>
+            <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;warn&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;disconnected from </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;MILVUS_URI&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;fatal&#39;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MilvusDB.create">
+<a class="viewcode-back" href="../../../magnet.utils.html#magnet.utils.milvus.MilvusDB.create">[docs]</a>
+    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a collection in MilvusDB and create an index on a specific field of the collection.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            overwrite (bool, optional): A boolean flag indicating whether to overwrite the existing collection with the same name. Default is False.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            Exception: If an error occurs during the creation of the collection or index.</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            config = {</span>
+<span class="sd">                &#39;MILVUS_URI&#39;: &#39;localhost&#39;,</span>
+<span class="sd">                &#39;INDEX&#39;: &#39;my_collection&#39;,</span>
+<span class="sd">                &#39;DIMENSION&#39;: 128,</span>
+<span class="sd">                &#39;INDEX_PARAMS&#39;: {&#39;index_type&#39;: &#39;IVF_FLAT&#39;, &#39;nlist&#39;: 100}</span>
+<span class="sd">            }</span>
+<span class="sd">            milvus_db = MilvusDB(config)</span>
+<span class="sd">            milvus_db.create(overwrite=True)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">utility</span><span class="o">.</span><span class="n">has_collection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;INDEX&#39;</span><span class="p">])</span> <span class="ow">and</span> <span class="n">overwrite</span><span class="p">:</span>
+            <span class="n">utility</span><span class="o">.</span><span class="n">drop_collection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;INDEX&#39;</span><span class="p">])</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">collection</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;INDEX&#39;</span><span class="p">],</span> <span class="n">schema</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">collection</span><span class="o">.</span><span class="n">create_index</span><span class="p">(</span><span class="n">field_name</span><span class="o">=</span><span class="s2">&quot;embedding&quot;</span><span class="p">,</span> <span class="n">index_params</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">index_params</span><span class="p">)</span>
+            <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;success&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;INDEX&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> created&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;fatal&#39;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MilvusDB.delete_index">
+<a class="viewcode-back" href="../../../magnet.utils.html#magnet.utils.milvus.MilvusDB.delete_index">[docs]</a>
+    <span class="k">def</span> <span class="nf">delete_index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deletes the index of a collection in MilvusDB.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">utility</span><span class="o">.</span><span class="n">has_collection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;INDEX&#39;</span><span class="p">]):</span>
+            <span class="n">utility</span><span class="o">.</span><span class="n">drop_collection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;INDEX&#39;</span><span class="p">])</span>
+            <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;warn&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;INDEX&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> deleted&quot;</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Prismadic, LLC.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
