@@ -51,12 +51,18 @@ python3 setup.py install
 
 ``` python
 from magnet.ize.filings import Processor
-# your text documents data
-source_data_file = "./raw/export.parquet"
+source_data_file = "./raw/filings.csv"
+export_data_file = "./data/filings_mistral_nlp.parquet"
 filings = Processor()
-filings.load(source_data_file)
-# output, text column, id column, and we disable sentence splitting for fastest processing
-await filings.process('./data/filings.parquet','clean','file', nlp=False)
+filings.load(
+    source_data_file
+    , 'clean'
+    , 'file'
+)
+await filings.process(
+    export_data_file
+    , nlp=True
+)
 ```
 
 <img src='./divider.png' style="width:100%;height:5px;">
