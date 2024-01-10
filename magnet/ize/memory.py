@@ -195,7 +195,7 @@ class Embedder:
         Returns:
             bool: True if the query embedding is a duplicate in the Milvus database, False otherwise.
         """
-        match = self.collection.search(
+        match = self.db.collection.search(
             data=[q]
             , anns_field = "embeddings"
             , param=self.config['INDEX_PARAMS']

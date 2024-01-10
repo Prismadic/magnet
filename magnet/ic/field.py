@@ -35,7 +35,7 @@ class Charge:
         self.category = category
         self.stream = stream
         try:
-            nc = await nats.connect(f'{self.server}')
+            nc = await nats.connect(f'nats://{self.server}:4222')
             self.nc = nc
             self.js = self.nc.jetstream()
             self.js.purge_stream
