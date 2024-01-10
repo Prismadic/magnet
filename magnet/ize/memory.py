@@ -29,7 +29,7 @@ class Embedder:
         self.db = MilvusDB(self.config)
         self.db.on()
         if create:
-            self.db.create()
+            self.db.create(overwrite=True)
 
     async def embed_and_store(self, payload, verbose=False, field=None):
         """
@@ -58,6 +58,7 @@ class Embedder:
         else:
             try:
                 _f('info', 'storing payload') if verbose else None
+                self.db.collection.load()
                 if not self.is_dupe(q=payload.embedding):
                     self.db.collection.insert([
                         [payload.document], [payload.text], [payload.embedding]
@@ -128,7 +129,7 @@ class Embedder:
                 f"Represent this sentence for searching relevant passages: {payload}", normalize_embeddings=True),
             model=self.config['MODEL']
         )
-        self.db.collection.load()
+        
         _results = self.db.collection.search(
             data=[payload.embedding],  # Embeded search value
             anns_field="embedding",  # Search across embeddings
@@ -197,9 +198,9 @@ class Embedder:
         """
         match = self.db.collection.search(
             data=[q]
-            , anns_field = "embeddings"
+            , anns_field = "embedding"
             , param=self.config['INDEX_PARAMS']
-            , output_fields=['text', 'id', 'documentId']
+            , output_fields=['text', 'document']
             , limit=1
         )
         return True if sum(match[0].distances) == 0.0 else False
