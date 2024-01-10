@@ -41,7 +41,14 @@ class MilvusDB:
 
         """
         try:
-            self.connection = connections.connect(host=self.config['MILVUS_URI'], port=self.config['MILVUS_PORT'])
+            self.connection = connections.connect(
+                host=self.config['MILVUS_URI']
+                , port=self.config['MILVUS_PORT']
+                , user=self.config['MILVUS_USER']
+                , password=self.config['MILVUS_PASSWORD']
+            ) \
+                if 'MILVUS_PASSWORD' in self.config and 'MILVUS_USER' in self.config \
+                else connections.connect(host=self.config['MILVUS_URI'], port=self.config['MILVUS_PORT'])
             self.collection = Collection(name=self.config['INDEX'], schema=self.schema)
             _f('success', f"connected successfully to {self.config['MILVUS_URI']}")
         except Exception as e:
