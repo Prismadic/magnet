@@ -31,7 +31,7 @@ class Embedder:
         if create:
             self.db.create(overwrite=True)
 
-    async def embed_and_store(self, payload, verbose=False, field=None):
+    async def embed_and_store(self, payload, verbose=False, field=None, instruction: str = "Represent this sentence for searching relevant passages: "):
         """
         Embeds the given payload using a pre-trained sentence transformer model and stores it in a Milvus database.
 
@@ -52,7 +52,7 @@ class Embedder:
         try:
             _f('info', 'embedding payload') if verbose else None
             payload.embedding = self.model.encode(
-                f"Represent this sentence for searching relevant passages: {payload.text}", normalize_embeddings=True)
+                f"{instruction} {payload.text}", normalize_embeddings=True)
         except Exception as e:
             _f('fatal', e)
         else:
