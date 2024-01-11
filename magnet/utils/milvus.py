@@ -1,5 +1,6 @@
 from pymilvus import connections, utility, FieldSchema, CollectionSchema, DataType, Collection
 from magnet.utils.globals import _f
+import random, array
 
 class MilvusDB:
     """
@@ -46,9 +47,14 @@ class MilvusDB:
                 , port=self.config['MILVUS_PORT']
                 , user=self.config['MILVUS_USER']
                 , password=self.config['MILVUS_PASSWORD']
+                , alias='magnet'
             ) \
                 if 'MILVUS_PASSWORD' in self.config and 'MILVUS_USER' in self.config \
-                else connections.connect(host=self.config['MILVUS_URI'], port=self.config['MILVUS_PORT'])
+                else connections.connect(
+                    host=self.config['MILVUS_URI']
+                    , port=self.config['MILVUS_PORT']
+                    , alias='magnet'
+                )
             self.collection = Collection(name=self.config['INDEX'], schema=self.schema)
             self.collection.load()
             _f('success', f"connected successfully to {self.config['MILVUS_URI']}")
@@ -105,6 +111,29 @@ class MilvusDB:
         except Exception as e:
             _f('fatal', e)
 
+    def initialize(self, user: str = 'magnet', password: str = '33011033'):
+        try:
+            if not self.connection:
+                return _f('fatal','no active Milvus connection') 
+            else:
+                _f('warn', f"initializing {self.config['MILVUS_URI']} using `root` to create '{user}'")
+            utility.reset_password('root', 'Milvus', self._pw(), using='magnet')
+            _f('success', f"secured root user successfully on {self.config['MILVUS_URI']}")
+            utility.create_user(user, password, using='magnet')
+            _f('success', f"created requested {user} on {self.config['MILVUS_URI']}")
+            try:
+                self.connection = connections.connect(
+                    host=self.config['MILVUS_URI']
+                    , port=self.config['MILVUS_PORT']
+                    , user=user
+                    , password=password
+                )
+                _f('success', 'Milvus has been initialized with your new credentials')
+            except Exception as e:
+                _f('fatal', e)
+        except Exception as e:
+            _f('fatal', e)
+    
     def delete_index(self):
         """
         Deletes the index of a collection in MilvusDB.
@@ -116,3 +145,32 @@ class MilvusDB:
         if utility.has_collection(self.config['INDEX']):
             utility.drop_collection(self.config['INDEX'])
             _f('warn', f"{self.config['INDEX']} deleted")
+
+    def _pw(self):
+        MAX_LEN = 24
+        DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']   
+        LOCASE_CHARACTERS = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',  
+                            'i', 'j', 'k', 'm', 'n', 'o', 'p', 'q', 
+                            'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 
+                            'z'] 
+        UPCASE_CHARACTERS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',  
+                            'I', 'J', 'K', 'M', 'N', 'O', 'P', 'Q', 
+                            'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 
+                            'Z'] 
+        SYMBOLS = ['@', '#', '$', '%', '=', ':', '?', '.', '/', '|', '~', '>',  
+                '*', '(', ')', '<'] 
+        COMBINED_LIST = DIGITS + UPCASE_CHARACTERS + LOCASE_CHARACTERS + SYMBOLS 
+        rand_digit = random.choice(DIGITS) 
+        rand_upper = random.choice(UPCASE_CHARACTERS) 
+        rand_lower = random.choice(LOCASE_CHARACTERS) 
+        rand_symbol = random.choice(SYMBOLS) 
+        temp_pass = rand_digit + rand_upper + rand_lower + rand_symbol 
+        for x in range(MAX_LEN - 4): 
+            temp_pass = temp_pass + random.choice(COMBINED_LIST)  
+            temp_pass_list = array.array('u', temp_pass) 
+            random.shuffle(temp_pass_list) 
+        password = "" 
+        for x in temp_pass_list: 
+            password = password + x 
+        _f('warn', f'Your Milvus `root` user password is now {password}')
+        return password
