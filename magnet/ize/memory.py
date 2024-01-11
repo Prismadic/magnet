@@ -72,7 +72,7 @@ class Embedder:
                         payload = EmbeddingPayload(
                             model=self.config['MODEL'],
                             embedding=self.model.encode(
-                                f"Represent this sentence for searching relevant passages: {payload.text}", normalize_embeddings=True).tolist(),
+                                f"{instruction} {payload.text}", normalize_embeddings=True).tolist(),
                             text=payload.text,
                             document=payload.document
                         )
@@ -83,7 +83,7 @@ class Embedder:
             except Exception as e:
                 _f('fatal', e)
 
-    def search(self, payload, limit=100, cb=None):
+    def search(self, payload, limit=100, cb=None, instruction="Represent this sentence for searching relevant passages: "):
         """
         Search for relevant passages based on a given input payload.
 
@@ -98,7 +98,7 @@ class Embedder:
         payload = EmbeddingPayload(
             text=payload,
             embedding=self.model.encode(
-                f"Represent this sentence for searching relevant passages: {payload}", normalize_embeddings=True),
+                f"{instruction} {payload}", normalize_embeddings=True),
             model=self.config['MODEL']
         )
         

@@ -49,7 +49,6 @@ class Charge:
                         streams = await self.js.streams_info()
                     if self.category not in sum([x.config.subjects for x in streams if x.config.name == self.stream], []):
                         subjects = sum([x.config.subjects for x in streams if x.config.name == self.stream], [])
-                        print(subjects)
                         subjects.append(self.category)
                         await self.js.update_stream(StreamConfig(
                             name = self.stream
