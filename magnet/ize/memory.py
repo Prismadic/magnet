@@ -22,13 +22,15 @@ class Embedder:
 
     """
 
-    def __init__(self, config, create=False):
+    def __init__(self, config, create=False, initialize=False):
         self.config = config
         self.model = SentenceTransformer(self.config['MODEL'])
         self.db = MilvusDB(self.config)
         self.db.on()
         if create:
             self.db.create(overwrite=True)
+        if initialize:
+            self.db.initialize()
 
     async def index(self, payload, msg, verbose=False, field=None, charge=False, instruction: str = "Represent this sentence for searching relevant passages: "):
         """
