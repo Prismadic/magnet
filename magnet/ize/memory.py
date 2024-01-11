@@ -30,7 +30,7 @@ class Embedder:
         if create:
             self.db.create(overwrite=True)
 
-    async def embed_and_store(self, payload, verbose=False, field=None, instruction: str = "Represent this sentence for searching relevant passages: "):
+    async def index(self, payload, msg, verbose=False, field=None, charge=False, instruction: str = "Represent this sentence for searching relevant passages: "):
         """
         Embeds the given payload using a pre-trained sentence transformer model and stores it in a Milvus database.
 
@@ -46,8 +46,12 @@ class Embedder:
             Exception: If an error occurs during the embedding or storing process.
 
         """
+        if not msg:
+            return _f('fatal', 'no field message to ack!')
         if field:
             self.field = field
+        else:
+            raise ValueError('field is required')
         try:
             _f('info', 'embedding payload') if verbose else None
             payload.embedding = self.model.encode(
@@ -55,6 +59,7 @@ class Embedder:
         except Exception as e:
             _f('fatal', e)
         else:
+            await msg.in_progress()
             try:
                 _f('info', 'storing payload') if verbose else None
                 if not self.is_dupe(q=payload.embedding):
@@ -63,51 +68,20 @@ class Embedder:
                     ])
                     self.db.collection.flush(collection_name_array=[
                                             self.config['INDEX']])
+                    if charge:
+                        payload = EmbeddingPayload(
+                            model=self.config['MODEL'],
+                            embedding=self.model.encode(
+                                f"Represent this sentence for searching relevant passages: {payload.text}", normalize_embeddings=True).tolist(),
+                            text=payload.text,
+                            document=payload.document
+                        )
+                        await msg.ack()
+                        _f('info', f'sending payload\n{payload}') if verbose else None
+                        await self.field.pulse(payload)
+                    msg.ack()
             except Exception as e:
                 _f('fatal', e)
-
-    async def embed_and_charge(self, payload, verbose=False, field=None):
-        """
-        Embeds the given payload using a pre-trained sentence transformer model and sends it to a specified field for further processing.
-
-        Args:
-            payload (object): The payload to be embedded and charged. It should contain the `text` and `document` attributes.
-            verbose (bool, optional): If set to True, additional information will be logged during the embedding process. Defaults to False.
-            field (object): The field to which the encoded payload will be sent for further processing.
-
-        Raises:
-            ValueError: If the `field` parameter is not provided.
-
-        Returns:
-            None
-
-        Example Usage:
-            config = {
-                'MODEL': 'bert-base-nli-mean-tokens',
-                'INDEX': 'my_index',
-                'INDEX_PARAMS': {'nprobe': 16}
-            }
-            embedder = Embedder(config)
-            await embedder.embed_and_charge(payload, verbose=True, field=my_field)
-
-        """
-        if field:
-            self.field = field
-        else:
-            raise ValueError('field is required')
-        try:
-            _f('info', 'embedding payload') if verbose else None
-            payload = EmbeddingPayload(
-                model=self.config['MODEL'],
-                embedding=self.model.encode(
-                    f"Represent this sentence for searching relevant passages: {payload.text}", normalize_embeddings=True).tolist(),
-                text=payload.text,
-                document=payload.document
-            )
-            _f('info', f'sending payload\n{payload}') if verbose else None
-            await self.field.pulse(payload)
-        except Exception as e:
-            _f('fatal', e)
 
     def search(self, payload, limit=100, cb=None):
         """
