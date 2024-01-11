@@ -3,7 +3,6 @@ from magnet.utils.globals import _f
 from magnet.utils.milvus import *
 from magnet.utils.data_classes import EmbeddingPayload
 
-
 class Embedder:
     """
     The Embedder class is responsible for embedding text using a pre-trained sentence transformer model and storing or sending the embeddings for further processing. It utilizes the Milvus database for storing and searching the embeddings.
@@ -58,7 +57,6 @@ class Embedder:
         else:
             try:
                 _f('info', 'storing payload') if verbose else None
-                self.db.collection.load()
                 if not self.is_dupe(q=payload.embedding):
                     self.db.collection.insert([
                         [payload.document], [payload.text], [payload.embedding]
