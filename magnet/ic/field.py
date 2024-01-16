@@ -80,7 +80,7 @@ class Charge:
         except Exception as e:
             _f('fatal', f'invalid JSON\n{e}')
         try:
-            await self.js.publish(self.category, bytes_)
+            await self.js.publish(self.category, bytes_, headers={"Nats-Msg-Id":})
         except Exception as e:
             _f('fatal', f'could not send data to {self.server}\n{e}')
 
