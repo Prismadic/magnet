@@ -4,6 +4,9 @@ from dataclasses import asdict
 from nats.errors import TimeoutError
 from magnet.utils.data_classes import *
 from nats.js.api import StreamConfig
+import xxhash
+
+x = xxhash.xxh64()
 
 class Charge:
     """
@@ -80,6 +83,14 @@ class Charge:
         except Exception as e:
             _f('fatal', f'invalid JSON\n{e}')
         try:
+            _hash = x(bytes_).hexdigest()
+            await self.js.publish(
+                self.category
+                , bytes_
+                , headers={
+                    "Nats-Msg-Id": _hash
+                }
+            )
             await self.js.publish(self.category, bytes_, headers={"Nats-Msg-Id":})
         except Exception as e:
             _f('fatal', f'could not send data to {self.server}\n{e}')
