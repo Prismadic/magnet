@@ -91,7 +91,7 @@ class Charge:
                     "Nats-Msg-Id": _hash
                 }
             )
-            await self.js.publish(self.category, bytes_, headers={"Nats-Msg-Id":})
+            await self.js.publish(self.category, bytes_, headers={"Nats-Msg-Id":_hash})
         except Exception as e:
             _f('fatal', f'could not send data to {self.server}\n{e}')
 
