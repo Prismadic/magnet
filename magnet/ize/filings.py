@@ -103,13 +103,13 @@ class Processor:
                     _f("wait", f"loading - {raw_data_dir}")
                     self.df = file_handlers[file_extension](raw_data_dir)
                     _f("success", f"loaded - {raw_data_dir}")
-                    return f"Data successfully loaded from {raw_data_dir}"
+                    return _f('success',f"data successfully loaded from {raw_data_dir}")
                 else:
                     raise ValueError("Unsupported file type")
             elif isinstance(raw, pd.DataFrame):
                 self.df = raw
                 _f("success", f"loaded - {raw}")
-                return f"Data successfully loaded from DataFrame"
+                return _f('success',f"data successfully loaded from DataFrame")
             else:
                 raise ValueError("Data type not in [csv, json, xlsx, parquet, pd.DataFrame]")
         except Exception as e:
