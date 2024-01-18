@@ -6,7 +6,7 @@ from magnet.utils.data_classes import *
 from nats.js.api import StreamConfig
 import xxhash
 
-x = xxhash.xxh64()
+x = xxhash
 
 class Charge:
     """
@@ -83,7 +83,7 @@ class Charge:
         except Exception as e:
             _f('fatal', f'invalid JSON\n{e}')
         try:
-            _hash = x(bytes_).hexdigest()
+            _hash = x.xxh64(bytes_).hexdigest()
             await self.js.publish(
                 self.category
                 , bytes_
