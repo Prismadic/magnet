@@ -142,8 +142,8 @@ class MilvusDB:
             None
 
         """
-        if utility.has_collection(self.config['INDEX']):
-            utility.drop_collection(self.config['INDEX'])
+        if utility.has_collection(self.config['INDEX'], using="magnet"):
+            utility.drop_collection(self.config['INDEX'], using="magnet")
             _f('warn', f"{self.config['INDEX']} deleted")
 
     def _pw(self):
