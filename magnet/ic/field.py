@@ -93,15 +93,15 @@ class Charge:
             )
         except Exception as e:
             _f('fatal', f'could not send data to {self.server}\n{e}')
-    async def excite(self, job: JobParams = {}):
+    async def excite(self, job: dict = {}):
         try:
-            bytes_ = json.dumps(asdict(job), separators=(', ', ':')).encode('utf-8')
+            bytes_ = json.dumps(job, separators=(', ', ':')).encode('utf-8')
         except Exception as e:
             _f('fatal', f'invalid JSON\n{e}')
         try:
             _hash = x.xxh64(bytes_).hexdigest()
             await self.js.publish(
-                'jobs'
+                self.category 
                 , bytes_
                 , headers={
                     "Nats-Msg-Id": _hash
