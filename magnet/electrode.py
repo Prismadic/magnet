@@ -31,11 +31,10 @@ class Electrode:
             , "GENERATION_MODEL": "mistralai/Mistral-7B-Instruct-v0.1"
             , "CREATE": True
         }
-        self.nats_server = f"{self.config['NATS_USER']}:{self.config['NATS_PASSWORD']}@{self.config['NATS_URL']}"
     async def auto(self):
         match self.config['JOB_TYPE']:
             case 'index':
-                self.reso = field.Resonator(self.nats_server)
+                self.reso = field.Resonator(f"{self.config['NATS_USER']}:{self.config['NATS_PASSWORD']}@{self.config['NATS_URL']}")
                 self.embedder = memory.Embedder(self.config, create=self.config["CREATE"])
                 await self.reso.on(category=self.config['NATS_CATEGORY'], session=self.config['NATS_SESSION'], stream=self.config['NATS_STREAM'])
                 await self.reso.listen(cb=self.embedder.index)
