@@ -202,7 +202,7 @@ class Resonator:
             _f("success", f'connected to {self.server}')
         except TimeoutError:
             _f("fatal", f'could not connect to {self.server}')
-    async def listen(self, cb=print):
+    async def listen(self, cb=print, job_range: tuple = None):
         """
         Consume messages from a specific category in a stream.
 
@@ -216,16 +216,27 @@ class Resonator:
             Exception: If there is an error in consuming the message or processing the callback function.
         """
         _f("info", f'consuming delta from [{self.category}] on\n🛰️ stream: {self.stream}\n🧲 session: "{self.session}"')
-        while True:
+        if job_range:
             try:
-                msg = await self.sub.next_msg(timeout=60)
-                payload = Payload(**json.loads(msg.data))
+                msgs = self.sub.fetch(job_range[1])[job_range[0], job_range[1]]
+                payloads = [Payload(**json.loads(msg.data)) for msg in msgs]
                 try:
-                    await cb(payload, msg)
+                    await cb(payloads, msgs)
                 except Exception as e:
-                    _f("warn", f'retrying connection to {self.server}')
+                    _f('fatal', e)
             except Exception as e:
-                _f('fatal','invalid JSON')
+                _f('fatal', e)
+        else:
+            while True:
+                try:
+                    msg = await self.sub.next_msg(timeout=60)
+                    payload = Payload(**json.loads(msg.data))
+                    try:
+                        await cb(payload, msg)
+                    except Exception as e:
+                        _f("warn", f'retrying connection to {self.server}')
+                except Exception as e:
+                    _f('fatal','invalid JSON')
 
     async def worker(self, cb=print):
         """

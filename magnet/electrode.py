@@ -27,7 +27,7 @@ class Electrode:
                 },
             }
             , "JOB_TYPE": "index"
-            , "JOB_RANGE": "0-10" # need to implement
+            , "JOB_RANGE": (0,10) # need to implement
             , "GENERATION_MODEL": "mistralai/Mistral-7B-Instruct-v0.1"
             , "CREATE": True
         }
@@ -37,7 +37,7 @@ class Electrode:
                 self.reso = field.Resonator(f"{self.config['NATS_USER']}:{self.config['NATS_PASSWORD']}@{self.config['NATS_URL']}")
                 self.embedder = memory.Embedder(self.config, create=self.config["CREATE"])
                 await self.reso.on(category=self.config['NATS_CATEGORY'], session=self.config['NATS_SESSION'], stream=self.config['NATS_STREAM'])
-                await self.reso.listen(cb=self.embedder.index)
+                await self.reso.listen(cb=self.embedder.index, job_range=self.config['JOB_RANGE']) # this will not work yet due to being a list of items, not one at a time
 
         
 
