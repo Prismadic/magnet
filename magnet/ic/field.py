@@ -220,6 +220,19 @@ class Resonator:
                     _f("warn", f'retrying connection to {self.server}')
             except Exception as e:
                 _f('fatal','invalid JSON')
+
+    async def worker(self, cb=print):
+        _f("info", f'processing jobs from [{self.category}] on\n🛰️ stream: {self.stream}\n🧲 session: "{self.session}"')
+        try:
+            msg = await self.sub.next_msg(timeout=60)
+            payload = JobParams(**json.loads(msg.data))
+            try:
+                await cb(payload, msg)
+            except Exception as e:
+                _f("warn", f'something wrong in your callback function!\n{e}')
+        except Exception as e:
+            _f('fatal','invalid JSON')
+
     async def info(self, session: str = None):
         """
         Retrieves information about a consumer in a JetStream stream.
