@@ -70,3 +70,15 @@ class MistralArgs:
     n_kv_heads: int
     norm_eps: float
     vocab_size: int
+
+@dataclass
+class JobParams:
+    milvus_host: str
+    milvus_port: int
+    milvus_username: str
+    milvus_password: str
+    nats_host: str
+    nats_username: str
+    nats_password: str
+    job_type: str
+    job_n: int
