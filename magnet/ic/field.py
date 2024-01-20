@@ -221,7 +221,8 @@ class Resonator:
                 msgs = self.sub.fetch(job_range[1])[job_range[0], job_range[1]]
                 payloads = [Payload(**json.loads(msg.data)) for msg in msgs]
                 try:
-                    await cb(payloads, msgs)
+                    for payload, msg in payloads, msgs:
+                        await cb(payload, msg)
                 except Exception as e:
                     _f('fatal', e)
             except Exception as e:
