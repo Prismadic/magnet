@@ -94,6 +94,12 @@ class Charge:
         except Exception as e:
             _f('fatal', f'could not send data to {self.server}\n{e}')
     async def excite(self, job: dict = {}):
+        """
+        Publishes data to the NATS server using the specified category and payload.
+
+        Args:
+            job (dict, optional): The data to be published. Defaults to {}.
+        """
         try:
             bytes_ = json.dumps(job, separators=(', ', ':')).encode('utf-8')
         except Exception as e:
@@ -222,6 +228,18 @@ class Resonator:
                 _f('fatal','invalid JSON')
 
     async def worker(self, cb=print):
+        """
+        Consume messages from a specific category in a stream and process them as jobs.
+
+        Args:
+            cb (function, optional): The callback function to process the received messages. Defaults to `print`.
+
+        Returns:
+            None
+
+        Raises:
+            Exception: If there is an error in consuming the message or processing the callback function.
+        """
         _f("info", f'processing jobs from [{self.category}] on\n🛰️ stream: {self.stream}\n🧲 session: "{self.session}"')
         try:
             msg = await self.sub.next_msg(timeout=60)
