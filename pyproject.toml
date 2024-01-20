@@ -1,6 +1,6 @@
 [project]
 name = "llm_magnet"
-version = "0.1.6"
+version = "0.1.7"
 description = "the small distributed language model toolkit. fine-tune state-of-the-art LLMs anywhere, rapidly."
 readme = "dynamic"
 
