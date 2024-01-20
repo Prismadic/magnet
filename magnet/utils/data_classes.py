@@ -77,9 +77,12 @@ class JobParams:
     milvus_port: int
     milvus_username: str
     milvus_password: str
+    milvus_collection: str
     nats_host: str
     nats_username: str
     nats_password: str
+    nats_stream: str
+    nats_category: str
     job_type: str
     job_n: int
     embedding_model: str
