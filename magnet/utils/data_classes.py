@@ -84,6 +84,6 @@ class JobParams:
     nats_stream: str
     nats_category: str
     job_type: str
-    job_n: int
+    job_range: tuple
     embedding_model: str
     generation_model: str
