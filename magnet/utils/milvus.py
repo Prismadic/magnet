@@ -55,8 +55,6 @@ class MilvusDB:
                     , port=self.config['MILVUS_PORT']
                     , alias='magnet'
                 )
-            self.collection = Collection(name=self.config['INDEX'], schema=self.schema)
-            self.collection.load()
             _f('success', f"connected successfully to {self.config['MILVUS_URI']}")
         except Exception as e:
             _f('fatal', e)
@@ -102,26 +100,28 @@ class MilvusDB:
             milvus_db.create(overwrite=True)
 
         """
-        if utility.has_collection(self.config['INDEX']) and overwrite:
-            utility.drop_collection(self.config['INDEX'])
+        if utility.has_collection(self.config['INDEX'], using="magnet") and overwrite:
+            utility.drop_collection(self.config['INDEX'], using="magnet")
         try:
-            self.collection = Collection(name=self.config['INDEX'], schema=self.schema)
+            self.collection = Collection(name=self.config['INDEX'], schema=self.schema, using="magnet")
             self.collection.create_index(field_name="embedding", index_params=self.index_params)
             _f('success', f"{self.config['INDEX']} created")
         except Exception as e:
             _f('fatal', e)
 
+    def load(self):
+        self.collection = Collection(name=self.config['INDEX'], schema=self.schema, using='magnet')
+        self.collection.load()
+
     def initialize(self, user: str = 'magnet', password: str = '33011033'):
         try:
-            if not self.connection:
-                return _f('fatal','no active Milvus connection') 
-            else:
-                _f('warn', f"initializing {self.config['MILVUS_URI']} using `root` to create '{user}'")
+            _f('warn', f"initializing {self.config['MILVUS_URI']} using `root` to create '{user}'")
             utility.reset_password('root', 'Milvus', self._pw(), using='magnet')
             _f('success', f"secured root user successfully on {self.config['MILVUS_URI']}")
             utility.create_user(user, password, using='magnet')
             _f('success', f"created requested {user} on {self.config['MILVUS_URI']}")
             try:
+                self.off()
                 self.connection = connections.connect(
                     host=self.config['MILVUS_URI']
                     , port=self.config['MILVUS_PORT']
@@ -157,8 +157,7 @@ class MilvusDB:
                             'I', 'J', 'K', 'M', 'N', 'O', 'P', 'Q', 
                             'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 
                             'Z'] 
-        SYMBOLS = ['@', '#', '$', '%', '=', ':', '?', '.', '/', '|', '~', '>',  
-                '*', '(', ')', '<'] 
+        SYMBOLS = ['@', '#', '$', '(', ')'] 
         COMBINED_LIST = DIGITS + UPCASE_CHARACTERS + LOCASE_CHARACTERS + SYMBOLS 
         rand_digit = random.choice(DIGITS) 
         rand_upper = random.choice(UPCASE_CHARACTERS) 

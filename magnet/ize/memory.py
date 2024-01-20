@@ -29,9 +29,11 @@ class Embedder:
         self.db.on()
         if create:
             self.db.create(overwrite=True)
-        if initialize:
-            self.db.initialize()
-
+            self.db.load()
+            if initialize:
+                self.db.initialize()
+            return
+        self.db.load()
     async def index(self, payload, msg, verbose=False, field=None, charge=False, instruction: str = "Represent this sentence for searching relevant passages: "):
         """
         Embeds the given payload using a pre-trained sentence transformer model and stores it in a Milvus database.
@@ -48,12 +50,10 @@ class Embedder:
             Exception: If an error occurs during the embedding or storing process.
 
         """
-        if not msg:
-            return _f('fatal', 'no field message to ack!')
+        if not msg or not payload:
+            return _f('fatal', 'no field message and/or payload to ack!')
         if field:
             self.field = field
-        else:
-            raise ValueError('field is required')
         try:
             _f('info', 'embedding payload') if verbose else None
             payload.embedding = self.model.encode(
@@ -78,10 +78,12 @@ class Embedder:
                             text=payload.text,
                             document=payload.document
                         )
-                        await msg.ack()
                         _f('info', f'sending payload\n{payload}') if verbose else None
-                        await self.field.pulse(payload)
-                    msg.ack()
+                        if field:
+                            await self.field.pulse(payload)
+                    await msg.ack()
+                else:
+                    await msg.ack()
             except Exception as e:
                 _f('fatal', e)
 
