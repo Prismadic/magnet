@@ -204,10 +204,11 @@ class Resonator:
             _f("fatal", f'could not connect to {self.server}')
     async def listen(self, cb=print, job_range: tuple = None):
         """
-        Consume messages from a specific category in a stream.
+        Consume messages from a specific category in a stream and process them.
 
         Args:
             cb (function, optional): The callback function to process the received messages. Defaults to `print`.
+            job_range (tuple, optional): A tuple representing the range of jobs to fetch and process. The first element is the start index and the second element is the end index. If not provided, the method will continuously consume messages.
 
         Returns:
             None
