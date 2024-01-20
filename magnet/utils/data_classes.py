@@ -82,4 +82,5 @@ class JobParams:
     nats_password: str
     job_type: str
     job_n: int
-    model: str
+    embedding_model: str
+    generation_model: str
