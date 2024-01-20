@@ -63,7 +63,7 @@ class Embedder:
         else:
             await msg.in_progress()
             try:
-                _f('info', 'storing payload') if verbose else None
+                _f('info', 'indexing payload') if verbose else None
                 if not self.is_dupe(q=payload.embedding):
                     self.db.collection.insert([
                         [payload.document], [payload.text], [payload.embedding]
@@ -78,8 +78,8 @@ class Embedder:
                             text=payload.text,
                             document=payload.document
                         )
-                        _f('info', f'sending payload\n{payload}') if verbose else None
                         if field:
+                            _f('info', f'sending payload\n{payload}') if verbose else None
                             await self.field.pulse(payload)
                     await msg.ack()
                 else:
@@ -103,14 +103,15 @@ class Embedder:
             text=payload,
             embedding=self.model.encode(
                 f"{instruction} {payload}", normalize_embeddings=True),
-            model=self.config['MODEL']
+            model=self.config['MODEL'],
+            document="none"
         )
         
         _results = self.db.collection.search(
-            data=[payload.embedding],  # Embeded search value
-            anns_field="embedding",  # Search across embeddings
+            data=[payload.embedding],
+            anns_field="embedding",
             param=self.config['INDEX_PARAMS'],
-            limit=limit,  # Limit to top_k results per search
+            limit=limit,
             output_fields=['text', 'document']
         )
         results = []
@@ -179,4 +180,4 @@ class Embedder:
             , output_fields=['text', 'document']
             , limit=1
         )
-        return True if sum(match[0].distances) == 0.0 else False
+        return True if sum(match[0].distances) == 0.0 and len(match[0])>0 else False
