@@ -4,6 +4,7 @@ from dataclasses import asdict
 from nats.errors import TimeoutError
 from magnet.utils.data_classes import *
 from nats.js.api import StreamConfig
+from nats.js.errors import Error
 import xxhash
 
 x = xxhash
@@ -199,9 +200,13 @@ class Resonator:
             self.nc = await nats.connect(f'nats://{self.server}:4222')
             self.js = self.nc.jetstream()
             try:
-                self.sub = await self.js.subscribe(self.category, durable=self.session, queue=self.session)
-            except Exception as e:
-                return _f('fatal', f"consumer might already be bound")
+                self.sub = await self.js.subscribe(self.category, durable=self.session)
+            except Error as e:
+                _f('warn', f"consumer may be bound, will try making worker queue\n{e}")
+                try:
+                    self.sub = await self.js.pull_subscribe(self.category, durable=self.session, queue=self.session)
+                except Exception as e:
+                    return _f('fatal', f'{e}')
             _f("success", f'connected to {self.server}')
         except TimeoutError:
             _f("fatal", f'could not connect to {self.server}')
