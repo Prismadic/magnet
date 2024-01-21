@@ -209,14 +209,13 @@ class Resonator:
                         , config=self.config
                         , deliver_subject=self.session
                 )
-            except Exception as e:
+            except:
                 _f('warn', f'consumer {self.session} exists, skipping create')
             try:
                 self.sub = await self.js.subscribe(
                     self.category
-                    , durable=self.session
-                    , stream=self.stream
                     , config=self.config
+                    , queue=self.session
                 )
             except Error as e:
                 _f('warn', f"a consumer may already be bound, will try making worker queue\n{e}")
