@@ -218,17 +218,9 @@ class Resonator:
                     , queue=self.session
                     , config=self.config
                 )
-            except Error as e:
-                _f('warn', f"a consumer may already be bound, will try making worker queue\n{e}")
-                try:
-                    self.sub = await self.js.subscribe(
-                        self.category
-                        , config=self.config
-                        , queue=self.session
-                    )
-                    _f('success', 'joined worker queue')
-                except Exception as e:
-                    return _f('fatal', f'{e}')
+                _f('info', 'joined worker queue')
+            except Exception as e:
+                return _f('fatal', f'{e}')
             _f("success", f'connected to {self.server}')
         except TimeoutError:
             _f("fatal", f'could not connect to {self.server}')
