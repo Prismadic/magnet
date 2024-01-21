@@ -198,6 +198,7 @@ class Resonator:
         self.config = ConsumerConfig(
                     name=self.session
                     , deliver_group=self.session
+                    , durable_name=self.session
                 )
         _f('wait',f'connecting to {self.server}')
         try:
