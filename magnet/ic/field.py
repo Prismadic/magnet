@@ -214,7 +214,7 @@ class Resonator:
             try:
                 self.sub = await self.js.subscribe(
                     self.category
-                    , durable=self.session
+                    , queue=self.session
                     , config=self.config
                 )
             except Error as e:
@@ -223,7 +223,7 @@ class Resonator:
                     self.sub = await self.js.subscribe(
                         self.category
                         , config=self.config
-                        , queue=f"{self.session}_1"
+                        , queue=self.session
                     )
                     _f('success', 'joined worker queue')
                 except Exception as e:
