@@ -203,11 +203,14 @@ class Resonator:
         try:
             self.nc = await nats.connect(f'nats://{self.server}:4222')
             self.js = self.nc.jetstream()
-            await self.js.add_consumer(
-                    stream=self.stream
-                    , config=self.config
-                    , deliver_subject=self.session
-            )
+            try:
+                await self.js.add_consumer(
+                        stream=self.stream
+                        , config=self.config
+                        , deliver_subject=self.session
+                )
+            except Exception as e:
+                _f('warn', f'consumer {self.session} exists, skipping create')
             try:
                 self.sub = await self.js.subscribe(
                     self.category
