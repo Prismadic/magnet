@@ -198,7 +198,10 @@ class Resonator:
         try:
             self.nc = await nats.connect(f'nats://{self.server}:4222')
             self.js = self.nc.jetstream()
-            self.sub = await self.js.subscribe(self.category, durable=self.session)
+            try:
+                self.sub = await self.js.subscribe(self.category, durable=self.session, queue=self.session)
+            except Exception as e:
+                return _f('fatal', f"consumer might already be bound")
             _f("success", f'connected to {self.server}')
         except TimeoutError:
             _f("fatal", f'could not connect to {self.server}')
@@ -238,7 +241,8 @@ class Resonator:
                     except Exception as e:
                         _f("warn", f'retrying connection to {self.server}')
                 except Exception as e:
-                    _f('fatal','invalid JSON')
+                    _f('fatal',f'invalid JSON\n{e}')
+                    break
 
     async def worker(self, cb=print):
         """
