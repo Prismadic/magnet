@@ -202,7 +202,7 @@ class Resonator:
             _f("success", f'connected to {self.server}')
         except TimeoutError:
             _f("fatal", f'could not connect to {self.server}')
-    async def listen(self, cb=print, job_range: tuple = None):
+    async def listen(self, cb=print, job_n: int = None):
         """
         Consume messages from a specific category in a stream and process them.
 
@@ -217,9 +217,9 @@ class Resonator:
             Exception: If there is an error in consuming the message or processing the callback function.
         """
         _f("info", f'consuming delta from [{self.category}] on\n🛰️ stream: {self.stream}\n🧲 session: "{self.session}"')
-        if job_range:
+        if job_n:
             try:
-                msgs = self.sub.fetch(job_range[1])[job_range[0], job_range[1]]
+                msgs = self.sub.fetch(job_n)
                 payloads = [Payload(**json.loads(msg.data)) for msg in msgs]
                 try:
                     for payload, msg in payloads, msgs:
