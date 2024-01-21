@@ -214,8 +214,8 @@ class Resonator:
             try:
                 self.sub = await self.js.subscribe(
                     self.category
+                    , durable=self.session
                     , config=self.config
-                    , queue=self.session
                 )
             except Error as e:
                 _f('warn', f"a consumer may already be bound, will try making worker queue\n{e}")
@@ -223,7 +223,7 @@ class Resonator:
                     self.sub = await self.js.subscribe(
                         self.category
                         , config=self.config
-                        , queue=self.session
+                        , queue=f"{self.session}_1"
                     )
                     _f('success', 'joined worker queue')
                 except Exception as e:
