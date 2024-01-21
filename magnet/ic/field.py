@@ -208,7 +208,7 @@ class Resonator:
 
         Args:
             cb (function, optional): The callback function to process the received messages. Defaults to `print`.
-            job_range (tuple, optional): A tuple representing the range of jobs to fetch and process. The first element is the start index and the second element is the end index. If not provided, the method will continuously consume messages.
+            job_n (int, optional): The number of messages to fetch and process. If provided, the method will fetch and process the specified number of messages. If not provided, the method will continuously fetch and process messages until stopped.
 
         Returns:
             None
