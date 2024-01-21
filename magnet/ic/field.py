@@ -3,7 +3,7 @@ from magnet.utils.globals import _f
 from dataclasses import asdict
 from nats.errors import TimeoutError
 from magnet.utils.data_classes import *
-from nats.js.api import StreamConfig
+from nats.js.api import StreamConfig, ConsumerConfig
 from nats.js.errors import Error
 import xxhash
 
@@ -195,16 +195,35 @@ class Resonator:
         self.category = category
         self.stream = stream
         self.session = session
+        self.config = ConsumerConfig(
+                    name=self.session
+                    , deliver_group=self.session
+                )
         _f('wait',f'connecting to {self.server}')
         try:
             self.nc = await nats.connect(f'nats://{self.server}:4222')
             self.js = self.nc.jetstream()
+            await self.js.add_consumer(
+                    stream=self.stream
+                    , config=self.config
+                    , deliver_subject=self.session
+            )
             try:
-                self.sub = await self.js.subscribe(self.category, durable=self.session)
+                self.sub = await self.js.subscribe(
+                    self.category
+                    , durable=self.session
+                    , stream=self.stream
+                    , config=self.config
+                )
             except Error as e:
-                _f('warn', f"consumer may be bound, will try making worker queue\n{e}")
+                _f('warn', f"a consumer may already be bound, will try making worker queue\n{e}")
                 try:
-                    self.sub = await self.js.pull_subscribe(self.category, durable=self.session, queue=self.session)
+                    self.sub = await self.js.subscribe(
+                        self.category
+                        , config=self.config
+                        , queue=self.session
+                    )
+                    _f('success', 'joined worker queue')
                 except Exception as e:
                     return _f('fatal', f'{e}')
             _f("success", f'connected to {self.server}')
@@ -224,10 +243,10 @@ class Resonator:
         Raises:
             Exception: If there is an error in consuming the message or processing the callback function.
         """
-        _f("info", f'consuming delta from [{self.category}] on\n🛰️ stream: {self.stream}\n🧲 session: "{self.session}"')
         if job_n:
+            _f("info", f'consuming {job_n} from [{self.category}] on\n🛰️ stream: {self.stream}\n🧲 session: "{self.session}"')
             try:
-                msgs = self.sub.fetch(job_n)
+                msgs = await self.sub.fetch(batch=job_n, timeout=10)
                 payloads = [Payload(**json.loads(msg.data)) for msg in msgs]
                 try:
                     for payload, msg in payloads, msgs:
@@ -237,6 +256,7 @@ class Resonator:
             except Exception as e:
                 _f('fatal', e)
         else:
+            _f("info", f'consuming delta from [{self.category}] on\n🛰️ stream: {self.stream}\n🧲 session: "{self.session}"')
             while True:
                 try:
                     msg = await self.sub.next_msg(timeout=60)
