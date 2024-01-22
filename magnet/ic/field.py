@@ -176,7 +176,7 @@ class Resonator:
         """
         self.server = server
 
-    async def on(self, category: str = 'no_category', stream: str = 'documents', session='magnet'):
+    async def on(self, category: str = 'no_category', stream: str = 'documents', session='magnet', job: bool = None):
         """
         Connects to the NATS server, subscribes to a specific category in a stream, and consumes messages from that category.
 
@@ -213,11 +213,18 @@ class Resonator:
             except:
                 _f('warn', f'consumer {self.session} exists, skipping create')
             try:
-                self.sub = await self.js.subscribe(
-                    self.category
-                    , queue=self.session
-                    , config=self.config
-                )
+                if job:
+                    self.sub = await self.js.pull_subscribe(
+                        self.category
+                        , durable=self.session
+                        , config=self.config
+                    )
+                else:
+                    self.sub = await self.js.subscribe(
+                        self.category
+                        , queue=self.session
+                        , config=self.config
+                    )
                 _f('info', 'joined worker queue')
             except Exception as e:
                 return _f('fatal', f'{e}')
@@ -246,6 +253,8 @@ class Resonator:
                 try:
                     for payload, msg in payloads, msgs:
                         await cb(payload, msg)
+                except ValueError as e:
+                    _f('success', f"job of {job_n} fulfilled")
                 except Exception as e:
                     _f('fatal', e)
             except Exception as e:
