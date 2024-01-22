@@ -83,7 +83,7 @@ class Embedder:
                             await self.field.pulse(payload)
                     await msg.ack_sync()
                 else:
-                    _f('info', 'embedding exists already') if verbose else None
+                    _f('info', f'embedding exists already\n{payload.text}')
                     await msg.ack_sync()
             except Exception as e:
                 await msg.term()
@@ -182,4 +182,4 @@ class Embedder:
             , output_fields=['text', 'document']
             , limit=1
         )
-        return True if sum(match[0].distances) == 0.0 and len(match[0])>0 else False
+        return True if sum(match[0].distances) >= 0.99 and len(match[0])>0 else False

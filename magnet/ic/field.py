@@ -298,6 +298,8 @@ class Resonator:
                 _f("warn", f'something wrong in your callback function!\n{e}')
         except Exception as e:
             _f('fatal','invalid JSON')
+    async def conduct(self, cb=print):
+        pass
 
     async def info(self, session: str = None):
         """
