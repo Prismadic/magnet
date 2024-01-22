@@ -86,6 +86,7 @@ class Embedder:
                     _f('info', 'embedding exists already') if verbose else None
                     await msg.ack()
             except Exception as e:
+                await msg.term()
                 _f('fatal', e)
 
     def search(self, payload, limit=100, cb=None, instruction="Represent this sentence for searching relevant passages: "):
