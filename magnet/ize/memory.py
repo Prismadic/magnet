@@ -81,10 +81,10 @@ class Embedder:
                         if field:
                             _f('info', f'sending payload\n{payload}') if verbose else None
                             await self.field.pulse(payload)
-                    await msg.ack()
+                    await msg.ack_sync()
                 else:
                     _f('info', 'embedding exists already') if verbose else None
-                    await msg.ack()
+                    await msg.ack_sync()
             except Exception as e:
                 await msg.term()
                 _f('fatal', e)
