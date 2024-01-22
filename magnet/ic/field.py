@@ -257,6 +257,8 @@ class Resonator:
                     _f('success', f"job of {job_n} fulfilled")
                 except Exception as e:
                     _f('fatal', e)
+            except ValueError as e:
+                _f('warn', f'{self.session} reached the end of {self.category}, {self.stream}')
             except Exception as e:
                 _f('fatal', e)
         else:
