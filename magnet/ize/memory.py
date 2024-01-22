@@ -55,7 +55,7 @@ class Embedder:
         if field:
             self.field = field
         try:
-            _f('info', 'embedding payload') if verbose else None
+            _f('info', f'encoding payload\n{payload}') if verbose else None
             payload.embedding = self.model.encode(
                 f"{instruction} {payload.text}", normalize_embeddings=True)
         except Exception as e:
@@ -63,7 +63,7 @@ class Embedder:
         else:
             await msg.in_progress()
             try:
-                _f('info', 'indexing payload') if verbose else None
+                _f('info', f'indexing payload') if verbose else None
                 if not self.is_dupe(q=payload.embedding):
                     self.db.collection.insert([
                         [payload.document], [payload.text], [payload.embedding]
