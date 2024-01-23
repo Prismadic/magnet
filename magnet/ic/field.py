@@ -176,7 +176,7 @@ class Resonator:
         """
         self.server = server
 
-    async def on(self, category: str = 'no_category', stream: str = 'documents', session='magnet', job: bool = None):
+    async def on(self, category: str = 'no_category', stream: str = 'documents', session='magnet', job: bool = None, group_size: int=1):
         """
         Connects to the NATS server, subscribes to a specific category in a stream, and consumes messages from that category.
 
@@ -210,7 +210,7 @@ class Resonator:
                         stream=self.stream
                         , config=self.config
                         , deliver_subject=self.session
-                        , max_ack_pending=1
+                        , max_ack_pending=group_size
                 )
             except:
                 _f('warn', f'consumer {self.session} exists, skipping create')
