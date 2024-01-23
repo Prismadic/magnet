@@ -199,6 +199,7 @@ class Resonator:
                     name=self.session
                     , deliver_group=self.session
                     , durable_name=self.session
+                    , ack_wait=20
                 )
         _f('wait',f'connecting to {self.server}')
         try:
@@ -209,6 +210,7 @@ class Resonator:
                         stream=self.stream
                         , config=self.config
                         , deliver_subject=self.session
+                        , max_ack_pending=1
                 )
             except:
                 _f('warn', f'consumer {self.session} exists, skipping create')

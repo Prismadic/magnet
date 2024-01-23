@@ -59,35 +59,35 @@ class Embedder:
             payload.embedding = self.model.encode(
                 f"{instruction} {payload.text}", normalize_embeddings=True)
         except Exception as e:
+            return _f('fatal', e)
+        await msg.in_progress()
+        try:
+            _f('info', f'indexing payload') if verbose else None
+            if not self.is_dupe(q=payload.embedding):
+                self.db.collection.insert([
+                    [payload.document], [payload.text], [payload.embedding]
+                ])
+                self.db.collection.flush(collection_name_array=[
+                                        self.config['INDEX']])
+                if charge:
+                    payload = EmbeddingPayload(
+                        model=self.config['MODEL'],
+                        embedding=self.model.encode(
+                            f"{instruction} {payload.text}", normalize_embeddings=True).tolist(),
+                        text=payload.text,
+                        document=payload.document
+                    )
+                    if field:
+                        _f('info', f'sending payload\n{payload}') if verbose else None
+                        await self.field.pulse(payload)
+                await msg.ack_sync(timeout=15)
+            else:
+                await msg.ack_sync(timeout=15)
+                _f('warn', f'embedding exists already\n{payload}') if verbose else None
+                
+        except Exception as e:
+            await msg.term()
             _f('fatal', e)
-        else:
-            await msg.in_progress()
-            try:
-                _f('info', f'indexing payload') if verbose else None
-                if not self.is_dupe(q=payload.embedding):
-                    self.db.collection.insert([
-                        [payload.document], [payload.text], [payload.embedding]
-                    ])
-                    self.db.collection.flush(collection_name_array=[
-                                            self.config['INDEX']])
-                    if charge:
-                        payload = EmbeddingPayload(
-                            model=self.config['MODEL'],
-                            embedding=self.model.encode(
-                                f"{instruction} {payload.text}", normalize_embeddings=True).tolist(),
-                            text=payload.text,
-                            document=payload.document
-                        )
-                        if field:
-                            _f('info', f'sending payload\n{payload}') if verbose else None
-                            await self.field.pulse(payload)
-                    await msg.ack_sync(timeout=15)
-                else:
-                    _f('warn', f'embedding exists already\n{payload.text}') if verbose else None
-                    await msg.ack_sync(timeout=15)
-            except Exception as e:
-                await msg.term()
-                _f('fatal', e)
 
     def search(self, payload, limit=100, cb=None, instruction="Represent this sentence for searching relevant passages: "):
         """
