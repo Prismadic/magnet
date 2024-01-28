@@ -196,10 +196,10 @@ class Resonator:
         self.stream = stream
         self.session = session
         self.config = ConsumerConfig(
-                    name=self.session
+                    name=f'{self.session}_1'
                     , deliver_group=self.session
-                    , durable_name=self.session
-                    , ack_wait=20
+                    , durable_name=f'{self.session}_1'
+                    , max_ack_pending=group_size
                 )
         _f('wait',f'connecting to {self.server}')
         try:
@@ -209,8 +209,6 @@ class Resonator:
                 await self.js.add_consumer(
                         stream=self.stream
                         , config=self.config
-                        , deliver_subject=self.session
-                        , max_ack_pending=group_size
                 )
             except:
                 _f('warn', f'consumer {self.session} exists, skipping create')
