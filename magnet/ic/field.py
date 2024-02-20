@@ -1,4 +1,4 @@
-import nats, json
+import nats, json, datetime
 from magnet.utils.globals import _f
 from dataclasses import asdict
 from nats.errors import TimeoutError
@@ -6,8 +6,13 @@ from magnet.utils.data_classes import *
 from nats.js.api import StreamConfig, ConsumerConfig
 from nats.js.errors import Error
 import xxhash
-
+import platform
+from datetime import timezone 
+import datetime 
 x = xxhash
+dt = datetime.datetime.now(timezone.utc) 
+utc_time = dt.replace(tzinfo=timezone.utc) 
+utc_timestamp = utc_time.timestamp() 
 
 class Charge:
     """
@@ -48,7 +53,7 @@ class Charge:
                 try:
                     if self.stream not in [x.config.name for x in streams]:
                         _f("wait", f'creating {self.stream}') \
-                        , await self.js.add_stream(name=self.stream, subjects=[self.category]) \
+                        , await self.js.add_stream(name=self.stream, subjects=[self.category], retention='workqueue') \
                             if create else _f("warn", f"couldn't create {stream} on {self.server}")
                         streams = await self.js.streams_info()
                     if self.category not in sum([x.config.subjects for x in streams if x.config.name == self.stream], []):
@@ -57,6 +62,7 @@ class Charge:
                         await self.js.update_stream(StreamConfig(
                             name = self.stream
                             , subjects = subjects
+                            , retention='workqueue'
                         ))
                         _f("success", f'created [{self.category}] on\n🛰️ stream: {self.stream}')
                 except Exception as e:
@@ -176,7 +182,7 @@ class Resonator:
         """
         self.server = server
 
-    async def on(self, category: str = 'no_category', stream: str = 'documents', session='magnet', job: bool = None, group_size: int=1):
+    async def on(self, category: str = 'no_category', stream: str = 'documents', session='magnet', job: bool = None, local: bool = False):
         """
         Connects to the NATS server, subscribes to a specific category in a stream, and consumes messages from that category.
 
@@ -195,37 +201,34 @@ class Resonator:
         self.category = category
         self.stream = stream
         self.session = session
+        self.node = f'{platform.node()}_{x.xxh64(platform.node(), seed=int(utc_timestamp)).hexdigest()}' if local else platform.node()
         self.config = ConsumerConfig(
-                    name=f'{self.session}_1'
+                    name=f'{self.node}_job' if job else self.node
                     , deliver_group=self.session
-                    , durable_name=f'{self.session}_1'
-                    , max_ack_pending=group_size
+                    , durable_name=f'{self.node}_job' if job else self.node
+                    , ack_wait=20
                 )
         _f('wait',f'connecting to {self.server}')
         try:
             self.nc = await nats.connect(f'nats://{self.server}:4222')
             self.js = self.nc.jetstream()
             try:
-                await self.js.add_consumer(
-                        stream=self.stream
-                        , config=self.config
-                )
-            except:
-                _f('warn', f'consumer {self.session} exists, skipping create')
-            try:
                 if job:
                     self.sub = await self.js.pull_subscribe(
                         self.category
-                        , durable=self.session
+                        , durable=f'{self.node}_job' if job else self.node
                         , config=self.config
                     )
                 else:
-                    self.sub = await self.js.subscribe(
-                        self.category
-                        , queue=self.session
-                        , config=self.config
-                    )
-                _f('info', 'joined worker queue')
+                    try:
+                        self.sub = await self.js.subscribe(
+                            self.category
+                            , queue=self.session
+                            , config=self.config
+                        )
+                    except Exception as e:
+                        return _f('warn', e)
+                _f('info', f'joined worker queue: {self.session} as {self.node}')
             except Exception as e:
                 return _f('fatal', f'{e}')
             _f("success", f'connected to {self.server}')
@@ -248,13 +251,13 @@ class Resonator:
         if job_n:
             _f("info", f'consuming {job_n} from [{self.category}] on\n🛰️ stream: {self.stream}\n🧲 session: "{self.session}"')
             try:
-                msgs = await self.sub.fetch(batch=job_n, timeout=10)
-                payloads = [Payload(**json.loads(msg.data)) for msg in msgs]
+                msgs = await self.sub.fetch(batch=job_n, timeout=60)
+                payloads = [json.loads(msg.data) for msg in msgs]
                 try:
-                    for payload, msg in payloads, msgs:
+                    for payload, msg in zip(payloads, msgs):
                         await cb(payload, msg)
                 except ValueError as e:
-                    _f('success', f"job of {job_n} fulfilled")
+                    _f('success', f"job of {job_n} fulfilled\n{e}")
                 except Exception as e:
                     _f('fatal', e)
             except ValueError as e:
@@ -266,7 +269,7 @@ class Resonator:
             while True:
                 try:
                     msg = await self.sub.next_msg(timeout=60)
-                    payload = Payload(**json.loads(msg.data))
+                    payload = json.loads(msg.data)
                     try:
                         await cb(payload, msg)
                     except Exception as e:
