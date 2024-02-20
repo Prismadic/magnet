@@ -252,7 +252,7 @@ class Resonator:
             _f("info", f'consuming {job_n} from [{self.category}] on\n🛰️ stream: {self.stream}\n🧲 session: "{self.session}"')
             try:
                 msgs = await self.sub.fetch(batch=job_n, timeout=60)
-                payloads = [json.loads(msg.data) for msg in msgs]
+                payloads = [Payload(**json.loads(msg.data)) for msg in msgs]
                 try:
                     for payload, msg in zip(payloads, msgs):
                         await cb(payload, msg)
@@ -269,7 +269,7 @@ class Resonator:
             while True:
                 try:
                     msg = await self.sub.next_msg(timeout=60)
-                    payload = json.loads(msg.data)
+                    payload = Payload(**json.loads(msg.data))
                     try:
                         await cb(payload, msg)
                     except Exception as e:
