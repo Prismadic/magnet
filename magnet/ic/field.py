@@ -212,7 +212,7 @@ class Resonator:
         _f('wait',f'connecting to {self.server}')
         try:
             self.nc = await nats.connect(f'nats://{self.server}:4222')
-            self.js = self.nc.jetstream() # domain="leaf", prefix="$JS.ngs.API" when leafnod
+            self.js = self.nc.jetstream() # domain="leaf", prefix="$JS.ngs.API" when leafnode
             try:
                 if job:
                     self.sub = await self.js.pull_subscribe(
@@ -228,6 +228,7 @@ class Resonator:
                             , stream=self.stream
                             , queue=self.session
                             , config=self.config
+                            , manual_ack=True
                         )
                     except Exception as e:
                         return _f('warn', e)
