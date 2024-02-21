@@ -181,7 +181,7 @@ class Resonator:
         """
         self.server = server
 
-    async def on(self, category: str = 'no_category', stream: str = 'documents', session='magnet', job: bool = None, local: bool = False):
+    async def on(self, category: str = 'no_category', stream: str = 'documents', session='magnet', job: bool = None, local: bool = False, domain: str = None):
         """
         Connects to the NATS server, subscribes to a specific category in a stream, and consumes messages from that category.
 
@@ -206,13 +206,14 @@ class Resonator:
                     , deliver_group=self.session
                     , deliver_subject=self.session
                     , durable_name=f'{self.node}_job' if job else self.node
-                    , ack_wait=20
                     , max_ack_pending=10
                 )
         _f('wait',f'connecting to {self.server}')
         try:
             self.nc = await nats.connect(f'nats://{self.server}:4222')
-            self.js = self.nc.jetstream() # domain="leaf", prefix="$JS.ngs.API" when leafnode
+            self.js = self.nc.jetstream(
+                    domain=domain
+                )
             try:
                 if job:
                     self.sub = await self.js.pull_subscribe(
@@ -239,7 +240,7 @@ class Resonator:
             _f("fatal", f'could not connect to {self.server}')
         except Exception as e:
             _f('wait', 'server queuing you...')
-    async def listen(self, cb=print, job_n: int = None):
+    async def listen(self, cb=print, job_n: int = None, generic: bool = False):
         """
         Consume messages from a specific category in a stream and process them.
 
@@ -257,10 +258,11 @@ class Resonator:
             _f("info", f'consuming {job_n} from [{self.category}] on\n🛰️ stream: {self.stream}\n🧲 session: "{self.session}"')
             try:
                 msgs = await self.sub.fetch(batch=job_n, timeout=60)
-                payloads = [Payload(**json.loads(msg.data)) for msg in msgs]
+                payloads = [msg.data if generic else Payload(**json.loads(msg.data)) for msg in msgs]
                 try:
                     for payload, msg in zip(payloads, msgs):
                         await cb(payload, msg)
+                        await msg.ack_sync()
                 except ValueError as e:
                     _f('success', f"job of {job_n} fulfilled\n{e}")
                 except Exception as e:
@@ -274,9 +276,10 @@ class Resonator:
             while True:
                 try:
                     msg = await self.sub.next_msg(timeout=60)
-                    payload = Payload(**json.loads(msg.data))
+                    payload = msg.data if generic else Payload(**json.loads(msg.data))
                     try:
                         await cb(payload, msg)
+                        await msg.ack_sync()
                     except Exception as e:
                         _f("warn", f'retrying connection to {self.server}')
                 except Exception as e:
