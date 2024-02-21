@@ -262,7 +262,7 @@ class Resonator:
                 try:
                     for payload, msg in zip(payloads, msgs):
                         await cb(payload, msg)
-                        await msg.ack_sync()
+                        await msg.ack_sync() if generic else None
                 except ValueError as e:
                     _f('success', f"job of {job_n} fulfilled\n{e}")
                 except Exception as e:
@@ -279,7 +279,7 @@ class Resonator:
                     payload = msg.data if generic else Payload(**json.loads(msg.data))
                     try:
                         await cb(payload, msg)
-                        await msg.ack_sync()
+                        await msg.ack_sync() if generic else None
                     except Exception as e:
                         _f("warn", f'retrying connection to {self.server}')
                 except Exception as e:
