@@ -47,7 +47,6 @@ class Charge:
             nc = await nats.connect(f'nats://{self.server}:4222')
             self.nc = nc
             self.js = self.nc.jetstream()
-            self.js.purge_stream
             streams = await self.js.streams_info()
             if self.stream not in [x.config.name for x in streams] or self.category not in sum([x.config.subjects for x in streams], []):
                 try:
@@ -238,6 +237,8 @@ class Resonator:
             _f("success", f'connected to {self.server}')
         except TimeoutError:
             _f("fatal", f'could not connect to {self.server}')
+        except Exception as e:
+            _f('wait', 'server queuing you...')
     async def listen(self, cb=print, job_n: int = None):
         """
         Consume messages from a specific category in a stream and process them.
