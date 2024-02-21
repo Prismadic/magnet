@@ -205,13 +205,14 @@ class Resonator:
         self.config = ConsumerConfig(
                     name=f'{self.node}_job' if job else self.node
                     , deliver_group=self.session
+                    , deliver_subject=self.session
                     , durable_name=f'{self.node}_job' if job else self.node
                     , ack_wait=20
                 )
         _f('wait',f'connecting to {self.server}')
         try:
             self.nc = await nats.connect(f'nats://{self.server}:4222')
-            self.js = self.nc.jetstream(domain="leaf", prefix="$JS.ngs.API")
+            self.js = self.nc.jetstream() # domain="leaf", prefix="$JS.ngs.API" when leafnod
             try:
                 if job:
                     self.sub = await self.js.pull_subscribe(
