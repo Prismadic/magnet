@@ -208,6 +208,7 @@ class Resonator:
                     , deliver_subject=self.session
                     , durable_name=f'{self.node}_job' if job else self.node
                     , ack_wait=20
+                    , max_ack_pending=10
                 )
         _f('wait',f'connecting to {self.server}')
         try:
@@ -228,7 +229,6 @@ class Resonator:
                             , stream=self.stream
                             , queue=self.session
                             , config=self.config
-                            , manual_ack=True
                         )
                     except Exception as e:
                         return _f('warn', e)
