@@ -211,11 +211,12 @@ class Resonator:
         _f('wait',f'connecting to {self.server}')
         try:
             self.nc = await nats.connect(f'nats://{self.server}:4222')
-            self.js = self.nc.jetstream()
+            self.js = self.nc.jetstream(domain="leaf", prefix="$JS.ngs.API")
             try:
                 if job:
                     self.sub = await self.js.pull_subscribe(
-                        self.category
+                        stream = self.stream
+                        , subject = self.category
                         , durable=f'{self.node}_job' if job else self.node
                         , config=self.config
                     )
@@ -223,6 +224,7 @@ class Resonator:
                     try:
                         self.sub = await self.js.subscribe(
                             self.category
+                            , stream=self.stream
                             , queue=self.session
                             , config=self.config
                         )
