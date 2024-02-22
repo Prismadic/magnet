@@ -1,4 +1,6 @@
-import nats, json, datetime
+import nats
+import json
+import datetime
 from magnet.utils.globals import _f
 from dataclasses import asdict
 from nats.errors import TimeoutError
@@ -7,12 +9,13 @@ from nats.js.api import StreamConfig, ConsumerConfig
 from nats.js.errors import Error
 import xxhash
 import platform
-from datetime import timezone 
-import datetime 
+from datetime import timezone
+import datetime
 x = xxhash
-dt = datetime.datetime.now(timezone.utc) 
-utc_time = dt.replace(tzinfo=timezone.utc) 
-utc_timestamp = utc_time.timestamp() 
+dt = datetime.datetime.now(timezone.utc)
+utc_time = dt.replace(tzinfo=timezone.utc)
+utc_timestamp = utc_time.timestamp()
+
 
 class Charge:
     """
@@ -51,24 +54,25 @@ class Charge:
             if self.stream not in [x.config.name for x in streams] or self.category not in sum([x.config.subjects for x in streams], []):
                 try:
                     if self.stream not in [x.config.name for x in streams]:
-                        _f("wait", f'creating {self.stream}') \
-                        , await self.js.add_stream(name=self.stream, subjects=[self.category], retention='workqueue') \
+                        _f("wait", f'creating {self.stream}'), await self.js.add_stream(name=self.stream, subjects=[self.category], retention='workqueue', num_replicas=3) \
                             if create else _f("warn", f"couldn't create {stream} on {self.server}")
                         streams = await self.js.streams_info()
                     if self.category not in sum([x.config.subjects for x in streams if x.config.name == self.stream], []):
-                        subjects = sum([x.config.subjects for x in streams if x.config.name == self.stream], [])
+                        subjects = sum(
+                            [x.config.subjects for x in streams if x.config.name == self.stream], [])
                         subjects.append(self.category)
                         await self.js.update_stream(StreamConfig(
-                            name = self.stream
-                            , subjects = subjects
-                            , retention='workqueue'
+                            name=self.stream, subjects=subjects, retention='workqueue'
                         ))
-                        _f("success", f'created [{self.category}] on\n🛰️ stream: {self.stream}')
+                        _f("success",
+                           f'created [{self.category}] on\n🛰️ stream: {self.stream}')
                 except Exception as e:
-                    _f('fatal', f"couldn't create {stream} on {self.server}\n{e}")
+                    _f('fatal',
+                       f"couldn't create {stream} on {self.server}\n{e}")
         except TimeoutError:
             _f('fatal', f'could not connect to {self.server}')
-        _f("success", f'connected to [{self.category}] on\n🛰️ stream: {self.stream}')
+        _f("success",
+           f'connected to [{self.category}] on\n🛰️ stream: {self.stream}')
 
     async def off(self):
         """
@@ -85,20 +89,20 @@ class Charge:
             payload (dict): The data to be published.
         """
         try:
-            bytes_ = json.dumps(asdict(payload), separators=(', ', ':')).encode('utf-8')
+            bytes_ = json.dumps(asdict(payload), separators=(
+                ', ', ':')).encode('utf-8')
         except Exception as e:
             _f('fatal', f'invalid JSON\n{e}')
         try:
             _hash = x.xxh64(bytes_).hexdigest()
             await self.js.publish(
-                self.category
-                , bytes_
-                , headers={
+                self.category, bytes_, headers={
                     "Nats-Msg-Id": _hash
                 }
             )
         except Exception as e:
             _f('fatal', f'could not send data to {self.server}\n{e}')
+
     async def excite(self, job: dict = {}):
         """
         Publishes data to the NATS server using the specified category and payload.
@@ -113,15 +117,12 @@ class Charge:
         try:
             _hash = x.xxh64(bytes_).hexdigest()
             await self.js.publish(
-                self.category 
-                , bytes_
-                , headers={
+                self.category, bytes_, headers={
                     "Nats-Msg-Id": _hash
                 }
             )
         except Exception as e:
             _f('fatal', f'could not send data to {self.server}\n{e}')
-
 
     async def emp(self, name=None):
         """
@@ -130,7 +131,7 @@ class Charge:
         Args:
             name (str, optional): The name of the stream to delete. Defaults to None.
         """
-        if name and name==self.stream:
+        if name and name == self.stream:
             await self.js.delete_stream(name=self.stream)
             _f('warn', f'{self.stream} stream deleted')
         else:
@@ -143,11 +144,12 @@ class Charge:
         Args:
             name (str, optional): The name of the category to purge. Defaults to None.
         """
-        if name and name==self.category:
+        if name and name == self.category:
             await self.js.purge_stream(name=self.stream, subject=self.category)
             _f('warn', f'{self.category} category deleted')
         else:
             _f('fatal', "name doesn't match the stream category or category doesn't exist")
+
 
 class Resonator:
     """
@@ -201,45 +203,38 @@ class Resonator:
         self.stream = stream
         self.session = session
         self.node = f'{platform.node()}_{x.xxh64(platform.node(), seed=int(utc_timestamp)).hexdigest()}' if local else platform.node()
+        self.durable = f'{self.node}_job' if job else self.node
         self.config = ConsumerConfig(
-                    name=f'{self.node}_job' if job else self.node
-                    , deliver_group=self.session
-                    , deliver_subject=self.session
-                    , durable_name=f'{self.node}_job' if job else self.node
-                    , max_ack_pending=10
-                )
-        _f('wait',f'connecting to {self.server}')
+            ack_policy="explicit"
+            , deliver_subject=self.durable
+        )
+        print(self.config)
+        _f('wait', f'connecting to {self.server}')
         try:
             self.nc = await nats.connect(f'nats://{self.server}:4222')
             self.js = self.nc.jetstream(
-                    domain=domain
-                )
+                domain=domain
+            )
             try:
-                if job:
-                    self.sub = await self.js.pull_subscribe(
-                        stream = self.stream
-                        , subject = self.category
-                        , durable=f'{self.node}_job' if job else self.node
-                        , config=self.config
-                    )
-                else:
-                    try:
-                        self.sub = await self.js.subscribe(
-                            self.category
-                            , stream=self.stream
-                            , queue=self.session
-                            , config=self.config
-                        )
-                    except Exception as e:
-                        return _f('warn', e)
-                _f('info', f'joined worker queue: {self.session} as {self.node}')
+                self.sub = await self.js.pull_subscribe(
+                    stream=self.stream, subject=self.category, durable=self.durable, config=self.config
+                ) if job else await self.js.subscribe(
+                    subject=self.category
+                    , stream=self.stream
+                    , queue=self.session
+                    , config=self.config
+                    , manual_ack=False
+                )
+                _f('info',
+                   f'joined worker queue: {self.session} as {self.node}')
             except Exception as e:
-                return _f('fatal', f'{e}')
+                return _f('fatal', e)
             _f("success", f'connected to {self.server}')
         except TimeoutError:
             _f("fatal", f'could not connect to {self.server}')
         except Exception as e:
             _f('wait', 'server queuing you...')
+
     async def listen(self, cb=print, job_n: int = None, generic: bool = False):
         """
         Consume messages from a specific category in a stream and process them.
@@ -254,36 +249,41 @@ class Resonator:
         Raises:
             Exception: If there is an error in consuming the message or processing the callback function.
         """
+        try: self.sub
+        except: return _f('fatal', 'no subscriber initialized')
         if job_n:
-            _f("info", f'consuming {job_n} from [{self.category}] on\n🛰️ stream: {self.stream}\n🧲 session: "{self.session}"')
+            _f("info",
+               f'consuming {job_n} from [{self.category}] on\n🛰️ stream: {self.stream}\n🧲 session: "{self.session}"')
             try:
                 msgs = await self.sub.fetch(batch=job_n, timeout=60)
-                payloads = [msg.data if generic else Payload(**json.loads(msg.data)) for msg in msgs]
+                payloads = [msg.data if generic else Payload(
+                    **json.loads(msg.data)) for msg in msgs]
                 try:
                     for payload, msg in zip(payloads, msgs):
                         await cb(payload, msg)
-                        await msg.ack_sync() if generic else None
                 except ValueError as e:
                     _f('success', f"job of {job_n} fulfilled\n{e}")
                 except Exception as e:
                     _f('fatal', e)
             except ValueError as e:
-                _f('warn', f'{self.session} reached the end of {self.category}, {self.stream}')
+                _f('warn',
+                   f'{self.session} reached the end of {self.category}, {self.stream}')
             except Exception as e:
                 _f('fatal', e)
         else:
-            _f("info", f'consuming delta from [{self.category}] on\n🛰️ stream: {self.stream}\n🧲 session: "{self.session}"')
+            _f("info",
+               f'consuming delta from [{self.category}] on\n🛰️ stream: {self.stream}\n🧲 session: "{self.session}"')
             while True:
                 try:
                     msg = await self.sub.next_msg(timeout=60)
-                    payload = msg.data if generic else Payload(**json.loads(msg.data))
+                    payload = msg.data if generic else Payload(
+                        **json.loads(msg.data))
                     try:
                         await cb(payload, msg)
-                        await msg.ack_sync() if generic else None
                     except Exception as e:
                         _f("warn", f'retrying connection to {self.server}')
                 except Exception as e:
-                    _f('fatal',f'invalid JSON\n{e}')
+                    _f('fatal', f'invalid JSON\n{e}')
                     break
 
     async def worker(self, cb=print):
@@ -299,7 +299,8 @@ class Resonator:
         Raises:
             Exception: If there is an error in consuming the message or processing the callback function.
         """
-        _f("info", f'processing jobs from [{self.category}] on\n🛰️ stream: {self.stream}\n🧲 session: "{self.session}"')
+        _f("info",
+           f'processing jobs from [{self.category}] on\n🛰️ stream: {self.stream}\n🧲 session: "{self.session}"')
         try:
             msg = await self.sub.next_msg(timeout=60)
             payload = JobParams(**json.loads(msg.data))
@@ -308,7 +309,8 @@ class Resonator:
             except Exception as e:
                 _f("warn", f'something wrong in your callback function!\n{e}')
         except Exception as e:
-            _f('fatal','invalid JSON')
+            _f('fatal', 'invalid JSON')
+
     async def conduct(self, cb=print):
         pass
 
@@ -320,7 +322,8 @@ class Resonator:
         :return: None
         """
         jsm = await self.js.consumer_info(stream=self.stream, consumer=session)
-        _f('info',json.dumps(jsm.config.__dict__, indent=2))
+        _f('info', json.dumps(jsm.config.__dict__, indent=2))
+
     async def off(self):
         """
         Unsubscribes from the category and stream and disconnects from the NATS server.
