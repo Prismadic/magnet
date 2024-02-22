@@ -207,8 +207,8 @@ class Resonator:
         self.config = ConsumerConfig(
             ack_policy="explicit"
             , deliver_subject=self.durable
+            , max_ack_pending=10
         )
-        print(self.config)
         _f('wait', f'connecting to {self.server}')
         try:
             self.nc = await nats.connect(f'nats://{self.server}:4222')
