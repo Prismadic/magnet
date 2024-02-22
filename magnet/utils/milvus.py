@@ -43,6 +43,7 @@ class MilvusDB:
         """
         try:
             self.alias = alias
+            _f('wait', f'connecting to {self.config['MILVUS_URI']}')
             self.connection = connections.connect(
                 host=self.config['MILVUS_URI']
                 , port=self.config['MILVUS_PORT']
@@ -111,6 +112,7 @@ class MilvusDB:
             _f('fatal', e)
 
     def load(self):
+        _f('wait', f'loading {self.config['INDEX']} into memory, may take time')
         self.collection = Collection(name=self.config['INDEX'], schema=self.schema, using='magnet')
         self.collection.load()
 
