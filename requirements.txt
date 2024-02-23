@@ -1,5 +1,6 @@
 torch
 sentence-transformers
+transformers
 pandas
 tqdm
 spacy
