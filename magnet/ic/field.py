@@ -223,7 +223,7 @@ class Resonator:
                     , stream=self.stream
                     , queue=self.session
                     , config=self.config
-                    , manual_ack=False
+                    , manual_ack=True
                 )
                 _f('info',
                    f'joined worker queue: {self.session} as {self.node}')
