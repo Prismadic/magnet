@@ -25,7 +25,7 @@ class Embedder:
 
     def __init__(self, config, create=False, initialize=False):
         self.config = config
-        self.model = SentenceTransformer(self.config['MODEL'], device=Utils().check_cuda())
+        self.model = SentenceTransformer(self.config['MODEL'], device='cuda')
         _f('info', f'loading into {self.model.device}')
         self.db = MilvusDB(self.config)
         self.db.on()
