@@ -206,7 +206,6 @@ class Resonator:
         self.durable = f'{self.node}_job' if job else self.node
         self.config = ConsumerConfig(
             ack_policy="explicit"
-            , deliver_group=self.session
             , max_ack_pending=bandwidth
             , ack_wait=3600
         )
