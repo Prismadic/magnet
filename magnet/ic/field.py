@@ -183,7 +183,7 @@ class Resonator:
         """
         self.server = server
 
-    async def on(self, category: str = 'no_category', stream: str = 'documents', session='magnet', job: bool = None, local: bool = False, domain: str = None):
+    async def on(self, category: str = 'no_category', stream: str = 'documents', session='magnet', job: bool = None, local: bool = False, domain: str = None, bandwidth: int = 3):
         """
         Connects to the NATS server, subscribes to a specific category in a stream, and consumes messages from that category.
 
@@ -206,8 +206,10 @@ class Resonator:
         self.durable = f'{self.node}_job' if job else self.node
         self.config = ConsumerConfig(
             ack_policy="explicit"
-            , deliver_subject=self.durable
-            , max_ack_pending=10
+            , deliver_group=self.session
+            , deliver_subject=self.session
+            , max_ack_pending=bandwidth
+            , ack_wait=3600
         )
         _f('wait', f'connecting to {self.server}')
         try:
