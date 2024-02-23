@@ -154,9 +154,10 @@ class Utils:
             _f(
                 "info", f"GPU Name - {torch.cuda.get_device_name(0)}"
             )  # 0 is the GPU index
-            return True
+            return 'cuda'
         else:
             _f("warn", "CUDA is not available on this machine.")
+            return 'cpu'
 
     def normalize_text(self, _):
         """

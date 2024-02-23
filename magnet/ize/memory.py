@@ -2,6 +2,7 @@ from sentence_transformers import SentenceTransformer
 from magnet.utils.globals import _f
 from magnet.utils.milvus import *
 from magnet.utils.data_classes import EmbeddingPayload
+from magnet.utils.globals import Utils
 
 class Embedder:
     """
@@ -24,7 +25,7 @@ class Embedder:
 
     def __init__(self, config, create=False, initialize=False):
         self.config = config
-        self.model = SentenceTransformer(self.config['MODEL'])
+        self.model = SentenceTransformer(self.config['MODEL'], device=Utils.check_cuda())
         _f('info', f'loading into {self.model.device}')
         self.db = MilvusDB(self.config)
         self.db.on()
