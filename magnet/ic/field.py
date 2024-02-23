@@ -207,7 +207,6 @@ class Resonator:
         self.config = ConsumerConfig(
             ack_policy="explicit"
             , deliver_group=self.session
-            , deliver_subject=self.session
             , max_ack_pending=bandwidth
             , ack_wait=3600
         )
