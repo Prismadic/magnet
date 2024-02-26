@@ -35,7 +35,7 @@ class Charge:
     def __init__(self, server):
         self.server = server
 
-    async def on(self, category: str = 'no_category', stream: str = 'documents', create: bool = False):
+    async def on(self, category: str = 'no_category', stream: str = 'documents', create: bool = False, workgroup: bool = False):
         """
         Connects to the NATS server, creates a stream and category if they don't exist, and prints a success message.
 
@@ -54,7 +54,7 @@ class Charge:
             if self.stream not in [x.config.name for x in streams] or self.category not in sum([x.config.subjects for x in streams], []):
                 try:
                     if self.stream not in [x.config.name for x in streams]:
-                        _f("wait", f'creating {self.stream}'), await self.js.add_stream(name=self.stream, subjects=[self.category], retention='workqueue', num_replicas=3) \
+                        _f("wait", f'creating {self.stream}'), await self.js.add_stream(name=self.stream, subjects=[self.category], retention='workqueue' if workgroup else None, num_replicas=3) \
                             if create else _f("warn", f"couldn't create {stream} on {self.server}")
                         streams = await self.js.streams_info()
                     if self.category not in sum([x.config.subjects for x in streams if x.config.name == self.stream], []):
