@@ -9,3 +9,4 @@ boto3
 nats-py
 rich
 xxhash
+nkeys

@@ -183,7 +183,7 @@ class Resonator:
         """
         self.server = server
 
-    async def on(self, category: str = 'no_category', stream: str = 'documents', session='magnet', job: bool = None, local: bool = False, domain: str = None, bandwidth: int = 3):
+    async def on(self, category: str = 'no_category', stream: str = 'documents', session='magnet', job: bool = None, local: bool = False, domain: str = None, bandwidth: int = 3, credentials: str = 'path_to_creds_file', port: int = 4222):
         """
         Connects to the NATS server, subscribes to a specific category in a stream, and consumes messages from that category.
 
@@ -211,19 +211,16 @@ class Resonator:
         )
         _f('wait', f'connecting to {self.server}')
         try:
-            self.nc = await nats.connect(f'nats://{self.server}:4222')
+            self.nc = await nats.connect(f'{"nats://" if not credentials else "tls://"}{self.server}:{port}',user_credentials=credentials)
             self.js = self.nc.jetstream(
                 domain=domain
             )
             try:
                 self.sub = await self.js.pull_subscribe(
-                    stream=self.stream, subject=self.category, durable=self.durable, config=self.config
-                ) if job else await self.js.subscribe(
-                    subject=self.category
+                    durable=self.durable
+                    , subject=self.category
                     , stream=self.stream
-                    , queue=self.session
                     , config=self.config
-                    , manual_ack=True
                 )
                 _f('info',
                    f'joined worker queue: {self.session} as {self.node}')
@@ -233,9 +230,9 @@ class Resonator:
         except TimeoutError:
             _f("fatal", f'could not connect to {self.server}')
         except Exception as e:
-            _f('wait', 'server queuing you...')
+            _f('wait', f'server queuing you...\n{e}')
 
-    async def listen(self, cb=print, job_n: int = None, generic: bool = False):
+    async def listen(self, cb=print, job_n: int = None, generic: bool = False, verbose=False):
         """
         Consume messages from a specific category in a stream and process them.
 
@@ -275,13 +272,15 @@ class Resonator:
                f'consuming delta from [{self.category}] on\n🛰️ stream: {self.stream}\n🧲 session: "{self.session}"')
             while True:
                 try:
-                    msg = await self.sub.next_msg(timeout=60)
-                    payload = msg.data if generic else Payload(
-                        **json.loads(msg.data))
+                    msgs = await self.sub.fetch(batch=1, timeout=60)
+                    _f('info', f"{msgs}") if verbose else None
+                    payload = msgs[0].data if generic else Payload(
+                        **json.loads(msgs[0].data))
+                    _f('info', f"{payload}") if verbose else None
                     try:
-                        await cb(payload, msg)
+                        await cb(payload, msgs[0])
                     except Exception as e:
-                        _f("warn", f'retrying connection to {self.server}')
+                        _f("warn", f'retrying connection to {self.server}\n{e}')
                 except Exception as e:
                     _f('fatal', f'invalid JSON\n{e}')
                     break

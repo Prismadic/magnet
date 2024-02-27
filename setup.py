@@ -16,7 +16,8 @@ setup(
         'boto3',
         'nats-py',
         'rich',
-        'xxhash'
+        'xxhash',
+        'nkeys'
     ],
     url = 'https://github.com/Prismadic/magnet'
 )
