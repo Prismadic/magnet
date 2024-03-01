@@ -183,7 +183,7 @@ class Resonator:
         """
         self.server = server
 
-    async def on(self, category: str = 'no_category', stream: str = 'documents', session='magnet', job: bool = None, local: bool = False, domain: str = None, bandwidth: int = 3, credentials: str = 'path_to_creds_file', port: int = 4222):
+    async def on(self, category: str = 'no_category', stream: str = 'documents', session='magnet', job: bool = None, local: bool = False, domain: str = None, bandwidth: int = 1000, credentials: str = 'path_to_creds_file', port: int = 4222):
         """
         Connects to the NATS server, subscribes to a specific category in a stream, and consumes messages from that category.
 
