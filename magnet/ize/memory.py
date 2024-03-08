@@ -69,8 +69,7 @@ class Embedder:
                 self.db.collection.insert([
                     [payload.document], [payload.text], [payload.embedding]
                 ])
-                self.db.collection.flush(collection_name_array=[
-                                        self.config['INDEX']])
+                # self.db.collection.flush(collection_name_array=[self.config['INDEX']]) # https://milvus.io/docs/v1.1.1/flush_python.md#:~:text=Milvus%20also%20performs%20an%20automatic,fixed%20interval%20(1%20second).&text=After%20calling%20delete%20%2C%20you%20can,data%20is%20no%20longer%20recoverable.
                 if charge:
                     payload = EmbeddingPayload(
                         model=self.config['MODEL'],
