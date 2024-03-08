@@ -217,7 +217,7 @@ class Resonator:
             )
             try:
                 self.sub = await self.js.pull_subscribe(
-                    durable=self.durable
+                    durable=self.session
                     , subject=self.category
                     , stream=self.stream
                     , config=self.config
