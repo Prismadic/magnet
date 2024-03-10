@@ -281,6 +281,7 @@ class Resonator:
                         await cb(payload, msgs[0])
                     except Exception as e:
                         _f("warn", f'retrying connection to {self.server}\n{e}')
+                        _f("info", "this can also be a problem with your callback")
                 except Exception as e:
                     _f('fatal', f'invalid JSON\n{e}')
                     break
