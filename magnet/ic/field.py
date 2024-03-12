@@ -118,7 +118,6 @@ class Charge:
             _f('fatal', "name doesn't match the stream category or category doesn't exist")
 
 class Resonator:
-
     def __init__(self, prism: PrismConfig | dict = None):
         """
         Initializes the `Resonator` class with the NATS server address.
@@ -253,7 +252,7 @@ class Resonator:
         await self.prism.js.sub.unsubscribe()
         _f('warn', f'unsubscribed from {self.prism.stream_name}')
         await self.nc.drain()
-        _f('warn', f'disconnected from {self.prism.host}')
+        _f('warn', f'safe to disconnect from {self.prism.host}')
 
 class Prism:
     def __init__(self, config: PrismConfig | dict = None):
@@ -276,16 +275,15 @@ class Prism:
         try:
             self.nc = await nats.connect(f'{"nats://" if not self.config.credentials else "tls://"}{self.config.host}:4222',user_credentials=self.config.credentials)
             self.js = self.nc.jetstream(
-                domain=self.config.domain
-            )
+                domain=self.config.domain 
+            ) if self.config.domain is not None else self.nc.jetstream()
             if self.config.stream_name:
                 self.config.stream_name = await self._setup_stream()
             if self.config.kv_name:
                 self.kv = await self._setup_kv()
             if self.config.os_name:
                 self.os = await self._setup_object_store()
-            _f("success", f"`Prism` aligned with\n🧲 {self.config}")
-            await self.nc.close()
+            _f("success", f"🧲 connected to \n💎 {self.config} ")
             return [self.js, self.kv, self.os]
         except Exception as e:
             _f("fatal", f"could not align {self.config.host}\n{e}")
@@ -299,7 +297,7 @@ class Prism:
             _f("warn", f"Stream {self.config.stream_name} not found, creating")
             await self.js.add_stream(name=self.config.stream_name, subjects=["magnet.*"])
             _f("success", f"created `{self.config.stream_name}` with default category `magnet.*`")
-        return self.js.stream_info(self.config.stream_name)
+        return await self.js.stream_info(self.config.stream_name)
 
     async def _setup_kv(self):
         """Setup key-value store."""
@@ -309,7 +307,7 @@ class Prism:
             _f("warn", f"KV bucket {self.config.kv_name} not found, creating")
             await self.js.create_key_value(bucket=self.config.kv_name)
             _f("success", f"created `{self.config.kv_name}`")
-        return self.js.key_value(self.config.kv_name)
+        return await self.js.key_value(self.config.kv_name)
 
     async def _setup_object_store(self):
         """Setup object store."""
@@ -320,3 +318,8 @@ class Prism:
             await self.js.create_object_store(bucket=self.config.os_name)
             _f("success", f"created `{self.config.os_name}`")
         return await self.js.object_store(self.config.os_name)
+
+    async def off(self):
+        """Disconnects from the NATS server and prints a warning message."""
+        await self.nc.drain()
+        _f('warn', f'disconnected from {self.config.host}')
