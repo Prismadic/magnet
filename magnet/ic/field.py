@@ -1,18 +1,15 @@
-import nats
-import json
-import datetime
-from magnet.utils.globals import _f
+import nats, json, datetime, xxhash, platform
+
 from dataclasses import asdict
-from nats.errors import TimeoutError
+from magnet.utils.globals import _f
 from magnet.utils.data_classes import *
+
+from nats.errors import TimeoutError
 from nats.js.api import StreamConfig, ConsumerConfig
-import xxhash
-import platform
-from datetime import timezone
-import datetime
+
 x = xxhash
-dt = datetime.datetime.now(timezone.utc)
-utc_time = dt.replace(tzinfo=timezone.utc)
+dt = datetime.datetime.now(datetime.timezone.utc)
+utc_time = dt.replace(tzinfo=datetime.timezone.utc)
 utc_timestamp = utc_time.timestamp()
 
 class Charge:
