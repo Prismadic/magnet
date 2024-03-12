@@ -16,7 +16,7 @@ class IndexConfig:
 class PrismConfig:
     host: str
     domain: str = None
-    stream_credentials: str = None
+    credentials: str = None
     session: str = None
     stream_name: str = None
     stream_category: str = None

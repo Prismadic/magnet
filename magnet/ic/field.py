@@ -257,10 +257,14 @@ class Resonator:
 
 class Prism:
     def __init__(self, config: PrismConfig | dict = None):
-        if isinstance(config, dict):
-            config = PrismConfig(**config)
-        elif not isinstance(config, PrismConfig):
-            return _f("fatal", "config must be a MagnetConfig instance or a dictionary")
+        try:
+            if isinstance(config, dict):
+                config = PrismConfig(**config)
+            elif not isinstance(config, PrismConfig):
+                _f("fatal", "config must be a PrismConfig instance or a dictionary")
+                raise ValueError
+        except Exception as e:
+            raise e
         self.config = config
         self.nc = None
         self.js = None
@@ -282,9 +286,10 @@ class Prism:
                 self.os = await self._setup_object_store()
             _f("success", f"`Prism` aligned with\n🧲 {self.config}")
             await self.nc.close()
-            return self.config.stream_name, self.kv, self.os
+            return [self.js, self.kv, self.os]
         except Exception as e:
-            _f("fatal", f"could not align {self.config.nats_host}\n{e}")
+            _f("fatal", f"could not align {self.config.host}\n{e}")
+            return None
 
     async def _setup_stream(self):
         """Setup stream."""
