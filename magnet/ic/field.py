@@ -62,7 +62,9 @@ class Charge:
                             [x.config.subjects for x in streams if x.config.name == self.stream], [])
                         subjects.append(self.category)
                         await self.js.update_stream(StreamConfig(
-                            name=self.stream, subjects=subjects, retention='workqueue'
+                            name=self.stream
+                            , subjects=subjects
+                            , retention='workqueue' if workgroup else None
                         ))
                         _f("success",
                            f'created [{self.category}] on\n🛰️ stream: {self.stream}')
