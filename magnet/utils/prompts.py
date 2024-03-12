@@ -26,3 +26,17 @@ class Prompts:
     Question: [QUERY]; Answer: """ \
                 .replace('[DOCUMENTS]', docs) \
                 .replace('[QUERY]', q)
+    
+    def classy(self, doc: str = "", q: str = None, schema={"original_data": "object", "scores": "list:float", "classes":"list:string"}) -> str:
+        """
+        Generates a formatted prompt for generating a classification based on the given documents and question.
+
+        Args:
+            doc (str): A text sample.
+            q (str): The context for which a classification is to be generated.
+
+        Returns:
+            str: A formatted string representing a prompt for generating a classification based on the given documents and question.
+        """
+        prompt = f"{q}\nPlease ONLY reply in JSON (do not provide any output but JSON) and keep your schema consistent with the following: {schema}\n\nand provide a score for each class:\n\n{doc} \n\n and make sure to put the original data into the 'original data' key."
+        return prompt

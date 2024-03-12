@@ -1,4 +1,29 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from typing import Dict
+
+@dataclass
+class IndexConfig:
+    milvus_uri: str
+    milvus_port: int
+    milvus_user: str
+    milvus_password: str
+    dimension: int
+    model: str
+    name: str
+    params: Dict[str, any] = field(default_factory=dict)
+
+@dataclass
+class PrismConfig:
+    host: str
+    domain: str = None
+    stream_credentials: str = None
+    session: str = None
+    stream_name: str = None
+    stream_category: str = None
+    kv_name: str = None
+    os_name: str = None
+    config_prefix: str = None
+    index: IndexConfig = None
 
 @dataclass
 class Payload:
