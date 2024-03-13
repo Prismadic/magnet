@@ -75,6 +75,9 @@ class MilvusDB:
         if utility.has_collection(self.config.index.name, using=self.config.session):
             utility.drop_collection(self.config.index.name, using=self.config.session)
             _f('warn', f"Index for {self.config.index.name} deleted")
+    
+    def list_indices(self):
+        return utility.list_collections(using=self.config.session)
 
     def _pw(self):
         MAX_LEN = 24

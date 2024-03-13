@@ -10,3 +10,5 @@ nats-py
 rich
 xxhash
 nkeys
+milvus
+docker

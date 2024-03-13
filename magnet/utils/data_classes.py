@@ -1,6 +1,19 @@
-from dataclasses import dataclass, field, is_dataclass, asdict
+from dataclasses import dataclass, field
 from typing import Dict, Optional, Any
-import json
+
+from dataclasses import dataclass, field
+from typing import List, Optional, Callable
+
+@dataclass
+class AskParameters:
+    m: str = "mistralai/Mistral-7B-Instruct-v0.1"
+    q: str = "What is your itinerary?"
+    t: float = 1.0
+    n: int = 8096
+    p: str = "qa_ref"
+    cb: Optional[Callable] = None
+    docs: List[str] = field(default_factory=list)
+    vllm: bool = False
 
 @dataclass
 class IndexConfig:
