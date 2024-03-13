@@ -132,7 +132,7 @@ class Prism:
         await self.nc.drain()
         _f('warn', f'disconnected from {self.config.host}')
 
-class EmbeddedCluster:
+class EmbeddedMagnet:
     def __init__(self):
         try:
             self.client = docker.from_env()
