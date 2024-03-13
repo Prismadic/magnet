@@ -1,9 +1,11 @@
 from dataclasses import asdict
 
 from magnet.utils.globals import _f
-from magnet.utils.huggingface import InferenceAPI
-from magnet.utils.local import LocalInference
-from magnet.utils.prompts import *
+
+from magnet.utils.llm.huggingface import InferenceAPI
+from magnet.utils.llm.local import LocalInference
+from magnet.utils.llm.prompts import *
+
 from magnet.utils.data_classes import *
 
 import requests, json

@@ -1,9 +1,12 @@
 from sentence_transformers import SentenceTransformer
+
 from magnet.utils.globals import _f
-from magnet.utils.milvus import *
-from magnet.ic.field import Charge, Prism
-from magnet.utils.data_classes import EmbeddingPayload
 from magnet.utils.globals import Utils
+from magnet.utils.index.milvus import *
+from magnet.utils.data_classes import EmbeddingPayload
+
+from magnet.ic.field import Charge, Prism
+
 from typing import Optional
 
 class Memory:
