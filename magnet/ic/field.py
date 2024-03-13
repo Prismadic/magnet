@@ -6,14 +6,87 @@ from magnet.utils.data_classes import *
 
 from nats.errors import TimeoutError
 from nats.js.api import StreamConfig, ConsumerConfig
+from nats.js.errors import ServerError
 
 x = xxhash
 dt = datetime.datetime.now(datetime.timezone.utc)
 utc_time = dt.replace(tzinfo=datetime.timezone.utc)
 utc_timestamp = utc_time.timestamp()
 
+class Prism:
+    def __init__(self, config: PrismConfig | dict = None):
+        try:
+            if isinstance(config, dict):
+                config = PrismConfig(**config)
+            if isinstance(config.index, dict):
+                config.index = IndexConfig(**config.index)
+            elif not isinstance(config, PrismConfig):
+                _f("fatal", "config must be a PrismConfig instance or a dictionary")
+                raise ValueError
+        except Exception as e:
+            raise e
+        self.config = config
+        self.nc = None
+        self.js = None
+        self.kv = None
+        self.os = None
+
+    async def align(self):
+        """Connect to NATS and setup configurations."""
+        try:
+            self.nc = await nats.connect(f'{"nats://" if not self.config.credentials else "tls://"}{self.config.host}:4222',user_credentials=self.config.credentials)
+            self.js = self.nc.jetstream(
+                domain=self.config.domain 
+            ) if self.config.domain is not None else self.nc.jetstream()
+            if self.config.name:
+                self.nc = await self._setup_stream()
+            if self.config.kv_name:
+                self.kv = await self._setup_kv()
+            if self.config.os_name:
+                self.os = await self._setup_object_store()
+            _f("success", f"🧲 connected to \n💎 {self.config} ")
+            return [self.js, self.kv, self.os]
+        except Exception as e:
+            _f("fatal", f"could not align {self.config.host}\n{e}")
+            return None
+
+    async def _setup_stream(self):
+        """Setup stream."""
+        try:
+            await self.js.stream_info(self.config.name)
+        except Exception as e:
+            _f("warn", f"Stream {self.config.name} not found, creating")
+            await self.js.add_stream(name=self.config.name, subjects=["magnet"])
+            _f("success", f"created `{self.config.name}` with default category `magnet`")
+        return await self.js.stream_info(self.config.name)
+
+    async def _setup_kv(self):
+        """Setup key-value store."""
+        try:
+            await self.js.key_value(self.config.kv_name)
+        except Exception as e:
+            _f("warn", f"KV bucket {self.config.kv_name} not found, creating")
+            await self.js.create_key_value(bucket=self.config.kv_name)
+            _f("success", f"created `{self.config.kv_name}`")
+        return await self.js.key_value(self.config.kv_name)
+
+    async def _setup_object_store(self):
+        """Setup object store."""
+        try:
+            await self.js.object_store(self.config.os_name)
+        except Exception as e:
+            _f("warn", f"Object Store {self.config.kv_name} not found, creating")
+            await self.js.create_object_store(bucket=self.config.os_name)
+            _f("success", f"created `{self.config.os_name}`")
+        return await self.js.object_store(self.config.os_name)
+
+    async def off(self):
+        """Disconnects from the NATS server and prints a warning message."""
+        await self.nc.drain()
+        _f('warn', f'disconnected from {self.config.host}')
+
 class Charge:
-    def __init__(self, prism: PrismConfig):
+    def __init__(self, prism: Prism):
         self.prism = prism
 
     async def on(self):
@@ -21,24 +94,24 @@ class Charge:
             streams = await self.prism.js.streams_info()
             remote_streams = [x.config.name for x in streams]
             remote_subjects = [x.config.subjects for x in streams]
-            if self.prism.stream_name not in remote_streams:
-                return _f('fatal', 'stream not found, initialize with `Prism.align()` first')
-            elif self.prism.stream_category not in sum(remote_subjects, []):
-                if self.prism.stream_category not in sum([x.config.subjects for x in streams if x.config.name == self.prism.stream_name], []):
+            if self.prism.config.name not in remote_streams:
+                return _f('fatal', f'{self.prism.config.name} not found, initialize with `Prism.align()` first')
+            elif self.prism.config.category not in sum(remote_subjects, []):
+                if self.prism.config.category not in sum([x.config.subjects for x in streams if x.config.name == self.prism.config.name], []):
                     try:
                         subjects = sum(
-                            [x.config.subjects for x in streams if x.config.name == self.prism.stream_name], [])
-                        subjects.append(self.prism.stream_category)
+                            [x.config.subjects for x in streams if x.config.name == self.prism.config.name], [])
+                        subjects.append(self.prism.config.category)
                         await self.prism.js.update_stream(StreamConfig(
-                            name=self.prism.stream_name
+                            name=self.prism.config.name
                             , subjects=subjects
                         ))
-                        _f("success", f'created [{self.prism.stream_category}] on\n🛰️ stream: {self.prism.stream_name}')
-                    except Exception as e:
-                        _f('fatal', f"couldn't create {self.prism.stream_name} on {self.prism.host}\n{e}")
+                        _f("success", f'created [{self.prism.config.category}] on\n🛰️ stream: {self.prism.config.name}')
+                    except ServerError as e:
+                        _f('fatal', f"couldn't create {self.prism.config.name} on {self.prism.config.host}, ensure your `category` is set")
         except TimeoutError:
-            return _f('fatal', f'could not connect to {self.prism.host}')
-        _f("success", f'connected to [{self.prism.stream_category}] on\n🛰️ stream: {self.prism.stream_name}')
+            return _f('fatal', f'could not connect to {self.prism.config.host}')
+        _f("success", f'ready [{self.prism.config.category}] on\n🛰️ stream: {self.prism.config.name}')
 
     async def off(self):
         """
@@ -46,9 +119,9 @@ class Charge:
         """
         await self.prism.nc.drain()
         await self.prism.nc.close()
-        _f('warn', f'disconnected from {self.prism.host}')
+        _f('warn', f'disconnected from {self.prism.config.host}')
 
-    async def pulse(self, payload):
+    async def pulse(self, payload: Payload | GeneratedPayload | EmbeddingPayload | JobParams = None, v=False):
         """
         Publishes data to the NATS server using the specified category and payload.
 
@@ -59,16 +132,20 @@ class Charge:
             bytes_ = json.dumps(asdict(payload), separators=(
                 ', ', ':')).encode('utf-8')
         except Exception as e:
-            _f('fatal', f'invalid JSON\n{e}')
+            return _f('fatal', f'invalid object, more info:\n{e} in [Payload, GeneratedPayload, EmbeddingPayload, JobParams]')
         try:
             _hash = x.xxh64(bytes_).hexdigest()
-            await self.prism.js.publish(
-                self.prism.stream_category, bytes_, headers={
+            msg = await self.prism.js.publish(
+                self.prism.config.category, bytes_, headers={
                     "Nats-Msg-Id": _hash
                 }
             )
+            _f('success', f'pulsed to {self.prism.config.category} on {self.prism.config.name}') if v else None
+            _ts = datetime.datetime.now(datetime.timezone.utc)
+            msg.ts = _ts
+            return msg
         except Exception as e:
-            _f('fatal', f'could not send data to {self.prism.host}\n{e}')
+            return _f('fatal', f'could not pulse data to {self.prism.config.host}\n{e}')
 
     async def excite(self, job: dict = {}):
         """
@@ -84,12 +161,12 @@ class Charge:
         try:
             _hash = x.xxh64(bytes_).hexdigest()
             await self.prism.js.publish(
-                self.prism.stream_category, bytes_, headers={
+                self.prism.config.category, bytes_, headers={
                     "Nats-Msg-Id": _hash
                 }
             )
         except Exception as e:
-            _f('fatal', f'could not send data to {self.prism.host}\n{e}')
+            _f('fatal', f'could not send data to {self.prism.config.host}\n{e}')
 
     async def emp(self, name=None):
         """
@@ -98,9 +175,9 @@ class Charge:
         Args:
             name (str, optional): The name of the stream to delete. Defaults to None.
         """
-        if name and name == self.prism.stream_name:
-            await self.prism.js.delete_stream(name=self.prism.stream_name)
-            _f('warn', f'{self.prism.stream_name} stream deleted')
+        if name and name == self.prism.config.name:
+            await self.prism.js.delete_stream(name=self.prism.config.name)
+            _f('warn', f'{self.prism.config.name} stream deleted')
         else:
             _f('fatal', "name doesn't match the stream or stream doesn't exist")
 
@@ -111,9 +188,9 @@ class Charge:
         Args:
             name (str, optional): The name of the category to purge. Defaults to None.
         """
-        if name and name == self.prism.stream_category:
-            await self.js.purge_stream(name=self.prism.stream_name, subject=self.prism.stream_category)
-            _f('warn', f'{self.prism.stream_category} category deleted')
+        if name and name == self.prism.config.category:
+            await self.js.purge_stream(name=self.prism.config.name, subject=self.prism.config.category)
+            _f('warn', f'{self.prism.config.category} category deleted')
         else:
             _f('fatal', "name doesn't match the stream category or category doesn't exist")
 
@@ -150,12 +227,12 @@ class Resonator:
             , max_ack_pending=bandwidth
             , ack_wait=3600
         )
-        _f('wait', f'connecting to {self.prism.host}')
+        _f('wait', f'connecting to {self.prism.config.host}')
         try:
             self.sub = await self.js.pull_subscribe(
                 durable=self.prism.session
-                , subject=self.prism.stream_category
-                , stream=self.prism.stream_name
+                , subject=self.prism.config.category
+                , stream=self.prism.config.name
                 , config=self.consumer_config
             )
             _f('info',
@@ -169,7 +246,7 @@ class Resonator:
         except: return _f('fatal', 'no subscriber initialized')
         if job_n:
             _f("info",
-               f'consuming {job_n} from [{self.prism.stream_category}] on\n🛰️ stream: {self.prism.stream_name}\n🧲 session: "{self.prism.session}"')
+               f'consuming {job_n} from [{self.prism.config.category}] on\n🛰️ stream: {self.prism.config.name}\n🧲 session: "{self.prism.session}"')
             try:
                 msgs = await self.prism.js.sub.fetch(batch=job_n, timeout=60)
                 payloads = [msg.data if generic else Payload(
@@ -183,12 +260,12 @@ class Resonator:
                     _f('fatal', e)
             except ValueError as e:
                 _f('warn',
-                   f'{self.session} reached the end of {self.prism.stream_category}, {self.prism.stream_name}')
+                   f'{self.session} reached the end of {self.prism.config.category}, {self.prism.config.name}')
             except Exception as e:
                 _f('fatal', e)
         else:
             _f("info",
-               f'consuming delta from [{self.prism.stream_category}] on\n🛰️ stream: {self.prism.stream_name}\n🧲 session: "{self.prism.session}"')
+               f'consuming delta from [{self.prism.config.category}] on\n🛰️ stream: {self.prism.config.name}\n🧲 session: "{self.prism.session}"')
             while True:
                 try:
                     msgs = await self.sub.fetch(batch=1, timeout=60)
@@ -199,7 +276,7 @@ class Resonator:
                     try:
                         await cb(payload, msgs[0])
                     except Exception as e:
-                        _f("warn", f'retrying connection to {self.prism.host}\n{e}')
+                        _f("warn", f'retrying connection to {self.prism.config.host}\n{e}')
                         _f("info", "this can also be a problem with your callback")
                 except Exception as e:
                     _f('fatal', f'invalid JSON\n{e}')
@@ -219,7 +296,7 @@ class Resonator:
             Exception: If there is an error in consuming the message or processing the callback function.
         """
         _f("info",
-           f'processing jobs from [{self.prism.stream_category}] on\n🛰️ stream: {self.prism.stream_name}\n🧲 session: "{self.prism.session}"')
+           f'processing jobs from [{self.prism.config.category}] on\n🛰️ stream: {self.prism.config.name}\n🧲 session: "{self.prism.session}"')
         try:
             msg = await self.sub.next_msg(timeout=60)
             payload = JobParams(**json.loads(msg.data))
@@ -240,7 +317,7 @@ class Resonator:
         :param session: A string representing the session name of the consumer. If not provided, information about all consumers in the stream will be retrieved.
         :return: None
         """
-        jsm = await self.prism.js.consumer_info(stream=self.prism.stream_name, consumer=self.prism.session)
+        jsm = await self.prism.js.consumer_info(stream=self.prism.config.name, consumer=self.prism.session)
         _f('info', json.dumps(jsm.config.__dict__, indent=2))
 
     async def off(self):
@@ -250,76 +327,7 @@ class Resonator:
         :return: None
         """
         await self.prism.js.sub.unsubscribe()
-        _f('warn', f'unsubscribed from {self.prism.stream_name}')
+        _f('warn', f'unsubscribed from {self.prism.config.name}')
         await self.nc.drain()
-        _f('warn', f'safe to disconnect from {self.prism.host}')
+        _f('warn', f'safe to disconnect from {self.prism.config.host}')
 
-class Prism:
-    def __init__(self, config: PrismConfig | dict = None):
-        try:
-            if isinstance(config, dict):
-                config = PrismConfig(**config)
-            elif not isinstance(config, PrismConfig):
-                _f("fatal", "config must be a PrismConfig instance or a dictionary")
-                raise ValueError
-        except Exception as e:
-            raise e
-        self.config = config
-        self.nc = None
-        self.js = None
-        self.kv = None
-        self.os = None
-
-    async def align(self):
-        """Connect to NATS and setup configurations."""
-        try:
-            self.nc = await nats.connect(f'{"nats://" if not self.config.credentials else "tls://"}{self.config.host}:4222',user_credentials=self.config.credentials)
-            self.js = self.nc.jetstream(
-                domain=self.config.domain 
-            ) if self.config.domain is not None else self.nc.jetstream()
-            if self.config.stream_name:
-                self.config.stream_name = await self._setup_stream()
-            if self.config.kv_name:
-                self.kv = await self._setup_kv()
-            if self.config.os_name:
-                self.os = await self._setup_object_store()
-            _f("success", f"🧲 connected to \n💎 {self.config} ")
-            return [self.js, self.kv, self.os]
-        except Exception as e:
-            _f("fatal", f"could not align {self.config.host}\n{e}")
-            return None
-
-    async def _setup_stream(self):
-        """Setup stream."""
-        try:
-            await self.js.stream_info(self.config.stream_name)
-        except Exception as e:
-            _f("warn", f"Stream {self.config.stream_name} not found, creating")
-            await self.js.add_stream(name=self.config.stream_name, subjects=["magnet.*"])
-            _f("success", f"created `{self.config.stream_name}` with default category `magnet.*`")
-        return await self.js.stream_info(self.config.stream_name)
-
-    async def _setup_kv(self):
-        """Setup key-value store."""
-        try:
-            await self.js.key_value(self.config.kv_name)
-        except Exception as e:
-            _f("warn", f"KV bucket {self.config.kv_name} not found, creating")
-            await self.js.create_key_value(bucket=self.config.kv_name)
-            _f("success", f"created `{self.config.kv_name}`")
-        return await self.js.key_value(self.config.kv_name)
-
-    async def _setup_object_store(self):
-        """Setup object store."""
-        try:
-            await self.js.object_store(self.config.os_name)
-        except Exception as e:
-            _f("warn", f"Object Store {self.config.kv_name} not found, creating")
-            await self.js.create_object_store(bucket=self.config.os_name)
-            _f("success", f"created `{self.config.os_name}`")
-        return await self.js.object_store(self.config.os_name)
-
-    async def off(self):
-        """Disconnects from the NATS server and prints a warning message."""
-        await self.nc.drain()
-        _f('warn', f'disconnected from {self.config.host}')

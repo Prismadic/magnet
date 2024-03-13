@@ -1,16 +1,17 @@
-from dataclasses import dataclass, field
-from typing import Dict
+from dataclasses import dataclass, field, is_dataclass, asdict
+from typing import Dict, Optional, Any
+import json
 
 @dataclass
 class IndexConfig:
-    milvus_uri: str
-    milvus_port: int
-    milvus_user: str
-    milvus_password: str
-    dimension: int
-    model: str
-    name: str
-    params: Dict[str, any] = field(default_factory=dict)
+    milvus_uri: Optional[str] = None
+    milvus_port: Optional[int] = None
+    milvus_user: Optional[str] = None
+    milvus_password: Optional[str] = None
+    dimension: Optional[int] = None
+    model: Optional[str] = None
+    name: Optional[str] = None
+    options: Dict[Optional[dict], Any] = field(default_factory=dict)
 
 @dataclass
 class PrismConfig:
@@ -18,12 +19,11 @@ class PrismConfig:
     domain: str = None
     credentials: str = None
     session: str = None
-    stream_name: str = None
-    stream_category: str = None
+    name: str = None
+    category: str = None
     kv_name: str = None
     os_name: str = None
-    config_prefix: str = None
-    index: IndexConfig = None
+    index: Optional[IndexConfig] = None
 
 @dataclass
 class Payload:

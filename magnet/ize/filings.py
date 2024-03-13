@@ -1,8 +1,10 @@
 import pandas as pd
 import os
-from magnet.utils.globals import _f, Utils
 from tqdm import tqdm
+
+from magnet.utils.globals import _f, Utils
 from magnet.utils.data_classes import *
+from magnet.ic.field import Charge
 
 class Processor:
     """
@@ -156,7 +158,7 @@ class Processor:
         else:
             return _f("fatal", "no data loaded!")
         
-    async def create_charge(self, field=None):
+    async def create_charge(self, field=Charge):
         """
         Process and send data to a field.
 
