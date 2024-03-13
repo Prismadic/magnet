@@ -36,20 +36,20 @@ class Memory:
                 self.db.initialize()
         self.db.load()
 
-    async def index(self, payload, msg, field: Charge = None, verbose: bool = False, instruction: str = "Represent this sentence for searching relevant passages: "):
+    async def index(self, payload, msg, field: Charge = None, v: bool = False, instruction: str = "Represent this sentence for searching relevant passages: "):
         if not msg or not payload:
             return _f('fatal', 'no field message and/or payload to ack!')
         if field:
             self.field = field
         try:
-            _f('info', f'encoding payload\n{payload}') if verbose else None
+            _f('info', f'encoding payload\n{payload}') if v else None
             payload.embedding = self._model.encode(
                 f"{instruction} {payload.text}", normalize_embeddings=True)
         except Exception as e:
             return _f('fatal', e)
         await msg.in_progress()
         try:
-            _f('info', f'indexing payload') if verbose else None
+            _f('info', f'indexing payload') if v else None
             if not await self.is_dupe(q=payload.embedding):
                 self.db.collection.insert([
                     [payload.document], [payload.text], [payload.embedding]
@@ -62,13 +62,13 @@ class Memory:
                         text=payload.text,
                         document=payload.document
                     )
-                    _f('info', f'sending payload\n{payload}') if verbose else None
+                    _f('info', f'sending payload\n{payload}') if v else None
                     await self.field.pulse(payload)
                 await msg.ack_sync()
-                _f('success', f'embedding indexed\n{payload}') if verbose else None
+                _f('success', f'embedding indexed\n{payload}') if v else None
             else:
                 await msg.ack_sync()
-                _f('warn', f'embedding exists already\n{payload}') if verbose else None
+                _f('warn', f'embedding exists already\n{payload}') if v else None
         except Exception as e:
             await msg.term()
             _f('fatal', e)
@@ -85,7 +85,7 @@ class Memory:
         _results = self.db.collection.search(
             data=[payload.embedding],
             anns_field="embedding",
-            param=self.config.index.params,
+            param=self.config.index.options,
             limit=limit,
             output_fields=['text', 'document']
         )
@@ -121,7 +121,7 @@ class Memory:
         match = self.db.collection.search(
             data=[q],
             anns_field="embedding",
-            param=self.config.index.params,
+            param=self.config.index.options,
             output_fields=['text', 'document'],
             limit=1
         )

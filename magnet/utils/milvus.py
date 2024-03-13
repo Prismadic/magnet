@@ -23,7 +23,6 @@ class MilvusDB:
                 alias=self.config.session
             )
             self.schema = CollectionSchema(fields=self.fields)
-            self.index_params = self.config.index.options
             _f('success', f"connected successfully to {self.config.index.milvus_uri}")
         except Exception as e:
             _f('fatal', e)
@@ -40,7 +39,7 @@ class MilvusDB:
             utility.drop_collection(self.config.index.name, using=self.config.session)
         try:
             self.collection = Collection(name=self.config.index.name, schema=self.schema, using=self.config.session)
-            self.collection.create_index(field_name="embedding", index_params=self.index_params)
+            self.collection.create_index(field_name="embedding", index_params=self.config.index.options)
             _f('success', f"{self.config.index.name} created")
         except Exception as e:
             _f('fatal', e)

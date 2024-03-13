@@ -124,7 +124,7 @@ class Charge:
             _f('fatal', "name doesn't match the stream category or category doesn't exist")
 
 class Resonator:
-    def __init__(self, prism: PrismConfig | dict = None):
+    def __init__(self, prism: Prism):
         """
         Initializes the `Resonator` class with the NATS server address.
 
@@ -158,26 +158,26 @@ class Resonator:
         )
         _f('wait', f'connecting to {self.prism.config.host}')
         try:
-            self.sub = await self.js.pull_subscribe(
-                durable=self.prism.session
+            self.sub = await self.prism.js.pull_subscribe(
+                durable=self.prism.config.session
                 , subject=self.prism.config.category
                 , stream=self.prism.config.name
                 , config=self.consumer_config
             )
             _f('info',
-                f'joined worker queue: {self.prism.session} as {self.node}')
+                f'joined worker queue: {self.prism.config.session} as {self.node}')
         except Exception as e:
             return _f('fatal', e)
 
     async def listen(self, cb=print, job_n: int = None, generic: bool = False, verbose=False):
 
-        try: self.prism.js.sub
+        try: self.sub
         except: return _f('fatal', 'no subscriber initialized')
         if job_n:
             _f("info",
                f'consuming {job_n} from [{self.prism.config.category}] on\n🛰️ stream: {self.prism.config.name}\n🧲 session: "{self.prism.session}"')
             try:
-                msgs = await self.prism.js.sub.fetch(batch=job_n, timeout=60)
+                msgs = await self.sub.fetch(batch=job_n, timeout=60)
                 payloads = [msg.data if generic else Payload(
                     **json.loads(msg.data)) for msg in msgs]
                 try:
@@ -189,12 +189,12 @@ class Resonator:
                     _f('fatal', e)
             except ValueError as e:
                 _f('warn',
-                   f'{self.session} reached the end of {self.prism.config.category}, {self.prism.config.name}')
+                   f'{self.prism.config.session} reached the end of {self.prism.config.category}, {self.prism.config.name}')
             except Exception as e:
-                _f('fatal', e)
+                _f('warn', "no more data")
         else:
             _f("info",
-               f'consuming delta from [{self.prism.config.category}] on\n🛰️ stream: {self.prism.config.name}\n🧲 session: "{self.prism.session}"')
+               f'consuming delta from [{self.prism.config.category}] on\n🛰️ stream: {self.prism.config.name}\n🧲 session: "{self.prism.config.session}"')
             while True:
                 try:
                     msgs = await self.sub.fetch(batch=1, timeout=60)
@@ -208,7 +208,7 @@ class Resonator:
                         _f("warn", f'retrying connection to {self.prism.config.host}\n{e}')
                         _f("info", "this can also be a problem with your callback")
                 except Exception as e:
-                    _f('fatal', f'invalid JSON\n{e}')
+                    _f('warn', f'no more data') if "nats: timeout" in str(e) else _f('fatal', e)
                     break
 
     async def worker(self, cb=print):

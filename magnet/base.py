@@ -30,7 +30,7 @@ class Prism:
                 domain=self.config.domain 
             ) if self.config.domain is not None else self.nc.jetstream()
             if self.config.name:
-                self.nc = await self._setup_stream()
+                await self._setup_stream()
             if self.config.kv_name:
                 self.kv = await self._setup_kv()
             if self.config.os_name:
