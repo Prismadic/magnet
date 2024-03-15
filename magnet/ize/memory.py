@@ -5,7 +5,7 @@ from magnet.utils.globals import Utils
 from magnet.utils.index.milvus import *
 from magnet.utils.data_classes import EmbeddingPayload
 
-from magnet.ic.field import Charge, Prism
+from magnet.ic.field import Charge, Magnet
 
 from typing import Optional
 
@@ -23,8 +23,8 @@ class Memory:
         db (MilvusDB): An instance of the MilvusDB class from the magnet.utils.milvus module, used for connecting to the Milvus database.
     """
 
-    def __init__(self, prism: Prism = None):
-        self.config = prism.config
+    def __init__(self, magnet: Magnet = None):
+        self.config = magnet.config
         self._model = None
         
     async def on(self, create: bool = False, initialize: bool = False):

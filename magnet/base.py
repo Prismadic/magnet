@@ -37,7 +37,7 @@ auto_config = {
     }
 }
 
-class Prism:
+class Magnet:
     def __init__(self, config: PrismConfig | dict = None):
         try:
             if isinstance(config, dict):
@@ -198,10 +198,10 @@ class EmbeddedMagnet:
         except Exception as e:
             _f("warn", f"embedded milvus can't be stopped\n{e}")
 
-    def create_prism(self):
-        _f('wait', 'creating prism with embedded cluster')
-        prism = Prism(auto_config)
-        return prism
+    def create_magnet(self):
+        _f('wait', 'creating magnet with embedded cluster')
+        magnet = Magnet(auto_config)
+        return magnet
 
     def cleanup(self):
         self.client.images.prune()

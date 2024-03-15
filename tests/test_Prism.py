@@ -1,7 +1,7 @@
 import pytest
-from magnet.ic.field import Prism
+from magnet.ic.field import Magnet
 
-# Prism can be initialized with a valid PrismConfig instance or a dictionary.
+# Magnet can be initialized with a valid PrismConfig instance or a dictionary.
 @pytest.mark.asyncio
 async def test_valid_initialization():
     config = {
@@ -13,15 +13,15 @@ async def test_valid_initialization():
         "os_name": "my_object_store"
     }
 
-    prism = Prism(config)
-    assert isinstance(prism, Prism)
+    magnet = Magnet(config)
+    assert isinstance(magnet, Magnet)
 
 @pytest.mark.asyncio
 async def test_invalid_initialization():
     config = "invalid_config"
 
     with pytest.raises(ValueError):
-        Prism(config)
+        Magnet(config)
 
 @pytest.mark.asyncio
 async def test_prism_connect_and_setup():
@@ -34,10 +34,10 @@ async def test_prism_connect_and_setup():
         "os_name": "my_object_store"
     }
 
-    prism = Prism(config)
-    assert isinstance(prism, Prism)
+    magnet = Magnet(config)
+    assert isinstance(magnet, Magnet)
 
-    js, kv, os = await prism.align()
+    js, kv, os = await magnet.align()
     assert js is not None
     assert kv is not None
     assert os is not None
@@ -53,11 +53,11 @@ async def test_close_connection():
         "os_name": "my_object_store"
     }
 
-    prism = Prism(config)
-    await prism.align()
+    magnet = Magnet(config)
+    await magnet.align()
     
-    assert prism.kv is not None
-    assert prism.os is not None
+    assert magnet.kv is not None
+    assert magnet.os is not None
 
-    await prism.off()
-    assert prism.nc.is_closed
+    await magnet.off()
+    assert magnet.nc.is_closed
