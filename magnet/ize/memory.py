@@ -31,12 +31,12 @@ class Memory:
         self._model = SentenceTransformer(self.config.index.model, device=Utils().check_cuda())
         _f('info', f'loading into {self._model.device}')
         self.db = MilvusDB(self.config)
-        self.db.on()
+        await self.db.on()
         if create:
-            self.db.create(overwrite=True)
-        self.db.load()
+            await self.db.create(overwrite=True)
+        await self.db.load()
         if initialize:
-                self.db.initialize()
+            self.db.initialize()
 
     async def index(self, payload, msg, field: Charge = None, v: bool = False, instruction: str = "Represent this sentence for searching relevant passages: "):
         if not msg or not payload:

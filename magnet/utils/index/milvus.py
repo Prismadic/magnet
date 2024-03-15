@@ -12,7 +12,7 @@ class MilvusDB:
             FieldSchema(name='text', dtype=DataType.VARCHAR, max_length=65535),
             FieldSchema(name='embedding', dtype=DataType.FLOAT_VECTOR, dim=self.config.index.dimension)
         ]
-    def on(self):
+    async def on(self):
         try:
             _f('wait', f'connecting to {self.config.index.milvus_uri}')
             self.connection = connections.connect(
@@ -34,17 +34,17 @@ class MilvusDB:
         except Exception as e:
             return _f('fatal', e)
 
-    def create(self, overwrite=False):
-        if utility.has_collection(self.config.index.name, using=self.config.session) and overwrite:
-            utility.drop_collection(self.config.index.name, using=self.config.session)
+    async def create(self, overwrite=False):
         try:
+            if utility.has_collection(self.config.index.name, using=self.config.session) and overwrite:
+                utility.drop_collection(self.config.index.name, using=self.config.session)
             self.collection = Collection(name=self.config.index.name, schema=self.schema, using=self.config.session)
             self.collection.create_index(field_name="embedding", index_params=self.config.index.options)
             _f('success', f"{self.config.index.name} created")
         except Exception as e:
             _f('fatal', e)
 
-    def load(self):
+    async def load(self):
         _f('wait', f'loading {self.config.index.name} into memory, may take time')
         self.collection = Collection(name=self.config.index.name, schema=self.schema, using=self.config.session)
         self.collection.load()
@@ -71,7 +71,7 @@ class MilvusDB:
         except Exception as e:
             _f('fatal', e)
 
-    def delete_index(self):
+    async def delete_index(self):
         if utility.has_collection(self.config.index.name, using=self.config.session):
             utility.drop_collection(self.config.index.name, using=self.config.session)
             _f('warn', f"Index for {self.config.index.name} deleted")
