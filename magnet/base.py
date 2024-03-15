@@ -4,7 +4,7 @@ import nats, asyncio, docker, platform
 from milvus import default_server
 
 from magnet.utils.globals import _f
-from magnet.utils.data_classes import PrismConfig, IndexConfig
+from magnet.utils.data_classes import MagnetConfig, IndexConfig
 
 milvus_server = default_server
 os_name = platform.system()
@@ -38,14 +38,14 @@ auto_config = {
 }
 
 class Magnet:
-    def __init__(self, config: PrismConfig | dict = None):
+    def __init__(self, config: MagnetConfig | dict = None):
         try:
             if isinstance(config, dict):
-                config = PrismConfig(**config)
+                config = MagnetConfig(**config)
             if isinstance(config.index, dict):
                 config.index = IndexConfig(**config.index)
-            elif not isinstance(config, PrismConfig):
-                _f("fatal", "config must be a PrismConfig instance or a dictionary")
+            elif not isinstance(config, MagnetConfig):
+                _f("fatal", "config must be a MagnetConfig instance or a dictionary")
                 raise ValueError
         except Exception as e:
             raise e

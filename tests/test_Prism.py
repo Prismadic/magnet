@@ -1,7 +1,7 @@
 import pytest
 from magnet.ic.field import Magnet
 
-# Magnet can be initialized with a valid PrismConfig instance or a dictionary.
+# Magnet can be initialized with a valid MagnetConfig instance or a dictionary.
 @pytest.mark.asyncio
 async def test_valid_initialization():
     config = {

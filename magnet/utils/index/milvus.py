@@ -1,10 +1,10 @@
 from pymilvus import connections, utility, FieldSchema, CollectionSchema, DataType, Collection
 from magnet.utils.globals import _f
-from magnet.utils.data_classes import PrismConfig
+from magnet.utils.data_classes import MagnetConfig
 import random, array
 
 class MilvusDB:
-    def __init__(self, config: PrismConfig):
+    def __init__(self, config: MagnetConfig):
         self.config = config
         self.fields = [
             FieldSchema(name='id', dtype=DataType.INT64, is_primary=True, auto_id=True),

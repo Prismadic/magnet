@@ -27,7 +27,7 @@ class IndexConfig:
     options: Dict[Optional[dict], Any] = field(default_factory=dict)
 
 @dataclass
-class PrismConfig:
+class MagnetConfig:
     host: str
     domain: str = None
     credentials: str = None
