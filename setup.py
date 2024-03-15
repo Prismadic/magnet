@@ -17,7 +17,10 @@ setup(
         'nats-py',
         'rich',
         'xxhash',
-        'nkeys'
+        'nkeys',
+        'tabulate',
+        'milvus',
+        'docker',
     ],
     url = 'https://github.com/Prismadic/magnet'
 )

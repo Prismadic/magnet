@@ -12,3 +12,4 @@ xxhash
 nkeys
 milvus
 docker
+tabulate
