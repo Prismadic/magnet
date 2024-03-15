@@ -127,4 +127,4 @@ class Memory:
             output_fields=['text', 'document'],
             limit=1
         )
-        return True if match and match[0] and sum(match[0][0].distances) >= 0.99 else False
+        return True if match and match[0] and match[0][0].distance >= 0.99 else False

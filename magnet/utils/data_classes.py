@@ -32,7 +32,7 @@ class PrismConfig:
     domain: str = None
     credentials: str = None
     session: str = None
-    name: str = None
+    stream_name: str = None
     category: str = None
     kv_name: str = None
     os_name: str = None

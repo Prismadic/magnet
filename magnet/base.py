@@ -55,7 +55,7 @@ class Prism:
         self.kv = None
         self.os = None
 
-    async def _cre_handler(self, cre): 
+    async def _cre_handler(self, cre):
         _f("warn", cre, no_print=True)
 
     async def align(self, backoff_strategy: str = 'eul'):
@@ -68,15 +68,24 @@ class Prism:
         attempt = 0
         eulers_number = 2.71828
         golden_ratio = 1.61803398875
-
+        
         while True:
             try:
+                _server = f'{"nats://" if not self.config.credentials else "tls://"}{self.config.host}:4222'
                 self.nc = await nats.connect(
-                    f'{"nats://" if not self.config.credentials else "tls://"}{self.config.host}:4222',
+                    _server,
                     user_credentials=self.config.credentials,
-                    error_cb=self._cre_handler)
-                self.js = self.nc.jetstream(domain=self.config.domain) if self.config.domain is not None else self.nc.jetstream()
-                if self.config.name:
+                    error_cb=self._cre_handler
+                )
+                _f("success", f"🧲 connected to \n💎 {_server} ")
+                
+                try:
+                    self.js = self.nc.jetstream(domain=self.config.domain)
+                    _f("info", f"🧲 initialized client ")
+                except Exception as e:
+                    _f("fatal", f"could not find domain {self.config.domain}\n{e}")
+                    raise e
+                if self.config.stream_name:
                     await self._setup_stream()
                 if self.config.kv_name:
                     self.kv = await self._setup_kv()
@@ -84,9 +93,8 @@ class Prism:
                     self.os = await self._setup_object_store()
                 _f("success", f"🧲 connected to \n💎 {self.config} ")
                 return [self.js, self.kv, self.os]
-            except Exception:
-                _f("fatal", f"could not align {self.config.host}")
-                
+            except Exception as e:
+                _f("fatal", f"could not align {self.config.host}\n{e}")
                 # Determine delay based on ratio type
                 if backoff_strategy == 'eul':
                     delay = pow(eulers_number, attempt)  # Exponential backoff using Euler's number
@@ -100,12 +108,12 @@ class Prism:
     async def _setup_stream(self):
         """Setup stream."""
         try:
-            await self.js.stream_info(self.config.name)
+            await self.js.stream_info(self.config.stream_name)
         except Exception as e:
-            _f("warn", f"Stream {self.config.name} not found, creating")
-            await self.js.add_stream(name=self.config.name, subjects=["magnet"])
-            _f("success", f"created `{self.config.name}` with default category `magnet`")
-        return await self.js.stream_info(self.config.name)
+            _f("warn", f"Stream {self.config.stream_name} not found, creating")
+            await self.js.add_stream(name=self.config.stream_name, subjects=["magnet"])
+            _f("success", f"created `{self.config.stream_name}` with default category `magnet`")
+        return await self.js.stream_info(self.config.stream_name)
 
     async def _setup_kv(self):
         """Setup key-value store."""
