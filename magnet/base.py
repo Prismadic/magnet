@@ -13,7 +13,7 @@ auto_config = {
     "host": "127.0.0.1",
     "credentials": None,
     "domain": None,
-    "name": "my_stream",
+    "stream_name": "my_stream",
     "category": "my_category",
     "kv_name": "my_kv",
     "session": "my_session",
