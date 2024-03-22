@@ -113,7 +113,7 @@ class Memory:
     async def delete(self, name: str = None):
         if name and name == self.config.index.name:
             try:
-                self.db.delete_index()
+                return await self.db.delete_index()
             except Exception as e:
                 _f('fatal', e)
         else:
