@@ -1,4 +1,4 @@
-import json, datetime, xxhash, platform
+import json, datetime, xxhash, platform, asyncio
 
 from dataclasses import asdict
 from tabulate import tabulate
@@ -207,7 +207,6 @@ class Resonator:
             return _f('fatal', e)
 
     async def listen(self, cb=print, job_n: int = None, generic: bool = False, verbose=False):
-
         try: self.sub
         except: return _f('fatal', 'no subscriber initialized')
         if job_n:
@@ -233,6 +232,7 @@ class Resonator:
             _f("info",
                f'consuming delta from [{self.magnet.config.category}] on\n🛰️ stream: {self.magnet.config.stream_name}\n🧲 session: "{self.magnet.config.session}"')
             while True:
+                _f('wait', 'waiting for messages')
                 try:
                     msgs = await self.sub.fetch(batch=1, timeout=60)
                     _f('info', f"{msgs}") if verbose else None
@@ -245,8 +245,11 @@ class Resonator:
                         _f("warn", f'retrying connection to {self.magnet.config.host}\n{e}')
                         _f("info", "this can also be a problem with your callback")
                 except Exception as e:
-                    _f('warn', f'no more data') if "nats: timeout" in str(e) else _f('fatal', e)
-                    break
+                    if "nats: timeout" in str(e):
+                        _f('warn', 'encountered a timeout, retrying in 1s')
+                    else:
+                        _f('fatal', 'test'+str(e))
+                await asyncio.sleep(1)
 
     async def worker(self, cb=print):
         """
