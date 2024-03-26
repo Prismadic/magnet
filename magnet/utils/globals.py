@@ -7,34 +7,30 @@ from spacy.lang.en import English
 import inspect
 from transformers import AutoTokenizer
 
-def break_into_chunks(text, model_name, max_tokens):
+def break_into_chunks(text, max_words):
     """
-    Break a text into chunks of a specified max number of tokens using the tokenizer of a given model.
+    Break a text into chunks of a specified maximum number of words.
     
     Parameters:
     - text (str): The text to break into chunks.
-    - model_name (str): The model or tokenizer name to use for tokenizing the text.
-    - max_tokens (int): The maximum number of tokens per chunk.
+    - max_words (int): The maximum number of words per chunk.
     
     Returns:
-    - List[str]: A list of text chunks, each with up to max_tokens tokens.
+    - List[str]: A list of text chunks, each with up to max_words words.
     """
-    # Load the tokenizer for the specified model
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    words = text.split()  # Split the text into individual words
     
-    tokens = tokenizer.tokenize(text)
+    chunks = []  # Initialize an empty list to hold the chunks of text
+    current_chunk = []  # Initialize an empty list to build up the current chunk
     
-    current_chunk = []
-    chunks = []
+    for word in words:
+        current_chunk.append(word)  # Add the current word to the chunk
+        if len(current_chunk) == max_words:  # If the chunk reaches the max size, add it to the chunks list
+            chunks.append(" ".join(current_chunk))  # Join the words in the chunk into a string
+            current_chunk = []  # Reset the current chunk to empty
     
-    for token in tokens:
-        current_chunk.append(token)
-        if len(current_chunk) == max_tokens:
-            chunks.append(tokenizer.convert_tokens_to_string(current_chunk))
-            current_chunk = []
-    
-    if current_chunk:
-        chunks.append(tokenizer.convert_tokens_to_string(current_chunk))
+    if current_chunk:  # If there are any remaining words in the current chunk, add them as a final chunk
+        chunks.append(" ".join(current_chunk))
     
     return chunks
 

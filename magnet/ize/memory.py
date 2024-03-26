@@ -1,5 +1,4 @@
 from sentence_transformers import SentenceTransformer
-from transformers import AutoTokenizer
 from magnet.utils.globals import _f, Utils, break_into_chunks
 from magnet.utils.index.milvus import *
 from magnet.utils.data_classes import EmbeddingPayload
@@ -45,11 +44,9 @@ class Memory:
         try:
             _f('info', f'encoding payload\n{payload}') if v else None
             text_to_encode = f"{instruction} {payload.text}"
-            tokenizer = AutoTokenizer.from_pretrained(self.config.index.model)
-            num_tokens = len(tokenizer.tokenize(text_to_encode))
-
+            num_tokens = len(text_to_encode.split())
             if num_tokens > self.config.index.dimension:
-                chunks = await self.break_into_chunks(text_to_encode, self.config.index.dimension)
+                chunks = break_into_chunks(text_to_encode, self.config.index.dimension)
                 for chunk in chunks:
                     embedding = self._model.encode(chunk, normalize_embeddings=True)
                     if not await self.is_dupe(q=embedding):
