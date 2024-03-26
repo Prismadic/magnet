@@ -1,7 +1,6 @@
 from sentence_transformers import SentenceTransformer
-
-from magnet.utils.globals import _f
-from magnet.utils.globals import Utils
+from transformers import AutoTokenizer
+from magnet.utils.globals import _f, Utils, break_into_chunks
 from magnet.utils.index.milvus import *
 from magnet.utils.data_classes import EmbeddingPayload
 
@@ -38,39 +37,51 @@ class Memory:
         if initialize:
             self.db.initialize()
 
-    async def index(self, payload, msg, field: Charge = None, v: bool = False, instruction: str = "Represent this sentence for searching relevant passages: "):
+    async def index(self, payload, msg, field=None, v=False, instruction="Represent this sentence for searching relevant passages: "):
         if not msg or not payload:
             return _f('fatal', 'no field message and/or payload to ack!')
         if field:
             self.field = field
         try:
             _f('info', f'encoding payload\n{payload}') if v else None
-            payload.embedding = self._model.encode(
-                f"{instruction} {payload.text}", normalize_embeddings=True)
-        except Exception as e:
-            return _f('fatal', e)
-        await msg.in_progress()
-        try:
-            _f('info', f'indexing payload') if v else None
-            if not await self.is_dupe(q=payload.embedding):
-                self.db.collection.insert([
-                    [payload.document], [payload.text], [payload.embedding]
-                ])
-                if field:
-                    payload = EmbeddingPayload(
-                        model=self.config.index.model,
-                        embedding=self._model.encode(
-                            f"{instruction} {payload.text}", normalize_embeddings=True).tolist(),
-                        text=payload.text,
-                        document=payload.document
-                    )
-                    _f('info', f'sending payload\n{payload}') if v else None
-                    await self.field.pulse(payload)
-                await msg.ack_sync()
-                _f('success', f'embedding indexed\n{payload}') if v else None
+            text_to_encode = f"{instruction} {payload.text}"
+            tokenizer = AutoTokenizer.from_pretrained(self.config.index.model)
+            num_tokens = len(tokenizer.tokenize(text_to_encode))
+
+            if num_tokens > self.config.index.dimension:
+                chunks = await self.break_into_chunks(text_to_encode, self.config.index.dimension)
+                for chunk in chunks:
+                    embedding = self._model.encode(chunk, normalize_embeddings=True)
+                    if not await self.is_dupe(q=embedding):
+                        self.db.collection.insert([
+                            [payload.document], [chunk], [embedding.tolist()]
+                        ])
+                        if field:
+                            payload = EmbeddingPayload(
+                                model=self.config.index.model,
+                                embedding=embedding.tolist(),
+                                text=chunk,
+                                document=payload.document
+                            )
+                            _f('info', f'sending payload\n{payload}') if v else None
+                            await self.field.pulse(payload)
             else:
-                await msg.ack_sync()
-                _f('warn', f'embedding exists already\n{payload}') if v else None
+                embedding = self._model.encode(text_to_encode, normalize_embeddings=True)
+                if not await self.is_dupe(q=embedding):
+                    self.db.collection.insert([
+                        [payload.document], [payload.text], [embedding.tolist()]
+                    ])
+                    if field:
+                        payload = EmbeddingPayload(
+                            model=self.config.index.model,
+                            embedding=embedding.tolist(),
+                            text=payload.text,
+                            document=payload.document
+                        )
+                        _f('info', f'sending payload\n{payload}') if v else None
+                        await self.field.pulse(payload)
+            await msg.ack_sync()
+            _f('success', f'embedding indexed\n{payload}') if v else None
         except Exception as e:
             await msg.term()
             _f('fatal', e)
