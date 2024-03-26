@@ -111,8 +111,8 @@ class Magnet:
             await self.js.stream_info(self.config.stream_name)
         except Exception as e:
             _f("warn", f"Stream {self.config.stream_name} not found, creating")
-            await self.js.add_stream(name=self.config.stream_name, subjects=["magnet"])
-            _f("success", f"created `{self.config.stream_name}` with default category `magnet`")
+            await self.js.add_stream(name=self.config.stream_name, subjects=[self.config.category])
+            _f("success", f"created `{self.config.stream_name}` with category `{self.config.category}`")
         return await self.js.stream_info(self.config.stream_name)
 
     async def _setup_kv(self):
