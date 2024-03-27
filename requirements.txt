@@ -3,7 +3,6 @@ sentence-transformers
 transformers
 pandas
 tqdm
-spacy
 pymilvus
 boto3
 nats-py
