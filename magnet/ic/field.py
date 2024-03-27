@@ -248,7 +248,7 @@ class Resonator:
                     if "nats: timeout" in str(e):
                         _f('warn', 'encountered a timeout, retrying in 1s')
                     else:
-                        _f('fatal', 'test'+str(e))
+                        _f('fatal', str(e))
                 await asyncio.sleep(1)
 
     async def worker(self, cb=print):

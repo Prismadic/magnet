@@ -17,7 +17,7 @@ class LLM:
         self.token = hf_token
 
     async def ask(self, params: AskParameters = None):
-        prompt = getattr(globals()['Prompts'](), params.p)(params.docs, params.q)
+        prompt = getattr(globals()['Prompts'](), params.p)(params.docs, params.q).replace('\n', ' ')
         _f('warn', '(p + q + d) > n') if len(prompt) > params.n else None
         
         headers = {

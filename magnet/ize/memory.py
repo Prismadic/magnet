@@ -46,7 +46,7 @@ class Memory:
             text_to_encode = f"{instruction} {payload.text}"
             num_tokens = len(text_to_encode.split())
             if num_tokens > self.config.index.dimension:
-                chunks = break_into_chunks(text_to_encode, self.config.index.dimension)
+                chunks = break_into_chunks(payload.text, self.config.index.dimension)
                 for chunk in chunks:
                     embedding = self._model.encode(chunk, normalize_embeddings=True)
                     if not await self.is_dupe(q=embedding):
@@ -63,7 +63,7 @@ class Memory:
                             _f('info', f'sending payload\n{payload}') if v else None
                             await self.field.pulse(payload)
             else:
-                embedding = self._model.encode(text_to_encode, normalize_embeddings=True)
+                embedding = self._model.encode(payload.text, normalize_embeddings=True)
                 if not await self.is_dupe(q=embedding):
                     self.db.collection.insert([
                         [payload.document], [payload.text], [embedding.tolist()]
