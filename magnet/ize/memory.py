@@ -2,7 +2,7 @@ from sentence_transformers import SentenceTransformer
 from magnet.utils.globals import _f, Utils, break_into_chunks
 from magnet.utils.index.milvus import *
 from magnet.utils.data_classes import EmbeddingPayload
-
+import re
 from magnet.ic.field import Charge, Magnet
 
 from typing import Optional
@@ -43,7 +43,9 @@ class Memory:
             self.field = field
         try:
             _f('info', f'encoding payload\n{payload}') if v else None
-            text_to_encode = f"{instruction} {payload.text}"
+            _text = re.sub(r'\s+', ' ', payload.text)
+            _text = _text.replace('\n', '')
+            text_to_encode = f"{instruction} {_text}"
             num_tokens = len(text_to_encode.split())
             if num_tokens > self.config.index.dimension:
                 chunks = break_into_chunks(payload.text, self.config.index.dimension)

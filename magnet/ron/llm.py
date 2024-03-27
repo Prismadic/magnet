@@ -1,8 +1,6 @@
-from dataclasses import asdict
-
 from magnet.utils.globals import _f
 
-from magnet.utils.llm.huggingface import InferenceAPI
+from magnet.utils.llm.api import InferenceAPI
 from magnet.utils.llm.local import LocalInference
 from magnet.utils.llm.prompts import *
 
@@ -11,10 +9,11 @@ from magnet.utils.data_classes import *
 import requests, json
 
 class LLM:
-    def __init__(self, server: str = None, field = None, hf_token: str = None):
-        self.server = server if not hf_token else None
+    def __init__(self, server: str = None, field = None, token: str = None, provider='openai'):
+        self.server = server if not token else None
         self.field = field
-        self.token = hf_token
+        self.provider = provider
+        self.token = token
 
     async def ask(self, params: AskParameters = None):
         prompt = getattr(globals()['Prompts'](), params.p)(params.docs, params.q).replace('\n', ' ')
@@ -24,7 +23,7 @@ class LLM:
             'Content-Type': 'application/json'
         }
 
-        generic_payload = json.dumps({
+        generic_payload = {
             "model": params.m,
             "prompt": prompt,
             "inputs": prompt,
@@ -32,15 +31,13 @@ class LLM:
                 "max_new_tokens": params.n
                 , "temperature": params.t,
             }
-        })
+        }
 
         if self.token:
-            api = InferenceAPI(self.token)
+            api = InferenceAPI(self.token, self.provider)
             response = api.invoke(generic_payload)
-            if not isinstance(response, list) and 'error' in response.keys():
-                return _f('fatal', response['error'])
-            else:
-                response = response[0]['generated_text'].split(json.loads(generic_payload)['prompt'])[1]
+            if not isinstance(response, str):
+                return _f('fatal', response)
         elif params.vllm:
             response = requests.request(
                 "POST", f"{self.server}/v1/completions", headers=headers, data=generic_payload).text
