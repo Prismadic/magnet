@@ -9,7 +9,7 @@ nats-py
 rich
 xxhash
 nkeys
-milvus==2.3.8
+milvus
 docker
 tabulate
 openai
