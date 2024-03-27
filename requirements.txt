@@ -13,3 +13,4 @@ nkeys
 milvus
 docker
 tabulate
+openai

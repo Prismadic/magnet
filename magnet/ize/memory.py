@@ -36,7 +36,7 @@ class Memory:
         if initialize:
             self.db.initialize()
 
-    async def index(self, payload, msg, field=None, v=False, instruction="Represent this sentence for searching relevant passages: "):
+    async def index(self, payload, msg, field=None, v=False, instruction="Represent this information for searching relevant passages: "):
         if not msg or not payload:
             return _f('fatal', 'no field message and/or payload to ack!')
         if field:
@@ -85,7 +85,7 @@ class Memory:
             await msg.term()
             _f('fatal', e)
 
-    def search(self, payload, limit: int = 100, cb: Optional[callable] = None, instruction: str = "Represent this sentence for searching relevant passages: "):
+    def search(self, payload, limit: int = 100, cb: Optional[callable] = None, instruction: str = "Represent this information for searching relevant passages: "):
         payload = EmbeddingPayload(
             text=payload,
             embedding=self._model.encode(
