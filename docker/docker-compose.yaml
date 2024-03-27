@@ -1,18 +1,26 @@
-version: '3.8'
+version: '3'
 services:
-  magnet-index:
-    image: magnet
+  app:
+    build: .
     environment:
-      MILVUS_HOST: ""
-      MILVUS_PORT: "19530"
-      MILVUS_USER: ""
-      MILVUS_PASSWORD: ""
-      DIMENSION: ""
-      MODEL: ""
-      INDEX: ""
-      efConstruction: ""
-      M: ""
-      RESONATOR_URI: ""
-      CATEGORY: ""
-      SESSION: ""
-      STREAM: ""
+      - MAGNET_ROLE=index
+      - HOST=""
+      - STREAM_NAME=
+      - CATEGORY=
+      - KV_NAME=
+      - SESSION=
+      - OS_NAME=
+      - MILVUS_URI=""
+      - MILVUS_PORT=19530
+      - MILVUS_USER=
+      - MILVUS_PASSWORD=""
+      - DIMENSION=1024
+      - MODEL="BAAI/bge-large-en-v1.5"
+      - INDEX_NAME=""
+      - METRIC_TYPE=COSINE
+      - INDEX_TYPE=HNSW
+      - EF_CONSTRUCTION=40
+      - M=48
+    volumes:
+      - ./:/app
+    working_dir: /app
