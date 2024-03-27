@@ -8,4 +8,4 @@ WORKDIR /magnet_node/magnet
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-CMD ["python", "./docker/scripts/main.py"]
+CMD ["python", "/magnet_node/magnet/docker/scripts/main.py"]

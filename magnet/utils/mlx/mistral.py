@@ -6,10 +6,14 @@ import time
 from dataclasses import dataclass
 from pathlib import Path
 from typing import List, Optional, Tuple
+import platform
+is_darwin = platform.system() == 'Darwin'
 
-import mlx.core as mx
-import mlx.nn as nn
-from mlx.utils import tree_unflatten
+if is_darwin:
+    import mlx.core as mx
+    import mlx.nn as nn
+    from mlx.utils import tree_unflatten
+
 from sentencepiece import SentencePieceProcessor
 from magnet.utils.globals import _f
 from magnet.utils.data_classes import MistralArgs
