@@ -13,6 +13,7 @@ class AskParameters:
     p: str = "qa_ref"
     cb: Optional[Callable] = None
     docs: List[str] = field(default_factory=list)
+    context: str = ""
     vllm: bool = False
 
 @dataclass

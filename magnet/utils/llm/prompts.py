@@ -9,7 +9,7 @@ class Prompts:
         """
         return
 
-    def qa_ref(self, docs: list = [], q: str = None) -> str:
+    def qa_ref(self, params) -> str:
         """
         Generates a formatted prompt for generating an answer based on the given documents and question.
 
@@ -20,23 +20,26 @@ class Prompts:
         Returns:
             str: A formatted string representing a prompt for generating an answer based on the given documents and question.
         """
-        docs = '\n'.join([f"Document[name={d}]\ {t}\n\n" for (t, d, c) in [tuple(x.values()) for x in docs]])
+        docs = '\n'.join([f"Document[name={d}]\ {t}\n\n" for (t, d, c) in [tuple(x.values()) for x in params.docs]])
         return """Create a concise and informative answer (no more than 200 words) for a given question based solely on the given documents. You must only use information from the given documents. Use an unbiased and journalistic tone. Do not repeat text. Cite the documents using Document[name] notation. If multiple documents contain the answer, cite those documents like ‘as stated in Document[name], Document[name], etc.’. If the documents do not contain the answer to the question, say that ‘answering is not possible given the available information.’
     [DOCUMENTS]
     Question: [QUERY]; Answer: """ \
                 .replace('[DOCUMENTS]', docs) \
-                .replace('[QUERY]', q)
+                .replace('[QUERY]', params.q)
     
-    def classy(self, doc: str = "", q: str = None, schema={"original_data": "object", "scores": "list:float", "classes":"list:string"}) -> str:
+    def follow_up(self, params) -> str:
         """
-        Generates a formatted prompt for generating a classification based on the given documents and question.
+        Generates a formatted prompt for generating a follow-up question based on the given documents, question, and answer.
 
         Args:
-            doc (str): A text sample.
-            q (str): The context for which a classification is to be generated.
+            docs (list): A list of dictionaries representing the documents. Each dictionary should have a "title" key and a "content" key.
+            q (str): The question for which an answer was generated.
+            a (str): The answer to the question.
 
         Returns:
-            str: A formatted string representing a prompt for generating a classification based on the given documents and question.
+            str: A formatted string representing a prompt for generating a follow-up question based on the given documents, question, and answer.
         """
-        prompt = f"{q}\nPlease ONLY reply in JSON (do not provide any output but JSON) and keep your schema consistent with the following: {schema}\n\nand provide a score for each class:\n\n{doc} \n\n and make sure to put the original data into the 'original data' key."
-        return prompt
+        docs = '\n'.join([f"Document[name={d}]\ {t}\n\n" for (t, d, c) in [tuple(x.values()) for x in params.docs]])
+        return f"""You are a financial expert with access to all live data about all financial information around the world. Create a follow-up question based on the information given. The question should be open-ended and should not be answerable with a simple 'yes' or 'no'. The follow-up question should be concise and should not exceed 200 characters, and include any entities by name.
+        
+        [ANSWER]""".replace('[ANSWER]', params.context)

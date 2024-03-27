@@ -16,7 +16,7 @@ class LLM:
         self.token = token
 
     async def ask(self, params: AskParameters = None):
-        prompt = getattr(globals()['Prompts'](), params.p)(params.docs, params.q).replace('\n', ' ')
+        prompt = getattr(globals()['Prompts'](), params.p)(params).replace('\n', ' ')
         _f('warn', '(p + q + d) > n') if len(prompt) > params.n else None
         
         headers = {
