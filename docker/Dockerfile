@@ -1,4 +1,4 @@
-FROM python:3.11.8
+FROM python:3.8
 
 WORKDIR /magnet_node
 
