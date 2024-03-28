@@ -42,49 +42,51 @@ class Memory:
         if field:
             self.field = field
         try:
+            await msg.in_progress()
             _f('info', f'encoding payload\n{payload}') if v else None
             _text = re.sub(r'\s+', ' ', payload.text)
             _text = _text.replace('\n', '')
             text_to_encode = f"{instruction} {_text}"
             num_tokens = len(text_to_encode.split())
             if num_tokens > self.config.index.dimension:
-                chunks = break_into_chunks(payload.text, self.config.index.dimension)
-                for chunk in chunks:
-                    embedding = self._model.encode(chunk, normalize_embeddings=True)
-                    if not await self.is_dupe(q=embedding):
+                chunks = break_into_chunks(_text, self.config.index.dimension)
+                for _chunk in chunks:
+                    embedding = self._model.encode(text_to_encode, normalize_embeddings=True)
+                    if not self.is_dupe(q=embedding):
                         self.db.collection.insert([
-                            [payload.document], [chunk], [embedding.tolist()]
+                            [payload.document], [_chunk], [embedding.tolist()]
                         ])
+                        _f('success', f'embedding indexed\n{payload}') if v else None
                         if field:
                             payload = EmbeddingPayload(
                                 model=self.config.index.model,
                                 embedding=embedding.tolist(),
-                                text=chunk,
+                                text=_chunk,
                                 document=payload.document
                             )
                             _f('info', f'sending payload\n{payload}') if v else None
                             await self.field.pulse(payload)
             else:
-                embedding = self._model.encode(payload.text, normalize_embeddings=True)
-                if not await self.is_dupe(q=embedding):
+                embedding = self._model.encode(text_to_encode, normalize_embeddings=True)
+                if not self.is_dupe(q=embedding):
                     self.db.collection.insert([
-                        [payload.document], [payload.text], [embedding.tolist()]
+                        [payload.document], [_text], [embedding.tolist()]
                     ])
+                    _f('success', f'embedding indexed\n{payload}') if v else None
+                    await msg.ack_sync()
                     if field:
                         payload = EmbeddingPayload(
                             model=self.config.index.model,
                             embedding=embedding.tolist(),
-                            text=payload.text,
+                            text=_text,
                             document=payload.document
                         )
                         _f('info', f'sending payload\n{payload}') if v else None
                         await self.field.pulse(payload)
                 else:
                     _f('warn', f'embedding exists\n{payload}')
-            await msg.ack_sync()
-            _f('success', f'embedding indexed\n{payload}') if v else None
+                    await msg.ack_sync()
         except Exception as e:
-            await msg.term()
             _f('fatal', e)
 
     def search(self, payload, limit: int = 100, cb: Optional[callable] = None, instruction: str = "Represent this information for searching relevant passages: "):
@@ -131,7 +133,7 @@ class Memory:
         else:
             _f('fatal', "name doesn't match the connection or the connection doesn't exist")
     
-    async def is_dupe(self, q: str = None):
+    def is_dupe(self, q: str = None):
         match = self.db.collection.search(
             data=[q],
             anns_field="embedding",
