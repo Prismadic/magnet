@@ -232,7 +232,6 @@ class Resonator:
             _f("info",
                f'consuming delta from [{self.magnet.config.category}] on\n🛰️ stream: {self.magnet.config.stream_name}\n🧲 session: "{self.magnet.config.session}"')
             while True:
-                _f('wait', 'waiting for messages')
                 try:
                     msgs = await self.sub.fetch(batch=1, timeout=60)
                     _f('info', f"{msgs}") if verbose else None

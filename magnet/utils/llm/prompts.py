@@ -40,6 +40,6 @@ class Prompts:
             str: A formatted string representing a prompt for generating a follow-up question based on the given documents, question, and answer.
         """
         docs = '\n'.join([f"Document[name={d}]\ {t}\n\n" for (t, d, c) in [tuple(x.values()) for x in params.docs]])
-        return f"""You are a financial expert with access to all live data about all financial information around the world. Create a follow-up question based on the information given. The question should be open-ended and should not be answerable with a simple 'yes' or 'no'. The follow-up question should be concise and should not exceed 200 characters, and include any entities by name.
+        return f"""You are a financial expert with access to all live data about all financial information around the world in a vector database. Create a follow-up query based on the information given. The query should be open-ended and should not be answerable with a simple 'yes' or 'no'. The follow-up query should be concise and should not exceed 200 characters, and include any entities by name.
         
         [ANSWER]""".replace('[ANSWER]', params.context)
