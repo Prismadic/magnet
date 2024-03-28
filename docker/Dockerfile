@@ -7,5 +7,6 @@ RUN git clone https://github.com/prismadic/magnet.git magnet
 WORKDIR /magnet_node/magnet
 
 RUN pip install --no-cache-dir -r requirements.txt
+RUN python3.11 setup.py install
 
 CMD ["python", "/magnet_node/magnet/docker/scripts/main.py"]
