@@ -103,7 +103,7 @@ class Memory:
             anns_field="embedding",
             param=self.config.index.options,
             limit=limit,
-            output_fields=['text', 'document']
+            output_fields=['text', 'document', 'embedding']
         )
         results = []
         for hits_i, hits in enumerate(_results):
@@ -111,6 +111,7 @@ class Memory:
                 results.append({
                     'text': hit.entity.get('text'),
                     'document': hit.entity.get('document'),
+                    'embedding': hit.entity.get('embedding'),
                     'distance': hit.distance
                 })
         if cb:
