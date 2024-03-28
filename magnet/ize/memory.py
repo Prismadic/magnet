@@ -79,6 +79,8 @@ class Memory:
                         )
                         _f('info', f'sending payload\n{payload}') if v else None
                         await self.field.pulse(payload)
+                else:
+                    _f('warn', f'embedding exists\n{payload}')
             await msg.ack_sync()
             _f('success', f'embedding indexed\n{payload}') if v else None
         except Exception as e:
@@ -137,4 +139,4 @@ class Memory:
             output_fields=['text', 'document'],
             limit=1
         )
-        return True if match and match[0] and match[0][0].distance == 0.99 else False
+        return True if match and match[0] and match[0][0].distance >= 0.99 else False
