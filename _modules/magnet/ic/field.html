@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>magnet.ic.field &mdash; magnet latest documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=7254e0c9" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=c6e86fd7"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/magnet.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v0.2.8
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Packages &amp; useful classes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../magnet.ic.html">magnet.ic package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.ic.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.ic.html#module-magnet.ic.field">magnet.ic.field module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Charge"><code class="docutils literal notranslate"><span class="pre">Charge</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Charge.emp"><code class="docutils literal notranslate"><span class="pre">Charge.emp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Charge.excite"><code class="docutils literal notranslate"><span class="pre">Charge.excite()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Charge.list_streams"><code class="docutils literal notranslate"><span class="pre">Charge.list_streams()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Charge.off"><code class="docutils literal notranslate"><span class="pre">Charge.off()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Charge.on"><code class="docutils literal notranslate"><span class="pre">Charge.on()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Charge.pulse"><code class="docutils literal notranslate"><span class="pre">Charge.pulse()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Charge.reset"><code class="docutils literal notranslate"><span class="pre">Charge.reset()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Resonator"><code class="docutils literal notranslate"><span class="pre">Resonator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Resonator.conduct"><code class="docutils literal notranslate"><span class="pre">Resonator.conduct()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Resonator.info"><code class="docutils literal notranslate"><span class="pre">Resonator.info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Resonator.listen"><code class="docutils literal notranslate"><span class="pre">Resonator.listen()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Resonator.off"><code class="docutils literal notranslate"><span class="pre">Resonator.off()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Resonator.on"><code class="docutils literal notranslate"><span class="pre">Resonator.on()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Resonator.worker"><code class="docutils literal notranslate"><span class="pre">Resonator.worker()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../magnet.ize.html">magnet.ize package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.ize.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.ize.html#magnet-ize-filings-module">magnet.ize.filings module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.ize.html#module-magnet.ize.memory">magnet.ize.memory module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.ize.html#magnet.ize.memory.Memory"><code class="docutils literal notranslate"><span class="pre">Memory</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ize.html#magnet.ize.memory.Memory.delete"><code class="docutils literal notranslate"><span class="pre">Memory.delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ize.html#magnet.ize.memory.Memory.disconnect"><code class="docutils literal notranslate"><span class="pre">Memory.disconnect()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ize.html#magnet.ize.memory.Memory.index"><code class="docutils literal notranslate"><span class="pre">Memory.index()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ize.html#magnet.ize.memory.Memory.info"><code class="docutils literal notranslate"><span class="pre">Memory.info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ize.html#magnet.ize.memory.Memory.is_dupe"><code class="docutils literal notranslate"><span class="pre">Memory.is_dupe()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ize.html#magnet.ize.memory.Memory.on"><code class="docutils literal notranslate"><span class="pre">Memory.on()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ize.html#magnet.ize.memory.Memory.search"><code class="docutils literal notranslate"><span class="pre">Memory.search()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../magnet.ron.html">magnet.ron package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.ron.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.ron.html#magnet-ron-llm-module">magnet.ron.llm module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../magnet.utils.html">magnet.utils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.utils.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.mlx.html">magnet.utils.mlx package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.mlx.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.mlx.html#magnet-utils-mlx-mistral-module">magnet.utils.mlx.mistral module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.utils.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.utils.html#module-magnet.utils.data_classes">magnet.utils.data_classes module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.AskParameters"><code class="docutils literal notranslate"><span class="pre">AskParameters</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.AskParameters.cb"><code class="docutils literal notranslate"><span class="pre">AskParameters.cb</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.AskParameters.context"><code class="docutils literal notranslate"><span class="pre">AskParameters.context</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.AskParameters.docs"><code class="docutils literal notranslate"><span class="pre">AskParameters.docs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.AskParameters.m"><code class="docutils literal notranslate"><span class="pre">AskParameters.m</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.AskParameters.n"><code class="docutils literal notranslate"><span class="pre">AskParameters.n</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.AskParameters.p"><code class="docutils literal notranslate"><span class="pre">AskParameters.p</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.AskParameters.q"><code class="docutils literal notranslate"><span class="pre">AskParameters.q</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.AskParameters.t"><code class="docutils literal notranslate"><span class="pre">AskParameters.t</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.AskParameters.vllm"><code class="docutils literal notranslate"><span class="pre">AskParameters.vllm</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.EmbeddingPayload"><code class="docutils literal notranslate"><span class="pre">EmbeddingPayload</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.EmbeddingPayload.document"><code class="docutils literal notranslate"><span class="pre">EmbeddingPayload.document</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.EmbeddingPayload.embedding"><code class="docutils literal notranslate"><span class="pre">EmbeddingPayload.embedding</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.EmbeddingPayload.model"><code class="docutils literal notranslate"><span class="pre">EmbeddingPayload.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.EmbeddingPayload.text"><code class="docutils literal notranslate"><span class="pre">EmbeddingPayload.text</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.GeneratedPayload"><code class="docutils literal notranslate"><span class="pre">GeneratedPayload</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.GeneratedPayload.context"><code class="docutils literal notranslate"><span class="pre">GeneratedPayload.context</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.GeneratedPayload.model"><code class="docutils literal notranslate"><span class="pre">GeneratedPayload.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.GeneratedPayload.prompt"><code class="docutils literal notranslate"><span class="pre">GeneratedPayload.prompt</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.GeneratedPayload.query"><code class="docutils literal notranslate"><span class="pre">GeneratedPayload.query</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.GeneratedPayload.result"><code class="docutils literal notranslate"><span class="pre">GeneratedPayload.result</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.IndexConfig"><code class="docutils literal notranslate"><span class="pre">IndexConfig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.IndexConfig.dimension"><code class="docutils literal notranslate"><span class="pre">IndexConfig.dimension</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.IndexConfig.milvus_password"><code class="docutils literal notranslate"><span class="pre">IndexConfig.milvus_password</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.IndexConfig.milvus_port"><code class="docutils literal notranslate"><span class="pre">IndexConfig.milvus_port</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.IndexConfig.milvus_uri"><code class="docutils literal notranslate"><span class="pre">IndexConfig.milvus_uri</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.IndexConfig.milvus_user"><code class="docutils literal notranslate"><span class="pre">IndexConfig.milvus_user</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.IndexConfig.model"><code class="docutils literal notranslate"><span class="pre">IndexConfig.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.IndexConfig.name"><code class="docutils literal notranslate"><span class="pre">IndexConfig.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.IndexConfig.options"><code class="docutils literal notranslate"><span class="pre">IndexConfig.options</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.JobParams"><code class="docutils literal notranslate"><span class="pre">JobParams</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.JobParams.embedding_model"><code class="docutils literal notranslate"><span class="pre">JobParams.embedding_model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.JobParams.generation_model"><code class="docutils literal notranslate"><span class="pre">JobParams.generation_model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.JobParams.job_n"><code class="docutils literal notranslate"><span class="pre">JobParams.job_n</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.JobParams.job_type"><code class="docutils literal notranslate"><span class="pre">JobParams.job_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.JobParams.milvus_collection"><code class="docutils literal notranslate"><span class="pre">JobParams.milvus_collection</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.JobParams.milvus_host"><code class="docutils literal notranslate"><span class="pre">JobParams.milvus_host</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.JobParams.milvus_password"><code class="docutils literal notranslate"><span class="pre">JobParams.milvus_password</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.JobParams.milvus_port"><code class="docutils literal notranslate"><span class="pre">JobParams.milvus_port</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.JobParams.milvus_username"><code class="docutils literal notranslate"><span class="pre">JobParams.milvus_username</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.JobParams.nats_category"><code class="docutils literal notranslate"><span class="pre">JobParams.nats_category</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.JobParams.nats_host"><code class="docutils literal notranslate"><span class="pre">JobParams.nats_host</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.JobParams.nats_password"><code class="docutils literal notranslate"><span class="pre">JobParams.nats_password</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.JobParams.nats_stream"><code class="docutils literal notranslate"><span class="pre">JobParams.nats_stream</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.JobParams.nats_username"><code class="docutils literal notranslate"><span class="pre">JobParams.nats_username</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MagnetConfig"><code class="docutils literal notranslate"><span class="pre">MagnetConfig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MagnetConfig.category"><code class="docutils literal notranslate"><span class="pre">MagnetConfig.category</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MagnetConfig.credentials"><code class="docutils literal notranslate"><span class="pre">MagnetConfig.credentials</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MagnetConfig.domain"><code class="docutils literal notranslate"><span class="pre">MagnetConfig.domain</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MagnetConfig.host"><code class="docutils literal notranslate"><span class="pre">MagnetConfig.host</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MagnetConfig.index"><code class="docutils literal notranslate"><span class="pre">MagnetConfig.index</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MagnetConfig.kv_name"><code class="docutils literal notranslate"><span class="pre">MagnetConfig.kv_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MagnetConfig.os_name"><code class="docutils literal notranslate"><span class="pre">MagnetConfig.os_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MagnetConfig.session"><code class="docutils literal notranslate"><span class="pre">MagnetConfig.session</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MagnetConfig.stream_name"><code class="docutils literal notranslate"><span class="pre">MagnetConfig.stream_name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MistralArgs"><code class="docutils literal notranslate"><span class="pre">MistralArgs</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MistralArgs.dim"><code class="docutils literal notranslate"><span class="pre">MistralArgs.dim</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MistralArgs.head_dim"><code class="docutils literal notranslate"><span class="pre">MistralArgs.head_dim</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MistralArgs.hidden_dim"><code class="docutils literal notranslate"><span class="pre">MistralArgs.hidden_dim</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MistralArgs.n_heads"><code class="docutils literal notranslate"><span class="pre">MistralArgs.n_heads</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MistralArgs.n_kv_heads"><code class="docutils literal notranslate"><span class="pre">MistralArgs.n_kv_heads</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MistralArgs.n_layers"><code class="docutils literal notranslate"><span class="pre">MistralArgs.n_layers</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MistralArgs.norm_eps"><code class="docutils literal notranslate"><span class="pre">MistralArgs.norm_eps</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MistralArgs.vocab_size"><code class="docutils literal notranslate"><span class="pre">MistralArgs.vocab_size</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.Payload"><code class="docutils literal notranslate"><span class="pre">Payload</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.Payload.document"><code class="docutils literal notranslate"><span class="pre">Payload.document</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.Payload.text"><code class="docutils literal notranslate"><span class="pre">Payload.text</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.utils.html#module-magnet.utils.globals">magnet.utils.globals module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.globals.Utils"><code class="docutils literal notranslate"><span class="pre">Utils</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.globals.Utils.check_cuda"><code class="docutils literal notranslate"><span class="pre">Utils.check_cuda()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.globals.Utils.normalize_text"><code class="docutils literal notranslate"><span class="pre">Utils.normalize_text()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.globals.Utils.upload_to_s3"><code class="docutils literal notranslate"><span class="pre">Utils.upload_to_s3()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.globals.break_into_chunks"><code class="docutils literal notranslate"><span class="pre">break_into_chunks()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.globals.reversal"><code class="docutils literal notranslate"><span class="pre">reversal()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.utils.html#magnet-utils-huggingface-module">magnet.utils.huggingface module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.utils.html#magnet-utils-local-module">magnet.utils.local module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.utils.html#magnet-utils-markdown-module">magnet.utils.markdown module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.utils.html#magnet-utils-milvus-module">magnet.utils.milvus module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.utils.html#magnet-utils-prompts-module">magnet.utils.prompts module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">magnet</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">magnet.ic.field</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for magnet.ic.field</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">json</span><span class="o">,</span> <span class="nn">datetime</span><span class="o">,</span> <span class="nn">xxhash</span><span class="o">,</span> <span class="nn">platform</span><span class="o">,</span> <span class="nn">asyncio</span>
+
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">asdict</span>
+<span class="kn">from</span> <span class="nn">tabulate</span> <span class="kn">import</span> <span class="n">tabulate</span>
+
+<span class="kn">from</span> <span class="nn">magnet.base</span> <span class="kn">import</span> <span class="n">Magnet</span>
+<span class="kn">from</span> <span class="nn">magnet.utils.globals</span> <span class="kn">import</span> <span class="n">_f</span>
+<span class="kn">from</span> <span class="nn">magnet.utils.data_classes</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="kn">from</span> <span class="nn">nats.errors</span> <span class="kn">import</span> <span class="ne">TimeoutError</span>
+<span class="kn">from</span> <span class="nn">nats.js.api</span> <span class="kn">import</span> <span class="n">StreamConfig</span><span class="p">,</span> <span class="n">ConsumerConfig</span>
+<span class="kn">from</span> <span class="nn">nats.js.errors</span> <span class="kn">import</span> <span class="n">ServerError</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">xxhash</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span>
+<span class="n">utc_time</span> <span class="o">=</span> <span class="n">dt</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tzinfo</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span>
+<span class="n">utc_timestamp</span> <span class="o">=</span> <span class="n">utc_time</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Charge">
+<a class="viewcode-back" href="../../../magnet.ic.html#magnet.ic.field.Charge">[docs]</a>
+<span class="k">class</span> <span class="nc">Charge</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">magnet</span><span class="p">:</span> <span class="n">Magnet</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">magnet</span> <span class="o">=</span> <span class="n">magnet</span>
+
+<div class="viewcode-block" id="Charge.list_streams">
+<a class="viewcode-back" href="../../../magnet.ic.html#magnet.ic.field.Charge.list_streams">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">list_streams</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">streams</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">js</span><span class="o">.</span><span class="n">streams_info</span><span class="p">()</span>
+            <span class="n">remote_streams</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">streams</span><span class="p">]</span>
+            <span class="n">remote_subjects</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">subjects</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">streams</span><span class="p">]</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">remote_streams</span><span class="p">,</span> <span class="n">remote_subjects</span><span class="p">)</span>
+            <span class="c1"># Initialize an empty list to store formatted data</span>
+            <span class="n">formatted_data</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="c1"># Loop through each stream and its subjects</span>
+            <span class="k">for</span> <span class="n">stream</span><span class="p">,</span> <span class="n">subjects</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">remote_streams</span><span class="p">,</span> <span class="n">remote_subjects</span><span class="p">):</span>
+                <span class="c1"># Check if the current stream name or any of the subjects match the config variables</span>
+                <span class="n">match_stream_name</span> <span class="o">=</span> <span class="n">stream</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">stream_name</span>
+                <span class="n">match_subject</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">category</span> <span class="ow">in</span> <span class="n">subjects</span>
+
+                <span class="c1"># If there&#39;s a match, format the stream name and subjects with ANSI green color and a magnet emoji</span>
+                <span class="k">if</span> <span class="n">match_stream_name</span> <span class="ow">or</span> <span class="n">match_subject</span><span class="p">:</span>
+                    <span class="n">formatted_stream</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[92m</span><span class="si">{</span><span class="n">stream</span><span class="si">}</span><span class="s2"> </span><span class="se">\U0001F9F2\033</span><span class="s2">[0m&quot;</span>  <span class="c1"># Green and magnet emoji for stream name</span>
+                    <span class="n">formatted_subjects</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[92m</span><span class="si">{</span><span class="n">subject</span><span class="si">}</span><span class="s2"> </span><span class="se">\U0001F9F2\033</span><span class="s2">[0m&quot;</span> <span class="k">if</span> <span class="n">subject</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">category</span> <span class="k">else</span> <span class="n">subject</span> <span class="k">for</span> <span class="n">subject</span> <span class="ow">in</span> <span class="n">subjects</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">formatted_stream</span> <span class="o">=</span> <span class="n">stream</span>
+                    <span class="n">formatted_subjects</span> <span class="o">=</span> <span class="n">subjects</span>
+
+                <span class="c1"># Add the formatted stream and subjects to the list</span>
+                <span class="n">formatted_data</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">formatted_stream</span><span class="p">,</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">formatted_subjects</span><span class="p">)])</span>
+
+            <span class="c1"># Creating a table with the formatted data</span>
+            <span class="n">table</span> <span class="o">=</span> <span class="n">tabulate</span><span class="p">(</span><span class="n">formatted_data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Stream Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Subjects&#39;</span><span class="p">],</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s2">&quot;pretty&quot;</span><span class="p">)</span>
+
+            <span class="n">_f</span><span class="p">(</span><span class="s2">&quot;info&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="si">{</span><span class="n">table</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">TimeoutError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;fatal&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;could not connect to </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">host</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;fatal&#39;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Charge.on">
+<a class="viewcode-back" href="../../../magnet.ic.html#magnet.ic.field.Charge.on">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">on</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">streams</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">js</span><span class="o">.</span><span class="n">streams_info</span><span class="p">()</span>
+            <span class="n">remote_streams</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">streams</span><span class="p">]</span>
+            <span class="n">remote_subjects</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">subjects</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">streams</span><span class="p">]</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">stream_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">remote_streams</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;fatal&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">stream_name</span><span class="si">}</span><span class="s1"> not found, initialize with `Magnet.align()` first&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">category</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">sum</span><span class="p">(</span><span class="n">remote_subjects</span><span class="p">,</span> <span class="p">[]):</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">category</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">sum</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">subjects</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">streams</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">stream_name</span><span class="p">],</span> <span class="p">[]):</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">subjects</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+                            <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">subjects</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">streams</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">stream_name</span><span class="p">],</span> <span class="p">[])</span>
+                        <span class="n">subjects</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">category</span><span class="p">)</span>
+                        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">js</span><span class="o">.</span><span class="n">update_stream</span><span class="p">(</span><span class="n">StreamConfig</span><span class="p">(</span>
+                            <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">stream_name</span>
+                            <span class="p">,</span> <span class="n">subjects</span><span class="o">=</span><span class="n">subjects</span>
+                        <span class="p">))</span>
+                        <span class="n">_f</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;created [</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">category</span><span class="si">}</span><span class="s1">] on</span><span class="se">\n</span><span class="s1">🛰️ stream: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">stream_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="n">ServerError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                        <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;fatal&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;couldn&#39;t create </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">stream_name</span><span class="si">}</span><span class="s2"> on </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">host</span><span class="si">}</span><span class="s2">, ensure your `category` is set&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">TimeoutError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;fatal&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;could not connect to </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">host</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">_f</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;ready [</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">category</span><span class="si">}</span><span class="s1">] on</span><span class="se">\n</span><span class="s1">🛰️ stream: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">stream_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Charge.off">
+<a class="viewcode-back" href="../../../magnet.ic.html#magnet.ic.field.Charge.off">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">off</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Disconnects from the NATS server and prints a warning message.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">nc</span><span class="o">.</span><span class="n">drain</span><span class="p">()</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">nc</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;warn&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;disconnected from </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">host</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Charge.pulse">
+<a class="viewcode-back" href="../../../magnet.ic.html#magnet.ic.field.Charge.pulse">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">pulse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payload</span><span class="p">:</span> <span class="n">Payload</span> <span class="o">|</span> <span class="n">GeneratedPayload</span> <span class="o">|</span> <span class="n">EmbeddingPayload</span> <span class="o">|</span> <span class="n">JobParams</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Publishes data to the NATS server using the specified category and payload.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            payload (dict): The data to be published.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">bytes_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">asdict</span><span class="p">(</span><span class="n">payload</span><span class="p">),</span> <span class="n">separators</span><span class="o">=</span><span class="p">(</span>
+                <span class="s1">&#39;, &#39;</span><span class="p">,</span> <span class="s1">&#39;:&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;fatal&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;invalid object, more info:</span><span class="se">\n</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1"> in [Payload, GeneratedPayload, EmbeddingPayload, JobParams]&#39;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">_hash</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">xxh64</span><span class="p">(</span><span class="n">bytes_</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">js</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">category</span><span class="p">,</span> <span class="n">bytes_</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+                    <span class="s2">&quot;Nats-Msg-Id&quot;</span><span class="p">:</span> <span class="n">_hash</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
+            <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;success&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;pulsed to </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">category</span><span class="si">}</span><span class="s1"> on </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">stream_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">v</span> <span class="k">else</span> <span class="kc">None</span>
+            <span class="n">_ts</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span>
+            <span class="n">msg</span><span class="o">.</span><span class="n">ts</span> <span class="o">=</span> <span class="n">_ts</span>
+            <span class="k">return</span> <span class="n">msg</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;fatal&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;could not pulse data to </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">host</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Charge.excite">
+<a class="viewcode-back" href="../../../magnet.ic.html#magnet.ic.field.Charge.excite">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">excite</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Publishes data to the NATS server using the specified category and payload.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            job (dict, optional): The data to be published. Defaults to {}.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">bytes_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">separators</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">,</span> <span class="s1">&#39;:&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;fatal&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;invalid JSON</span><span class="se">\n</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">_hash</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">xxh64</span><span class="p">(</span><span class="n">bytes_</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">js</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">category</span><span class="p">,</span> <span class="n">bytes_</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+                    <span class="s2">&quot;Nats-Msg-Id&quot;</span><span class="p">:</span> <span class="n">_hash</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;fatal&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;could not send data to </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">host</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Charge.emp">
+<a class="viewcode-back" href="../../../magnet.ic.html#magnet.ic.field.Charge.emp">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">emp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deletes the specified stream if the name matches the current stream, or prints an error message if the name doesn&#39;t match or the stream doesn&#39;t exist.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (str, optional): The name of the stream to delete. Defaults to None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">and</span> <span class="n">name</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">stream_name</span><span class="p">:</span>
+            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">js</span><span class="o">.</span><span class="n">delete_stream</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">stream_name</span><span class="p">)</span>
+            <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;warn&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">stream_name</span><span class="si">}</span><span class="s1"> stream deleted&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;fatal&#39;</span><span class="p">,</span> <span class="s2">&quot;name doesn&#39;t match the stream or stream doesn&#39;t exist&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Charge.reset">
+<a class="viewcode-back" href="../../../magnet.ic.html#magnet.ic.field.Charge.reset">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Purges the specified category if the name matches the current category, or prints an error message if the name doesn&#39;t match or the category doesn&#39;t exist.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (str, optional): The name of the category to purge. Defaults to None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">and</span> <span class="n">name</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">category</span><span class="p">:</span>
+            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">js</span><span class="o">.</span><span class="n">purge_stream</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">stream_name</span><span class="p">,</span> <span class="n">subject</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">category</span><span class="p">)</span>
+            <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;warn&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">category</span><span class="si">}</span><span class="s1"> category deleted&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;fatal&#39;</span><span class="p">,</span> <span class="s2">&quot;name doesn&#39;t match the stream category or category doesn&#39;t exist&quot;</span><span class="p">)</span></div>
+</div>
+
+
+<div class="viewcode-block" id="Resonator">
+<a class="viewcode-back" href="../../../magnet.ic.html#magnet.ic.field.Resonator">[docs]</a>
+<span class="k">class</span> <span class="nc">Resonator</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">magnet</span><span class="p">:</span> <span class="n">Magnet</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the `Resonator` class with the NATS server address.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            server (str): The address of the NATS server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">magnet</span> <span class="o">=</span> <span class="n">magnet</span>
+
+<div class="viewcode-block" id="Resonator.on">
+<a class="viewcode-back" href="../../../magnet.ic.html#magnet.ic.field.Resonator.on">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">on</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">job</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">local</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">bandwidth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Connects to the NATS server, subscribes to a specific category in a stream, and consumes messages from that category.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            category (str, optional): The category to subscribe to. Defaults to &#39;no_category&#39;.</span>
+<span class="sd">            stream (str, optional): The stream to subscribe to. Defaults to &#39;documents&#39;.</span>
+<span class="sd">            session (str, optional): The session name for durable subscriptions. Defaults to &#39;magnet&#39;.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            TimeoutError: If there is a timeout error while connecting to the NATS server.</span>
+<span class="sd">            Exception: If there is an error in consuming the message or processing the callback function.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">node</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">platform</span><span class="o">.</span><span class="n">node</span><span class="p">()</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">xxh64</span><span class="p">(</span><span class="n">platform</span><span class="o">.</span><span class="n">node</span><span class="p">(),</span><span class="w"> </span><span class="n">seed</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">utc_timestamp</span><span class="p">))</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">if</span> <span class="n">local</span> <span class="k">else</span> <span class="n">platform</span><span class="o">.</span><span class="n">node</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">durable</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="si">}</span><span class="s1">_job&#39;</span> <span class="k">if</span> <span class="n">job</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">node</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">consumer_config</span> <span class="o">=</span> <span class="n">ConsumerConfig</span><span class="p">(</span>
+            <span class="n">ack_policy</span><span class="o">=</span><span class="s2">&quot;explicit&quot;</span>
+            <span class="p">,</span> <span class="n">max_ack_pending</span><span class="o">=</span><span class="n">bandwidth</span>
+            <span class="p">,</span> <span class="n">ack_wait</span><span class="o">=</span><span class="mi">3600</span>
+        <span class="p">)</span>
+        <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;wait&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;connecting to </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">host</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sub</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">js</span><span class="o">.</span><span class="n">pull_subscribe</span><span class="p">(</span>
+                <span class="n">durable</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">session</span>
+                <span class="p">,</span> <span class="n">subject</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">category</span>
+                <span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">stream_name</span>
+                <span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">consumer_config</span>
+            <span class="p">)</span>
+            <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;info&#39;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s1">&#39;joined worker queue: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">session</span><span class="si">}</span><span class="s1"> as </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">node</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;fatal&#39;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Resonator.listen">
+<a class="viewcode-back" href="../../../magnet.ic.html#magnet.ic.field.Resonator.listen">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">listen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cb</span><span class="o">=</span><span class="nb">print</span><span class="p">,</span> <span class="n">job_n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">generic</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub</span>
+        <span class="k">except</span><span class="p">:</span> <span class="k">return</span> <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;fatal&#39;</span><span class="p">,</span> <span class="s1">&#39;no subscriber initialized&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">job_n</span><span class="p">:</span>
+            <span class="n">_f</span><span class="p">(</span><span class="s2">&quot;info&quot;</span><span class="p">,</span>
+               <span class="sa">f</span><span class="s1">&#39;consuming </span><span class="si">{</span><span class="n">job_n</span><span class="si">}</span><span class="s1"> from [</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">category</span><span class="si">}</span><span class="s1">] on</span><span class="se">\n</span><span class="s1">🛰️ stream: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">stream_name</span><span class="si">}</span><span class="se">\n</span><span class="s1">🧲 session: &quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">session</span><span class="si">}</span><span class="s1">&quot;&#39;</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">msgs</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">batch</span><span class="o">=</span><span class="n">job_n</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+                <span class="n">payloads</span> <span class="o">=</span> <span class="p">[</span><span class="n">msg</span><span class="o">.</span><span class="n">data</span> <span class="k">if</span> <span class="n">generic</span> <span class="k">else</span> <span class="n">Payload</span><span class="p">(</span>
+                    <span class="o">**</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">data</span><span class="p">))</span> <span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="n">msgs</span><span class="p">]</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">payload</span><span class="p">,</span> <span class="n">msg</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">payloads</span><span class="p">,</span> <span class="n">msgs</span><span class="p">):</span>
+                        <span class="k">await</span> <span class="n">cb</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;success&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;job of </span><span class="si">{</span><span class="n">job_n</span><span class="si">}</span><span class="s2"> fulfilled</span><span class="se">\n</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;fatal&#39;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;warn&#39;</span><span class="p">,</span>
+                   <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">session</span><span class="si">}</span><span class="s1"> reached the end of </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">category</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;warn&#39;</span><span class="p">,</span> <span class="s2">&quot;no more data&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_f</span><span class="p">(</span><span class="s2">&quot;info&quot;</span><span class="p">,</span>
+               <span class="sa">f</span><span class="s1">&#39;consuming delta from [</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">category</span><span class="si">}</span><span class="s1">] on</span><span class="se">\n</span><span class="s1">🛰️ stream: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">stream_name</span><span class="si">}</span><span class="se">\n</span><span class="s1">🧲 session: &quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">session</span><span class="si">}</span><span class="s1">&quot;&#39;</span><span class="p">)</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">msgs</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">batch</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+                    <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">msgs</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">verbose</span> <span class="k">else</span> <span class="kc">None</span>
+                    <span class="n">payload</span> <span class="o">=</span> <span class="n">msgs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="k">if</span> <span class="n">generic</span> <span class="k">else</span> <span class="n">Payload</span><span class="p">(</span>
+                        <span class="o">**</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">msgs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
+                    <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">payload</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">verbose</span> <span class="k">else</span> <span class="kc">None</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="k">await</span> <span class="n">cb</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">msgs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                        <span class="n">_f</span><span class="p">(</span><span class="s2">&quot;warn&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;retrying connection to </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">host</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                        <span class="n">_f</span><span class="p">(</span><span class="s2">&quot;info&quot;</span><span class="p">,</span> <span class="s2">&quot;this can also be a problem with your callback&quot;</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="s2">&quot;nats: timeout&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+                        <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;warn&#39;</span><span class="p">,</span> <span class="s1">&#39;encountered a timeout, retrying in 1s&#39;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;fatal&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+                <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Resonator.worker">
+<a class="viewcode-back" href="../../../magnet.ic.html#magnet.ic.field.Resonator.worker">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">worker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cb</span><span class="o">=</span><span class="nb">print</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Consume messages from a specific category in a stream and process them as jobs.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            cb (function, optional): The callback function to process the received messages. Defaults to `print`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            Exception: If there is an error in consuming the message or processing the callback function.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_f</span><span class="p">(</span><span class="s2">&quot;info&quot;</span><span class="p">,</span>
+           <span class="sa">f</span><span class="s1">&#39;processing jobs from [</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">category</span><span class="si">}</span><span class="s1">] on</span><span class="se">\n</span><span class="s1">🛰️ stream: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">stream_name</span><span class="si">}</span><span class="se">\n</span><span class="s1">🧲 session: &quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">session</span><span class="si">}</span><span class="s1">&quot;&#39;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">sub</span><span class="o">.</span><span class="n">next_msg</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+            <span class="n">payload</span> <span class="o">=</span> <span class="n">JobParams</span><span class="p">(</span><span class="o">**</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">data</span><span class="p">))</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">await</span> <span class="n">cb</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">_f</span><span class="p">(</span><span class="s2">&quot;warn&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;something wrong in your callback function!</span><span class="se">\n</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;fatal&#39;</span><span class="p">,</span> <span class="s1">&#39;invalid JSON&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Resonator.conduct">
+<a class="viewcode-back" href="../../../magnet.ic.html#magnet.ic.field.Resonator.conduct">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">conduct</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cb</span><span class="o">=</span><span class="nb">print</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="Resonator.info">
+<a class="viewcode-back" href="../../../magnet.ic.html#magnet.ic.field.Resonator.info">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves information about a consumer in a JetStream stream.</span>
+
+<span class="sd">        :param session: A string representing the session name of the consumer. If not provided, information about all consumers in the stream will be retrieved.</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">jsm</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">js</span><span class="o">.</span><span class="n">consumer_info</span><span class="p">(</span><span class="n">stream</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">stream_name</span><span class="p">,</span> <span class="n">consumer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">session</span><span class="p">)</span>
+        <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">jsm</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="Resonator.off">
+<a class="viewcode-back" href="../../../magnet.ic.html#magnet.ic.field.Resonator.off">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">off</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Unsubscribes from the category and stream and disconnects from the NATS server.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">js</span><span class="o">.</span><span class="n">sub</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">()</span>
+        <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;warn&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;unsubscribed from </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">stream_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">nc</span><span class="o">.</span><span class="n">drain</span><span class="p">()</span>
+        <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;warn&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;safe to disconnect from </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">magnet</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">host</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></div>
+</div>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Prismadic, LLC.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

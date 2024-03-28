@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>magnet.utils.globals &mdash; magnet latest documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=7254e0c9" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=c6e86fd7"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/magnet.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v0.2.8
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Packages &amp; useful classes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../magnet.ic.html">magnet.ic package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.ic.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.ic.html#module-magnet.ic.field">magnet.ic.field module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Charge"><code class="docutils literal notranslate"><span class="pre">Charge</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Charge.emp"><code class="docutils literal notranslate"><span class="pre">Charge.emp()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Charge.excite"><code class="docutils literal notranslate"><span class="pre">Charge.excite()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Charge.list_streams"><code class="docutils literal notranslate"><span class="pre">Charge.list_streams()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Charge.off"><code class="docutils literal notranslate"><span class="pre">Charge.off()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Charge.on"><code class="docutils literal notranslate"><span class="pre">Charge.on()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Charge.pulse"><code class="docutils literal notranslate"><span class="pre">Charge.pulse()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Charge.reset"><code class="docutils literal notranslate"><span class="pre">Charge.reset()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Resonator"><code class="docutils literal notranslate"><span class="pre">Resonator</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Resonator.conduct"><code class="docutils literal notranslate"><span class="pre">Resonator.conduct()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Resonator.info"><code class="docutils literal notranslate"><span class="pre">Resonator.info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Resonator.listen"><code class="docutils literal notranslate"><span class="pre">Resonator.listen()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Resonator.off"><code class="docutils literal notranslate"><span class="pre">Resonator.off()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Resonator.on"><code class="docutils literal notranslate"><span class="pre">Resonator.on()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ic.html#magnet.ic.field.Resonator.worker"><code class="docutils literal notranslate"><span class="pre">Resonator.worker()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../magnet.ize.html">magnet.ize package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.ize.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.ize.html#magnet-ize-filings-module">magnet.ize.filings module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.ize.html#module-magnet.ize.memory">magnet.ize.memory module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.ize.html#magnet.ize.memory.Memory"><code class="docutils literal notranslate"><span class="pre">Memory</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ize.html#magnet.ize.memory.Memory.delete"><code class="docutils literal notranslate"><span class="pre">Memory.delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ize.html#magnet.ize.memory.Memory.disconnect"><code class="docutils literal notranslate"><span class="pre">Memory.disconnect()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ize.html#magnet.ize.memory.Memory.index"><code class="docutils literal notranslate"><span class="pre">Memory.index()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ize.html#magnet.ize.memory.Memory.info"><code class="docutils literal notranslate"><span class="pre">Memory.info()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ize.html#magnet.ize.memory.Memory.is_dupe"><code class="docutils literal notranslate"><span class="pre">Memory.is_dupe()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ize.html#magnet.ize.memory.Memory.on"><code class="docutils literal notranslate"><span class="pre">Memory.on()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.ize.html#magnet.ize.memory.Memory.search"><code class="docutils literal notranslate"><span class="pre">Memory.search()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../magnet.ron.html">magnet.ron package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.ron.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.ron.html#magnet-ron-llm-module">magnet.ron.llm module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../magnet.utils.html">magnet.utils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.utils.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.mlx.html">magnet.utils.mlx package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.mlx.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.mlx.html#magnet-utils-mlx-mistral-module">magnet.utils.mlx.mistral module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.utils.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.utils.html#module-magnet.utils.data_classes">magnet.utils.data_classes module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.AskParameters"><code class="docutils literal notranslate"><span class="pre">AskParameters</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.AskParameters.cb"><code class="docutils literal notranslate"><span class="pre">AskParameters.cb</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.AskParameters.context"><code class="docutils literal notranslate"><span class="pre">AskParameters.context</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.AskParameters.docs"><code class="docutils literal notranslate"><span class="pre">AskParameters.docs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.AskParameters.m"><code class="docutils literal notranslate"><span class="pre">AskParameters.m</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.AskParameters.n"><code class="docutils literal notranslate"><span class="pre">AskParameters.n</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.AskParameters.p"><code class="docutils literal notranslate"><span class="pre">AskParameters.p</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.AskParameters.q"><code class="docutils literal notranslate"><span class="pre">AskParameters.q</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.AskParameters.t"><code class="docutils literal notranslate"><span class="pre">AskParameters.t</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.AskParameters.vllm"><code class="docutils literal notranslate"><span class="pre">AskParameters.vllm</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.EmbeddingPayload"><code class="docutils literal notranslate"><span class="pre">EmbeddingPayload</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.EmbeddingPayload.document"><code class="docutils literal notranslate"><span class="pre">EmbeddingPayload.document</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.EmbeddingPayload.embedding"><code class="docutils literal notranslate"><span class="pre">EmbeddingPayload.embedding</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.EmbeddingPayload.model"><code class="docutils literal notranslate"><span class="pre">EmbeddingPayload.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.EmbeddingPayload.text"><code class="docutils literal notranslate"><span class="pre">EmbeddingPayload.text</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.GeneratedPayload"><code class="docutils literal notranslate"><span class="pre">GeneratedPayload</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.GeneratedPayload.context"><code class="docutils literal notranslate"><span class="pre">GeneratedPayload.context</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.GeneratedPayload.model"><code class="docutils literal notranslate"><span class="pre">GeneratedPayload.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.GeneratedPayload.prompt"><code class="docutils literal notranslate"><span class="pre">GeneratedPayload.prompt</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.GeneratedPayload.query"><code class="docutils literal notranslate"><span class="pre">GeneratedPayload.query</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.GeneratedPayload.result"><code class="docutils literal notranslate"><span class="pre">GeneratedPayload.result</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.IndexConfig"><code class="docutils literal notranslate"><span class="pre">IndexConfig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.IndexConfig.dimension"><code class="docutils literal notranslate"><span class="pre">IndexConfig.dimension</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.IndexConfig.milvus_password"><code class="docutils literal notranslate"><span class="pre">IndexConfig.milvus_password</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.IndexConfig.milvus_port"><code class="docutils literal notranslate"><span class="pre">IndexConfig.milvus_port</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.IndexConfig.milvus_uri"><code class="docutils literal notranslate"><span class="pre">IndexConfig.milvus_uri</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.IndexConfig.milvus_user"><code class="docutils literal notranslate"><span class="pre">IndexConfig.milvus_user</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.IndexConfig.model"><code class="docutils literal notranslate"><span class="pre">IndexConfig.model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.IndexConfig.name"><code class="docutils literal notranslate"><span class="pre">IndexConfig.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.IndexConfig.options"><code class="docutils literal notranslate"><span class="pre">IndexConfig.options</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.JobParams"><code class="docutils literal notranslate"><span class="pre">JobParams</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.JobParams.embedding_model"><code class="docutils literal notranslate"><span class="pre">JobParams.embedding_model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.JobParams.generation_model"><code class="docutils literal notranslate"><span class="pre">JobParams.generation_model</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.JobParams.job_n"><code class="docutils literal notranslate"><span class="pre">JobParams.job_n</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.JobParams.job_type"><code class="docutils literal notranslate"><span class="pre">JobParams.job_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.JobParams.milvus_collection"><code class="docutils literal notranslate"><span class="pre">JobParams.milvus_collection</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.JobParams.milvus_host"><code class="docutils literal notranslate"><span class="pre">JobParams.milvus_host</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.JobParams.milvus_password"><code class="docutils literal notranslate"><span class="pre">JobParams.milvus_password</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.JobParams.milvus_port"><code class="docutils literal notranslate"><span class="pre">JobParams.milvus_port</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.JobParams.milvus_username"><code class="docutils literal notranslate"><span class="pre">JobParams.milvus_username</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.JobParams.nats_category"><code class="docutils literal notranslate"><span class="pre">JobParams.nats_category</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.JobParams.nats_host"><code class="docutils literal notranslate"><span class="pre">JobParams.nats_host</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.JobParams.nats_password"><code class="docutils literal notranslate"><span class="pre">JobParams.nats_password</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.JobParams.nats_stream"><code class="docutils literal notranslate"><span class="pre">JobParams.nats_stream</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.JobParams.nats_username"><code class="docutils literal notranslate"><span class="pre">JobParams.nats_username</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MagnetConfig"><code class="docutils literal notranslate"><span class="pre">MagnetConfig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MagnetConfig.category"><code class="docutils literal notranslate"><span class="pre">MagnetConfig.category</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MagnetConfig.credentials"><code class="docutils literal notranslate"><span class="pre">MagnetConfig.credentials</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MagnetConfig.domain"><code class="docutils literal notranslate"><span class="pre">MagnetConfig.domain</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MagnetConfig.host"><code class="docutils literal notranslate"><span class="pre">MagnetConfig.host</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MagnetConfig.index"><code class="docutils literal notranslate"><span class="pre">MagnetConfig.index</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MagnetConfig.kv_name"><code class="docutils literal notranslate"><span class="pre">MagnetConfig.kv_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MagnetConfig.os_name"><code class="docutils literal notranslate"><span class="pre">MagnetConfig.os_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MagnetConfig.session"><code class="docutils literal notranslate"><span class="pre">MagnetConfig.session</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MagnetConfig.stream_name"><code class="docutils literal notranslate"><span class="pre">MagnetConfig.stream_name</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MistralArgs"><code class="docutils literal notranslate"><span class="pre">MistralArgs</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MistralArgs.dim"><code class="docutils literal notranslate"><span class="pre">MistralArgs.dim</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MistralArgs.head_dim"><code class="docutils literal notranslate"><span class="pre">MistralArgs.head_dim</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MistralArgs.hidden_dim"><code class="docutils literal notranslate"><span class="pre">MistralArgs.hidden_dim</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MistralArgs.n_heads"><code class="docutils literal notranslate"><span class="pre">MistralArgs.n_heads</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MistralArgs.n_kv_heads"><code class="docutils literal notranslate"><span class="pre">MistralArgs.n_kv_heads</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MistralArgs.n_layers"><code class="docutils literal notranslate"><span class="pre">MistralArgs.n_layers</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MistralArgs.norm_eps"><code class="docutils literal notranslate"><span class="pre">MistralArgs.norm_eps</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.MistralArgs.vocab_size"><code class="docutils literal notranslate"><span class="pre">MistralArgs.vocab_size</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.Payload"><code class="docutils literal notranslate"><span class="pre">Payload</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.Payload.document"><code class="docutils literal notranslate"><span class="pre">Payload.document</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.data_classes.Payload.text"><code class="docutils literal notranslate"><span class="pre">Payload.text</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.utils.html#module-magnet.utils.globals">magnet.utils.globals module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.globals.Utils"><code class="docutils literal notranslate"><span class="pre">Utils</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.globals.Utils.check_cuda"><code class="docutils literal notranslate"><span class="pre">Utils.check_cuda()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.globals.Utils.normalize_text"><code class="docutils literal notranslate"><span class="pre">Utils.normalize_text()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.globals.Utils.upload_to_s3"><code class="docutils literal notranslate"><span class="pre">Utils.upload_to_s3()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.globals.break_into_chunks"><code class="docutils literal notranslate"><span class="pre">break_into_chunks()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../magnet.utils.html#magnet.utils.globals.reversal"><code class="docutils literal notranslate"><span class="pre">reversal()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.utils.html#magnet-utils-huggingface-module">magnet.utils.huggingface module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.utils.html#magnet-utils-local-module">magnet.utils.local module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.utils.html#magnet-utils-markdown-module">magnet.utils.markdown module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.utils.html#magnet-utils-milvus-module">magnet.utils.milvus module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../magnet.utils.html#magnet-utils-prompts-module">magnet.utils.prompts module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">magnet</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">magnet.utils.globals</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for magnet.utils.globals</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">boto3</span>
+<span class="kn">from</span> <span class="nn">spacy.lang.en</span> <span class="kn">import</span> <span class="n">English</span>
+<span class="kn">import</span> <span class="nn">inspect</span>
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoTokenizer</span>
+
+<div class="viewcode-block" id="break_into_chunks">
+<a class="viewcode-back" href="../../../magnet.utils.html#magnet.utils.globals.break_into_chunks">[docs]</a>
+<span class="k">def</span> <span class="nf">break_into_chunks</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">max_words</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Break a text into chunks of a specified maximum number of words.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    - text (str): The text to break into chunks.</span>
+<span class="sd">    - max_words (int): The maximum number of words per chunk.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    - List[str]: A list of text chunks, each with up to max_words words.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>  <span class="c1"># Split the text into individual words</span>
+    
+    <span class="n">chunks</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># Initialize an empty list to hold the chunks of text</span>
+    <span class="n">current_chunk</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># Initialize an empty list to build up the current chunk</span>
+    
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+        <span class="n">current_chunk</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>  <span class="c1"># Add the current word to the chunk</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">current_chunk</span><span class="p">)</span> <span class="o">==</span> <span class="n">max_words</span><span class="p">:</span>  <span class="c1"># If the chunk reaches the max size, add it to the chunks list</span>
+            <span class="n">chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">current_chunk</span><span class="p">))</span>  <span class="c1"># Join the words in the chunk into a string</span>
+            <span class="n">current_chunk</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># Reset the current chunk to empty</span>
+    
+    <span class="k">if</span> <span class="n">current_chunk</span><span class="p">:</span>  <span class="c1"># If there are any remaining words in the current chunk, add them as a final chunk</span>
+        <span class="n">chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">current_chunk</span><span class="p">))</span>
+    
+    <span class="k">return</span> <span class="n">chunks</span></div>
+
+
+<div class="viewcode-block" id="reversal">
+<a class="viewcode-back" href="../../../magnet.utils.html#magnet.utils.globals.reversal">[docs]</a>
+<span class="k">def</span> <span class="nf">reversal</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getsource</span><span class="p">(</span><span class="n">inspect</span><span class="o">.</span><span class="n">currentframe</span><span class="p">()</span><span class="o">.</span><span class="n">f_back</span><span class="p">)</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">_f</span><span class="p">(</span>
+    <span class="n">tag</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">body</span><span class="p">:</span> <span class="nb">any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">no_print</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">luxe</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The `_f` function is a logging utility that prints messages with different tags and colors based on</span>
+<span class="sd">    the provided parameters.</span>
+
+<span class="sd">    :param tag: The `tag` parameter is a string that represents the tag for the log message. It can be</span>
+<span class="sd">    one of the following values: &quot;FATAL&quot;, &quot;WARN&quot;, &quot;INFO&quot;, &quot;WAIT&quot;, or &quot;SUCCESS&quot;</span>
+<span class="sd">    :type tag: str</span>
+<span class="sd">    :param body: The `body` parameter is used to specify the message or content that you want to</span>
+<span class="sd">    display. It can be of any type</span>
+<span class="sd">    :type body: any</span>
+<span class="sd">    :param no_print: The `no_print` parameter is a boolean flag that determines whether the output</span>
+<span class="sd">    should be printed or returned as a string.</span>
+<span class="sd">    the formatted string without printing it. If `no_print` is set to `False` (default)</span>
+<span class="sd">    :type no_print: bool (optional)</span>
+<span class="sd">    :param luxe: The `luxe` parameter is a boolean flag that determines whether to use a more luxurious</span>
+<span class="sd">    and colorful output format. If `luxe` is set to `True`, the output will include random colors,</span>
+<span class="sd">    emojis, and matrix-like characters.</span>
+<span class="sd">    :type luxe: bool (optional)</span>
+<span class="sd">    :return: The function `_f` returns a formatted string if the `no_print` parameter is set to `True`.</span>
+<span class="sd">    If `no_print` is `False`, the function prints the formatted string and returns `None`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tags</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;FATAL&quot;</span><span class="p">,</span> <span class="s2">&quot;☠️&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[91m&quot;</span><span class="p">),</span>  <span class="c1"># Red color for FATAL</span>
+        <span class="p">(</span><span class="s2">&quot;WARN&quot;</span><span class="p">,</span> <span class="s2">&quot;🚨&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[93m&quot;</span><span class="p">),</span>  <span class="c1"># Yellow color for WARN</span>
+        <span class="p">(</span><span class="s2">&quot;INFO&quot;</span><span class="p">,</span> <span class="s2">&quot;ℹ️&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[94m&quot;</span><span class="p">),</span>  <span class="c1"># Blue color for INFO</span>
+        <span class="p">(</span><span class="s2">&quot;WAIT&quot;</span><span class="p">,</span> <span class="s2">&quot;☕️&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[96m&quot;</span><span class="p">),</span>  <span class="c1"># Cyan color for WAIT</span>
+        <span class="p">(</span><span class="s2">&quot;SUCCESS&quot;</span><span class="p">,</span> <span class="s2">&quot;🌊&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[92m&quot;</span><span class="p">),</span>  <span class="c1"># Green color for SUCCESS</span>
+    <span class="p">]</span>
+    <span class="n">_luxe</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[31m&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[32m&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[33m&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[34m&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[35m&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[36m&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[91m&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[92m&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[93m&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[94m&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[95m&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[96m&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="n">_matrix</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;⣾&quot;</span><span class="p">,</span> <span class="s2">&quot;⣽&quot;</span><span class="p">,</span> <span class="s2">&quot;⣻&quot;</span><span class="p">,</span> <span class="s2">&quot;⢿&quot;</span><span class="p">,</span> <span class="s2">&quot;⡿&quot;</span><span class="p">,</span> <span class="s2">&quot;⣟&quot;</span><span class="p">,</span> <span class="s2">&quot;⣯&quot;</span><span class="p">,</span> <span class="s2">&quot;⣷&quot;</span><span class="p">]</span>
+    <span class="n">_joy</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;🍤&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;🌈&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;📊&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;🏁&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;🌊&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;🧠&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;✨&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;🧮&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;🎉&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;🥳&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;🤩&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;🐈&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;❤️&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;💙&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;💜&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;💚&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;💛&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;🧡&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;⭐️&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="n">matching_tags</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tags</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">tag</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span>
+    <span class="k">if</span> <span class="n">matching_tags</span><span class="p">:</span>
+        <span class="n">tag_text</span> <span class="o">=</span> <span class="n">matching_tags</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">emoji</span> <span class="o">=</span> <span class="n">matching_tags</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">color_code</span> <span class="o">=</span> <span class="n">matching_tags</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">luxe</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_luxe</span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">_luxe</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">_joy</span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">_joy</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">_matrix</span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">_matrix</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">body</span><span class="si">}</span><span class="se">\033</span><span class="s2">[0m&quot;</span>
+                <span class="k">if</span> <span class="n">no_print</span>
+                <span class="k">else</span> <span class="nb">print</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">_luxe</span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">_luxe</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">_joy</span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">_joy</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">_matrix</span><span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">_matrix</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">body</span><span class="si">}</span><span class="se">\033</span><span class="s2">[0m&quot;</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">color_code</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">emoji</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">tag_text</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">body</span><span class="si">}</span><span class="se">\033</span><span class="s2">[0m&quot;</span>
+                <span class="k">if</span> <span class="n">no_print</span>
+                <span class="k">else</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">color_code</span><span class="si">}{</span><span class="n">emoji</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">tag_text</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">body</span><span class="si">}</span><span class="se">\033</span><span class="s2">[0m&quot;</span><span class="p">)</span>
+            <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;😭 UNKNOWN TAG - `</span><span class="si">{</span><span class="n">tag</span><span class="si">}</span><span class="s2">`&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Utils">
+<a class="viewcode-back" href="../../../magnet.utils.html#magnet.utils.globals.Utils">[docs]</a>
+<span class="k">class</span> <span class="nc">Utils</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The `Utils` class provides various utility functions for tasks such as checking CUDA availability, normalizing text, and uploading files to Amazon S3.</span>
+
+<span class="sd">    Example Usage:</span>
+<span class="sd">        # Create an instance of the Utils class</span>
+<span class="sd">        utils = Utils()</span>
+
+<span class="sd">        # Check if CUDA is available</span>
+<span class="sd">        utils.check_cuda()</span>
+
+<span class="sd">        # Normalize a text string</span>
+<span class="sd">        normalized_text = utils.normalize_text(&quot;   This is a sample text.   &quot;)</span>
+
+<span class="sd">        # Upload a file to Amazon S3</span>
+<span class="sd">        utils.upload_to_s3(file_or_dir=&quot;path/to/file.txt&quot;, keys=(&quot;YOUR_ACCESS_KEY&quot;, &quot;YOUR_SECRET_KEY&quot;), bucket=&quot;my-bucket&quot;, bucket_path=&quot;data&quot;)</span>
+
+<span class="sd">    Main functionalities:</span>
+<span class="sd">    - Checking if CUDA is available on the machine</span>
+<span class="sd">    - Normalizing text by performing various cleaning operations</span>
+<span class="sd">    - Uploading files to Amazon S3</span>
+
+<span class="sd">    Methods:</span>
+<span class="sd">    - __init__(): Initializes the Utils class and sets up the spaCy English language model with a sentence tokenizer.</span>
+<span class="sd">    - check_cuda(): Checks if CUDA is available on the machine and provides additional information if it is.</span>
+<span class="sd">    - normalize_text(_): Cleans a text string by removing whitespace, replacing characters, and removing curly braces.</span>
+<span class="sd">    - upload_to_s3(file_or_dir, keys, bucket, bucket_path): Uploads a file or directory to an Amazon S3 bucket using the provided access keys and bucket information.</span>
+
+<span class="sd">    Fields:</span>
+<span class="sd">    The Utils class does not have any fields.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">nlp</span> <span class="o">=</span> <span class="n">English</span><span class="p">()</span>
+        <span class="n">nlp</span><span class="o">.</span><span class="n">add_pipe</span><span class="p">(</span><span class="s2">&quot;sentencizer&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nlp</span> <span class="o">=</span> <span class="n">nlp</span>
+
+<div class="viewcode-block" id="Utils.check_cuda">
+<a class="viewcode-back" href="../../../magnet.utils.html#magnet.utils.globals.Utils.check_cuda">[docs]</a>
+    <span class="k">def</span> <span class="nf">check_cuda</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The function checks if CUDA is available on the machine and provides additional information if</span>
+<span class="sd">        it is.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
+            <span class="n">_f</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">,</span> <span class="s2">&quot;CUDA is available on this machine.&quot;</span><span class="p">)</span>
+            <span class="c1"># You can also print additional information like the number of available GPUs:</span>
+            <span class="n">_f</span><span class="p">(</span><span class="s2">&quot;info&quot;</span><span class="p">,</span>
+               <span class="sa">f</span><span class="s2">&quot;Number of available GPUs - </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">device_count</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="c1"># To get the name of the GPU:</span>
+            <span class="n">_f</span><span class="p">(</span>
+                <span class="s2">&quot;info&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;GPU Name - </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">get_device_name</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>  <span class="c1"># 0 is the GPU index</span>
+            <span class="k">return</span> <span class="s1">&#39;cuda&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_f</span><span class="p">(</span><span class="s2">&quot;warn&quot;</span><span class="p">,</span> <span class="s2">&quot;CUDA is not available on this machine.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s1">&#39;cpu&#39;</span></div>
+
+
+<div class="viewcode-block" id="Utils.normalize_text">
+<a class="viewcode-back" href="../../../magnet.utils.html#magnet.utils.globals.Utils.normalize_text">[docs]</a>
+    <span class="k">def</span> <span class="nf">normalize_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The `clean` function takes a string as input and performs various cleaning operations on it,</span>
+<span class="sd">        such as removing whitespace, replacing characters, and removing curly braces.</span>
+
+<span class="sd">        :param _: The parameter &quot;_&quot; is a placeholder for the input string that needs to be cleaned</span>
+<span class="sd">        :return: a cleaned version of the input string.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">_f</span><span class="p">(</span>
+                <span class="s2">&quot;warn&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">&quot;this item may not process properly because it is a list: </span><span class="se">\n</span><span class="si">{</span><span class="n">_</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">_f</span><span class="p">(</span><span class="s1">&#39;warn&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;non-string found </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">_</span> <span class="o">=</span> <span class="n">_</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="n">_</span> <span class="o">=</span> <span class="n">_</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span>
+                <span class="n">_</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">&gt;</span> <span class="mf">0.3</span> <span class="k">else</span> <span class="n">_</span>
+
+            <span class="c1"># Check if more than 20% of the string is integers</span>
+            <span class="n">num_digits</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">_</span> <span class="k">if</span> <span class="n">char</span><span class="o">.</span><span class="n">isdigit</span><span class="p">())</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">num_digits</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">_</span><span class="p">))</span> <span class="o">&gt;=</span> <span class="mf">0.2</span><span class="p">:</span>
+                <span class="n">_</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>  <span class="c1"># Replace with empty quotes</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">_</span> <span class="o">=</span> <span class="n">_</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Check if the string has at least 5 words</span>
+            <span class="n">words</span> <span class="o">=</span> <span class="n">_</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+                <span class="n">_</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>  <span class="c1"># Replace with empty quotes if fewer than 5 words</span>
+
+            <span class="n">_</span> <span class="o">=</span> <span class="n">_</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="n">_</span> <span class="o">=</span> <span class="n">_</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="n">_</span> <span class="o">=</span> <span class="n">_</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\xa0</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="n">_</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+            <span class="n">_</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot; {[^}]*}&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">_</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">_f</span><span class="p">(</span><span class="s2">&quot;fatal&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Utils.upload_to_s3">
+<a class="viewcode-back" href="../../../magnet.utils.html#magnet.utils.globals.Utils.upload_to_s3">[docs]</a>
+    <span class="k">def</span> <span class="nf">upload_to_s3</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">file_or_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">keys</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;YOUR_ACCESS_KEY&quot;</span><span class="p">,</span> <span class="s2">&quot;YOUR_SECRET_KEY&quot;</span><span class="p">),</span>
+        <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">bucket_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Uploads a file or directory to an Amazon S3 bucket.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            file_or_dir (str): The path of the file or directory to be uploaded.</span>
+<span class="sd">            keys (tuple): A tuple containing the access keys (access key ID and secret access key) required to access the Amazon S3 bucket. Default is (&quot;YOUR_ACCESS_KEY&quot;, &quot;YOUR_SECRET_KEY&quot;).</span>
+<span class="sd">            bucket (str): The name of the Amazon S3 bucket where the file or directory will be uploaded.</span>
+<span class="sd">            bucket_path (str): The path within the bucket where the file or directory will be uploaded.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            None</span>
+
+<span class="sd">        Example Usage:</span>
+<span class="sd">            # Create an instance of the Utils class</span>
+<span class="sd">            utils = Utils()</span>
+
+<span class="sd">            # Upload a file to Amazon S3</span>
+<span class="sd">            utils.upload_to_s3(file_or_dir=&quot;path/to/file.txt&quot;, keys=(&quot;YOUR_ACCESS_KEY&quot;, &quot;YOUR_SECRET_KEY&quot;), bucket=&quot;my-bucket&quot;, bucket_path=&quot;data&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">aws_access_key_id</span><span class="p">,</span> <span class="n">aws_secret_access_key</span> <span class="o">=</span> <span class="n">keys</span>
+
+        <span class="n">s3</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span>
+            <span class="s2">&quot;s3&quot;</span><span class="p">,</span>
+            <span class="n">aws_access_key_id</span><span class="o">=</span><span class="n">aws_access_key_id</span><span class="p">,</span>
+            <span class="n">aws_secret_access_key</span><span class="o">=</span><span class="n">aws_secret_access_key</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">_f</span><span class="p">(</span><span class="s2">&quot;warn&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;uploading to S3 - </span><span class="si">{</span><span class="n">file_or_dir</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">file_or_dir</span><span class="p">)):</span>
+            <span class="n">s3</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span>
+                    <span class="n">file_or_dir</span><span class="p">),</span> <span class="n">bucket</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">bucket_path</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">file_or_dir</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="p">)</span>
+            <span class="n">_f</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+               <span class="sa">f</span><span class="s1">&#39;uploaded - </span><span class="si">{</span><span class="n">bucket</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">bucket_path</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">file_or_dir</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">file_or_dir</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">file_or_dir</span><span class="p">):</span>
+                <span class="n">f</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">file_or_dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+                <span class="n">s3</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span>
+                        <span class="n">f</span><span class="p">),</span> <span class="n">bucket</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">bucket_path</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">f</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span>
+                <span class="p">)</span>
+                <span class="n">_f</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
+                   <span class="sa">f</span><span class="s1">&#39;uploaded - </span><span class="si">{</span><span class="n">bucket</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">bucket_path</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">f</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Prismadic, LLC.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
