@@ -50,19 +50,44 @@ python3 setup.py install
 <small>a snippet to get you started</small>
 
 ``` python
-from magnet.ize.filings import Processor
-source_data_file = "./raw/filings.csv"
-export_data_file = "./data/filings_mistral_nlp.parquet"
-filings = Processor()
-filings.load(
-    source_data_file
-    , 'clean'
-    , 'file'
-)
-await filings.process(
-    export_data_file
-    , nlp=True
-)
+from magnet.base import Magnet
+from magnet.base import EmbeddedMagnet
+
+cluster = EmbeddedMagnet()
+cluster.start()
+magnet = cluster.create_magnet()
+await magnet.align()
+
+config = {
+    "host": "127.0.0.1",
+    "credentials": None,
+    "domain": None,
+    "name": "my_stream",
+    "category": "my_category",
+    "kv_name": "my_kv",
+    "session": "my_session",
+    "os_name": "my_object_store",
+    "index": {
+        "milvus_uri": "127.0.0.1",
+        "milvus_port": 19530,
+        "milvus_user": "test",
+        "milvus_password": "test",
+        "dimension": 1024,
+        "model": "BAAI/bge-large-en-v1.5",
+        "name": "test",
+        "options": {
+            'metric_type': 'COSINE',
+            'index_type':'HNSW',
+            'params': {
+                "efConstruction": 40
+                , "M": 48
+            }
+        }
+    }
+}
+
+magnet = Magnet(config)
+await magnet.align()
 ```
 
 <img src='./divider.png' style="width:100%;height:5px;">
