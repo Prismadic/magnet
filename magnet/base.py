@@ -142,6 +142,7 @@ class Magnet:
 
 class EmbeddedMagnet:
     def __init__(self):
+        self.client = None
         try:
             self.client = docker.from_env()
             _f('success', 'containerization engine connected')

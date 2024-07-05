@@ -1,4 +1,4 @@
-import json, datetime, xxhash, platform, asyncio
+import json, datetime, xxhash, platform, asyncio, io, base64
 
 from dataclasses import asdict
 from tabulate import tabulate
@@ -10,6 +10,7 @@ from magnet.utils.data_classes import *
 from nats.errors import TimeoutError
 from nats.js.api import StreamConfig, ConsumerConfig
 from nats.js.errors import ServerError
+from nats.js.api import ObjectMeta
 
 x = xxhash
 dt = datetime.datetime.now(datetime.timezone.utc)
@@ -30,7 +31,7 @@ class Charge:
             formatted_data = []
 
             # Loop through each stream and its subjects
-            for stream, subjects in zip(remote_streams, remote_subjects):
+            for stream, subjects in data:
                 # Check if the current stream name or any of the subjects match the config variables
                 match_stream_name = stream == self.magnet.config.stream_name
                 match_subject = self.magnet.config.category in subjects
@@ -87,31 +88,44 @@ class Charge:
         await self.magnet.nc.close()
         _f('warn', f'disconnected from {self.magnet.config.host}')
 
-    async def pulse(self, payload: Payload | GeneratedPayload | EmbeddingPayload | JobParams = None, v=False):
+    async def pulse(self, payload: Payload | FilePayload | GeneratedPayload | EmbeddingPayload | JobParams = None, v=False):
         """
         Publishes data to the NATS server using the specified category and payload.
 
         Args:
             payload (dict): The data to be published.
         """
-        try:
-            bytes_ = json.dumps(asdict(payload), separators=(
-                ', ', ':')).encode('utf-8')
-        except Exception as e:
-            return _f('fatal', f'invalid object, more info:\n{e} in [Payload, GeneratedPayload, EmbeddingPayload, JobParams]')
-        try:
-            _hash = x.xxh64(bytes_).hexdigest()
-            msg = await self.magnet.js.publish(
-                self.magnet.config.category, bytes_, headers={
-                    "Nats-Msg-Id": _hash
-                }
-            )
-            _f('success', f'pulsed to {self.magnet.config.category} on {self.magnet.config.stream_name}') if v else None
-            _ts = datetime.datetime.now(datetime.timezone.utc)
-            msg.ts = _ts
-            return msg
-        except Exception as e:
-            return _f('fatal', f'could not pulse data to {self.magnet.config.host}\n{e}')
+        if type(payload) == FilePayload:
+            _hash = x.xxh64(payload.data).hexdigest()
+            payload_data_bytes = base64.b64decode(payload.data.encode('utf-8'))
+            bucket_name = self.magnet.config.os_name
+            object_name = f"{_hash}"
+            meta = ObjectMeta(name=object_name
+                              , headers={
+                                  "ext": payload.document.split('.')[-1]
+                              })
+            bucket = await self.magnet.js.object_store(bucket_name)
+            await bucket.put(object_name, payload_data_bytes, meta=meta)
+            _f('success', f'uploaded to NATS object store in bucket {bucket_name} as {object_name}') if v else None
+        else:
+            try:
+                bytes_ = json.dumps(asdict(payload), separators=(
+                    ', ', ':')).encode('utf-8')
+            except Exception as e:
+                return _f('fatal', f'invalid object, more info:\n{e} in [Payload, FilePayload, GeneratedPayload, EmbeddingPayload, JobParams]')
+            try:
+                _hash = x.xxh64(bytes_).hexdigest()
+                msg = await self.magnet.js.publish(
+                    self.magnet.config.category, bytes_, headers={
+                        "Nats-Msg-Id": _hash
+                    }
+                )
+                _f('success', f'pulsed to {self.magnet.config.category} on {self.magnet.config.stream_name}') if v else None
+                _ts = datetime.datetime.now(datetime.timezone.utc)
+                msg.ts = _ts
+                return msg
+            except Exception as e:
+                return _f('fatal', f'could not pulse data to {self.magnet.config.host}\n{e}')
 
     async def excite(self, job: dict = {}):
         """
@@ -170,7 +184,7 @@ class Resonator:
         """
         self.magnet = magnet
 
-    async def on(self, job: bool = None, local: bool = False, bandwidth: int = 1000):
+    async def on(self, job: bool = None, local: bool = False, bandwidth: int = 1000, obj=False):
         """
         Connects to the NATS server, subscribes to a specific category in a stream, and consumes messages from that category.
 
@@ -195,18 +209,41 @@ class Resonator:
         )
         _f('wait', f'connecting to {self.magnet.config.host}')
         try:
-            self.sub = await self.magnet.js.pull_subscribe(
-                durable=self.magnet.config.session
-                , subject=self.magnet.config.category
-                , stream=self.magnet.config.stream_name
-                , config=self.consumer_config
-            )
-            _f('info',
-                f'joined worker queue: {self.magnet.config.session} as {self.node}')
+            if obj:
+                object_store = await self.magnet.js.object_store(self.magnet.config.os_name)
+                self.object_store = object_store
+                self.sub = await object_store.watch(include_history=False)
+                _f('info',
+                    f'subscribed to object store: {self.magnet.config.os_name} as {self.node}')
+            else:
+                self.sub = await self.magnet.js.pull_subscribe(
+                    durable=self.magnet.config.session
+                    , subject=self.magnet.config.category
+                    , stream=self.magnet.config.stream_name
+                    , config=self.consumer_config
+                )
+                _f('info',
+                    f'joined worker queue: {self.magnet.config.session} as {self.node}')
         except Exception as e:
             return _f('fatal', e)
+        
+    async def download(self, obj: object = None):
+        if obj and self.object_store:
+            buffer = io.BytesIO()
+            file = await self.object_store.get(obj.name, buffer)
+            buffer.seek(0)
+            chunk_size = 128 * 1024
+            with open(f"{file.info.name}.{file.info.headers['ext']}", 'wb') as fh:
+                while True:
+                    chunk = buffer.read(chunk_size)
+                    if not chunk:
+                        break
+                    fh.write(chunk)
+                _f('success', f'downloaded {file.info.name} from {self.magnet.config.os_name}')
+        else:
+            _f('fatal', 'no object store initialized')
 
-    async def listen(self, cb=print, job_n: int = None, generic: bool = False, verbose=False):
+    async def listen(self, cb=print, job_n: int = None, generic: bool = False, v=False):
         try: self.sub
         except: return _f('fatal', 'no subscriber initialized')
         if job_n:
@@ -229,26 +266,34 @@ class Resonator:
             except Exception as e:
                 _f('warn', "no more data")
         else:
-            _f("info",
-               f'consuming delta from [{self.magnet.config.category}] on\n🛰️ stream: {self.magnet.config.stream_name}\n🧲 session: "{self.magnet.config.session}"')
-            while True:
-                try:
-                    msgs = await self.sub.fetch(batch=1, timeout=60)
-                    _f('info', f"{msgs}") if verbose else None
-                    payload = msgs[0].data if generic else Payload(
-                        **json.loads(msgs[0].data))
-                    _f('info', f"{payload}") if verbose else None
+            if type(self.sub).__name__ == "ObjectWatcher":
+                e = await self.sub.updates()
+                loop = asyncio.get_event_loop()
+                loop.create_task(cb(self.object_store, e))
+                _f("info",
+                   f'consuming objects from [{self.magnet.config.os_name}] on\n🛰️ stream: {self.magnet.config.stream_name}\n🧲 session: "{self.magnet.config.session}"')
+                await asyncio.sleep(3600)
+                _f("info",
+                    f'consuming delta from [{self.magnet.config.category}] on\n🛰️ stream: {self.magnet.config.stream_name}\n🧲 session: "{self.magnet.config.session}"')
+            else:
+                while True:
                     try:
-                        await cb(payload, msgs[0])
+                        msgs = await self.sub.fetch(batch=1, timeout=60)
+                        _f('info', f"{msgs}") if verbose else None
+                        payload = msgs[0].data if generic else Payload(
+                            **json.loads(msgs[0].data))
+                        _f('info', f"{payload}") if verbose else None
+                        try:
+                            await cb(payload, msgs[0])
+                        except Exception as e:
+                            _f("warn", f'retrying connection to {self.magnet.config.host}\n{e}')
+                            _f("info", "this can also be a problem with your callback")
                     except Exception as e:
-                        _f("warn", f'retrying connection to {self.magnet.config.host}\n{e}')
-                        _f("info", "this can also be a problem with your callback")
-                except Exception as e:
-                    if "nats: timeout" in str(e):
-                        _f('warn', 'encountered a timeout, retrying in 1s')
-                    else:
-                        _f('fatal', str(e))
-                await asyncio.sleep(1)
+                        if "nats: timeout" in str(e):
+                            _f('warn', 'encountered a timeout, retrying in 1s')
+                        else:
+                            _f('fatal', str(e))
+                    await asyncio.sleep(1)
 
     async def worker(self, cb=print):
         """
