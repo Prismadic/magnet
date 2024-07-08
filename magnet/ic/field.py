@@ -272,9 +272,8 @@ class Resonator:
                 loop.create_task(cb(self.object_store, e))
                 _f("info",
                    f'consuming objects from [{self.magnet.config.os_name}] on\n🛰️ stream: {self.magnet.config.stream_name}\n🧲 session: "{self.magnet.config.session}"')
-                await asyncio.sleep(3600)
-                _f("info",
-                    f'consuming delta from [{self.magnet.config.category}] on\n🛰️ stream: {self.magnet.config.stream_name}\n🧲 session: "{self.magnet.config.session}"')
+                await asyncio.sleep(1)
+                
             else:
                 while True:
                     try:
@@ -294,6 +293,8 @@ class Resonator:
                         else:
                             _f('fatal', str(e))
                     await asyncio.sleep(1)
+                    _f("info",
+                        f'consuming delta from [{self.magnet.config.category}] on\n🛰️ stream: {self.magnet.config.stream_name}\n🧲 session: "{self.magnet.config.session}"')
 
     async def worker(self, cb=print):
         """
