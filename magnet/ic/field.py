@@ -278,10 +278,10 @@ class Resonator:
                 while True:
                     try:
                         msgs = await self.sub.fetch(batch=1, timeout=60)
-                        _f('info', f"{msgs}") if verbose else None
+                        _f('info', f"{msgs}") if v else None
                         payload = msgs[0].data if generic else Payload(
                             **json.loads(msgs[0].data))
-                        _f('info', f"{payload}") if verbose else None
+                        _f('info', f"{payload}") if v else None
                         try:
                             await cb(payload, msgs[0])
                         except Exception as e:
