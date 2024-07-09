@@ -5,6 +5,12 @@ from dataclasses import dataclass, field
 from typing import List, Optional, Callable
 
 @dataclass
+class Job:
+    _type: str
+    _id: str
+    _isClaimed: bool = False
+
+@dataclass
 class AskParameters:
     m: str = "mistralai/Mistral-7B-Instruct-v0.1"
     q: str = "What is your itinerary?"

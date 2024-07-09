@@ -44,7 +44,7 @@ class Magnet:
                 config = MagnetConfig(**config)
             if isinstance(config.index, dict):
                 config.index = IndexConfig(**config.index)
-            elif not isinstance(config, MagnetConfig):
+            else:
                 _f("fatal", "config must be a MagnetConfig instance or a dictionary")
                 raise ValueError
         except Exception as e:

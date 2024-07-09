@@ -88,7 +88,7 @@ class Charge:
         await self.magnet.nc.close()
         _f('warn', f'disconnected from {self.magnet.config.host}')
 
-    async def pulse(self, payload: Payload | FilePayload | GeneratedPayload | EmbeddingPayload | JobParams = None, v=False):
+    async def pulse(self, payload: Payload | FilePayload | GeneratedPayload | EmbeddingPayload | JobParams = None, create_job=False, v=False):
         """
         Publishes data to the NATS server using the specified category and payload.
 
@@ -107,6 +107,11 @@ class Charge:
             bucket = await self.magnet.js.object_store(bucket_name)
             await bucket.put(object_name, payload_data_bytes, meta=meta)
             _f('success', f'uploaded to NATS object store in bucket {bucket_name} as {object_name}') if v else None
+
+            if create_job:
+                job = Job("process_document", _hash)
+                await self.magnet.kv.put(key=job._id, value=json.dumps(asdict(job)).encode('utf-8'))
+                _f('info', f'created job {job._id}')
         else:
             try:
                 bytes_ = json.dumps(asdict(payload), separators=(
@@ -210,9 +215,7 @@ class Resonator:
         _f('wait', f'connecting to {self.magnet.config.host}')
         try:
             if obj:
-                object_store = await self.magnet.js.object_store(self.magnet.config.os_name)
-                self.object_store = object_store
-                self.sub = await object_store.watch(include_history=False)
+                self.sub = await self.magnet.os.watch(include_history=False)
                 _f('info',
                     f'subscribed to object store: {self.magnet.config.os_name} as {self.node}')
             else:
@@ -228,9 +231,9 @@ class Resonator:
             return _f('fatal', e)
         
     async def download(self, obj: object = None):
-        if obj and self.object_store:
+        if obj and self.magnet.os:
             buffer = io.BytesIO()
-            file = await self.object_store.get(obj.name, buffer)
+            file = await self.magnet.os.get(obj.name, buffer)
             buffer.seek(0)
             chunk_size = 128 * 1024
             with open(f"{file.info.name}.{file.info.headers['ext']}", 'wb') as fh:
@@ -263,10 +266,10 @@ class Resonator:
             try:
                 if type(self.sub).__name__ == "ObjectWatcher":
                     _f("info", f'consuming objects from [{self.magnet.config.host.split("@")[1]}] from\n🛰️ bucket: {self.magnet.config.os_name}"')
-                    msgs = await self.object_store.list()
+                    msgs = await self.magnet.os.list()
                     for msg in msgs:
                         await self.download(msg)
-                        await cb(self.object_store, msg)
+                        await cb(self.magnet.os, msg)
                 else:
                     _f("info", f'consuming {job_n} from [{self.magnet.config.category}] on\n🛰️ stream: {self.magnet.config.stream_name}\n🧲 session: "{self.magnet.session}"')
                     msgs = await self.sub.fetch(batch=job_n, timeout=60)
@@ -280,7 +283,7 @@ class Resonator:
                 _f("info", f'consuming objects from [{self.magnet.config.host.split("@")[1]}] from\n🛰️ bucket: {self.magnet.config.stream_name}"')
                 e = await self.sub.updates()
                 loop = asyncio.get_event_loop()
-                loop.create_task(cb(self.object_store, e))
+                loop.create_task(cb(self.magnet.os, e))
                 await asyncio.sleep(1)
             else:
                 while True:
@@ -317,16 +320,16 @@ class Resonator:
             Exception: If there is an error in consuming the message or processing the callback function.
         """
         _f("info",
-           f'processing jobs from [{self.magnet.config.category}] on\n🛰️ stream: {self.magnet.config.stream_name}\n🧲 session: "{self.magnet.session}"')
+           f'processing jobs from [{self.magnet.config.kv_name}] on\n🛰️ object store: {self.magnet.config.os_name}')
         try:
-            msg = await self.sub.next_msg(timeout=60)
-            payload = JobParams(**json.loads(msg.data))
-            try:
-                await cb(payload, msg)
-            except Exception as e:
-                _f("warn", f'something wrong in your callback function!\n{e}')
+            keys = await self.magnet.kv.keys()
+            for key in keys:
+                _job = await self.magnet.kv.get(key)
+                job = json.loads(_job.value.decode('utf-8'))
+                if not job['_isClaimed']: 
+                    await cb(_job, job)
         except Exception as e:
-            _f('fatal', 'invalid JSON')
+            _f('fatal', f'invalid JSON\n{e}')
 
     async def conduct(self, cb=print):
         pass
