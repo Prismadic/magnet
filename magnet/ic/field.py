@@ -212,7 +212,7 @@ class Resonator:
             , max_ack_pending=bandwidth
             , ack_wait=3600
         )
-        _f('wait', f'connecting to {self.magnet.config.host}')
+        _f('wait', f'connecting to {self.magnet.config.host.split("@")[1]}')
         try:
             if obj:
                 self.sub = await self.magnet.os.watch(include_history=False)
@@ -222,7 +222,6 @@ class Resonator:
                 self.sub = await self.magnet.js.pull_subscribe(
                     durable=self.magnet.config.session
                     , subject=self.magnet.config.category
-                    , stream=self.magnet.config.stream_name
                     , config=self.consumer_config
                 )
                 _f('info',
@@ -271,13 +270,13 @@ class Resonator:
                         await self.download(msg)
                         await cb(self.magnet.os, msg)
                 else:
-                    _f("info", f'consuming {job_n} from [{self.magnet.config.category}] on\n🛰️ stream: {self.magnet.config.stream_name}\n🧲 session: "{self.magnet.session}"')
+                    _f("info", f'consuming {job_n} from [{self.magnet.config.category}] on\n🛰️ stream: {self.magnet.config.stream_name}\n🧲 session: "{self.magnet.config.session}"')
                     msgs = await self.sub.fetch(batch=job_n, timeout=60)
                     await deliver_messages(msgs)
             except ValueError as e:
                 _f('warn', f'{self.magnet.config.session} reached the end of {self.magnet.config.category}, {self.magnet.config.name}')
             except Exception as e:
-                _f('warn', "no more data")
+                _f('warn', f"no more data\n{e}")
         else:
             if type(self.sub).__name__ == "ObjectWatcher":
                 _f("info", f'consuming objects from [{self.magnet.config.host.split("@")[1]}] from\n🛰️ bucket: {self.magnet.config.stream_name}"')
@@ -300,7 +299,7 @@ class Resonator:
                             _f('warn', 'encountered a timeout, retrying in 1s')
                         else:
                             _f('fatal', str(e))
-                        _f("warn", f'retrying connection to {self.magnet.config.host}\n{e}')
+                        _f("warn", f'retrying connection to {self.magnet.config.host.split("@")[1]}\n{e}')
                         _f("info", "this can also be a problem with your callback")
                     await asyncio.sleep(1)
                     _f("info", f'consuming delta from [{self.magnet.config.category}] on\n🛰️ stream: {self.magnet.config.stream_name}\n🧲 session: "{self.magnet.config.session}"')
@@ -350,8 +349,8 @@ class Resonator:
 
         :return: None
         """
-        await self.magnet.js.sub.unsubscribe()
+        await self.sub.unsubscribe()
         _f('warn', f'unsubscribed from {self.magnet.config.stream_name}')
         await self.nc.drain()
-        _f('warn', f'safe to disconnect from {self.magnet.config.host}')
+        _f('warn', f'safe to disconnect from {self.magnet.config.host.split("@")[1]}')
 

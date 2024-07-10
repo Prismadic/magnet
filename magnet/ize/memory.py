@@ -56,7 +56,7 @@ class Memory:
                         self.db.collection.insert([
                             [payload.document], [_chunk], [embedding.tolist()]
                         ])
-                        _f('success', f'embedding indexed\n{payload}') if v else None
+                        _f('success', f'embedding indexed\n{_chunk}') if v else None
                         if field:
                             payload = EmbeddingPayload(
                                 model=self.config.index.model,
@@ -64,7 +64,7 @@ class Memory:
                                 text=_chunk,
                                 document=payload.document
                             )
-                            _f('info', f'sending payload\n{payload}') if v else None
+                            _f('info', f'sending payload\n{_chunk}') if v else None
                             await self.field.pulse(payload)
             else:
                 embedding = self._model.encode(text_to_encode, normalize_embeddings=True)
