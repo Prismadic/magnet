@@ -130,7 +130,7 @@ class Magnet:
         try:
             await self.js.object_store(self.config.os_name)
         except Exception as e:
-            _f("warn", f"Object Store {self.config.kv_name} not found, creating")
+            _f("warn", f"Object Store {self.config.os_name} not found, creating")
             await self.js.create_object_store(bucket=self.config.os_name)
             _f("success", f"created `{self.config.os_name}`")
         return await self.js.object_store(self.config.os_name)

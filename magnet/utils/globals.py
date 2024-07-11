@@ -3,7 +3,6 @@ import os
 import torch
 import random
 import boto3
-from spacy.lang.en import English
 import inspect
 from transformers import AutoTokenizer
 
@@ -163,9 +162,7 @@ class Utils:
     """
 
     def __init__(self):
-        nlp = English()
-        nlp.add_pipe("sentencizer")
-        self.nlp = nlp
+        pass
 
     def check_cuda(self):
         """
