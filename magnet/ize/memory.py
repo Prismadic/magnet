@@ -36,7 +36,7 @@ class Memory:
         if initialize:
             self.db.initialize()
 
-    async def index(self, payload, msg, field=None, v=False, instruction="Represent this information for searching relevant passages: "):
+    async def index(self, payload=None, msg=None, field=None, v=False, instruction="Represent this information for searching relevant passages: "):
         if not msg or not payload:
             return _f('fatal', 'no field message and/or payload to ack!')
         if field:
@@ -64,8 +64,10 @@ class Memory:
                                 text=_chunk,
                                 document=payload.document
                             )
-                            _f('info', f'sending payload\n{_chunk}') if v else None
+                            _f('info', f'sending payload\n{_chunk}')
                             await self.field.pulse(payload)
+                    else:
+                        _f('warn', f'embedding exists') if v else None
             else:
                 embedding = self._model.encode(text_to_encode, normalize_embeddings=True)
                 if not self.is_dupe(q=embedding):
@@ -84,7 +86,7 @@ class Memory:
                         _f('info', f'sending payload\n{payload}') if v else None
                         await self.field.pulse(payload)
                 else:
-                    _f('warn', f'embedding exists\n{payload}')
+                    _f('warn', f'embedding exists') if v else None
                     await msg.ack_sync()
         except Exception as e:
             _f('fatal', e)

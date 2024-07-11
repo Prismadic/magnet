@@ -285,6 +285,7 @@ class Resonator:
                 loop.create_task(cb(self.magnet.os, e))
                 await asyncio.sleep(1)
             else:
+                _f("info", f'consuming delta from [{self.magnet.config.category}] on\n🛰️ stream: {self.magnet.config.stream_name}\n🧲 session: "{self.magnet.config.session}"')
                 while True:
                     try:
                         msgs = await self.sub.fetch(batch=1, timeout=60)
@@ -302,7 +303,6 @@ class Resonator:
                         _f("warn", f'retrying connection to {self.magnet.config.host.split("@")[1]}\n{e}')
                         _f("info", "this can also be a problem with your callback")
                     await asyncio.sleep(1)
-                    _f("info", f'consuming delta from [{self.magnet.config.category}] on\n🛰️ stream: {self.magnet.config.stream_name}\n🧲 session: "{self.magnet.config.session}"')
 
 
     async def worker(self, cb=print):
