@@ -17,7 +17,7 @@ if is_darwin:
 from sentencepiece import SentencePieceProcessor
 from magnet.utils.globals import _f
 from magnet.utils.data_classes import MistralArgs
-
+import torch.nn as nn
 
 class RMSNorm(nn.Module):
     def __init__(self, dims: int, eps: float = 1e-5):
