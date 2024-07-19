@@ -1,8 +1,12 @@
 
 import nats, asyncio, docker, platform
 
-from milvus import default_server
+import platform
 
+# Check if the OS is macOS
+if platform.system() == 'Darwin':
+    from milvus import default_server
+    
 from magnet.utils.globals import _f
 from magnet.utils.data_classes import MagnetConfig, IndexConfig
 
