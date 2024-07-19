@@ -1,15 +1,15 @@
 # Copyright © 2023 Apple Inc.
 # docstrings - 2023 Prismadic, LLC.
-
+import os
 import json
 import time
 from dataclasses import dataclass
 from pathlib import Path
 from typing import List, Optional, Tuple
 import platform
-is_darwin = platform.system() == 'Darwin'
+os_name = platform.system()
 
-if is_darwin:
+if os_name == 'Darwin' and not os.getenv('DOCKER_ENV'):
     import mlx.core as mx
     import mlx.nn as nn
     from mlx.utils import tree_unflatten
@@ -17,7 +17,6 @@ if is_darwin:
 from sentencepiece import SentencePieceProcessor
 from magnet.utils.globals import _f
 from magnet.utils.data_classes import MistralArgs
-import torch.nn as nn
 
 class RMSNorm(nn.Module):
     def __init__(self, dims: int, eps: float = 1e-5):

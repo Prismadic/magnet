@@ -1,6 +1,13 @@
-import requests
+import platform
+import os
+os_name = platform.system()
 from magnet.utils.globals import _f
-from magnet.utils.mlx import mistral
+if os_name == 'Darwin' and not os.getenv('DOCKER_ENV'):
+    try:
+        from magnet.utils.mlx import mistral
+    except ImportError:
+        _f("warn", "MLX module not found on macOS without DOCKER_ENV")
+
 import json
 
 class LocalInference:
