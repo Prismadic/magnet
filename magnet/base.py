@@ -1,13 +1,22 @@
-
-import nats, asyncio, docker, platform, os
+import nats
+import asyncio
+import docker
+import platform
+import os
+import importlib
 
 from magnet.utils.globals import _f
 from magnet.utils.data_classes import MagnetConfig, IndexConfig
 
-milvus_server = default_server
+milvus_server = None  # Set to None initially
 os_name = platform.system()
+
 if os_name == 'Darwin' and not os.getenv('DOCKER_ENV'):
-    from milvus import default_server
+    try:
+        milvus_module = importlib.import_module('milvus')
+        milvus_server = milvus_module.default_server  # Initialize milvus_server only if imported
+    except ImportError:
+        _f("warn", "milvus module not found on macOS without DOCKER_ENV")
 
 auto_config = {
     "host": "127.0.0.1",
@@ -28,10 +37,10 @@ auto_config = {
         "name": "test",
         "options": {
             'metric_type': 'COSINE',
-            'index_type':'HNSW',
+            'index_type': 'HNSW',
             'params': {
-                "efConstruction": 40
-                , "M": 48
+                "efConstruction": 40,
+                "M": 48
             }
         }
     }
@@ -68,7 +77,7 @@ class Magnet:
         attempt = 0
         eulers_number = 2.71828
         golden_ratio = 1.61803398875
-        
+
         while True:
             try:
                 _server = f'{"nats://" if not self.config.credentials else "tls://"}{self.config.host}:4222'
@@ -78,7 +87,7 @@ class Magnet:
                     error_cb=self._cre_handler
                 )
                 _f("success", f"🧲 connected to \n💎 {_server} ")
-                
+
                 try:
                     self.js = self.nc.jetstream(domain=self.config.domain)
                     _f("info", f"🧲 initialized client ")
@@ -156,11 +165,11 @@ class EmbeddedMagnet:
     def start(self):
         try:
             nats_container = self.client.containers.run(
-                self.nats_image
-                , name="magnet-embedded-nats"
-                , detach=True
-                , ports={'4222/tcp': 4222}
-                , command="-js"
+                self.nats_image,
+                name="magnet-embedded-nats",
+                detach=True,
+                ports={'4222/tcp': 4222},
+                command="-js"
             )
         except Exception as e:
             return _f('fatal', e)
@@ -169,18 +178,19 @@ class EmbeddedMagnet:
             if container.id == nats_container.id:
                 _f("wait", f"{container.name} container progressing with id {container.id}")
                 nats_logs = container.logs().decode('utf-8').split('[INF]')
-            
+
             if container.name == "magnet-embedded-nats" and container.status == "running":
                 _f("info", f"nats logs")
                 for log in nats_logs:
                     _f("warn", f"{log}", luxe=True)
-            
+
             if container.status == "exited":
                 _f("fatal", f"{container.name} has exited")
                 break
         try:
-            milvus_server.start()
-            _f("success", "milvus server started")
+            if milvus_server:  # Only try to start if milvus_server is initialized
+                milvus_server.start()
+                _f("success", "milvus server started")
         except Exception as e:
             _f("fatal", f"milvus failure\n{e}")
 
@@ -194,8 +204,9 @@ class EmbeddedMagnet:
                 container.remove()
                 _f("success", f"embedded nats removed")
         try:
-            milvus_server.stop()
-            _f("success", "embedded milvus server stopped")
+            if milvus_server:  # Only try to stop if milvus_server is initialized
+                milvus_server.stop()
+                _f("success", "embedded milvus server stopped")
         except Exception as e:
             _f("warn", f"embedded milvus can't be stopped\n{e}")
 
@@ -209,18 +220,8 @@ class EmbeddedMagnet:
         self.client.volumes.prune()
         _f("warn", "container engine pruned")
         try:
-            milvus_server.cleanup()
-            _f("success", "embedded cluster cleaned up")
+            if milvus_server:  # Only try to cleanup if milvus_server is initialized
+                milvus_server.cleanup()
+                _f("success", "embedded cluster cleaned up")
         except Exception as e:
-            _f("fatal",f"error cleaning up milvus\n{e}")
-
-# class Electrode:
-#     def __init__(self, config: dict = None):
-#         self.config = config if config else _f('fatal', 'no config applied')
-#     async def auto(self):
-#         match self.config['JOB_TYPE']:
-#             case 'index':
-#                 self.reso = field.Resonator(f"{self.config['NATS_USER']}:{self.config['NATS_PASSWORD']}@{self.config['NATS_URL']}")
-#                 self.embedder = memory.Embedder(self.config, create=self.config["CREATE"])
-#                 await self.reso.on(category=self.config['NATS_CATEGORY'], session=self.config['NATS_SESSION'], stream=self.config['NATS_STREAM'], job=True)
-#                 await self.reso.listen(cb=self.embedder.index, job_n=self.config['JOB_N'])
+            _f("fatal", f"error cleaning up milvus\n{e}")
