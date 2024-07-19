@@ -1,17 +1,13 @@
 
-import nats, asyncio, docker, platform
+import nats, asyncio, docker, platform, os
 
-import platform
-
-# Check if the OS is macOS
-if platform.system() == 'Darwin':
-    from milvus import default_server
-    
 from magnet.utils.globals import _f
 from magnet.utils.data_classes import MagnetConfig, IndexConfig
 
 milvus_server = default_server
 os_name = platform.system()
+if os_name == 'Darwin' and not os.getenv('DOCKER_ENV'):
+    from milvus import default_server
 
 auto_config = {
     "host": "127.0.0.1",
