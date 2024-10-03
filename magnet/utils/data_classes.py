@@ -3,12 +3,64 @@ from typing import Dict, Optional, Any
 
 from dataclasses import dataclass, field
 from typing import List, Optional, Callable
+from datetime import datetime
+from numpy import ndarray
 
 @dataclass
+class Status:
+    timestamp: datetime
+    type: str  # e.g., 'success', 'warn', 'fatal', 'info', etc.
+    content: str
+
+@dataclass
+class ProcessParams:
+    resource_id: str
+    location: str
+    model: str
+    data_source: str
+    processing_options: Dict[str, Any]  # E.g., {'filter': True, 'normalize': False}
+
+@dataclass
+class InferenceParams:
+    resource_id: str
+    location: str
+    data_source: str
+    model_id: str
+    inference_options: Dict[str, Any]  # E.g., {'batch_size': 32, 'confidence_threshold': 0.5}
+
+@dataclass
+class TrainParams:
+    resource_id: str
+    location: str
+    data_source: str
+    model: str
+    training_options: Dict[str, Any]  # E.g., {'early_stopping': True, 'augmentation': True}
+
+@dataclass
+class AcquireParams:
+    resource_id: str
+    data_source: str
+    location: str
+    acquisition_options: Dict[str, Any]  # E.g., {'timeout': 120, 'retry_on_failure': True}
+
+# The main Job class remains as you defined it:
+@dataclass
 class Job:
+    params: AcquireParams | TrainParams | InferenceParams | ProcessParams  # This will be one of the above parameter classes
     _type: str
     _id: str
     _isClaimed: bool = False
+
+@dataclass
+class Run:
+    _id: str
+    _job: Job
+    _type: str
+    start_time: str
+    status: Optional[str] = None
+    end_time: Optional[str] = None
+    results: Optional[Dict[str, Any]] = None
+    metrics: Optional[Dict[str, Any]] = None
 
 @dataclass
 class AskParameters:
@@ -51,23 +103,24 @@ class Payload:
     Represents a payload with two main fields: text and document.
 
     Args:
-        text (str): The text associated with the payload.
-        document (str): The document associated with the payload.
+        content (object | list | str | dict): The information associated with the payload.
+        _id (str): The id associated with the payload.
     """
-    text: str
-    document: str
+    content: object | list | str | dict | ndarray
+    _id: str
 
 @dataclass
 class FilePayload:
     """
-    Represents a payload with two main fields: text and document.
+    Represents a payload with two main fields: data and _id.
 
     Args:
-        text (str): The text associated with the payload.
-        document (str): The document associated with the payload.
+        data (list): The bytearray associated with the payload.
+        _id (str): The document associated with the payload.
     """
-    data: str
-    document: str
+    data: bytes
+    original_filename: str
+    _id: str
 
 @dataclass
 class GeneratedPayload:
@@ -100,7 +153,7 @@ class EmbeddingPayload:
     """
     document: str
     embedding: list
-    text: list
+    content: list
     model: str
 
 @dataclass
