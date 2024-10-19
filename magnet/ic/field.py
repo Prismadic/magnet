@@ -23,7 +23,8 @@ class Charge:
         self.magnet = magnet
         self.help = RunHelpers(magnet)  # Use RunHelpers for run-related operations
 
-    async def on(self):
+    async def on(self, subject=None):
+        category = self.magnet.config.category if not subject else subject
         try:
             streams = await self.magnet.js.streams_info()
             remote_streams = [x.config.name for x in streams]
@@ -32,26 +33,25 @@ class Charge:
                 self.magnet.status_callback(Status(datetime.now(
                     timezone.utc), 'fatal', f'{self.magnet.config.stream_name} not found, initialize with `Magnet.align()` first'))
                 return
-            elif self.magnet.config.category not in sum(remote_subjects, []):
-                if self.magnet.config.category not in sum([x.config.subjects for x in streams if x.config.name == self.magnet.config.stream_name], []):
+            elif category not in sum(remote_subjects, []):
+                if category not in sum([x.config.subjects for x in streams if x.config.name == self.magnet.config.stream_name], []):
                     try:
                         subjects = sum(
                             [x.config.subjects for x in streams if x.config.name == self.magnet.config.stream_name], [])
-                        subjects.append(self.magnet.config.category)
+                        subjects.append(category)
                         await self.magnet.js.update_stream(StreamConfig(
                             name=self.magnet.config.stream_name,
                             subjects=subjects
                         ))
                         self.magnet.status_callback(Status(datetime.now(
-                            timezone.utc), "success", f'created [{self.magnet.config.category}] on\n🛰️ stream: {self.magnet.config.stream_name}'))
+                            timezone.utc), "success", f'created [{category}] on 🛰️ stream: {self.magnet.config.stream_name}'))
                     except ServerError as e:
+                        print(e)
                         self.magnet.status_callback(Status(datetime.now(
                             timezone.utc), 'fatal', f"couldn't create {self.magnet.config.stream_name} on {self.magnet.config.host}, ensure your `category` is set"))
         except TimeoutError:
             self.magnet.status_callback(Status(
                 datetime.now(timezone.utc), 'fatal', f'could not connect to {self.magnet.config.host}'))
-        self.magnet.status_callback(Status(datetime.now(
-            timezone.utc), "success", f'ready [{self.magnet.config.category}] on\n🛰️ stream: {self.magnet.config.stream_name}'))
 
     async def off(self):
         await self.magnet.nc.drain()
@@ -59,7 +59,7 @@ class Charge:
         self.magnet.status_callback(
             Status(datetime.now(timezone.utc), 'warn', f'disconnected from {self.magnet.config.host}'))
 
-    async def pulse(self, payload: Payload | FilePayload | GeneratedPayload | EmbeddingPayload | JobParams = None, subject: str = None, v=False):
+    async def pulse(self, payload: Payload | FilePayload | GeneratedPayload | EmbeddingPayload | JobParams = None, subject: str = None, stream: str = None, v=False):
         try:
             if isinstance(payload, FilePayload):
                 payload_data_bytes = payload.data
@@ -78,7 +78,7 @@ class Charge:
                 _hash = x.xxh64(bytes_).hexdigest()
                 subject_name = subject if subject else self.magnet.config.category
                 msg = await self.magnet.js.publish(
-                    subject_name, bytes_, headers={
+                    subject=subject_name, payload=bytes_, stream=stream, headers={
                         "Nats-Msg-Id": _hash
                     }
                 )
@@ -109,7 +109,6 @@ class Charge:
             )
             return None
 
-
     async def emp(self, name=None):
         if name and name == self.magnet.config.stream_name:
             await self.magnet.js.delete_stream(name=self.magnet.config.stream_name)
@@ -137,9 +136,9 @@ class Resonator:
         self.consumer_config = None
         self.sub = None
 
-    async def on(self, role: str, local: bool = False, bandwidth: int = 1000, obj=False):
+    async def on(self, role: str, local: bool = False, bandwidth: int = 1000, obj=False, subject=None):
         try:
-            subject_name = self.magnet.config.category
+            subject_name = self.magnet.config.category if not subject else subject
             streams = await self.magnet.js.streams_info()
             remote_streams = [x.config.name for x in streams]
             remote_subjects = [x.config.subjects for x in streams]
@@ -160,6 +159,7 @@ class Resonator:
                         self.magnet.status_callback(Status(datetime.now(
                             timezone.utc), "success", f'created [{subject_name}] on\n🛰️ stream: {self.magnet.config.stream_name}'))
                     except ServerError as e:
+                        print(e)
                         self.magnet.status_callback(Status(datetime.now(
                             timezone.utc), 'fatal', f"couldn't create {self.magnet.config.stream_name} on {self.magnet.config.host}, ensure your `category` is set"))
         except TimeoutError:
@@ -178,10 +178,11 @@ class Resonator:
             if obj:
                 self.sub = await self.magnet.os.watch(include_history=False)
                 self.magnet.status_callback(Status(datetime.now(
-                    timezone.utc), 'info', f'subscribed to object store: {self.magnet.config.os_name} as {self.node}'))
+                    timezone.utc), 'info', f'subscribed to object store: {self.magnet.config.os_name} as {self.node}')
+                )
             else:
+                self.magnet.js.__dict__
                 self.sub = await self.magnet.js.pull_subscribe(
-                    durable=self.durable,
                     subject=subject_name,
                     config=self.consumer_config
                 )
@@ -204,18 +205,14 @@ class Resonator:
                 try:
                     # Fetch a batch of messages (replace 10 with the desired batch size)
                     if batch_size:
-                        msgs = await self.sub.fetch(batch_size, timeout=5)  
+                        msgs = await self.sub.fetch(batch_size)
                     for msg in msgs:
                         if v:
                             self.magnet.status_callback(Status(datetime.now(
                                 timezone.utc), 'info', f'received {msg.subject}'))
                         yield msg
-                    
-                    # Acknowledge all messages
-                    for msg in msgs:
-                        await msg.ack()
 
-                except TimeoutError:
+                except TimeoutError as e:
                     self.magnet.status_callback(Status(datetime.now(
                         timezone.utc), 'warn', 'No new messages.'))
 
@@ -224,7 +221,7 @@ class Resonator:
                 Status(datetime.now(timezone.utc), 'fatal', f'Error in listen method: {e}'))
             return
 
-        
+
     async def worker(self, role=None):
         await self.on(role=role)  # Ensure the resonator is set up for the specific role
         self.magnet.status_callback(Status(datetime.now(

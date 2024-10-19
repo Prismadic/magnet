@@ -1,3 +1,5 @@
+import json
+import pickle
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -11,15 +13,15 @@ from magnet.utils.prism.models.cmamba.data_classes import CMambaArgs
 
 # Define the training function
 async def train_model(magnet, run, train_loader, test_loader):
-    num_epochs = run.params.training_options.num_epochs
-    lr = run.params.training_options.learning_rate
-    final_model_path = f'/tmp/{run.params.resource_id}'
-
+    train_params = CMambaArgs(**run.params.training_options)  # Convert the run parameters to a CMambaArgs object
+    num_epochs = train_params.num_epochs
+    lr = train_params.learning_rate
+    final_model_path = f'/tmp/{run._id}'
+    print("Final model path:", final_model_path)
     # Initialize the model, loss function, and optimizer
-    model = CMamba(run.params.training_options, magnet)  # Pass the CMambaArgs object and magnet to the model
+    model = CMamba(train_params, magnet)  # Pass the CMambaArgs object and magnet to the model
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     model.to(device)
-
     criterion = nn.MSELoss()
     optimizer = optim.Adam(model.parameters(), lr=lr)
 
@@ -30,7 +32,7 @@ async def train_model(magnet, run, train_loader, test_loader):
     for epoch in range(num_epochs):
         model.train()
         running_loss = 0.0
-        magnet.status_callback(Status(datetime.now(), "info", f"\nEpoch [{epoch+1}/{num_epochs}]"))
+        magnet.status_callback(Status(datetime.now(), "info", f"Epoch [{epoch+1}/{num_epochs}]"))
         magnet.status_callback(Status(datetime.now(), "info", f"Learning Rate: {optimizer.param_groups[0]['lr']}"))
 
         for i, (X_batch, y_batch) in enumerate(train_loader):
@@ -50,7 +52,8 @@ async def train_model(magnet, run, train_loader, test_loader):
                     grad_norm = param.grad.norm(2).item()
                     grad_norms[f"grad_norm_{name}"] = grad_norm
             
-            await magnet.runs_kv.put(key=run.id,value=grad_norms)
+            # Serialize grad_norms dictionary to bytes using json
+            await magnet.runs_kv.put(key=run._id, value=json.dumps(grad_norms).encode())
 
             optimizer.step()
             
@@ -58,13 +61,15 @@ async def train_model(magnet, run, train_loader, test_loader):
             
             if i % 10 == 9:
                 magnet.status_callback(Status(datetime.now(), "info", f"Step [{i+1}/{len(train_loader)}], Batch Loss: {loss.item():.4f}"))
-                await magnet.runs_kv.put(key=run.id,value=loss.item())
+                # Serialize loss value to bytes using json
+                await magnet.runs_kv.put(key=run._id, value=json.dumps({"loss": loss.item()}).encode())
 
         epoch_loss = running_loss / len(train_loader)
         train_losses.append(epoch_loss)
         magnet.status_callback(Status(datetime.now(), "info", f"Epoch [{epoch+1}/{num_epochs}], Average Training Loss: {epoch_loss:.4f}"))
         
-        await magnet.runs_kv.put(key=run.id,value=epoch_loss)
+        # Serialize epoch_loss to bytes
+        await magnet.runs_kv.put(key=run._id, value=json.dumps({"epoch_loss": epoch_loss}).encode())
 
         with torch.no_grad():
             weight_stats = {}
@@ -73,7 +78,8 @@ async def train_model(magnet, run, train_loader, test_loader):
                     weight_stats[f"weight_mean_{name}"] = param.mean().item()
                     weight_stats[f"weight_std_{name}"] = param.std().item()
             
-            await magnet.runs_kv.put(key=run.id, value=weight_stats)
+            # Serialize weight_stats dictionary to bytes
+            await magnet.runs_kv.put(key=run._id, value=json.dumps(weight_stats).encode())
         
         model.eval()
         val_loss = 0
@@ -87,22 +93,26 @@ async def train_model(magnet, run, train_loader, test_loader):
                 
                 if j % 10 == 9:
                     magnet.status_callback(Status(datetime.now(), "info", f"Validation Batch [{j+1}], Batch Loss: {loss.item():.4f}"))
-                    await magnet.runs_kv.put(key=run.id, value=loss.item())
+                    # Serialize validation loss to bytes
+                    await magnet.runs_kv.put(key=run._id, value=json.dumps({"val_loss": loss.item()}).encode())
         
         val_loss /= len(test_loader)
         val_losses.append(val_loss)
         magnet.status_callback(Status(datetime.now(), "info", f"Epoch [{epoch+1}/{num_epochs}], Validation Loss: {val_loss:.4f}"))
         
-        await magnet.runs_kv.put(key=run.id, value=val_loss)
+        # Serialize val_loss to bytes
+        await magnet.runs_kv.put(key=run._id, value=json.dumps({"val_loss": val_loss}).encode())
 
         if (epoch + 1) % 5 == 0:
             model_path = f'c_mamba_model_epoch_{epoch+1}.pth'
             torch.save(model.state_dict(), model_path)
-            await magnet.runs_kv.put(key=run.id, value=model_path)
+            # Serialize the model path (string) to bytes
+            await magnet.runs_kv.put(key=run._id, value=model_path.encode())
 
     if final_model_path:
         torch.save(model.state_dict(), final_model_path)
-        await magnet.runs_kv.put(key=run.id, value=final_model_path)
+        # Serialize the final model path (string) to bytes
+        await magnet.runs_kv.put(key=run._id, value=final_model_path.encode())
 
     # Update run with final metrics and status
     run.status = "completed"
@@ -111,4 +121,5 @@ async def train_model(magnet, run, train_loader, test_loader):
         "train_losses": train_losses,
         "val_losses": val_losses
     }
-    await magnet.runs_kv.put(key=run.id, value=run)
+    # Serialize the `run` object using pickle
+    await magnet.runs_kv.put(key=run._id, value=pickle.dumps(run))

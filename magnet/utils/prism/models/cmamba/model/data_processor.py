@@ -27,9 +27,9 @@ class DataProcessor:
 
     def fit_scaler(self):
         self.magnet.status_callback(Status(datetime.now(timezone.utc), "info",
-                                           f"Starting to fit scaler on data from {self.run._id}"))
+                                           f"Starting to fit scaler on data from {self.run._job.params.resource_id}"))
         try:
-            for chunk_index, chunk in enumerate(pd.read_csv(f'/tmp/{self.run._job._id}', chunksize=self.config.chunk_size)):
+            for chunk_index, chunk in enumerate(pd.read_csv(f'/tmp/{self.run._job.params.resource_id}', chunksize=self.config.chunk_size)):
                 self.magnet.status_callback(Status(datetime.now(timezone.utc), "info", f"Fitting scaler on chunk {chunk_index + 1}."))
                 chunk = self.process_chunk(chunk)
                 if not self.feature_columns:
@@ -45,7 +45,7 @@ class DataProcessor:
         self.magnet.status_callback(Status(datetime.now(timezone.utc), "info", f"Starting to transform data from {self.run._id}"))
         processed_chunks = []
         try:
-            for chunk_index, chunk in enumerate(pd.read_csv(f'/tmp/{self.run._job._id}', chunksize=self.config.chunk_size)):
+            for chunk_index, chunk in enumerate(pd.read_csv(f'/tmp/{self.run._job.params.resource_id}', chunksize=self.config.chunk_size)):
                 self.magnet.status_callback(Status(datetime.now(timezone.utc), "info", f"Transforming chunk {chunk_index + 1}"))
                 chunk = self.process_chunk(chunk)
                 features = chunk[self.feature_columns].values
@@ -65,13 +65,14 @@ class DataProcessor:
         self.magnet.status_callback(Status(datetime.now(timezone.utc), "info", f"Starting to create sequences with input length {self.config.input_length}"))
         sequences = []
         subject_name = '.'.join(['runs', self.run._id, self.run._job.params.resource_id.split('.')[-1]])
+        await self.magnet.charge.on(subject=subject_name)
         try:
             for start in range(0, len(features) - self.config.input_length + 1, self.config.input_length):
                 sequence = features[start:start + self.config.input_length]
                 sequences.append(sequence)
                 payload = Payload(content=sequence.tolist(), _id=str(start))
                 if self.run._job.params.data_source == 'local':
-                    await self.magnet.charge.pulse(payload=payload, subject=subject_name, v=1)
+                    await self.magnet.charge.pulse(payload=payload, subject=subject_name, stream=self.magnet.config.stream_name, v=1)
 
             sequences = np.array(sequences)
             self.magnet.status_callback(Status(datetime.now(timezone.utc), "info",

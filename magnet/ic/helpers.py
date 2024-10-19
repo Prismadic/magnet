@@ -115,7 +115,7 @@ class RunHelpers(BaseHelpers):
                         data=file_data,
                         _id=run._job._id
                     )
-                    object_name = file_payload._id
+                    object_name = job_params.resource_id
 
                     # If this is an acquisition run, data should be uploaded to the jobs object store
                     await self._log_status("info", f"Pulsing {object_name} to jobs object store")
@@ -160,8 +160,11 @@ class RunHelpers(BaseHelpers):
     async def train(self, run: Run):
         await self._claimant(run, claim=True, status="in_progress")
         await self._log_status("info", f"Training run: {run._id}")
+        
         try:
-            run.params = TrainParams(**run.params)
+            # Initialize TrainParams correctly from job params
+            run.params = TrainParams(**run._job.params)
+            
             if isinstance(run.params, TrainParams):
                 if run.params.model == "cmamba":
                     cmamba = CMambaRun(self.magnet)
@@ -175,6 +178,13 @@ class RunHelpers(BaseHelpers):
             else:
                 await self._log_status("warn", f"Run {run._id} does not have valid TrainParams")
                 await self._claimant(run, claim=True, status="failed", results=None, metrics=None)
+        
+        except TypeError as te:
+            await self._log_status("fatal", f"An error occurred while training for run {run._id}: {te}")
+            print(f"TypeError: {te}")
+            await self._claimant(run, claim=False, status="failed", results=None, metrics=None)
+
         except Exception as e:
-            await self._log_status("fatal", f"An error occurred while training run {run._id}: {e}")
+            print(e)
+            await self._log_status("fatal", f"An error occurred while training for run {run._id}: {e}")
             await self._claimant(run, claim=False, status="failed", results=None, metrics=None)

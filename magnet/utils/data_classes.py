@@ -31,7 +31,6 @@ class InferenceParams:
 @dataclass
 class TrainParams:
     resource_id: str
-    location: str
     data_source: str
     model: str
     training_options: Dict[str, Any]  # E.g., {'early_stopping': True, 'augmentation': True}

@@ -71,8 +71,11 @@ class Magnet:
         self.js = None
         self.kv = None
         self.os = None
-        self.fabric = None
+        self.fabric_kv = None
         self.jobs_kv = None
+        self.jobs_os = None
+        self.fabric_os = None
+        self.runs_os = None
         self.runs_kv = None
         self.status_callback = status_callback
         self.charge = Charge(self)
@@ -147,7 +150,7 @@ class Magnet:
         except Exception as e:
             self.status_callback(Status(
                 datetime.now(), "warn", f"Stream {self.config.stream_name} not found, creating"))
-            await self.js.add_stream(name=self.config.stream_name, subjects=[self.config.category, 'jobs.>', 'runs.>', 'fabric.>'])
+            await self.js.add_stream(name=self.config.stream_name, subjects=[self.config.category, 'jobs', 'runs', 'fabric'])
             self.status_callback(Status(datetime.now(
             ), "success", f"created `{self.config.stream_name}` with category `{self.config.category}`"))
         return await self.js.stream_info(self.config.stream_name)

@@ -49,6 +49,8 @@ class CMambaArgs:
         reduction_ratio (int): Reduction ratio for channel attention.
         verbose (bool): Verbose mode for detailed output.
     """
+    num_epochs: int = 5
+    learning_rate: float = 0.0005
     d_model: int = 128
     n_layer: int = 4
     seq_len: int = 500
